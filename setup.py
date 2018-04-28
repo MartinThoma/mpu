@@ -15,7 +15,9 @@ config = {
     'url': 'https://github.com/MartinThoma/mpu',
     'license': 'MIT',
     'description': 'Martins Python Utilities',
-    'long_description': ('In case the batteries are not enough anymore.'),
+    'long_description': ('In case the batteries are not enough anymore.\n'
+                         'Have a look at https://github.com/MartinThoma/mpu '
+                         'for documentation.'),
     'install_requires': [],
     'keywords': ['utility'],
     'download_url': 'https://github.com/MartinThoma/mpu',
@@ -26,7 +28,6 @@ config = {
                     'License :: OSI Approved :: MIT License',
                     'Natural Language :: English',
                     'Programming Language :: Python :: 3.5',
-                    'Topic :: Scientific/Engineering :: Information Analysis',
                     'Topic :: Software Development',
                     'Topic :: Utilities'],
     'zip_safe': True,

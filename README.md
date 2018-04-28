@@ -13,6 +13,8 @@ It can, of course, also be installed via PyPI.
 
 ## Usage
 
+### Datastructures
+
 ```
 from mpu.datastructures import EList
 
@@ -25,4 +27,13 @@ from mpu.datastructures import EList
 
 >>> l[l]
 [0, 1, 2]
+```
+
+### Shell
+
+To enchance your terminals output, you might want to do something like:
+
+```
+from mpu.shell import Codes
+print(Codes.BOLD + Codes.GREEN + 'WORKS!' + Codes.RESET_ALL)
 ```
