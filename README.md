@@ -35,5 +35,5 @@ To enchance your terminals output, you might want to do something like:
 
 ```
 from mpu.shell import Codes
-print(Codes.BOLD + Codes.GREEN + 'WORKS!' + Codes.RESET_ALL)
+print('{c.GREEN}{c.UNDERLINED}Works{c.RESET_ALL}'.format(c=Codes))
 ```
