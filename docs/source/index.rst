@@ -11,6 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   mpu
+
 
 
 This package contains various small functions and classes. All of the
