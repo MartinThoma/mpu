@@ -1,3 +1,7 @@
+[![Documentation Status](https://readthedocs.org/projects/mpu/badge/?version=latest)](http://mpu.readthedocs.io/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.org/MartinThoma/mpu.svg?branch=master)](https://travis-ci.org/MartinThoma/mpu)
+[![Coverage Status](https://coveralls.io/repos/github/MartinThoma/mpu/badge.svg?branch=master)](https://coveralls.io/github/MartinThoma/mpu?branch=master)
+
 # mpu
 Martins Python Utilities (mpu) is a collection of utility functions and classes
 with no other dependencies.
