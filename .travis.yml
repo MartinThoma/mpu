@@ -4,11 +4,7 @@ python:
   - 3.5
   - 3.6
 install:
-  - pip install coveralls
-script:
-  - tox
-before_install:
-  - sudo apt-get install tox
+  - pip install coveralls tox-travis
 script:
   - tox
 after_success:
