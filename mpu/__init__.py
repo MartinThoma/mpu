@@ -22,5 +22,6 @@ def parallel_for(loop_function, parameters, nb_threads=100):
     return_values : list of return values
     """
     import multiprocessing.pool
-    with multiprocessing.pool.ThreadPool(nb_threads) as pool:
+    from contextlib import closing
+    with closing(multiprocessing.pool.ThreadPool(nb_threads)) as pool:
         return pool.map(loop_function, parameters)
