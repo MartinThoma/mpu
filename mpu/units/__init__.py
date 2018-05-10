@@ -96,6 +96,8 @@ class Money(object):
             raise ValueError(('Division with type \'{}\' is not '
                               'supported').format())
 
+    __div__ = __truediv__
+
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             same_currency = (self.currency == other.currency)
