@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from pkg_resources import get_distribution
 try:
     __version__ = get_distribution('mpu').version
