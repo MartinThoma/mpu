@@ -8,8 +8,10 @@ from dateutil import parser as dateparser
 import csv
 import fractions
 import pkg_resources
+from functools import total_ordering
 
 
+@total_ordering
 class Money(object):
     """Unit of account."""
 
@@ -109,6 +111,14 @@ class Money(object):
         return not self.__eq__(other)
 
     __rmul__ = __mul__
+
+    def __gt__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        elif self.currency != other.currency:
+            return False
+        else:
+            return self.value > other.value
 
 
 def get_currency(currency_str):

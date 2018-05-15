@@ -67,6 +67,19 @@ class MoneyTests(unittest.TestCase):
             a / '0.1'
         self.assertEquals(str(a / 2), '0.25 Euro')
 
+    def test_currency_comperators(self):
+        a = Money('0.5', 'EUR')
+        b = Money('0.1', 'EUR')
+        c = Money('0.5', 'EUR')
+        self.assertEquals(a > b, True)
+        self.assertEquals(a < b, False)
+        self.assertEquals(a >= b, True)
+        self.assertEquals(a <= b, False)
+        self.assertEquals(a > c, False)
+        self.assertEquals(a < c, False)
+        self.assertEquals(a >= c, True)
+        self.assertEquals(a <= c, True)
+
     def test_currency(self):
         eur = Currency(name='Euro',
                        code='EUR',
