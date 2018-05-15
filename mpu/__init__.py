@@ -2,11 +2,9 @@
 
 # core modules
 import random
-from pkg_resources import get_distribution
-try:
-    __version__ = get_distribution('mpu').version
-except:
-    __version__ = 'Not installed'
+
+# internal modules
+from mpu._version import __version__
 
 
 def parallel_for(loop_function, parameters, nb_threads=100):
