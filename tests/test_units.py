@@ -71,6 +71,7 @@ class MoneyTests(unittest.TestCase):
         a = Money('0.5', 'EUR')
         b = Money('0.1', 'EUR')
         c = Money('0.5', 'EUR')
+        d = Money('0.5', 'USD')
         self.assertEquals(a > b, True)
         self.assertEquals(a < b, False)
         self.assertEquals(a >= b, True)
@@ -79,6 +80,10 @@ class MoneyTests(unittest.TestCase):
         self.assertEquals(a < c, False)
         self.assertEquals(a >= c, True)
         self.assertEquals(a <= c, True)
+
+        self.assertEquals(c > d, False)
+        self.assertEquals(c < d, False)
+        self.assertEquals(c == d, False)
 
     def test_currency(self):
         eur = Currency(name='Euro',

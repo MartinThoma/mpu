@@ -120,6 +120,14 @@ class Money(object):
         else:
             return self.value > other.value
 
+    def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        elif self.currency != other.currency:
+            return False
+        else:
+            return self.value < other.value
+
 
 def get_currency(currency_str):
     """
