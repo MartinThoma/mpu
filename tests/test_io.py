@@ -38,6 +38,14 @@ class IoTest(unittest.TestCase):
         self.assertEquals(data_real, data_exp)
         data_real = read(source, skiprows=1)
         self.assertEquals(data_real, data_exp[1:])
+        data_real = read(source, skiprows=1, delimiter=',', quotechar='"')
+        self.assertEquals(data_real, data_exp[1:])
+
+    def test_read_hdf5(self):
+        path = '../tests/files/example.hdf5'
+        source = pkg_resources.resource_filename('mpu', path)
+        with self.assertRaises(Exception):
+            read(source)
 
     def test_read_json(self):
         path = '../tests/files/example.json'
