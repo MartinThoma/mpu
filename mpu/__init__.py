@@ -5,6 +5,7 @@ import random
 
 # internal modules
 from mpu._version import __version__
+from mpu import units
 
 
 def parallel_for(loop_function, parameters, nb_threads=100):
