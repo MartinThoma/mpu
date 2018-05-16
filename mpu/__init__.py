@@ -73,13 +73,27 @@ def haversine_distance(origin, destination):
 
     Examples
     --------
-    >>> origin = (48.1372, 11.5756)  # Munich
-    >>> destination = (52.5186, 13.4083)  # Berlin
-    >>> round(haversine_distance(origin, destination), 1)
+    >>> munich = (48.1372, 11.5756)
+    >>> berlin = (52.5186, 13.4083)
+    >>> round(haversine_distance(munich, berlin), 1)
     504.2
+
+    >>> new_york_city = (40.712777777778, -74.005833333333)  # NYC
+    >>> round(haversine_distance(berlin, new_york_city), 1)
+    6385.3
     """
     lat1, lon1 = origin
     lat2, lon2 = destination
+    if not (-90.0 <= lat1 <= 90):
+        raise ValueError('lat1={:2.2f}, but must be in [-90,+90]'.format(lat1))
+    if not (-90.0 <= lat2 <= 90):
+        raise ValueError('lat2={:2.2f}, but must be in [-90,+90]'.format(lat1))
+    if not (-180.0 <= lon1 <= 180):
+        raise ValueError('lon1={:2.2f}, but must be in [-180,+180]'
+                         .format(lat1))
+    if not (-180.0 <= lon2 <= 180):
+        raise ValueError('lon1={:2.2f}, but must be in [-180,+180]'
+                         .format(lat1))
     radius = 6371  # km
 
     dlat = math.radians(lat2 - lat1)
