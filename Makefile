@@ -2,7 +2,9 @@ upload:
 	make clean
 	python3 setup.py sdist bdist_wheel && twine upload dist/*
 clean:
-	rm -rf *.pyc __pycache__ build dist mpu.egg-info mpu/__pycache__
+	python setup.py clean --all
+	pyclean .
+	rm -rf *.pyc __pycache__ build dist mpu.egg-info mpu/__pycache__ mpu/units/__pycache__ lambda.zip venv-lambda tests/__pycache__ tests/reports
 package:
 	make clean
 	./create_package.sh

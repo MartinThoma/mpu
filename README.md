@@ -70,3 +70,25 @@ gives
 4      Spain   46549045.0      2017-06-01   True
 5    Vatican          NaN             NaT   True
 ```
+
+
+### Money
+
+```
+import mpu
+from fractions import Fraction
+gross_income = mpu.units.Money('2345.10', 'EUR')
+net_income = gross_income * Fraction('0.80')
+apartment = mpu.units.Money('501.23', 'EUR')
+savings = net_income - apartment
+print(savings)
+```
+
+prints `1375.31 Euro`
+
+
+### IO
+
+* Download files with `mpu.io.download(source, sink)`
+* Read CSV, JSON and pickle with `mpu.io.read(filepath)`
+* Write CSV, JSON and pickle with `mpu.io.read(filepath)`

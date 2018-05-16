@@ -4,7 +4,6 @@
 """Handle units - currently only currencies."""
 
 # core modules
-from dateutil import parser as dateparser
 import csv
 import fractions
 import pkg_resources
@@ -52,11 +51,11 @@ class Money(object):
         return str(self)
 
     def __mul__(self, other):
-        if isinstance(other, int):
+        if isinstance(other, (int, fractions.Fraction)):
             return Money(self.value * other, self.currency)
         else:
             raise ValueError(('Multiplication with type \'{}\' is not '
-                              'supported').format())
+                              'supported').format(type(other)))
 
     def __add__(self, other):
         if isinstance(other, Money):
@@ -161,7 +160,7 @@ def get_currency(currency_str):
                 else:
                     exponent = int(row[5])
                 if len(row[6]) > 0:
-                    withdrawal_date = dateparser.parse(row[6])
+                    withdrawal_date = row[6]
                 else:
                     withdrawal_date = None
                 subunits = row[7]
