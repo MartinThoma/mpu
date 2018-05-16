@@ -54,6 +54,18 @@ class IoTest(unittest.TestCase):
         self.assertEquals(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp
 
+    def test_write_csv_params(self):
+        handle, filepath = mkstemp(suffix='.csv', prefix='mpu_test')
+        data = [['1', "A towel,", '1.0'],
+                ['42', " it says, ", '2.0'],
+                ['1337', "is about the most ", '-1'],
+                ['0', "massively useful thing ", '123'],
+                ['-2', "an interstellar hitchhiker can have.", '3']]
+        write(filepath, data)
+        data_read = read(filepath, delimiter=',', quotechar='"')
+        self.assertEquals(data, data_read)
+        os.remove(filepath)  # cleanup of mkstemp
+
     def test_read_hdf5(self):
         path = '../tests/files/example.hdf5'
         source = pkg_resources.resource_filename('mpu', path)
@@ -80,6 +92,22 @@ class IoTest(unittest.TestCase):
                                  'key': 'value',
                                  'the answer': 42}}
         write(filepath, data)
+        data_read = read(filepath)
+        self.assertEquals(data, data_read)
+        os.remove(filepath)  # cleanup of mkstemp
+
+    def test_write_json_params(self):
+        handle, filepath = mkstemp(suffix='.json', prefix='mpu_test')
+        data = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
+                'a string': 'bla',
+                'another dict': {'foo': 'bar',
+                                 'key': 'value',
+                                 'the answer': 42}}
+        write(filepath, data,
+              indent=4,
+              sort_keys=True,
+              separators=(',', ':'),
+              ensure_ascii=False)
         data_read = read(filepath)
         self.assertEquals(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp
