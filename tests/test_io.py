@@ -28,7 +28,8 @@ class IoTest(unittest.TestCase):
         path = '../tests/files/example.csv'
         source = pkg_resources.resource_filename('mpu', path)
         data_real = read(source)
-        data_exp = [['1', "A towel,", '1.0'],
+        data_exp = [['a', 'b', 'c'],
+                    ['1', "A towel,", '1.0'],
                     ['42', " it says, ", '2.0'],
                     ['1337', "is about the most ", '-1'],
                     ['0', "massively useful thing ", '123'],
@@ -41,6 +42,22 @@ class IoTest(unittest.TestCase):
         self.assertEquals(data_real, data_exp[1:])
         data_real = read(source, skiprows=1, delimiter=',', quotechar='"')
         self.assertEquals(data_real, data_exp[1:])
+
+    def test_read_csv_dicts(self):
+        path = '../tests/files/example.csv'
+        source = pkg_resources.resource_filename('mpu', path)
+        data_real = read(source, format='dicts')
+        data_exp = [{'a': '1', 'b': "A towel,", 'c': '1.0'},
+                    {'a': '42', 'b': " it says, ", 'c': '2.0'},
+                    {'a': '1337', 'b': "is about the most ", 'c': '-1'},
+                    {'a': '0', 'b': "massively useful thing ", 'c': '123'},
+                    {'a': '-2', 'b': "an interstellar hitchhiker can have.",
+                     'c': '3'},
+                    {'a': '3.141', 'b': "Special char test: €üößł", 'c': '2.7'}
+                    ]
+        self.assertEquals(len(data_real), len(data_exp))
+        self.assertEquals(data_real[0], data_exp[0])
+        self.assertEquals(data_real, data_exp)
 
     def test_write_csv(self):
         handle, filepath = mkstemp(suffix='.csv', prefix='mpu_test')
@@ -61,7 +78,7 @@ class IoTest(unittest.TestCase):
                 ['1337', "is about the most ", '-1'],
                 ['0', "massively useful thing ", '123'],
                 ['-2', "an interstellar hitchhiker can have.", '3']]
-        write(filepath, data)
+        write(filepath, data, delimiter=',', quotechar='"')
         data_read = read(filepath, delimiter=',', quotechar='"')
         self.assertEquals(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp

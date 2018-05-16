@@ -42,20 +42,32 @@ def read(filepath, **kwargs):
     data : str or bytes
     """
     if filepath.lower().endswith('.csv'):
+        if 'delimiter' not in kwargs:
+            kwargs['delimiter'] = ','
+        if 'quotechar' not in kwargs:
+            kwargs['quotechar'] = '"'
+        if 'skiprows' not in kwargs:
+            kwargs['skiprows'] = []
+        if isinstance(kwargs['skiprows'], int):
+            kwargs['skiprows'] = [i for i in range(kwargs['skiprows'])]
+        if 'format' in kwargs:
+            format_ = kwargs['format']
+            kwargs.pop('format', None)
+        else:
+            format_ = 'default'
+        skiprows = kwargs['skiprows']
+        kwargs.pop('skiprows', None)
         with open(filepath, 'r') as fp:
-            if 'delimiter' not in kwargs:
-                kwargs['delimiter'] = ','
-            if 'quotechar' not in kwargs:
-                kwargs['quotechar'] = '"'
-            if 'skiprows' not in kwargs:
-                kwargs['skiprows'] = []
-            if isinstance(kwargs['skiprows'], int):
-                kwargs['skiprows'] = [i for i in range(kwargs['skiprows'])]
-            skiprows = kwargs['skiprows']
-            kwargs.pop('skiprows', None)
-            reader = csv.reader(fp, **kwargs)
-            data = EList([row for row in reader])
-            data = data.remove_indices(skiprows)
+            if format_ == 'default':
+                reader = csv.reader(fp, **kwargs)
+                data = EList([row for row in reader])
+                data = data.remove_indices(skiprows)
+            elif format_ == 'dicts':
+                reader_list = csv.DictReader(fp)
+                data = [row for row in reader_list]
+            else:
+                raise NotImplementedError('Format \'{}\' unknown'
+                                          .format(format_))
         return data
     elif filepath.lower().endswith('.json'):
         with open(filepath) as data_file:
