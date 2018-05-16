@@ -101,6 +101,18 @@ class IoTest(unittest.TestCase):
                                      'the answer': 42}}
         self.assertEquals(data_real, data_exp)
 
+    def test_read_pickle(self):
+        path = '../tests/files/example.pickle'
+        source = pkg_resources.resource_filename('mpu', path)
+        data_real = read(source)
+
+        data_exp = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
+                    'a string': 'bla',
+                    'another dict': {'foo': 'bar',
+                                     'key': 'value',
+                                     'the answer': 42}}
+        self.assertEquals(data_real, data_exp)
+
     def test_write_json(self):
         handle, filepath = mkstemp(suffix='.json', prefix='mpu_test')
         data = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
@@ -125,6 +137,30 @@ class IoTest(unittest.TestCase):
               sort_keys=True,
               separators=(',', ':'),
               ensure_ascii=False)
+        data_read = read(filepath)
+        self.assertEquals(data, data_read)
+        os.remove(filepath)  # cleanup of mkstemp
+
+    def test_write_pickle(self):
+        handle, filepath = mkstemp(suffix='.pickle', prefix='mpu_test')
+        data = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
+                'a string': 'bla',
+                'another dict': {'foo': 'bar',
+                                 'key': 'value',
+                                 'the answer': 42}}
+        write(filepath, data)
+        data_read = read(filepath)
+        self.assertEquals(data, data_read)
+        os.remove(filepath)  # cleanup of mkstemp
+
+    def test_write_pickle_protocol(self):
+        handle, filepath = mkstemp(suffix='.pickle', prefix='mpu_test')
+        data = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
+                'a string': 'bla',
+                'another dict': {'foo': 'bar',
+                                 'key': 'value',
+                                 'the answer': 42}}
+        write(filepath, data, protocol=0)
         data_read = read(filepath)
         self.assertEquals(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp

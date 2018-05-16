@@ -9,6 +9,8 @@ from __future__ import absolute_import
 import csv
 import json
 import os
+import pickle
+
 # Make it work for Python 2+3 and with Unicode
 import io as io_stl
 try:
@@ -28,6 +30,7 @@ def read(filepath, **kwargs):
 
     * CSV
     * JSON
+    * pickle
 
     Parameters
     ----------
@@ -73,6 +76,10 @@ def read(filepath, **kwargs):
         with open(filepath) as data_file:
             data = json.load(data_file, **kwargs)
         return data
+    elif filepath.lower().endswith('.pickle'):
+        with open(filepath, 'rb') as handle:
+            data = pickle.load(handle)
+        return data
     else:
         raise NotImplementedError('File \'{}\' is not known.'.format(filepath))
 
@@ -85,6 +92,7 @@ def write(filepath, data, **kwargs):
 
     * CSV
     * JSON
+    * pickle
 
     Parameters
     ----------
@@ -122,6 +130,11 @@ def write(filepath, data, **kwargs):
                 kwargs['ensure_ascii'] = False
             str_ = json.dumps(data, **kwargs)
             outfile.write(to_unicode(str_))
+    elif filepath.lower().endswith('.pickle'):
+        if 'protocol' not in kwargs:
+            kwargs['protocol'] = pickle.HIGHEST_PROTOCOL
+        with open(filepath, 'wb') as handle:
+            pickle.dump(data, handle, **kwargs)
     else:
         raise NotImplementedError('File \'{}\' is not known.'.format(filepath))
 
