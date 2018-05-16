@@ -13,6 +13,7 @@ config = {
     'maintainer': 'Martin Thoma',
     'maintainer_email': 'info@martin-thoma.de',
     'packages': find_packages(),
+    'package_data': {'mpu': ['units/currencies.csv']},
     'scripts': [],
     'platforms': ['Linux'],
     'url': 'https://github.com/MartinThoma/mpu',
