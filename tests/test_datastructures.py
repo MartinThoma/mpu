@@ -11,7 +11,8 @@ from mpu.datastructures import EList
 class DatastructuresTest(unittest.TestCase):
 
     def test_EList_empty(self):
-        EList()
+        l = EList()
+        self.assertEqual(len(l), 0)
 
     def test_EList_getitem(self):
         l = EList([2, 3, 5, 7, 11])

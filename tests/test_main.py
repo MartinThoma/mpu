@@ -16,9 +16,10 @@ class DatastructuresInit(unittest.TestCase):
         def looping_function(payload):
             i, j = payload
             time.sleep(1)
+            return i + j
         parameters = list((i, i + 1) for i in range(50))
         out = parallel_for(looping_function, parameters)
-        print(out)
+        self.assertEquals(out, [2 * i + 1 for i in range(50)])
 
     def test_haversine(self):
         with self.assertRaises(ValueError):

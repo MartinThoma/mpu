@@ -67,7 +67,7 @@ class Money(object):
                                  .format(self.currency, other.currency))
         else:
             raise ValueError(('Addition with type \'{}\' is not '
-                              'supported').format())
+                              'supported').format(type(other)))
 
     def __sub__(self, other):
         if isinstance(other, Money):
@@ -80,7 +80,7 @@ class Money(object):
                                  .format(self.currency, other.currency))
         else:
             raise ValueError(('Subtraction with type \'{}\' is not '
-                              'supported').format())
+                              'supported').format(type(other)))
 
     def __truediv__(self, other):
         if isinstance(other, Money):
@@ -95,7 +95,7 @@ class Money(object):
             return Money(self.value / other, self.currency)
         else:
             raise ValueError(('Division with type \'{}\' is not '
-                              'supported').format())
+                              'supported').format(type(other)))
 
     __div__ = __truediv__
 

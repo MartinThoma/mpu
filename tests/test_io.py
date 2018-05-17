@@ -15,13 +15,16 @@ class IoTest(unittest.TestCase):
 
     def test_download_with_path(self):
         source = 'http://www.martin-thoma.de/bilder/Martin_Thoma_web_thumb.jpg'
-        fd, sink = mkstemp(suffix='image.jpg')
+        _, sink = mkstemp(suffix='image.jpg')
         download(source, sink)
+        self.assertEquals(os.path.getsize(sink), 21975)
         os.remove(sink)  # cleanup of mkstemp
 
     def test_download_without_path(self):
         source = 'http://www.martin-thoma.de/bilder/Martin_Thoma_web_thumb.jpg'
         sink = download(source)
+        download(source, sink)
+        self.assertEquals(os.path.getsize(sink), 21975)
         os.remove(sink)  # cleanup of mkstemp
 
     def test_read_csv(self):
@@ -60,7 +63,7 @@ class IoTest(unittest.TestCase):
         self.assertEquals(data_real, data_exp)
 
     def test_write_csv(self):
-        handle, filepath = mkstemp(suffix='.csv', prefix='mpu_test')
+        _, filepath = mkstemp(suffix='.csv', prefix='mpu_test')
         data = [['1', "A towel,", '1.0'],
                 ['42', " it says, ", '2.0'],
                 ['1337', "is about the most ", '-1'],
@@ -72,7 +75,7 @@ class IoTest(unittest.TestCase):
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_write_csv_params(self):
-        handle, filepath = mkstemp(suffix='.csv', prefix='mpu_test')
+        _, filepath = mkstemp(suffix='.csv', prefix='mpu_test')
         data = [['1', "A towel,", '1.0'],
                 ['42', " it says, ", '2.0'],
                 ['1337', "is about the most ", '-1'],
@@ -114,7 +117,7 @@ class IoTest(unittest.TestCase):
         self.assertEquals(data_real, data_exp)
 
     def test_write_json(self):
-        handle, filepath = mkstemp(suffix='.json', prefix='mpu_test')
+        _, filepath = mkstemp(suffix='.json', prefix='mpu_test')
         data = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
                 'a string': 'bla',
                 'another dict': {'foo': 'bar',
@@ -126,7 +129,7 @@ class IoTest(unittest.TestCase):
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_write_json_params(self):
-        handle, filepath = mkstemp(suffix='.json', prefix='mpu_test')
+        _, filepath = mkstemp(suffix='.json', prefix='mpu_test')
         data = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
                 'a string': 'bla',
                 'another dict': {'foo': 'bar',
@@ -142,7 +145,7 @@ class IoTest(unittest.TestCase):
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_write_pickle(self):
-        handle, filepath = mkstemp(suffix='.pickle', prefix='mpu_test')
+        _, filepath = mkstemp(suffix='.pickle', prefix='mpu_test')
         data = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
                 'a string': 'bla',
                 'another dict': {'foo': 'bar',
@@ -154,7 +157,7 @@ class IoTest(unittest.TestCase):
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_write_pickle_protocol(self):
-        handle, filepath = mkstemp(suffix='.pickle', prefix='mpu_test')
+        _, filepath = mkstemp(suffix='.pickle', prefix='mpu_test')
         data = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
                 'a string': 'bla',
                 'another dict': {'foo': 'bar',

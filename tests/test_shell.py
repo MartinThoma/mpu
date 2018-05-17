@@ -11,4 +11,5 @@ from mpu.shell import Codes
 class ShellTest(unittest.TestCase):
 
     def test_codes(self):
-        print(Codes.BOLD + Codes.GREEN + 'WORKS!' + Codes.RESET_ALL)
+        s = (Codes.BOLD + Codes.GREEN + 'WORKS!' + Codes.RESET_ALL)
+        self.assertIsInstance(s, str)

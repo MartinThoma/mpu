@@ -80,6 +80,16 @@ def read(filepath, **kwargs):
         with open(filepath, 'rb') as handle:
             data = pickle.load(handle)
         return data
+    elif (filepath.lower().endswith('.yml') or
+          filepath.lower().endswith('.yaml')):
+        raise NotImplementedError('YAML is not supported. See '
+                                  'https://stackoverflow.com/a/42054860/562769'
+                                  ' as a guide how to use it.')
+    elif (filepath.lower().endswith('.h5') or
+          filepath.lower().endswith('.hdf5')):
+        raise NotImplementedError('YAML is not supported. See '
+                                  'https://stackoverflow.com/a/41586571/562769'
+                                  ' as a guide how to use it.')
     else:
         raise NotImplementedError('File \'{}\' is not known.'.format(filepath))
 
@@ -135,6 +145,16 @@ def write(filepath, data, **kwargs):
             kwargs['protocol'] = pickle.HIGHEST_PROTOCOL
         with open(filepath, 'wb') as handle:
             pickle.dump(data, handle, **kwargs)
+    elif (filepath.lower().endswith('.yml') or
+          filepath.lower().endswith('.yaml')):
+        raise NotImplementedError('YAML is not supported. See '
+                                  'https://stackoverflow.com/a/42054860/562769'
+                                  ' as a guide how to use it.')
+    elif (filepath.lower().endswith('.h5') or
+          filepath.lower().endswith('.hdf5')):
+        raise NotImplementedError('YAML is not supported. See '
+                                  'https://stackoverflow.com/a/41586571/562769'
+                                  ' as a guide how to use it.')
     else:
         raise NotImplementedError('File \'{}\' is not known.'.format(filepath))
 
