@@ -13,7 +13,7 @@ projects.
 
 ## Installation
 
-```
+```bash
 $ pip install git+https://github.com/MartinThoma/mpu.git
 ```
 
@@ -24,8 +24,8 @@ It can, of course, also be installed via PyPI.
 
 ### Datastructures
 
-```
-from mpu.datastructures import EList
+```python
+>>> from mpu.datastructures import EList
 
 >>> l = EList([2, 1, 0])
 >>> l[2]
@@ -42,7 +42,7 @@ from mpu.datastructures import EList
 
 To enchance your terminals output, you might want to do something like:
 
-```
+```python
 from mpu.shell import Codes
 print('{c.GREEN}{c.UNDERLINED}Works{c.RESET_ALL}'.format(c=Codes))
 ```
@@ -53,7 +53,7 @@ print('{c.GREEN}{c.UNDERLINED}Works{c.RESET_ALL}'.format(c=Codes))
 Creating small example datastructures is a task I encounder once in a while
 for StackExchange answers.
 
-```
+```python
 from mpu.pd import example_df
 df = example_df()
 print(df)
@@ -74,7 +74,7 @@ gives
 
 ### Money
 
-```
+```python
 import mpu
 from fractions import Fraction
 gross_income = mpu.units.Money('2345.10', 'EUR')
