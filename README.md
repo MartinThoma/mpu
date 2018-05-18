@@ -1,3 +1,4 @@
+[![Python Support](https://img.shields.io/pypi/pyversions/mpu.svg)](https://pypi.org/project/mpu/)
 [![Documentation Status](https://readthedocs.org/projects/mpu/badge/?version=latest)](http://mpu.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/MartinThoma/mpu.svg?branch=master)](https://travis-ci.org/MartinThoma/mpu)
 [![Coverage Status](https://coveralls.io/repos/github/MartinThoma/mpu/badge.svg?branch=master)](https://coveralls.io/github/MartinThoma/mpu?branch=master)
