@@ -3,6 +3,9 @@
 
 """Utility datastructures."""
 
+# core modules
+import collections
+
 
 class EList(list):
     """
@@ -48,3 +51,35 @@ class EList(list):
             if index not in indices:
                 new_list.append(el)
         return EList(new_list)
+
+
+def flatten(iterable):
+    """
+    Flatten an given iterable of iterables into one list.
+
+    Parameters
+    ----------
+    iterable : iterable
+
+    Returns
+    -------
+    flat_list : list
+
+    Examples
+    --------
+    >>> flatten([1, [2, [3]]])
+    [1, 2, 3]
+
+    >>> flatten(((1, 2), (3, 4), (5, 6)))
+    [1, 2, 3, 4, 5, 6]
+
+    >>> flatten(EList([EList([1, 2]), (3, [4, [[5]]])]))
+    [1, 2, 3, 4, 5]
+    """
+    flat_list = []
+    for item in iterable:
+        if isinstance(item, collections.Iterable):
+            flat_list.extend(flatten(item))
+        else:
+            flat_list.append(item)
+    return flat_list
