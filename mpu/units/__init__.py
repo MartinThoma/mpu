@@ -100,7 +100,6 @@ class Money(object):
             raise NotImplementedError('The formatter \'{}\' is not '
                                       'implemented for the Money class.'
                                       .format(symbol_formatter))
-        return value_str + str(self.currency)
 
     def __add__(self, other):
         if isinstance(other, Money):
