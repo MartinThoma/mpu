@@ -5,6 +5,7 @@
 
 # core modules
 import collections
+from copy import deepcopy
 
 
 class EList(list):
@@ -83,3 +84,97 @@ def flatten(iterable):
         else:
             flat_list.append(item)
     return flat_list
+
+
+def dict_merge(dict_left, dict_right, merge_method='take_left_shallow'):
+    """
+    Merge two dictionaries.
+
+    This method does NOT modify dict_left or dict_right!
+
+    Apply this method multiple times if the dictionary is nested.
+
+    Parameters
+    ----------
+    dict_left : dict
+    dict_right: dict
+    merge_method : {'take_left_shallow', 'take_left_deep',
+                    'take_right_shallow', 'take_right_deep',
+                    'sum'}
+        take_left_shallow: Use both dictinaries. If both have the same key,
+                           take the value of dict_left
+        take_left_deep: If both dictionaries have the same key and the value
+                        is a dict for both again, then merge
+                        those sub-dictionaries
+        take_right_shallow: See take_left_shallow
+        take_right_deep: See take_left_deep
+        sum : sum up both dictionaries
+              If one does not have a value for a key of the other, assume the
+              missing value to be zero.
+
+    Returns
+    -------
+    merged_dict : dict
+
+    Examples
+    --------
+    >>> dict_merge({'a': 1, 'b': 2}, {'c': 3}) == {'a': 1, 'b': 2, 'c': 3}
+    True
+
+    >>> out = dict_merge({'a': {'A': 1}},
+    ...                  {'a': {'A': 2, 'B': 3}}, 'take_left_deep')
+    >>> expected = {'a': {'A': 1, 'B': 3}}
+    >>> out == expected
+    True
+
+    >>> out = dict_merge({'a': {'A': 1}},
+    ...                  {'a': {'A': 2, 'B': 3}}, 'take_left_shallow')
+    >>> expected = {'a': {'A': 1}}
+    >>> out == expected
+    True
+
+    >>> out = dict_merge({'a': 1, 'b': {'c': 2}},
+    ...                  {'b': {'c': 3, 'd': 4}},
+    ...                  'sum')
+    >>> expected = {'a': 1, 'b': {'c': 5, 'd': 4}}
+    >>> out == expected
+    True
+    """
+    new_dict = {}
+    if merge_method in ['take_right_shallow', 'take_right_deep']:
+        new_dict = deepcopy(dict_left)
+        for key, value in dict_right.items():
+            if key not in new_dict:
+                new_dict[key] = value
+            else:
+                recurse = (merge_method == 'take_right_deep' and
+                           isinstance(dict_left[key], dict) and
+                           isinstance(dict_right[key], dict))
+                if recurse:
+                    new_dict[key] = dict_merge(dict_left[key],
+                                               dict_right[key],
+                                               merge_method='take_right_deep')
+                else:
+                    new_dict[key] = value
+        return new_dict
+    elif merge_method == 'take_left_shallow':
+        return dict_merge(dict_right, dict_left, 'take_right_shallow')
+    elif merge_method == 'take_left_deep':
+        return dict_merge(dict_right, dict_left, 'take_right_deep')
+    elif merge_method == 'sum':
+        new_dict = deepcopy(dict_left)
+        for key, value in dict_right.items():
+            if key not in new_dict:
+                new_dict[key] = value
+            else:
+                recurse = isinstance(value, dict)
+                if recurse:
+                    new_dict[key] = dict_merge(dict_left[key],
+                                               dict_right[key],
+                                               merge_method='sum')
+                else:
+                    new_dict[key] = dict_left[key] + dict_right[key]
+        return new_dict
+    else:
+        raise NotImplementedError('merge_method=\'{}\' is not known.'
+                                  .format(merge_method))
