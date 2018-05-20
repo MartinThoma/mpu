@@ -98,19 +98,17 @@ def dict_merge(dict_left, dict_right, merge_method='take_left_shallow'):
     ----------
     dict_left : dict
     dict_right: dict
-    merge_method : {'take_left_shallow', 'take_left_deep',
-                    'take_right_shallow', 'take_right_deep',
+    merge_method : {'take_left_shallow', 'take_left_deep', \
+                    'take_right_shallow', 'take_right_deep', \
                     'sum'}
-        take_left_shallow: Use both dictinaries. If both have the same key,
-                           take the value of dict_left
-        take_left_deep: If both dictionaries have the same key and the value
-                        is a dict for both again, then merge
-                        those sub-dictionaries
-        take_right_shallow: See take_left_shallow
-        take_right_deep: See take_left_deep
-        sum : sum up both dictionaries
-              If one does not have a value for a key of the other, assume the
-              missing value to be zero.
+        * take_left_shallow: Use both dictinaries. If both have the same key,
+          take the value of dict_left
+        * take_left_deep : If both dictionaries have the same key and the value
+          is a dict for both again, then merge those sub-dictionaries
+        * take_right_shallow : See take_left_shallow
+        * take_right_deep : See take_left_deep
+        * sum : sum up both dictionaries. If one does not have a value for a
+          key of the other, assume the missing value to be zero.
 
     Returns
     -------

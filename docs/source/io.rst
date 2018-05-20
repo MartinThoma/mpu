@@ -1,7 +1,7 @@
-mpu
----
+mpu.io
+------
 
-.. automodule:: mpu
+.. automodule:: mpu.io
     :members:
     :undoc-members:
     :show-inheritance:

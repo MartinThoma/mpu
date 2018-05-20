@@ -6,15 +6,6 @@
 Welcome to mpu's documentation!
 ===============================
 
-Contents:
-
-.. toctree::
-   :maxdepth: 2
-
-   mpu
-   genindex
-
-
 
 This package contains various small functions and classes. All of the
 functionality is not offered by any mayor package.
@@ -33,11 +24,22 @@ Please note that this is not in version 1.0 yet. So there will likely be
 breaking changes.
 
 
+Contents:
+
+.. toctree::
+   :maxdepth: 2
+
+   mpu
+   datastructures
+   io
+   pd
+   shell
+   units
+
 
 
 Indices and tables
-==================
+------------------
 
 * :ref:`modindex`
 * :ref:`search`
-

@@ -1,1 +1,2 @@
 pandas==0.23.0
+sphinx_rtd_theme>=0.3.1

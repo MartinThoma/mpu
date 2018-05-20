@@ -1,20 +1,18 @@
-mpu.units package
-=================
+mpu.units
+=========
 
 Module contents
 ---------------
 
 .. automodule:: mpu.units
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
-.. autosummary::
-    :nosignatures:
-
-    Money
-    Currency
-    get_currency
-
-
-Here you can see which operations are allowed by two Money curencies (A and B):
+Allowed operations with Money
+-----------------------------
+Here you can see which operations are allowed by two Money objects of
+currencies (A and B):
 
 +---------+----------------------+----------+---------+---------------+
 | Money A | Operator             | Money A  | Money B | int, Fraction |
