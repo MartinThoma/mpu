@@ -12,7 +12,28 @@ from functools import total_ordering
 
 @total_ordering
 class Money(object):
-    """Unit of account."""
+    """
+    Unit of account.
+
+    Parameters
+    ----------
+    value : str, Fraction or int
+    currency : Currency or str
+
+    Examples
+    --------
+    >>> rent = Money(500, 'USD')
+    >>> '{:.2f,shortcode}'.format(rent)
+    'USD 500.00'
+    >>> '{:.2f,postshortcode}'.format(rent)
+    '500.00 USD'
+    >>> '{:.2f,symbol}'.format(rent)
+    '$ 500.00'
+    >>> '{:.2f,postsymbol}'.format(rent)
+    '500.00 $'
+    >>> '{:.2f}'.format(rent)
+    '500.00 USD'
+    """
 
     def __init__(self, value, currency):
         # Handle value
@@ -56,6 +77,30 @@ class Money(object):
         else:
             raise ValueError(('Multiplication with type \'{}\' is not '
                               'supported').format(type(other)))
+
+    def __format__(self, spec):
+        if ',' not in spec:
+            value_formatter = spec
+            value_str = ('{:' + value_formatter + '}'
+                         ).format(float(self.value))
+            symbol_formatter = 'postshortcode'
+        else:
+            value_formatter, symbol_formatter = spec.split(',')
+            value_str = ('{:' + value_formatter + '}'
+                         ).format(float(self.value))
+        if symbol_formatter == 'symbol':
+            return self.currency.symbol + ' ' + value_str
+        elif symbol_formatter == 'postsymbol':
+            return value_str + ' ' + self.currency.symbol
+        elif symbol_formatter == 'shortcode':
+            return self.currency.code + ' ' + value_str
+        elif symbol_formatter == 'postshortcode':
+            return value_str + ' ' + self.currency.code
+        else:
+            raise NotImplementedError('The formatter \'{}\' is not '
+                                      'implemented for the Money class.'
+                                      .format(symbol_formatter))
+        return value_str + str(self.currency)
 
     def __add__(self, other):
         if isinstance(other, Money):
