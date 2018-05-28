@@ -10,6 +10,7 @@ import csv
 import json
 import os
 import pickle
+import sys
 
 # Make it work for Python 2+3 and with Unicode
 import io as io_stl
@@ -60,7 +61,13 @@ def read(filepath, **kwargs):
             format_ = 'default'
         skiprows = kwargs['skiprows']
         kwargs.pop('skiprows', None)
-        with open(filepath, 'r') as fp:
+
+        kwargs_open = {'newline': ''}
+        mode = 'r'
+        if sys.version_info < (3, 0):
+            kwargs_open.pop('newline', None)
+            mode = 'rb'
+        with open(filepath, mode, **kwargs_open) as fp:
             if format_ == 'default':
                 reader = csv.reader(fp, **kwargs)
                 data = EList([row for row in reader])
@@ -119,7 +126,12 @@ def write(filepath, data, **kwargs):
     data : str or bytes
     """
     if filepath.lower().endswith('.csv'):
-        with open(filepath, 'r') as fp:
+        kwargs_open = {'newline': ''}
+        mode = 'w'
+        if sys.version_info < (3, 0):
+            kwargs_open.pop('newline', None)
+            mode = 'wb'
+        with open(filepath, mode, **kwargs_open) as fp:
             if 'delimiter' not in kwargs:
                 kwargs['delimiter'] = ','
             if 'quotechar' not in kwargs:

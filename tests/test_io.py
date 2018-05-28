@@ -38,7 +38,7 @@ class IoTest(unittest.TestCase):
                     ['42', " it says, ", '2.0'],
                     ['1337', "is about the most ", '-1'],
                     ['0', "massively useful thing ", '123'],
-                    ['-2', "an interstellar hitchhiker can have.", '3'],
+                    ['-2', "an interstellar hitchhiker can have.\r\n", '3'],
                     ['3.141', "Special char test: €üößł", '2.7']]
         self.assertEquals(len(data_real), len(data_exp))
         self.assertEquals(data_real[0], data_exp[0])
@@ -56,7 +56,8 @@ class IoTest(unittest.TestCase):
                     {'a': '42', 'b': " it says, ", 'c': '2.0'},
                     {'a': '1337', 'b': "is about the most ", 'c': '-1'},
                     {'a': '0', 'b': "massively useful thing ", 'c': '123'},
-                    {'a': '-2', 'b': "an interstellar hitchhiker can have.",
+                    {'a': '-2',
+                     'b': "an interstellar hitchhiker can have.\r\n",
                      'c': '3'},
                     {'a': '3.141', 'b': "Special char test: €üößł", 'c': '2.7'}
                     ]
@@ -70,7 +71,7 @@ class IoTest(unittest.TestCase):
                 ['42', " it says, ", '2.0'],
                 ['1337', "is about the most ", '-1'],
                 ['0', "massively useful thing ", '123'],
-                ['-2', "an interstellar hitchhiker can have.", '3']]
+                ['-2', "an interstellar hitchhiker can have.\r\n", '3']]
         write(filepath, data)
         data_read = read(filepath)
         self.assertEquals(data, data_read)
@@ -82,7 +83,7 @@ class IoTest(unittest.TestCase):
                 ['42', " it says, ", '2.0'],
                 ['1337', "is about the most ", '-1'],
                 ['0', "massively useful thing ", '123'],
-                ['-2', "an interstellar hitchhiker can have.", '3']]
+                ['-2', "an interstellar hitchhiker can have.\r\n", '3']]
         write(filepath, data, delimiter=',', quotechar='"')
         data_read = read(filepath, delimiter=',', quotechar='"')
         self.assertEquals(data, data_read)
