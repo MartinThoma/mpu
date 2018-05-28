@@ -14,17 +14,19 @@ from mpu.io import (download, read, write)
 class IoTest(unittest.TestCase):
 
     def test_download_with_path(self):
-        source = 'http://www.martin-thoma.de/bilder/Martin_Thoma_web_thumb.jpg'
+        source = ('https://upload.wikimedia.org/wikipedia/commons/e/e9/'
+                  'Aurelia-aurita-3-1-style.jpg')
         _, sink = mkstemp(suffix='image.jpg')
         download(source, sink)
-        self.assertEquals(os.path.getsize(sink), 21975)
+        self.assertEquals(os.path.getsize(sink), 116087)
         os.remove(sink)  # cleanup of mkstemp
 
     def test_download_without_path(self):
-        source = 'http://www.martin-thoma.de/bilder/Martin_Thoma_web_thumb.jpg'
+        source = ('https://upload.wikimedia.org/wikipedia/commons/e/e9/'
+                  'Aurelia-aurita-3-1-style.jpg')
         sink = download(source)
         download(source, sink)
-        self.assertEquals(os.path.getsize(sink), 21975)
+        self.assertEquals(os.path.getsize(sink), 116087)
         os.remove(sink)  # cleanup of mkstemp
 
     def test_read_csv(self):
