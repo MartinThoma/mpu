@@ -6,7 +6,7 @@ import math
 
 # internal modules
 from mpu._version import __version__
-from mpu import units, io, shell
+from mpu import units, io, shell, string
 
 
 def parallel_for(loop_function, parameters, nb_threads=100):
