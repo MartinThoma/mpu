@@ -7,6 +7,7 @@ from __future__ import absolute_import
 
 # core modules
 import csv
+import hashlib
 import json
 import os
 import pickle
@@ -190,3 +191,35 @@ def download(source, sink=None):
         sink = os.path.abspath(os.path.split(source)[1])
     urlretrieve(source, sink)
     return sink
+
+
+def hash(filepath, method='sha1', buffer_size=65536):
+    """
+    Calculate a hash of a local file.
+
+    Parameters
+    ----------
+    filepath : str
+    method : {'sha1', 'md5'}
+    buffer_size : int, optional (default: 65536 byte = 64 KiB)
+        in byte
+
+    Returns
+    -------
+    hash : str
+    """
+    if method == 'sha1':
+        hash_function = hashlib.sha1()
+    elif method == 'md5':
+        hash_function = hashlib.md5()
+    else:
+        raise NotImplementedError('Only md5 and sha1 hashes are known, but '
+                                  ' \'{}\' was specified.'.format(method))
+
+    with open(filepath, 'rb') as f:
+        while True:
+            data = f.read(buffer_size)
+            if not data:
+                break
+            hash_function.update(data)
+    return hash_function.hexdigest()

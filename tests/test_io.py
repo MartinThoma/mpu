@@ -9,6 +9,7 @@ import unittest
 
 # internal modules
 from mpu.io import (download, read, write)
+import mpu.io
 
 
 class IoTest(unittest.TestCase):
@@ -175,3 +176,11 @@ class IoTest(unittest.TestCase):
         source = pkg_resources.resource_filename('mpu', 'io.py')
         with self.assertRaises(Exception):
             read(source)
+
+    def test_hash(self):
+        path = '../tests/files/example.pickle'
+        source = pkg_resources.resource_filename('mpu', path)
+        self.assertEquals(mpu.io.hash(source),
+                          'e845794fde22e7a33dd389ed0f5381ae042154c1')
+        self.assertEquals(mpu.io.hash(source, method='md5'),
+                          'c59db499d09531a5937c2ae2342cb18b')
