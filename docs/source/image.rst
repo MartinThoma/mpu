@@ -1,5 +1,5 @@
-mpu.io
-------
+mpu.image
+---------
 
 .. automodule:: mpu.image
     :members:

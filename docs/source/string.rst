@@ -1,5 +1,5 @@
-mpu.io
-------
+mpu.string
+----------
 
 .. automodule:: mpu.string
     :members:
