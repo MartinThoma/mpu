@@ -34,6 +34,7 @@ Contents:
    io
    pd
    shell
+   string
    units
 
 
