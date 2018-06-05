@@ -31,6 +31,7 @@ Contents:
 
    mpu
    datastructures
+   image
    io
    pd
    shell
