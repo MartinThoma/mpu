@@ -1,3 +1,4 @@
+[![PyPI version](https://badge.fury.io/py/mpu.svg)](https://badge.fury.io/py/mpu)
 [![Python Support](https://img.shields.io/pypi/pyversions/mpu.svg)](https://pypi.org/project/mpu/)
 [![Documentation Status](https://readthedocs.org/projects/mpu/badge/?version=latest)](http://mpu.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/MartinThoma/mpu.svg?branch=master)](https://travis-ci.org/MartinThoma/mpu)
