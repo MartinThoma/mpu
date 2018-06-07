@@ -13,6 +13,10 @@ def parallel_for(loop_function, parameters, nb_threads=100):
     """
     Execute the loop body in parallel.
 
+    .. note:: Race-Conditions
+          Executing code in parallel can cause an error class called
+          "race-condition".
+
     Parameters
     ----------
     loop_function : Python function which takes a tuple as input
