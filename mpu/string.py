@@ -140,8 +140,8 @@ def str2bool(string_, default='raise'):
     >>> str2bool('0')
     False
     """
-    true = ['true', 't', '1', 'y', 'yes', 'enabled', 'enable']
-    false = ['false', 'f', '0', 'n', 'no', 'disabled', 'disable']
+    true = ['true', 't', '1', 'y', 'yes', 'enabled', 'enable', 'on']
+    false = ['false', 'f', '0', 'n', 'no', 'disabled', 'disable', 'off']
     if string_.lower() in true:
         return True
     elif string_.lower() in false or (not default):
