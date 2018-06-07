@@ -176,3 +176,35 @@ def dict_merge(dict_left, dict_right, merge_method='take_left_shallow'):
     else:
         raise NotImplementedError('merge_method=\'{}\' is not known.'
                                   .format(merge_method))
+
+
+def set_dict_value(dictionary, keys, value):
+    """
+    Set a value in a (nested) dictionary by defining a list of keys.
+
+    .. note:: Side-effects
+              This function does not make a copy of dictionary, but directly
+              edits it.
+
+    Parameters
+    ----------
+    dictionary : dict
+    keys : list
+    value : object
+
+    Returns
+    -------
+    dictionary : dict
+
+    Examples
+    --------
+    >>> d = {'a': {'b': 'c', 'd': 'e'}}
+    >>> expected = {'a': {'b': 'foobar', 'd': 'e'}}
+    >>> set_dict_value(d, ['a', 'b'], 'foobar') == expected
+    True
+    """
+    orig = dictionary
+    for key in keys[:-1]:
+        dictionary = dictionary.setdefault(key, {})
+    dictionary[keys[-1]] = value
+    return orig
