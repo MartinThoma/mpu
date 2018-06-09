@@ -34,7 +34,7 @@ config = {
     'install_requires': [],
     'keywords': ['utility'],
     'download_url': 'https://github.com/MartinThoma/mpu',
-    'classifiers': ['Development Status :: 1 - Planning',
+    'classifiers': ['Development Status :: 3 - Alpha',
                     'Environment :: Console',
                     'Intended Audience :: Developers',
                     'Intended Audience :: Information Technology',
