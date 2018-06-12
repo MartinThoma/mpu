@@ -31,6 +31,7 @@ Contents:
 
    mpu
    datastructures
+   decorators
    image
    io
    pd
