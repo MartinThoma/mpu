@@ -26,8 +26,22 @@ class MoneyTests(unittest.TestCase):
             Money((5, 100, 42), 'EUR')
         with self.assertRaises(Exception):
             Money(0.1, 'EUR')
-        with self.assertRaises(Exception):
-            Money('0.1', None)
+        non_currency = Money('0.1', None)
+        self.assertEquals(str(non_currency), '0.10')
+        with self.assertRaises(ValueError):
+            Money(1, a)
+
+    def test_money_floatingpoint_issue1(self):
+        """This test is the reason why one should not use float for money."""
+        a = Money('10.00', None)
+        b = Money('1.2', None)
+        self.assertEquals(str(a + b - a), str(b))
+
+    def test_money_floatingpoint_issue2(self):
+        """This test is the reason why one should not use float for money."""
+        a = Money('10.00', None)
+        b = Money('1.2', None)
+        self.assertEquals(str((a + b - a) * 10**14 - b * 10**14), '0.00')
 
     def test_currency_operations(self):
         a = Money('0.5', 'EUR')
@@ -135,3 +149,19 @@ class MoneyTests(unittest.TestCase):
                      entities=['Germany'],
                      withdrawal_date=None,
                      subunits=2)
+
+    def test_formatting(self):
+        non_currency = Money('12.2', None)
+        self.assertEquals('{}'.format(non_currency), '12.20')
+        self.assertEquals('{:0.2f,symbol}'.format(non_currency), '12.20')
+        self.assertEquals('{:0.2f,postsymbol}'.format(non_currency), '12.20')
+        self.assertEquals('{:0.2f,shortcode}'.format(non_currency), '12.20')
+        self.assertEquals('{:0.2f,postshortcode}'.format(non_currency),
+                          '12.20')
+
+        a = Money('12.20', 'USD')
+        self.assertEquals('{}'.format(a), '12.20 USD')
+        self.assertEquals('{:0.2f,symbol}'.format(a), '$12.20')
+        self.assertEquals('{:0.2f,postsymbol}'.format(a), '12.20$')
+        self.assertEquals('{:0.2f,shortcode}'.format(a), 'USD 12.20')
+        self.assertEquals('{:0.2f,postshortcode}'.format(a), '12.20 USD')

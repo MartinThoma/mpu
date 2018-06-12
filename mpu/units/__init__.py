@@ -28,9 +28,9 @@ class Money(object):
     >>> '{:.2f,postshortcode}'.format(rent)
     '500.00 USD'
     >>> '{:.2f,symbol}'.format(rent)
-    '$ 500.00'
+    '$500.00'
     >>> '{:.2f,postsymbol}'.format(rent)
-    '500.00 $'
+    '500.00$'
     >>> '{:.2f}'.format(rent)
     '500.00 USD'
     """
@@ -55,6 +55,15 @@ class Money(object):
             self.currency = currency
         elif isinstance(currency, str):
             self.currency = get_currency(currency)
+        elif currency is None:
+            self.currency = Currency(name='',
+                                     code='',
+                                     numeric_code=None,
+                                     symbol='',
+                                     exponent=None,
+                                     entities=None,
+                                     withdrawal_date=None,
+                                     subunits=None)
         else:
             raise ValueError('currency is of type={}, but should be str or '
                              'Currency')
@@ -63,10 +72,14 @@ class Money(object):
         exponent = 2
         if self.currency.exponent is not None:
             exponent = self.currency.exponent
-        return ('{value:0.{exponent}f} {currency}'
-                .format(exponent=exponent,
-                        value=float(self.value),
-                        currency=self.currency))
+        if self.currency.numeric_code is None:
+            return '{value:0.{exponent}f}'.format(exponent=exponent,
+                                                  value=float(self.value))
+        else:
+            return ('{value:0.{exponent}f} {currency}'
+                    .format(exponent=exponent,
+                            value=float(self.value),
+                            currency=self.currency))
 
     def __repr__(self):
         return str(self)
@@ -80,6 +93,11 @@ class Money(object):
 
     def __format__(self, spec):
         if ',' not in spec:
+            if spec == '':
+                exponent = 2
+                if self.currency.exponent is not None:
+                    exponent = self.currency.exponent
+                spec = '0.{exponent:}f'.format(exponent=exponent)
             value_formatter = spec
             value_str = ('{:' + value_formatter + '}'
                          ).format(float(self.value))
@@ -89,13 +107,21 @@ class Money(object):
             value_str = ('{:' + value_formatter + '}'
                          ).format(float(self.value))
         if symbol_formatter == 'symbol':
-            return self.currency.symbol + ' ' + value_str
+            sep = ''
+            return self.currency.symbol + sep + value_str
         elif symbol_formatter == 'postsymbol':
-            return value_str + ' ' + self.currency.symbol
+            sep = ''
+            return value_str + sep + self.currency.symbol
         elif symbol_formatter == 'shortcode':
-            return self.currency.code + ' ' + value_str
+            sep = ' '
+            if self.currency.numeric_code is None:
+                sep = ''
+            return self.currency.code + sep + value_str
         elif symbol_formatter == 'postshortcode':
-            return value_str + ' ' + self.currency.code
+            sep = ' '
+            if self.currency.numeric_code is None:
+                sep = ''
+            return value_str + sep + self.currency.code
         else:
             raise NotImplementedError('The formatter \'{}\' is not '
                                       'implemented for the Money class.'
@@ -263,4 +289,8 @@ class Currency(object):
         return self.name
 
     def __repr__(self):
-        return str(self)
+        return ('Currency(name={name}, code={code}, '
+                'numeric_code={numeric_code})'
+                .format(name=self.name,
+                        code=self.code,
+                        numeric_code=self.numeric_code))
