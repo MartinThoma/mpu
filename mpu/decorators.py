@@ -10,15 +10,15 @@ import sys
 import warnings
 
 
-def timing(f):
+def timing(func):
     """Measure the execution time of a function call and print the result."""
-    @functools.wraps(f)
+    @functools.wraps(func)
     def wrap(*args, **kw):
         t0 = time()
-        result = f(*args, **kw)
+        result = func(*args, **kw)
         t1 = time()
         print('func:%r args:[%r, %r] took: %2.4f sec' %
-              (f.__name__, args, kw, t1 - t0))
+              (func.__name__, args, kw, t1 - t0))
         return result
     return wrap
 
