@@ -40,7 +40,8 @@ def read(filepath, **kwargs):
         Path to the file that should be read. This methods action depends
         mainly on the file extension.
     kwargs : dict
-        Any keywords for the specific file format.
+        Any keywords for the specific file format. For CSV, this is
+        'delimiter', 'quotechar', 'skiprows', 'format'
 
     Returns
     -------
@@ -74,7 +75,7 @@ def read(filepath, **kwargs):
                 data = EList([row for row in reader])
                 data = data.remove_indices(skiprows)
             elif format_ == 'dicts':
-                reader_list = csv.DictReader(fp)
+                reader_list = csv.DictReader(fp, **kwargs)
                 data = [row for row in reader_list]
             else:
                 raise NotImplementedError('Format \'{}\' unknown'
