@@ -1,0 +1,70 @@
+country_en;length;bban_format;iban_fields
+Albania;28;8n,16c;ALkkbbbssssxcccccccccccccccc
+Andorra;24;8n,12c;ADkkbbbbsssscccccccccccc
+Austria;20;16n;ATkkbbbbbccccccccccc
+Azerbaijan;28;4c,20n;AZkkbbbbcccccccccccccccccccc
+Bahrain;22;4a,14c;BHkkbbbbcccccccccccccc
+Belarus;28;4c,20n;BYkkbbbbaaaacccccccccccccccc
+Belgium;16;12n;BEkkbbbcccccccxx
+Bosnia and Herzegovina;20;16n;BAkkbbbsssccccccccxx
+Brazil;29;23n,1a,1c;BRkkbbbbbbbbssssscccccccccctn
+Bulgaria;22;4a,6n,8c;BGkkbbbbssssttcccccccc
+Costa Rica;22;18n;CRkk0bbbcccccccccccccc
+Croatia;21;17n;HRkkbbbbbbbcccccccccc
+Cyprus;28;8n,16c;CYkkbbbssssscccccccccccccccc
+Czech Republic;24;20n;CZkkbbbbsssssscccccccccc
+Denmark;18;14n;DKkkbbbbcccccccccc
+Dominican Republic;28;4a,20n;DOkkbbbbcccccccccccccccccccc
+East Timor;23;19n;TLkkbbbccccccccccccccxx
+Estonia;20;16n;EEkkbbsscccccccccccx
+Faroe Islands;18;14n;FOkkbbbbcccccccccx
+Finland;18;14n;FIkkbbbbbbcccccccx
+France;27;10n,11c,2n;FRkkbbbbbssssscccccccccccxx
+Georgia;22;2c,16n;GEkkbbcccccccccccccccc
+Germany;22;18n;DEkkbbbbbbbbcccccccccc
+Gibraltar;23;4a,15c;GIkkbbbbccccccccccccccc
+Greece;27;7n,16c;GRkkbbbsssscccccccccccccccc
+Greenland;18;14n;GLkkbbbbcccccccccc
+Guatemala;28;4c,20c;GTkkbbbbmmttcccccccccccccccc
+Hungary;28;24n;HUkkbbbssssxcccccccccccccccx
+Iceland;26;22n;ISkkbbbbsscccccciiiiiiiiii
+Ireland;22;4c,14n;IEkkaaaabbbbbbcccccccc
+Israel;23;19n;ILkkbbbnnnccccccccccccc
+Italy;27;1a,10n,12c;ITkkxbbbbbssssscccccccccccc
+Jordan;30;4a,22n;JOkkbbbbsssscccccccccccccccccc
+Kazakhstan;20;3n,13c;KZkkbbbccccccccccccc
+Kosovo;20;4n,10n,2n;XKkkbbbbcccccccccccc
+Kuwait;30;4a,22c;KWkkbbbbcccccccccccccccccccccc
+Latvia;21;4a,13c;LVkkbbbbccccccccccccc
+Lebanon;28;4n,20c;LBkkbbbbcccccccccccccccccccc
+Liechtenstein;21;5n,12c;LIkkbbbbbcccccccccccc
+Lithuania;20;16n;LTkkbbbbbccccccccccc
+Luxembourg;20;3n,13c;LUkkbbbccccccccccccc
+Macedonia;19;3n,10c,2n;MKkkbbbccccccccccxx
+Malta;31;4a,5n,18c;MTkkbbbbssssscccccccccccccccccc
+Mauritania;27;23n;MRkkbbbbbssssscccccccccccxx
+Mauritius;30;4a,19n,3a;MUkkbbbbbbsscccccccccccc000mmm
+Monaco;27;10n,11c,2n;MCkkbbbbbssssscccccccccccxx
+Moldova;24;2c,18c;MDkkbbcccccccccccccccccc
+Montenegro;22;18n;MEkkbbbcccccccccccccxx
+Netherlands;18;4a,10n;NLkkbbbbcccccccccc
+Norway;15;11n;NOkkbbbbccccccx
+Pakistan;24;4c,16n;PKkkbbbbcccccccccccccccc
+Palestinian territories;29;4c,21n;PSkkbbbbxxxxxxxxxcccccccccccc
+Poland;28;24n;PLkkbbbssssxcccccccccccccccc
+Portugal;25;21n;PTkkbbbbsssscccccccccccxx
+Qatar;29;4a,21c;QAkkbbbbccccccccccccccccccccc
+Romania;24;4a,16c;ROkkbbbbcccccccccccccccc
+San Marino;27;1a,10n,12c;SMkkxbbbbbssssscccccccccccc
+Saudi Arabia;24;2n,18c;SAkkbbcccccccccccccccccc
+Serbia;22;18n;RSkkbbbcccccccccccccxx
+Slovakia;24;20n;SKkkbbbbsssssscccccccccc
+Slovenia;19;15n;SIkkbbsssccccccccxx
+Spain;24;20n;ESkkbbbbssssxxcccccccccc
+Sweden;24;20n;SEkkbbbccccccccccccccccc
+Switzerland;21;5n,12c;CHkkbbbbbcccccccccccc
+Tunisia;24;20n;TNkkbbsssccccccccccccccc
+Turkey;26;5n,17c;TRkkbbbbbxcccccccccccccccc
+United Arab Emirates;23;3n,16n;AEkkbbbcccccccccccccccc
+United Kingdom;22;4a,14n;GBkkbbbbsssssscccccccc
+Virgin Islands, British;24;4c,16n;VGkkbbbbcccccccccccccccc

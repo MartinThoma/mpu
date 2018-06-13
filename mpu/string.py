@@ -10,6 +10,10 @@ For more complex checks, you might want to use the
 
 # core modules
 from email.utils import parseaddr
+import pkg_resources
+
+# internal modules
+import mpu.io
 
 
 def is_email(potential_email_address):
@@ -149,3 +153,82 @@ def str2bool(string_, default='raise'):
     else:
         raise ValueError('The value \'{}\' cannot be mapped to boolean.'
                          .format(string_))
+
+
+def is_iban(potential_iban):
+    """
+    Check if a string is a valid IBAN number.
+
+    IBAN is described in ISO 13616-1:2007 Part 1.
+
+    Spaces are ignored.
+
+    # CODE
+    0 = always zero
+    b = BIC or National Bank code
+    c = Account number
+    i = holder's kennitala (national identification number)
+    k = IBAN check digits
+    n = Branch number
+    t = Account type
+    x = National check digit or character
+
+    Examples
+    --------
+    >>> is_iban('DE89 3704 0044 0532 0130 00')
+    True
+    >>> is_iban('DE89 3704 0044 0532 0130 01')
+    False
+    """
+    path = 'data/iban.csv'  # always use slash in Python packages
+    filepath = pkg_resources.resource_filename('mpu', path)
+    data = mpu.io.read(filepath, delimiter=';', format='dicts')
+    potential_iban = potential_iban.replace(' ', '')  # Remove spaces
+    if len(potential_iban) < min([int(el['length']) for el in data]):
+        return False
+    country = None
+    for el in data:
+        if el['iban_fields'][:2] == potential_iban[:2]:
+            country = el
+            break
+    if country is None:
+        return False
+    if len(potential_iban) != int(country['length']):
+        return False
+    if country['country_en'] == 'Germany':
+        checksum_val = [value
+                        for field_type, value in
+                        zip(country['iban_fields'], potential_iban)
+                        if field_type == 'k']
+        checksum_val = ''.join(checksum_val)
+        checksum_exp = _calculate_german_iban_checksum(potential_iban,
+                                                       country['iban_fields'])
+        return checksum_val == checksum_exp
+    return True
+
+
+def _calculate_german_iban_checksum(iban,
+                                    iban_fields='DEkkbbbbbbbbcccccccccc'):
+    """
+    Calculate the checksam of the German IBAN format.
+
+    Examples
+    --------
+    >>> iban =        'DE41500105170123456789'
+    >>> _calculate_german_iban_checksum(iban)
+    '41'
+    """
+    number = [value
+              for field_type, value in zip(iban_fields, iban)
+              if field_type in ['b', 'c']]
+    translate = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5',
+                 '6': '6', '7': '7', '8': '8', '9': '9'}
+    for i in range(ord('A'), ord('Z') + 1):
+        translate[chr(i)] = str(i - ord('A') + 10)
+    for val in 'DE00':
+        translated = translate[val]
+        for char in translated:
+            number.append(char)
+    number = sum(int(value) * 10**i for i, value in enumerate(number[::-1]))
+    checksum = 98 - (number % 97)
+    return str(checksum)

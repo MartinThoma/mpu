@@ -22,7 +22,7 @@ config = {
     'maintainer': 'Martin Thoma',
     'maintainer_email': 'info@martin-thoma.de',
     'packages': find_packages(),
-    'package_data': {'mpu': ['units/currencies.csv']},
+    'package_data': {'mpu': ['units/currencies.csv', 'data/iban.csv']},
     'extras_require': {'all': ['pandas', 'Pillow']},
     'scripts': [],
     'platforms': ['Linux'],
