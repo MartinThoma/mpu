@@ -15,4 +15,7 @@ class ImageTests(unittest.TestCase):
         path = '../tests/files/example.png'
         source = pkg_resources.resource_filename('mpu', path)
         meta = get_meta(source)
-        self.assertDictEqual(meta, {'width': 252, 'height': 167})
+        meta['file'] = None
+        self.assertDictEqual(meta, {'width': 252, 'height': 167,
+                                    'channels': 4,
+                                    'file': None})

@@ -3,6 +3,7 @@
 
 # core modules
 from tempfile import mkstemp
+import datetime
 import os
 import pkg_resources
 import unittest
@@ -19,7 +20,7 @@ class IoTest(unittest.TestCase):
                   'Aurelia-aurita-3-1-style.jpg')
         _, sink = mkstemp(suffix='image.jpg')
         download(source, sink)
-        self.assertEquals(os.path.getsize(sink), 116087)
+        self.assertEqual(os.path.getsize(sink), 116087)
         os.remove(sink)  # cleanup of mkstemp
 
     def test_download_without_path(self):
@@ -27,7 +28,7 @@ class IoTest(unittest.TestCase):
                   'Aurelia-aurita-3-1-style.jpg')
         sink = download(source)
         download(source, sink)
-        self.assertEquals(os.path.getsize(sink), 116087)
+        self.assertEqual(os.path.getsize(sink), 116087)
         os.remove(sink)  # cleanup of mkstemp
 
     def test_read_csv(self):
@@ -41,13 +42,13 @@ class IoTest(unittest.TestCase):
                     ['0', "massively useful thing ", '123'],
                     ['-2', "an interstellar hitchhiker can have.\r\n", '3'],
                     ['3.141', "Special char test: €üößł", '2.7']]
-        self.assertEquals(len(data_real), len(data_exp))
-        self.assertEquals(data_real[0], data_exp[0])
-        self.assertEquals(data_real, data_exp)
+        self.assertEqual(len(data_real), len(data_exp))
+        self.assertEqual(data_real[0], data_exp[0])
+        self.assertEqual(data_real, data_exp)
         data_real = read(source, skiprows=1)
-        self.assertEquals(data_real, data_exp[1:])
+        self.assertEqual(data_real, data_exp[1:])
         data_real = read(source, skiprows=1, delimiter=',', quotechar='"')
-        self.assertEquals(data_real, data_exp[1:])
+        self.assertEqual(data_real, data_exp[1:])
 
     def test_read_csv_dicts(self):
         path = '../tests/files/example.csv'
@@ -62,9 +63,9 @@ class IoTest(unittest.TestCase):
                      'c': '3'},
                     {'a': '3.141', 'b': "Special char test: €üößł", 'c': '2.7'}
                     ]
-        self.assertEquals(len(data_real), len(data_exp))
-        self.assertEquals(data_real[0], data_exp[0])
-        self.assertEquals(data_real, data_exp)
+        self.assertEqual(len(data_real), len(data_exp))
+        self.assertEqual(data_real[0], data_exp[0])
+        self.assertEqual(data_real, data_exp)
 
     def test_write_csv(self):
         _, filepath = mkstemp(suffix='.csv', prefix='mpu_test')
@@ -75,7 +76,18 @@ class IoTest(unittest.TestCase):
                 ['-2', "an interstellar hitchhiker can have.\r\n", '3']]
         write(filepath, data)
         data_read = read(filepath)
-        self.assertEquals(data, data_read)
+        self.assertEqual(data, data_read)
+        os.remove(filepath)  # cleanup of mkstemp
+
+    def test_write_h5(self):
+        _, filepath = mkstemp(suffix='.hdf5', prefix='mpu_test')
+        data = [['1', "A towel,", '1.0'],
+                ['42', " it says, ", '2.0'],
+                ['1337', "is about the most ", '-1'],
+                ['0', "massively useful thing ", '123'],
+                ['-2', "an interstellar hitchhiker can have.\r\n", '3']]
+        with self.assertRaises(NotImplementedError):
+            write(filepath, data)
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_write_csv_params(self):
@@ -87,7 +99,7 @@ class IoTest(unittest.TestCase):
                 ['-2', "an interstellar hitchhiker can have.\r\n", '3']]
         write(filepath, data, delimiter=',', quotechar='"')
         data_read = read(filepath, delimiter=',', quotechar='"')
-        self.assertEquals(data, data_read)
+        self.assertEqual(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_read_hdf5(self):
@@ -106,7 +118,7 @@ class IoTest(unittest.TestCase):
                     'another dict': {'foo': 'bar',
                                      'key': 'value',
                                      'the answer': 42}}
-        self.assertEquals(data_real, data_exp)
+        self.assertEqual(data_real, data_exp)
 
     def test_read_pickle(self):
         path = '../tests/files/example.pickle'
@@ -118,7 +130,7 @@ class IoTest(unittest.TestCase):
                     'another dict': {'foo': 'bar',
                                      'key': 'value',
                                      'the answer': 42}}
-        self.assertEquals(data_real, data_exp)
+        self.assertEqual(data_real, data_exp)
 
     def test_write_json(self):
         _, filepath = mkstemp(suffix='.json', prefix='mpu_test')
@@ -129,7 +141,7 @@ class IoTest(unittest.TestCase):
                                  'the answer': 42}}
         write(filepath, data)
         data_read = read(filepath)
-        self.assertEquals(data, data_read)
+        self.assertEqual(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_write_json_params(self):
@@ -145,7 +157,7 @@ class IoTest(unittest.TestCase):
               separators=(',', ':'),
               ensure_ascii=False)
         data_read = read(filepath)
-        self.assertEquals(data, data_read)
+        self.assertEqual(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_write_pickle(self):
@@ -157,7 +169,7 @@ class IoTest(unittest.TestCase):
                                  'the answer': 42}}
         write(filepath, data)
         data_read = read(filepath)
-        self.assertEquals(data, data_read)
+        self.assertEqual(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_write_pickle_protocol(self):
@@ -169,7 +181,7 @@ class IoTest(unittest.TestCase):
                                  'the answer': 42}}
         write(filepath, data, protocol=0)
         data_read = read(filepath)
-        self.assertEquals(data, data_read)
+        self.assertEqual(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_read_h5(self):
@@ -180,7 +192,19 @@ class IoTest(unittest.TestCase):
     def test_hash(self):
         path = '../tests/files/example.pickle'
         source = pkg_resources.resource_filename('mpu', path)
-        self.assertEquals(mpu.io.hash(source),
-                          'e845794fde22e7a33dd389ed0f5381ae042154c1')
-        self.assertEquals(mpu.io.hash(source, method='md5'),
-                          'c59db499d09531a5937c2ae2342cb18b')
+        self.assertEqual(mpu.io.hash(source),
+                         'e845794fde22e7a33dd389ed0f5381ae042154c1')
+        self.assertEqual(mpu.io.hash(source, method='md5'),
+                         'c59db499d09531a5937c2ae2342cb18b')
+
+    def test_get_creation_datetime(self):
+        ret_val = mpu.io.get_creation_datetime(__file__)
+        self.assertIsInstance(ret_val, (type(None), datetime.datetime))
+
+    def test_get_modification_datetime(self):
+        ret_val = mpu.io.get_modification_datetime(__file__)
+        self.assertIsInstance(ret_val, datetime.datetime)
+
+    def test_get_access_datetime(self):
+        ret_val = mpu.io.get_access_datetime(__file__)
+        self.assertIsInstance(ret_val, datetime.datetime)

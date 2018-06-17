@@ -1,8 +1,9 @@
 # core modules
 from setuptools import find_packages
 from setuptools import setup
-import os
 import io
+import os
+import unittest
 
 # internal modules
 exec(open('mpu/_version.py').read())
@@ -14,6 +15,13 @@ def read(file_name):
                  encoding='utf-8') as f:
         return f.read()
 
+
+def my_test_suite():
+    """Return a a composite test consisting of a number of TestCases."""
+    test_loader = unittest.TestLoader()
+    test_suite = test_loader.discover('tests', pattern='test_*.py')
+    return test_suite
+
 config = {
     'name': 'mpu',
     'version': __version__,
@@ -23,7 +31,7 @@ config = {
     'maintainer_email': 'info@martin-thoma.de',
     'packages': find_packages(),
     'package_data': {'mpu': ['units/currencies.csv', 'data/iban.csv']},
-    'extras_require': {'all': ['pandas', 'Pillow']},
+    'extras_require': {'all': ['pandas', 'Pillow', 'pytz', 'python-magic']},
     'scripts': [],
     'platforms': ['Linux'],
     'url': 'https://github.com/MartinThoma/mpu',
@@ -45,6 +53,7 @@ config = {
                     'Topic :: Software Development',
                     'Topic :: Utilities'],
     'zip_safe': True,
+    'test_suite': 'setup.my_test_suite',
 }
 
 setup(**config)

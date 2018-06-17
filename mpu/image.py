@@ -3,6 +3,9 @@
 
 """Image manipulation."""
 
+# internal modules
+import mpu
+
 
 def get_meta(filepath):
     """
@@ -23,6 +26,7 @@ def get_meta(filepath):
             width, height = img.size
         meta['width'] = width
         meta['height'] = height
+        meta['channels'] = len(img.mode)  # RGB, RGBA - does this always work?
     except ImportError:
         pass
     try:
@@ -33,4 +37,7 @@ def get_meta(filepath):
         meta['channels'] = channels
     except ImportError:
         pass
+
+    # Get times - creation, last edit, last open
+    meta['file'] = mpu.io.get_file_meta(filepath)
     return meta

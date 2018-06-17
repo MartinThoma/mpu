@@ -6,12 +6,15 @@
 from __future__ import absolute_import
 
 # core modules
+from datetime import datetime
 import csv
 import hashlib
 import json
 import os
 import pickle
+import platform
 import sys
+import time
 
 # Make it work for Python 2+3 and with Unicode
 import io as io_stl
@@ -224,3 +227,92 @@ def hash(filepath, method='sha1', buffer_size=65536):
                 break
             hash_function.update(data)
     return hash_function.hexdigest()
+
+
+def get_creation_datetime(filepath):
+    """
+    Get the date that a file was created.
+
+    Parameters
+    ----------
+    filepath : str
+
+    Returns
+    -------
+    creation_datetime : datetime.datetime or None
+    """
+    if platform.system() == 'Windows':
+        return datetime.fromtimestamp(os.path.getctime(filepath))
+    else:
+        stat = os.stat(filepath)
+        try:
+            return datetime.fromtimestamp(stat.st_birthtime)
+        except AttributeError:
+            # We're probably on Linux. No easy way to get creation dates here,
+            # so we'll settle for when its content was last modified.
+            return None
+
+
+def get_modification_datetime(filepath):
+    """
+    Get the datetime that a file was last modified.
+
+    Parameters
+    ----------
+    filepath : str
+
+    Returns
+    -------
+    modification_datetime : datetime.datetime
+
+    """
+    import pytz
+    tz = pytz.timezone(time.tzname[0])
+    mtime = datetime.fromtimestamp(os.path.getmtime(filepath))
+    return mtime.replace(tzinfo=tz)
+
+
+def get_access_datetime(filepath):
+    """
+    Get the last time filepath was accessed.
+
+    Parameters
+    ----------
+    filepath : str
+
+    Returns
+    -------
+    access_datetime : datetime.datetime
+    """
+    import pytz
+    tz = pytz.timezone(time.tzname[0])
+    mtime = datetime.fromtimestamp(os.path.getatime(filepath))
+    return mtime.replace(tzinfo=tz)
+
+
+def get_file_meta(filepath):
+    """
+    Get meta-information about a file.
+
+    Parameters
+    ----------
+    filepath : str
+
+    Returns
+    -------
+    meta : dict
+    """
+    meta = {}
+    meta['filepath'] = os.path.abspath(filepath)
+    meta['creation_datetime'] = get_creation_datetime(filepath)
+    meta['last_access_datetime'] = get_access_datetime(filepath)
+    meta['modification_datetime'] = get_modification_datetime(filepath)
+    try:
+        import magic
+        f_mime = magic.Magic(mime=True, uncompress=True)
+        f_other = magic.Magic(mime=False, uncompress=True)
+        meta['mime'] = f_mime.from_file(meta['filepath'])
+        meta['magic-type'] = f_other.from_file(meta['filepath'])
+    except ImportError:
+        pass
+    return meta
