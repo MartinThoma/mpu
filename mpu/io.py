@@ -34,7 +34,7 @@ def read(filepath, **kwargs):
     Supported formats:
 
     * CSV
-    * JSON
+    * JSON, JSONL
     * pickle
 
     Parameters
@@ -88,6 +88,12 @@ def read(filepath, **kwargs):
         with open(filepath) as data_file:
             data = json.load(data_file, **kwargs)
         return data
+    elif filepath.lower().endswith('.jsonl'):
+        with open(filepath) as data_file:
+            data = [json.loads(line, **kwargs)
+                    for line in data_file
+                    if len(line) > 0]
+        return data
     elif filepath.lower().endswith('.pickle'):
         with open(filepath, 'rb') as handle:
             data = pickle.load(handle)
@@ -113,7 +119,7 @@ def write(filepath, data, **kwargs):
     Supported formats:
 
     * CSV
-    * JSON
+    * JSON, JSONL
     * pickle
 
     Parameters
@@ -157,6 +163,20 @@ def write(filepath, data, **kwargs):
                 kwargs['ensure_ascii'] = False
             str_ = json.dumps(data, **kwargs)
             outfile.write(to_unicode(str_))
+    elif filepath.lower().endswith('.jsonl'):
+        print(filepath)
+        with io_stl.open(filepath, 'w', encoding='utf8') as outfile:
+            kwargs['indent'] = None  # JSON has to be on one line!
+            if 'sort_keys' not in kwargs:
+                kwargs['sort_keys'] = True
+            if 'separators' not in kwargs:
+                kwargs['separators'] = (',', ': ')
+            if 'ensure_ascii' not in kwargs:
+                kwargs['ensure_ascii'] = False
+            for line in data:
+                str_ = json.dumps(line, **kwargs)
+                outfile.write(to_unicode(str_))
+                outfile.write(u'\n')
     elif filepath.lower().endswith('.pickle'):
         if 'protocol' not in kwargs:
             kwargs['protocol'] = pickle.HIGHEST_PROTOCOL

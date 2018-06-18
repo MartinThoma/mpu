@@ -120,6 +120,18 @@ class IoTest(unittest.TestCase):
                                      'the answer': 42}}
         self.assertEqual(data_real, data_exp)
 
+    def test_read_jsonl(self):
+        path = '../tests/files/example.jsonl'
+        source = pkg_resources.resource_filename('mpu', path)
+        data_real = read(source)
+        data_exp = [{"some": "thing"},
+                    {"foo": 17, "bar": False, "quux": True},
+                    {"may": {"include": "nested",
+                             "objects": ["and", "arrays"]}}]
+        self.assertEqual(len(data_real), len(data_exp))
+        for real, exp_ in zip(data_real, data_exp):
+            self.assertEqual(real, exp_)
+
     def test_read_pickle(self):
         path = '../tests/files/example.pickle'
         source = pkg_resources.resource_filename('mpu', path)
@@ -139,6 +151,17 @@ class IoTest(unittest.TestCase):
                 'another dict': {'foo': 'bar',
                                  'key': 'value',
                                  'the answer': 42}}
+        write(filepath, data)
+        data_read = read(filepath)
+        self.assertEqual(data, data_read)
+        os.remove(filepath)  # cleanup of mkstemp
+
+    def test_write_jsonl(self):
+        _, filepath = mkstemp(suffix='.jsonl', prefix='mpu_test')
+        data = [{"some": "thing"},
+                {"foo": 17, "bar": False, "quux": True},
+                {"may": {"include": "nested",
+                         "objects": ["and", "arrays"]}}]
         write(filepath, data)
         data_read = read(filepath)
         self.assertEqual(data, data_read)
