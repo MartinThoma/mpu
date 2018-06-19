@@ -93,4 +93,4 @@ prints `1375.31 Euro`
 
 * Download files with `mpu.io.download(source, sink)`
 * Read CSV, JSON and pickle with `mpu.io.read(filepath)`
-* Write CSV, JSON and pickle with `mpu.io.read(filepath)`
+* Write CSV, JSON and pickle with `mpu.io.write(filepath, data)`
