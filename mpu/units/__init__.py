@@ -51,9 +51,13 @@ class Money(object):
             self.value = fractions.Fraction(value)  # convert to Decimal
 
         # Handle currency
+        try:
+            strtype = basestring
+        except NameError:
+            strtype = str
         if isinstance(currency, Currency):
             self.currency = currency
-        elif isinstance(currency, str):
+        elif isinstance(currency, strtype):
             self.currency = get_currency(currency)
         elif currency is None:
             self.currency = Currency(name='',
@@ -66,7 +70,8 @@ class Money(object):
                                      subunits=None)
         else:
             raise ValueError('currency is of type={}, but should be str or '
-                             'Currency')
+                             'Currency'
+                             .format(type(currency)))
 
     def __str__(self):
         exponent = 2
@@ -197,6 +202,25 @@ class Money(object):
         else:
             return self.value < other.value
 
+    def __json__(self):
+        """Return a JSON-serializable object."""
+        currency = str(self.currency)
+        if self.currency.numeric_code is None:
+            currency = None
+        return {
+            'value': '{}'.format(self.value),
+            'currency': currency,
+            '__python__': 'mpu.units:Money.from_json',
+        }
+
+    for_json = __json__
+
+    @classmethod
+    def from_json(cls, json):
+        """Create a Money object from a JSON dump."""
+        obj = cls(json['value'], json['currency'])
+        return obj
+
 
 def get_currency(currency_str):
     """
@@ -294,3 +318,32 @@ class Currency(object):
                 .format(name=self.name,
                         code=self.code,
                         numeric_code=self.numeric_code))
+
+    def __json__(self):
+        """Return a JSON-serializable object."""
+        return {
+            'name': self.name,
+            'code': self.code,
+            'numeric_code': self.numeric_code,
+            'symbol': self.symbol,
+            'exponent': self.exponent,
+            'entities': self.entities,
+            'withdrawal_date': self.withdrawal_date,
+            'subunits': self.subunits,
+            '__python__': 'mpu.units:Currency.from_json',
+        }
+
+    for_json = __json__
+
+    @classmethod
+    def from_json(cls, json):
+        """Create a Currency object from a JSON dump."""
+        obj = cls(name=json['name'],
+                  code=json['code'],
+                  numeric_code=json['numeric_code'],
+                  symbol=json['symbol'],
+                  exponent=json['exponent'],
+                  entities=json['entities'],
+                  withdrawal_date=json['withdrawal_date'],
+                  subunits=json['subunits'])
+        return obj

@@ -4,8 +4,11 @@
 # core modules
 import unittest
 
+# 3rd party modules
+import simplejson
+
 # internal modules
-from mpu.units import Money, Currency
+from mpu.units import Money, Currency, get_currency
 
 
 class MoneyTests(unittest.TestCase):
@@ -30,6 +33,29 @@ class MoneyTests(unittest.TestCase):
         self.assertEquals(str(non_currency), '0.10')
         with self.assertRaises(ValueError):
             Money(1, a)
+
+    def test_currency_for_json(self):
+        usd = get_currency('USD')
+        dump = simplejson.dumps(usd, for_json=True)
+        dict_ = simplejson.loads(dump)
+        undump = Currency.from_json(dict_)
+        self.assertEquals(usd, undump)
+
+    def test_money_json_magic(self):
+        usd = Money('0.1', 'USD')
+        usd_dict = usd.__json__()
+        dump = simplejson.dumps(usd_dict)
+        dict_ = simplejson.loads(dump)
+        undump = Money.from_json(dict_)
+        self.assertEquals(usd, undump)
+
+    def test_money_json_magic_none(self):
+        usd = Money('0.1', None)
+        usd_dict = usd.__json__()
+        dump = simplejson.dumps(usd_dict)
+        dict_ = simplejson.loads(dump)
+        undump = Money.from_json(dict_)
+        self.assertEquals(usd, undump)
 
     def test_money_floatingpoint_issue1(self):
         """This test is the reason why one should not use float for money."""
