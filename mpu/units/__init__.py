@@ -3,6 +3,8 @@
 
 """Handle units - currently only currencies."""
 
+from __future__ import absolute_import
+
 # core modules
 import csv
 import fractions

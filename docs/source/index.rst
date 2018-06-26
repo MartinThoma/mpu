@@ -31,6 +31,7 @@ Contents:
 
    mpu
    datastructures
+   datetime
    decorators
    image
    io

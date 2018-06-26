@@ -3,8 +3,10 @@
 
 """Pandas utility functions."""
 
+from __future__ import absolute_import
+
 # core modules
-from datetime import datetime
+import datetime as dt
 
 # 3rd party modules
 import pandas as pd
@@ -19,11 +21,11 @@ def example_df():
                      'Spain',
                      'Vatican']
     population = [82521653, 66991000, 255461700, 4761865, 46549045, None]
-    population_time = [datetime(2016, 12, 1),
-                       datetime(2017, 1, 1),
-                       datetime(2017, 1, 1),
+    population_time = [dt.datetime(2016, 12, 1),
+                       dt.datetime(2017, 1, 1),
+                       dt.datetime(2017, 1, 1),
                        None,  # Ireland
-                       datetime(2017, 6, 1),  # Spain
+                       dt.datetime(2017, 6, 1),  # Spain
                        None,
                        ]
     euro = [True, True, False, True, True, True]
