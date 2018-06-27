@@ -22,6 +22,12 @@ def my_test_suite():
     test_suite = test_loader.discover('tests', pattern='test_*.py')
     return test_suite
 
+requires_datetime = ['pytz']
+requires_image = ['Pillow']
+requires_io = ['pytz']
+requires_all = (['pandas', 'python-magic'] + requires_datetime +
+                requires_image + requires_io)
+
 config = {
     'name': 'mpu',
     'version': __version__,
@@ -31,7 +37,10 @@ config = {
     'maintainer_email': 'info@martin-thoma.de',
     'packages': find_packages(),
     'package_data': {'mpu': ['units/currencies.csv', 'data/iban.csv']},
-    'extras_require': {'all': ['pandas', 'Pillow', 'pytz', 'python-magic']},
+    'extras_require': {'all': requires_all,
+                       'datetime': requires_datetime,
+                       'image': requires_image,
+                       'io': requires_io},
     'scripts': [],
     'platforms': ['Linux'],
     'url': 'https://github.com/MartinThoma/mpu',
