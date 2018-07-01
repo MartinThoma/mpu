@@ -107,7 +107,7 @@ def read(filepath, **kwargs):
                                   ' as a guide how to use it.')
     elif (filepath.lower().endswith('.h5') or
           filepath.lower().endswith('.hdf5')):
-        raise NotImplementedError('YAML is not supported. See '
+        raise NotImplementedError('HDF5 is not supported. See '
                                   'https://stackoverflow.com/a/41586571/562769'
                                   ' as a guide how to use it.')
     else:
