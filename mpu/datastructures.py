@@ -140,21 +140,7 @@ def dict_merge(dict_left, dict_right, merge_method='take_left_shallow'):
     """
     new_dict = {}
     if merge_method in ['take_right_shallow', 'take_right_deep']:
-        new_dict = deepcopy(dict_left)
-        for key, value in dict_right.items():
-            if key not in new_dict:
-                new_dict[key] = value
-            else:
-                recurse = (merge_method == 'take_right_deep' and
-                           isinstance(dict_left[key], dict) and
-                           isinstance(dict_right[key], dict))
-                if recurse:
-                    new_dict[key] = dict_merge(dict_left[key],
-                                               dict_right[key],
-                                               merge_method='take_right_deep')
-                else:
-                    new_dict[key] = value
-        return new_dict
+        return _dict_merge_right(dict_left, dict_right, merge_method)
     elif merge_method == 'take_left_shallow':
         return dict_merge(dict_right, dict_left, 'take_right_shallow')
     elif merge_method == 'take_left_deep':
@@ -176,6 +162,25 @@ def dict_merge(dict_left, dict_right, merge_method='take_left_shallow'):
     else:
         raise NotImplementedError('merge_method=\'{}\' is not known.'
                                   .format(merge_method))
+
+
+def _dict_merge_right(dict_left, dict_right, merge_method):
+    """See documentation of mpu.datastructures.dict_merge."""
+    new_dict = deepcopy(dict_left)
+    for key, value in dict_right.items():
+        if key not in new_dict:
+            new_dict[key] = value
+        else:
+            recurse = (merge_method == 'take_right_deep' and
+                       isinstance(dict_left[key], dict) and
+                       isinstance(dict_right[key], dict))
+            if recurse:
+                new_dict[key] = dict_merge(dict_left[key],
+                                           dict_right[key],
+                                           merge_method='take_right_deep')
+            else:
+                new_dict[key] = value
+    return new_dict
 
 
 def set_dict_value(dictionary, keys, value):

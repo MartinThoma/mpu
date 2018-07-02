@@ -51,49 +51,13 @@ def read(filepath, **kwargs):
     data : str or bytes
     """
     if filepath.lower().endswith('.csv'):
-        if 'delimiter' not in kwargs:
-            kwargs['delimiter'] = ','
-        if 'quotechar' not in kwargs:
-            kwargs['quotechar'] = '"'
-        if 'skiprows' not in kwargs:
-            kwargs['skiprows'] = []
-        if isinstance(kwargs['skiprows'], int):
-            kwargs['skiprows'] = [i for i in range(kwargs['skiprows'])]
-        if 'format' in kwargs:
-            format_ = kwargs['format']
-            kwargs.pop('format', None)
-        else:
-            format_ = 'default'
-        skiprows = kwargs['skiprows']
-        kwargs.pop('skiprows', None)
-
-        kwargs_open = {'newline': ''}
-        mode = 'r'
-        if sys.version_info < (3, 0):
-            kwargs_open.pop('newline', None)
-            mode = 'rb'
-        with open(filepath, mode, **kwargs_open) as fp:
-            if format_ == 'default':
-                reader = csv.reader(fp, **kwargs)
-                data = EList([row for row in reader])
-                data = data.remove_indices(skiprows)
-            elif format_ == 'dicts':
-                reader_list = csv.DictReader(fp, **kwargs)
-                data = [row for row in reader_list]
-            else:
-                raise NotImplementedError('Format \'{}\' unknown'
-                                          .format(format_))
-        return data
+        return _read_csv(filepath, kwargs)
     elif filepath.lower().endswith('.json'):
         with open(filepath) as data_file:
             data = json.load(data_file, **kwargs)
         return data
     elif filepath.lower().endswith('.jsonl'):
-        with open(filepath) as data_file:
-            data = [json.loads(line, **kwargs)
-                    for line in data_file
-                    if len(line) > 0]
-        return data
+        return _read_jsonl(filepath, kwargs)
     elif filepath.lower().endswith('.pickle'):
         with open(filepath, 'rb') as handle:
             data = pickle.load(handle)
@@ -112,6 +76,52 @@ def read(filepath, **kwargs):
                                   ' as a guide how to use it.')
     else:
         raise NotImplementedError('File \'{}\' is not known.'.format(filepath))
+
+
+def _read_csv(filepath, kwargs):
+    """See documentation of mpu.io.read."""
+    if 'delimiter' not in kwargs:
+        kwargs['delimiter'] = ','
+    if 'quotechar' not in kwargs:
+        kwargs['quotechar'] = '"'
+    if 'skiprows' not in kwargs:
+        kwargs['skiprows'] = []
+    if isinstance(kwargs['skiprows'], int):
+        kwargs['skiprows'] = [i for i in range(kwargs['skiprows'])]
+    if 'format' in kwargs:
+        format_ = kwargs['format']
+        kwargs.pop('format', None)
+    else:
+        format_ = 'default'
+    skiprows = kwargs['skiprows']
+    kwargs.pop('skiprows', None)
+
+    kwargs_open = {'newline': ''}
+    mode = 'r'
+    if sys.version_info < (3, 0):
+        kwargs_open.pop('newline', None)
+        mode = 'rb'
+    with open(filepath, mode, **kwargs_open) as fp:
+        if format_ == 'default':
+            reader = csv.reader(fp, **kwargs)
+            data = EList([row for row in reader])
+            data = data.remove_indices(skiprows)
+        elif format_ == 'dicts':
+            reader_list = csv.DictReader(fp, **kwargs)
+            data = [row for row in reader_list]
+        else:
+            raise NotImplementedError('Format \'{}\' unknown'
+                                      .format(format_))
+    return data
+
+
+def _read_jsonl(filepath, kwargs):
+    """See documentation of mpu.io.read."""
+    with open(filepath) as data_file:
+        data = [json.loads(line, **kwargs)
+                for line in data_file
+                if len(line) > 0]
+    return data
 
 
 def write(filepath, data, **kwargs):
@@ -139,51 +149,13 @@ def write(filepath, data, **kwargs):
     data : str or bytes
     """
     if filepath.lower().endswith('.csv'):
-        kwargs_open = {'newline': ''}
-        mode = 'w'
-        if sys.version_info < (3, 0):
-            kwargs_open.pop('newline', None)
-            mode = 'wb'
-        with open(filepath, mode, **kwargs_open) as fp:
-            if 'delimiter' not in kwargs:
-                kwargs['delimiter'] = ','
-            if 'quotechar' not in kwargs:
-                kwargs['quotechar'] = '"'
-            with open(filepath, 'w') as fp:
-                writer = csv.writer(fp, **kwargs)
-                writer.writerows(data)
-        return data
+        return _write_csv(filepath, data, kwargs)
     elif filepath.lower().endswith('.json'):
-        with io_stl.open(filepath, 'w', encoding='utf8') as outfile:
-            if 'indent' not in kwargs:
-                kwargs['indent'] = 4
-            if 'sort_keys' not in kwargs:
-                kwargs['sort_keys'] = True
-            if 'separators' not in kwargs:
-                kwargs['separators'] = (',', ': ')
-            if 'ensure_ascii' not in kwargs:
-                kwargs['ensure_ascii'] = False
-            str_ = json.dumps(data, **kwargs)
-            outfile.write(to_unicode(str_))
+        return _write_json(filepath, data, kwargs)
     elif filepath.lower().endswith('.jsonl'):
-        print(filepath)
-        with io_stl.open(filepath, 'w', encoding='utf8') as outfile:
-            kwargs['indent'] = None  # JSON has to be on one line!
-            if 'sort_keys' not in kwargs:
-                kwargs['sort_keys'] = True
-            if 'separators' not in kwargs:
-                kwargs['separators'] = (',', ': ')
-            if 'ensure_ascii' not in kwargs:
-                kwargs['ensure_ascii'] = False
-            for line in data:
-                str_ = json.dumps(line, **kwargs)
-                outfile.write(to_unicode(str_))
-                outfile.write(u'\n')
+        return _write_jsonl(filepath, data, kwargs)
     elif filepath.lower().endswith('.pickle'):
-        if 'protocol' not in kwargs:
-            kwargs['protocol'] = pickle.HIGHEST_PROTOCOL
-        with open(filepath, 'wb') as handle:
-            pickle.dump(data, handle, **kwargs)
+        return _write_pickle(filepath, data, kwargs)
     elif (filepath.lower().endswith('.yml') or
           filepath.lower().endswith('.yaml')):
         raise NotImplementedError('YAML is not supported, because you need '
@@ -198,6 +170,66 @@ def write(filepath, data, **kwargs):
                                   ' as a guide how to use it.')
     else:
         raise NotImplementedError('File \'{}\' is not known.'.format(filepath))
+
+
+def _write_csv(filepath, data, kwargs):
+    """See documentation of mpu.io.write."""
+    kwargs_open = {'newline': ''}
+    mode = 'w'
+    if sys.version_info < (3, 0):
+        kwargs_open.pop('newline', None)
+        mode = 'wb'
+    with open(filepath, mode, **kwargs_open) as fp:
+        if 'delimiter' not in kwargs:
+            kwargs['delimiter'] = ','
+        if 'quotechar' not in kwargs:
+            kwargs['quotechar'] = '"'
+        with open(filepath, 'w') as fp:
+            writer = csv.writer(fp, **kwargs)
+            writer.writerows(data)
+    return data
+
+
+def _write_json(filepath, data, kwargs):
+    """See documentation of mpu.io.write."""
+    with io_stl.open(filepath, 'w', encoding='utf8') as outfile:
+        if 'indent' not in kwargs:
+            kwargs['indent'] = 4
+        if 'sort_keys' not in kwargs:
+            kwargs['sort_keys'] = True
+        if 'separators' not in kwargs:
+            kwargs['separators'] = (',', ': ')
+        if 'ensure_ascii' not in kwargs:
+            kwargs['ensure_ascii'] = False
+        str_ = json.dumps(data, **kwargs)
+        outfile.write(to_unicode(str_))
+    return data
+
+
+def _write_jsonl(filepath, data, kwargs):
+    """See documentation of mpu.io.write."""
+    with io_stl.open(filepath, 'w', encoding='utf8') as outfile:
+        kwargs['indent'] = None  # JSON has to be on one line!
+        if 'sort_keys' not in kwargs:
+            kwargs['sort_keys'] = True
+        if 'separators' not in kwargs:
+            kwargs['separators'] = (',', ': ')
+        if 'ensure_ascii' not in kwargs:
+            kwargs['ensure_ascii'] = False
+        for line in data:
+            str_ = json.dumps(line, **kwargs)
+            outfile.write(to_unicode(str_))
+            outfile.write(u'\n')
+    return data
+
+
+def _write_pickle(filepath, data, kwargs):
+    """See documentation of mpu.io.write."""
+    if 'protocol' not in kwargs:
+        kwargs['protocol'] = pickle.HIGHEST_PROTOCOL
+    with open(filepath, 'wb') as handle:
+        pickle.dump(data, handle, **kwargs)
+    return data
 
 
 def download(source, sink=None):
