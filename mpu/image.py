@@ -29,14 +29,6 @@ def get_meta(filepath):
         meta['channels'] = len(img.mode)  # RGB, RGBA - does this always work?
     except ImportError:
         pass
-    try:
-        import scipy.ndimage
-        height, width, channels = scipy.ndimage.imread(filepath).shape
-        meta['width'] = width
-        meta['height'] = height
-        meta['channels'] = channels
-    except ImportError:
-        pass
 
     # Get times - creation, last edit, last open
     meta['file'] = mpu.io.get_file_meta(filepath)
