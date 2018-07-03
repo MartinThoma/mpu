@@ -57,6 +57,13 @@ class MoneyTests(unittest.TestCase):
         undump = Money.from_json(dict_)
         self.assertEquals(usd, undump)
 
+    def test_money_conversion_float(self):
+        """Test if one can convert Money instances to float."""
+        a = Money('1337.00', None)
+        self.assertEquals(float(a), 1337.0)
+        b = Money('42.00', 'USD')
+        self.assertEquals(float(b), 42.0)
+
     def test_money_floatingpoint_issue1(self):
         """This test is the reason why one should not use float for money."""
         a = Money('10.00', None)
@@ -71,6 +78,7 @@ class MoneyTests(unittest.TestCase):
 
     def test_currency_operations(self):
         a = Money('0.5', 'EUR')
+        aneg = Money('-0.5', 'EUR')
         b = Money('0.1', 'EUR')
         c = Money('0.1', 'USD')
         d = Money('0.5', 'EUR')
@@ -82,6 +90,8 @@ class MoneyTests(unittest.TestCase):
         self.assertEquals(a != d, False)
         self.assertEquals(a != c, True)
         self.assertEquals(str(a - b), '0.40 Euro')
+        self.assertEquals(-a, aneg)
+        self.assertEquals(+a, a)
         with self.assertRaises(Exception):
             a - c
         with self.assertRaises(Exception):

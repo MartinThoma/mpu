@@ -204,6 +204,15 @@ class Money(object):
         else:
             return self.value < other.value
 
+    def __neg__(self):
+        return Money(-self.value, self.currency)
+
+    def __pos__(self):
+        return Money(self.value, self.currency)
+
+    def __float__(self):
+        return float(self.value)
+
     def __json__(self):
         """Return a JSON-serializable object."""
         currency = str(self.currency)
