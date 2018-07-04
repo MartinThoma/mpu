@@ -85,7 +85,7 @@ def is_int(potential_int):
     try:
         int(potential_int)
         return True
-    except:
+    except ValueError:
         return False
 
 
@@ -117,7 +117,7 @@ def is_float(potential_float):
     try:
         float(potential_float)
         return True
-    except:
+    except ValueError:
         return False
 
 

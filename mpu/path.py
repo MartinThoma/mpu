@@ -25,7 +25,7 @@ def get_all_files(root, followlinks=False):
         List of absolute paths to files
     """
     filepaths = []
-    for path, subdirs, files in os.walk(root, followlinks=followlinks):
+    for path, _, files in os.walk(root, followlinks=followlinks):
         for name in files:
             filepaths.append(os.path.abspath(os.path.join(path, name)))
     return filepaths
