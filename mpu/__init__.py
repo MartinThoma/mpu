@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
+
 # core modules
 import random
-import math
+import math as math_stl
 
 # internal modules
 from mpu._version import __version__
@@ -100,12 +102,13 @@ def haversine_distance(origin, destination):
                          .format(lat1))
     radius = 6371  # km
 
-    dlat = math.radians(lat2 - lat1)
-    dlon = math.radians(lon2 - lon1)
-    a = (math.sin(dlat / 2) * math.sin(dlat / 2) +
-         math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) *
-         math.sin(dlon / 2) * math.sin(dlon / 2))
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    dlat = math_stl.radians(lat2 - lat1)
+    dlon = math_stl.radians(lon2 - lon1)
+    a = (math_stl.sin(dlat / 2) * math_stl.sin(dlat / 2) +
+         math_stl.cos(math_stl.radians(lat1)) *
+         math_stl.cos(math_stl.radians(lat2)) *
+         math_stl.sin(dlon / 2) * math_stl.sin(dlon / 2))
+    c = 2 * math_stl.atan2(math_stl.sqrt(a), math_stl.sqrt(1 - a))
     d = radius * c
 
     return d
