@@ -35,6 +35,7 @@ Contents:
    decorators
    image
    io
+   path
    pd
    shell
    string
