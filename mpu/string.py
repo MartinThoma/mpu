@@ -155,6 +155,113 @@ def str2bool(string_, default='raise'):
                          .format(string_))
 
 
+def str2bool_or_none(string_, default='raise'):
+    """
+    Convert a string_ to a bool or to None.
+
+    Parameters
+    ----------
+    string_ : str
+    default : {'raise', False}
+        Default behaviour if none of the "true" or "none" strings is detected.
+
+    Returns
+    -------
+    boolean : bool
+
+    Examples
+    --------
+    >>> str2bool_or_none('True')
+    True
+    >>> str2bool_or_none('1')
+    True
+    >>> str2bool_or_none('0')
+    False
+    >>> str2bool_or_none('undefined')
+    """
+    if is_none(string_, default=False):
+        return None
+    else:
+        return str2bool(string_, default)
+
+
+def str2float_or_none(string_):
+    """
+    Convert a string_ to a float or to None.
+
+    Parameters
+    ----------
+    string_ : str
+
+    Returns
+    -------
+    boolean : bool
+
+    Examples
+    --------
+    >>> str2float_or_none('1')
+    1.0
+    >>> str2float_or_none('1.2')
+    1.2
+    >>> str2float_or_none('undefined')
+    """
+    if is_none(string_, default=False):
+        return None
+    else:
+        return float(string_)
+
+
+def str2int_or_none(string_):
+    """
+    Convert a string_ to a int or to None.
+
+    Parameters
+    ----------
+    string_ : str
+
+    Returns
+    -------
+    boolean : bool
+
+    Examples
+    --------
+    >>> str2int_or_none('2')
+    2
+    >>> str2int_or_none('undefined')
+    """
+    if is_none(string_, default=False):
+        return None
+    else:
+        return int(string_)
+
+
+def is_none(string_, default='raise'):
+    """
+    Check if a string is equivalent to None.
+
+    Parameters
+    ----------
+    string_ : str
+    default : {'raise', False}
+        Default behaviour if none of the "None" strings is detected.
+
+    Examples
+    --------
+    >>> is_none('2', default=False)
+    False
+    >>> is_none('undefined', default=False)
+    True
+    """
+    none = ['none', 'undefined', 'unknown', 'null', '']
+    if string_.lower() in none:
+        return True
+    elif not default:
+        return False
+    else:
+        raise ValueError('The value \'{}\' cannot be mapped to none.'
+                         .format(string_))
+
+
 def is_iban(potential_iban):
     """
     Check if a string is a valid IBAN number.

@@ -23,3 +23,7 @@ class StringTests(unittest.TestCase):
     def test_is_iban(self):
         iban = 'FR14 2004 1010 0505 0001 3M02 606'
         self.assertTrue(mpu.string.is_iban(iban))
+
+    def test_is_none_not(self):
+        with self.assertRaises(ValueError):
+            mpu.string.is_none('foobar')
