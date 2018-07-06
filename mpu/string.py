@@ -123,7 +123,7 @@ def is_float(potential_float):
 
 def str2bool(string_, default='raise'):
     """
-    Convert a string_ to a bool.
+    Convert a string to a bool.
 
     Parameters
     ----------
@@ -157,7 +157,7 @@ def str2bool(string_, default='raise'):
 
 def str2bool_or_none(string_, default='raise'):
     """
-    Convert a string_ to a bool or to None.
+    Convert a string to a bool or to None.
 
     Parameters
     ----------
@@ -167,7 +167,7 @@ def str2bool_or_none(string_, default='raise'):
 
     Returns
     -------
-    boolean : bool
+    bool_or_none : bool or None
 
     Examples
     --------
@@ -187,7 +187,7 @@ def str2bool_or_none(string_, default='raise'):
 
 def str2float_or_none(string_):
     """
-    Convert a string_ to a float or to None.
+    Convert a string to a float or to None.
 
     Parameters
     ----------
@@ -195,7 +195,7 @@ def str2float_or_none(string_):
 
     Returns
     -------
-    boolean : bool
+    float_or_none : float or None
 
     Examples
     --------
@@ -213,7 +213,7 @@ def str2float_or_none(string_):
 
 def str2int_or_none(string_):
     """
-    Convert a string_ to a int or to None.
+    Convert a string to a int or to None.
 
     Parameters
     ----------
@@ -221,7 +221,7 @@ def str2int_or_none(string_):
 
     Returns
     -------
-    boolean : bool
+    int_or_none : int or None
 
     Examples
     --------
@@ -244,6 +244,10 @@ def is_none(string_, default='raise'):
     string_ : str
     default : {'raise', False}
         Default behaviour if none of the "None" strings is detected.
+
+    Returns
+    -------
+    is_none : bool
 
     Examples
     --------
