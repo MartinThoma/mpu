@@ -6,7 +6,7 @@ import unittest
 import pkg_resources
 
 # internal modules
-from mpu.path import get_all_files
+from mpu.path import get_all_files, get_from_package
 
 
 class ImageTests(unittest.TestCase):
@@ -16,3 +16,6 @@ class ImageTests(unittest.TestCase):
         root = pkg_resources.resource_filename('mpu', path)
         meta = get_all_files(root)
         self.assertEqual(len(meta), 5)
+
+    def test_get_from_package(self):
+        get_from_package('mpu', 'data/iban.csv')
