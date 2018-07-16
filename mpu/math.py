@@ -15,7 +15,9 @@ Standard libraries are:
 from __future__ import absolute_import
 
 # core functions
+from functools import reduce
 import math as math_stl
+import operator
 
 
 def generate_primes():
@@ -121,3 +123,27 @@ def is_prime(number):
     True
     """
     return len(factorize(number)) == 1
+
+
+def product(iterable, start=1):
+    """
+    Calculate the product of the iterables.
+
+    Parameters
+    ----------
+    iterable : iterable
+        List, tuple or similar which contains numbers
+    start : number, optional (default: 1)
+
+    Returns
+    -------
+    product : number
+
+    Examples
+    --------
+    >>> product([1, 2, 3, 4, 5])
+    120
+    >>> product([])
+    1
+    """
+    return reduce(operator.mul, iterable, start)
