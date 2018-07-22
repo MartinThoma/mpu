@@ -147,3 +147,34 @@ def product(iterable, start=1):
     1
     """
     return reduce(operator.mul, iterable, start)
+
+
+def argmax(iterable):
+    """
+    Find the first index of the biggest value in the iterable.
+
+    Parameters
+    ----------
+    iterable : iterable
+
+    Returns
+    -------
+    argmax : int
+
+    Examples
+    --------
+    >>> argmax([0, 0, 0])
+    0
+    >>> argmax([1, 0, 0])
+    0
+    >>> argmax([0, 1, 0])
+    1
+    >>> argmax([])
+    """
+    max_value = None
+    max_index = None
+    for index, value in enumerate(iterable):
+        if (max_value is None) or max_value < value:
+            max_value = value
+            max_index = index
+    return max_index
