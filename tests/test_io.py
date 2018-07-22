@@ -9,7 +9,7 @@ import pkg_resources
 import unittest
 
 # internal modules
-from mpu.io import (download, read, write)
+from mpu.io import (download, read, write, _write_jsonl)
 import mpu.io
 
 
@@ -163,6 +163,19 @@ class IoTest(unittest.TestCase):
                 {"may": {"include": "nested",
                          "objects": ["and", "arrays"]}}]
         write(filepath, data)
+        data_read = read(filepath)
+        self.assertEqual(data, data_read)
+        os.remove(filepath)  # cleanup of mkstemp
+
+    def test_write_jsonl_all_params(self):
+        _, filepath = mkstemp(suffix='.jsonl', prefix='mpu_test')
+        data = [{"some": "thing"},
+                {"foo": 17, "bar": False, "quux": True},
+                {"may": {"include": "nested",
+                         "objects": ["and", "arrays"]}}]
+        _write_jsonl(filepath, data, kwargs={'sort_keys': True,
+                                             'separators': (',', ': '),
+                                             'ensure_ascii': True})
         data_read = read(filepath)
         self.assertEqual(data, data_read)
         os.remove(filepath)  # cleanup of mkstemp
