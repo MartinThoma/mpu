@@ -42,7 +42,7 @@ It can, of course, also be installed via PyPI.
 
 ### Shell
 
-To enchance your terminals output, you might want to do something like:
+To enhance your terminals output, you might want to do something like:
 
 ```python
 from mpu.shell import Codes
@@ -52,7 +52,7 @@ print('{c.GREEN}{c.UNDERLINED}Works{c.RESET_ALL}'.format(c=Codes))
 
 ### Quick Examples
 
-Creating small example datastructures is a task I encounder once in a while
+Creating small example datastructures is a task I encounter once in a while
 for StackExchange answers.
 
 ```python
