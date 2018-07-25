@@ -30,6 +30,7 @@ Contents:
    :maxdepth: 2
 
    mpu
+   aws
    datastructures
    datetime
    decorators

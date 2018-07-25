@@ -25,8 +25,9 @@ def my_test_suite():
 requires_datetime = ['pytz']
 requires_image = ['Pillow']
 requires_io = ['pytz']
+requires_aws = ['boto3']
 requires_all = (['pandas', 'python-magic'] + requires_datetime +
-                requires_image + requires_io)
+                requires_image + requires_io + requires_aws)
 
 config = {
     'name': 'mpu',
@@ -38,6 +39,7 @@ config = {
     'packages': find_packages(),
     'package_data': {'mpu': ['units/currencies.csv', 'data/iban.csv']},
     'extras_require': {'all': requires_all,
+                       'aws': requires_aws,
                        'datetime': requires_datetime,
                        'image': requires_image,
                        'io': requires_io},
