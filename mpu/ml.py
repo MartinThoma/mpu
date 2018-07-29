@@ -58,6 +58,9 @@ def one_hot2indices(one_hots):
 
     Examples
     --------
+    >>> one_hot2indices([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+    [0, 1, 2]
+
     >>> one_hot2indices([[1, 0], [1, 0], [0, 1]])
     [0, 0, 1]
     """
