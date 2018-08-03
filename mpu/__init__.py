@@ -35,6 +35,32 @@ def parallel_for(loop_function, parameters, nb_threads=100):
         return pool.map(loop_function, parameters)
 
 
+def clip(number, lowest=None, highest=None):
+    """
+    Clip a number to a given lowest / highest value.
+
+    Parameters
+    ----------
+    number : number
+    lowest : number, optional
+    highest : number, optional
+
+    Returns
+    -------
+    clipped_number : number
+
+    Examples
+    --------
+    >>> clip(42, lowest=0, highest=10)
+    10
+    """
+    if lowest is not None:
+        number = max(number, lowest)
+    if highest is not None:
+        number = min(number, highest)
+    return number
+
+
 def consistent_shuffle(*lists):
     """
     Shuffle lists consistently.

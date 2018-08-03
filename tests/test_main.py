@@ -5,10 +5,15 @@
 import unittest
 
 # internal modules
-from mpu import parallel_for, haversine_distance
+from mpu import parallel_for, haversine_distance, clip
 
 
 class DatastructuresInit(unittest.TestCase):
+
+    def test_clip(self):
+        self.assertEquals(clip(42), 42)
+        self.assertEquals(clip(42, 0, 100), 42)
+        self.assertEquals(clip(42, 0, 42.0), 42)
 
     def test_parallel_for(self):
         import time
