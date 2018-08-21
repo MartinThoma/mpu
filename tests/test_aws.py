@@ -35,8 +35,27 @@ class AWSTest(unittest.TestCase):
 
         # Test download
         _, destination = mkstemp(suffix='example.csv')
+        os.remove(destination)  # make sure this file does NOT exist
         mpu.aws.s3_download('s3://mybucket/example_test.csv', destination)
         self.assertTrue(filecmp.cmp(destination, local_path))
+        os.remove(destination)  # cleanup of mkstemp
+
+        # Test download: File exists
+        _, destination = mkstemp(suffix='example.csv')
+        with self.assertRaises(RuntimeError):
+            mpu.aws.s3_download('s3://mybucket/example_test.csv',
+                                destination,
+                                exists_strategy='raise')
+        with self.assertRaises(ValueError):
+            mpu.aws.s3_download('s3://mybucket/example_test.csv',
+                                destination,
+                                exists_strategy='raises')
+        mpu.aws.s3_download('s3://mybucket/example_test.csv',
+                            destination,
+                            exists_strategy='abort')
+        mpu.aws.s3_download('s3://mybucket/example_test.csv',
+                            destination,
+                            exists_strategy='replace')
         os.remove(destination)  # cleanup of mkstemp
 
     def test_s3_path_split(self):

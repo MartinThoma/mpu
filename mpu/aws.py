@@ -3,6 +3,9 @@
 
 """Convenience functions for AWS interactions."""
 
+# core modules
+import os
+
 # 3rd party modules
 import boto3
 
@@ -36,7 +39,9 @@ def list_files(bucket, profile_name=None):
     return keys
 
 
-def s3_download(source, destination, profile_name=None):
+def s3_download(source, destination,
+                exists_strategy='raise',
+                profile_name=None):
     """
     Copy a file from an S3 source to a local destination.
 
@@ -45,6 +50,8 @@ def s3_download(source, destination, profile_name=None):
     source : str
         Path starting with s3://, e.g. 's3://bucket-name/key/foo.bar'
     destination : str
+    exists_strategy : {'raise', 'replace', 'abort'}
+        What is done when the destination already exists?
     profile_name : str, optional
         AWS profile
 
@@ -56,9 +63,19 @@ def s3_download(source, destination, profile_name=None):
         AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN.
         See https://boto3.readthedocs.io/en/latest/guide/configuration.html
     """
+    exists_strategies = ['raise', 'replace', 'abort']
+    if exists_strategy not in exists_strategies:
+        raise ValueError('exists_strategy \'{}\' is not in {}'
+                         .format(exists_strategy, exists_strategies))
     session = boto3.Session(profile_name=profile_name)
     s3 = session.resource('s3')
     bucket_name, key = _s3_path_split(source)
+    if os.path.isfile(destination):
+        if exists_strategy is 'raise':
+            raise RuntimeError('File \'{}\' already exists.'
+                               .format(destination))
+        elif exists_strategy is 'abort':
+            return
     s3.Bucket(bucket_name).download_file(key, destination)
 
 
