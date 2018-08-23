@@ -50,6 +50,10 @@ def s3_read(source, profile_name=None):
     profile_name : str, optional
         AWS profile
 
+    Returns
+    -------
+    content : bytes
+
     Raises
     ------
     botocore.exceptions.NoCredentialsError
