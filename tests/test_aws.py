@@ -56,6 +56,8 @@ class AWSTest(unittest.TestCase):
         mpu.aws.s3_download('s3://mybucket/example_test.csv',
                             destination,
                             exists_strategy='replace')
+
+        mpu.aws.s3_read('s3://mybucket/example_test.csv')
         os.remove(destination)  # cleanup of mkstemp
 
     def test_s3_path_split(self):
