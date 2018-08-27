@@ -58,3 +58,33 @@ class Codes:
     BACKGROUND_LIGHT_MAGENTA = '\033[105m'
     BACKGROUND_LIGHT_CYAN = '\033[106m'
     BACKGROUND_WHITE = '\033[107m'
+
+
+def print_table(table):
+    """
+    Print as a table.
+
+    I recommend looking at [`tabulate`](https://pypi.org/project/tabulate/).
+
+    Parameters
+    ----------
+    table : list
+
+    Examples
+    --------
+    >>> print_table([[1, 2, 3], [41, 0, 1]])
+     1  2  3
+    41  0  1
+    """
+    table = [[str(cell) for cell in row] for row in table]
+    column_widths = [len(cell) for cell in table[0]]
+    for row in table:
+        for x, cell in enumerate(row):
+            column_widths[x] = max(column_widths[x], len(cell))
+
+    formatters = []
+    for width in column_widths:
+        formatters.append('{:>' + str(width) + '}')
+    formatter = '  '.join(formatters)
+    for row in table:
+        print(formatter.format(*row))
