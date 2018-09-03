@@ -3,6 +3,9 @@
 
 """Enhancing printed terminal output."""
 
+# core modules
+import sys
+
 
 class Codes:
     """Escape sequences for enhanced shell output."""
@@ -88,3 +91,23 @@ def print_table(table):
     formatter = '  '.join(formatters)
     for row in table:
         print(formatter.format(*row))
+
+
+def text_input(text):
+    """
+    Ask the user for textual input.
+
+    Parameters
+    ----------
+    text : str
+        What the user sees.
+
+    Returns
+    -------
+    inputed_text : str
+        What the user wrote.
+    """
+    if sys.version_info > (3, 0):
+        return input(text)
+    else:
+        return raw_input(text)
