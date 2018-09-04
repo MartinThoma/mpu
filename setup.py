@@ -38,7 +38,7 @@ config = {
     'maintainer_email': 'info@martin-thoma.de',
     'packages': find_packages(),
     'package_data': {'mpu': ['units/currencies.csv',
-                             'data/iban.csv',
+                             'data/*',
                              'package/templates/*']},
     'extras_require': {'all': requires_all,
                        'aws': requires_aws,

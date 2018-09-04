@@ -7,9 +7,13 @@ from __future__ import absolute_import
 
 # core modules
 import datetime as dt
+import pkg_resources
 
 # 3rd party modules
 import pandas as pd
+
+countries_file = pkg_resources.resource_filename('mpu', 'data/countries.csv')
+countries = pd.read_csv(countries_file)
 
 
 def example_df():
