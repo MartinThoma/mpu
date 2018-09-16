@@ -1,250 +1,249 @@
-English short name (upper/lower case),Alpha-2 code,Alpha-3 code,Numeric code,Link to ISO 3166-2 subdivision codes,Independent
-Afghanistan,AF,AFG,4,ISO 3166-2:AF,Yes
-Åland Islands,AX,ALA,248,ISO 3166-2:AX,No
-Albania,AL,ALB,8,ISO 3166-2:AL,Yes
-Algeria,DZ,DZA,12,ISO 3166-2:DZ,Yes
-American Samoa,AS,ASM,16,ISO 3166-2:AS,No
-Andorra,AD,AND,20,ISO 3166-2:AD,Yes
-Angola,AO,AGO,24,ISO 3166-2:AO,Yes
-Anguilla,AI,AIA,660,ISO 3166-2:AI,No
-Antarctica,AQ,ATA,10,ISO 3166-2:AQ,No
-Antigua and Barbuda,AG,ATG,28,ISO 3166-2:AG,Yes
-Argentina,AR,ARG,32,ISO 3166-2:AR,Yes
-Armenia,AM,ARM,51,ISO 3166-2:AM,Yes
-Aruba,AW,ABW,533,ISO 3166-2:AW,No
-Australia,AU,AUS,36,ISO 3166-2:AU,Yes
-Austria,AT,AUT,40,ISO 3166-2:AT,Yes
-Azerbaijan,AZ,AZE,31,ISO 3166-2:AZ,Yes
-Bahamas,BS,BHS,44,ISO 3166-2:BS,Yes
-Bahrain,BH,BHR,48,ISO 3166-2:BH,Yes
-Bangladesh,BD,BGD,50,ISO 3166-2:BD,Yes
-Barbados,BB,BRB,52,ISO 3166-2:BB,Yes
-Belarus,BY,BLR,112,ISO 3166-2:BY,Yes
-Belgium,BE,BEL,56,ISO 3166-2:BE,Yes
-Belize,BZ,BLZ,84,ISO 3166-2:BZ,Yes
-Benin,BJ,BEN,204,ISO 3166-2:BJ,Yes
-Bermuda,BM,BMU,60,ISO 3166-2:BM,No
-Bhutan,BT,BTN,64,ISO 3166-2:BT,Yes
-Bolivia (Plurinational State of),BO,BOL,68,ISO 3166-2:BO,Yes
-"Bonaire, Sint Eustatius and Saba",BQ,BES,535,ISO 3166-2:BQ,No
-Bosnia and Herzegovina,BA,BIH,70,ISO 3166-2:BA,Yes
-Botswana,BW,BWA,72,ISO 3166-2:BW,Yes
-Bouvet Island,BV,BVT,74,ISO 3166-2:BV,No
-Brazil,BR,BRA,76,ISO 3166-2:BR,Yes
-British Indian Ocean Territory,IO,IOT,86,ISO 3166-2:IO,No
-Brunei Darussalam,BN,BRN,96,ISO 3166-2:BN,Yes
-Bulgaria,BG,BGR,100,ISO 3166-2:BG,Yes
-Burkina Faso,BF,BFA,854,ISO 3166-2:BF,Yes
-Burundi,BI,BDI,108,ISO 3166-2:BI,Yes
-Cabo Verde,CV,CPV,132,ISO 3166-2:CV,Yes
-Cambodia,KH,KHM,116,ISO 3166-2:KH,Yes
-Cameroon,CM,CMR,120,ISO 3166-2:CM,Yes
-Canada,CA,CAN,124,ISO 3166-2:CA,Yes
-Cayman Islands,KY,CYM,136,ISO 3166-2:KY,No
-Central African Republic,CF,CAF,140,ISO 3166-2:CF,Yes
-Chad,TD,TCD,148,ISO 3166-2:TD,Yes
-Chile,CL,CHL,152,ISO 3166-2:CL,Yes
-China,CN,CHN,156,ISO 3166-2:CN,Yes
-Christmas Island,CX,CXR,162,ISO 3166-2:CX,No
-Cocos (Keeling) Islands,CC,CCK,166,ISO 3166-2:CC,No
-Colombia,CO,COL,170,ISO 3166-2:CO,Yes
-Comoros,KM,COM,174,ISO 3166-2:KM,Yes
-Congo,CG,COG,178,ISO 3166-2:CG,Yes
-Congo (Democratic Republic of the),CD,COD,180,ISO 3166-2:CD,Yes
-Cook Islands,CK,COK,184,ISO 3166-2:CK,No
-Costa Rica,CR,CRI,188,ISO 3166-2:CR,Yes
-Côte d'Ivoire,CI,CIV,384,ISO 3166-2:CI,Yes
-Croatia,HR,HRV,191,ISO 3166-2:HR,Yes
-Cuba,CU,CUB,192,ISO 3166-2:CU,Yes
-Curaçao,CW,CUW,531,ISO 3166-2:CW,No
-Cyprus,CY,CYP,196,ISO 3166-2:CY,Yes
-Czech Republic,CZ,CZE,203,ISO 3166-2:CZ,Yes
-Denmark,DK,DNK,208,ISO 3166-2:DK,Yes
-Djibouti,DJ,DJI,262,ISO 3166-2:DJ,Yes
-Dominica,DM,DMA,212,ISO 3166-2:DM,Yes
-Dominican Republic,DO,DOM,214,ISO 3166-2:DO,Yes
-Ecuador,EC,ECU,218,ISO 3166-2:EC,Yes
-Egypt,EG,EGY,818,ISO 3166-2:EG,Yes
-El Salvador,SV,SLV,222,ISO 3166-2:SV,Yes
-Equatorial Guinea,GQ,GNQ,226,ISO 3166-2:GQ,Yes
-Eritrea,ER,ERI,232,ISO 3166-2:ER,Yes
-Estonia,EE,EST,233,ISO 3166-2:EE,Yes
-Eswatini,SZ,SWZ,748,ISO 3166-2:SZ,Yes
-Ethiopia,ET,ETH,231,ISO 3166-2:ET,Yes
-Falkland Islands (Malvinas),FK,FLK,238,ISO 3166-2:FK,No
-Faroe Islands,FO,FRO,234,ISO 3166-2:FO,No
-Fiji,FJ,FJI,242,ISO 3166-2:FJ,Yes
-Finland,FI,FIN,246,ISO 3166-2:FI,Yes
-France,FR,FRA,250,ISO 3166-2:FR,Yes
-French Guiana,GF,GUF,254,ISO 3166-2:GF,No
-French Polynesia,PF,PYF,258,ISO 3166-2:PF,No
-French Southern Territories,TF,ATF,260,ISO 3166-2:TF,No
-Gabon,GA,GAB,266,ISO 3166-2:GA,Yes
-Gambia,GM,GMB,270,ISO 3166-2:GM,Yes
-Georgia,GE,GEO,268,ISO 3166-2:GE,Yes
-Germany,DE,DEU,276,ISO 3166-2:DE,Yes
-Ghana,GH,GHA,288,ISO 3166-2:GH,Yes
-Gibraltar,GI,GIB,292,ISO 3166-2:GI,No
-Greece,GR,GRC,300,ISO 3166-2:GR,Yes
-Greenland,GL,GRL,304,ISO 3166-2:GL,No
-Grenada,GD,GRD,308,ISO 3166-2:GD,Yes
-Guadeloupe,GP,GLP,312,ISO 3166-2:GP,No
-Guam,GU,GUM,316,ISO 3166-2:GU,No
-Guatemala,GT,GTM,320,ISO 3166-2:GT,Yes
-Guernsey,GG,GGY,831,ISO 3166-2:GG,No
-Guinea,GN,GIN,324,ISO 3166-2:GN,Yes
-Guinea-Bissau,GW,GNB,624,ISO 3166-2:GW,Yes
-Guyana,GY,GUY,328,ISO 3166-2:GY,Yes
-Haiti,HT,HTI,332,ISO 3166-2:HT,Yes
-Heard Island and McDonald Islands,HM,HMD,334,ISO 3166-2:HM,No
-Holy See,VA,VAT,336,ISO 3166-2:VA,Yes
-Honduras,HN,HND,340,ISO 3166-2:HN,Yes
-Hong Kong,HK,HKG,344,ISO 3166-2:HK,No
-Hungary,HU,HUN,348,ISO 3166-2:HU,Yes
-Iceland,IS,ISL,352,ISO 3166-2:IS,Yes
-India,IN,IND,356,ISO 3166-2:IN,Yes
-Indonesia,ID,IDN,360,ISO 3166-2:ID,Yes
-Iran,IR,IRN,364,ISO 3166-2:IR,Yes
-Iraq,IQ,IRQ,368,ISO 3166-2:IQ,Yes
-Ireland,IE,IRL,372,ISO 3166-2:IE,Yes
-Isle of Man,IM,IMN,833,ISO 3166-2:IM,No
-Israel,IL,ISR,376,ISO 3166-2:IL,Yes
-Italy,IT,ITA,380,ISO 3166-2:IT,Yes
-Jamaica,JM,JAM,388,ISO 3166-2:JM,Yes
-Japan,JP,JPN,392,ISO 3166-2:JP,Yes
-Jersey,JE,JEY,832,ISO 3166-2:JE,No
-Jordan,JO,JOR,400,ISO 3166-2:JO,Yes
-Kazakhstan,KZ,KAZ,398,ISO 3166-2:KZ,Yes
-Kenya,KE,KEN,404,ISO 3166-2:KE,Yes
-Kiribati,KI,KIR,296,ISO 3166-2:KI,Yes
-North Korea,KP,PRK,408,ISO 3166-2:KP,Yes
-South Korea,KR,KOR,410,ISO 3166-2:KR,Yes
-Kuwait,KW,KWT,414,ISO 3166-2:KW,Yes
-Kyrgyzstan,KG,KGZ,417,ISO 3166-2:KG,Yes
-Lao People's Democratic Republic,LA,LAO,418,ISO 3166-2:LA,Yes
-Latvia,LV,LVA,428,ISO 3166-2:LV,Yes
-Lebanon,LB,LBN,422,ISO 3166-2:LB,Yes
-Lesotho,LS,LSO,426,ISO 3166-2:LS,Yes
-Liberia,LR,LBR,430,ISO 3166-2:LR,Yes
-Libya,LY,LBY,434,ISO 3166-2:LY,Yes
-Liechtenstein,LI,LIE,438,ISO 3166-2:LI,Yes
-Lithuania,LT,LTU,440,ISO 3166-2:LT,Yes
-Luxembourg,LU,LUX,442,ISO 3166-2:LU,Yes
-Macao,MO,MAC,446,ISO 3166-2:MO,No
-Macedonia (the former Yugoslav Republic of),MK,MKD,807,ISO 3166-2:MK,Yes
-Madagascar,MG,MDG,450,ISO 3166-2:MG,Yes
-Malawi,MW,MWI,454,ISO 3166-2:MW,Yes
-Malaysia,MY,MYS,458,ISO 3166-2:MY,Yes
-Maldives,MV,MDV,462,ISO 3166-2:MV,Yes
-Mali,ML,MLI,466,ISO 3166-2:ML,Yes
-Malta,MT,MLT,470,ISO 3166-2:MT,Yes
-Marshall Islands,MH,MHL,584,ISO 3166-2:MH,Yes
-Martinique,MQ,MTQ,474,ISO 3166-2:MQ,No
-Mauritania,MR,MRT,478,ISO 3166-2:MR,Yes
-Mauritius,MU,MUS,480,ISO 3166-2:MU,Yes
-Mayotte,YT,MYT,175,ISO 3166-2:YT,No
-Mexico,MX,MEX,484,ISO 3166-2:MX,Yes
-Micronesia (Federated States of),FM,FSM,583,ISO 3166-2:FM,Yes
-Moldova (Republic of),MD,MDA,498,ISO 3166-2:MD,Yes
-Monaco,MC,MCO,492,ISO 3166-2:MC,Yes
-Mongolia,MN,MNG,496,ISO 3166-2:MN,Yes
-Montenegro,ME,MNE,499,ISO 3166-2:ME,Yes
-Montserrat,MS,MSR,500,ISO 3166-2:MS,No
-Morocco,MA,MAR,504,ISO 3166-2:MA,Yes
-Mozambique,MZ,MOZ,508,ISO 3166-2:MZ,Yes
-Myanmar,MM,MMR,104,ISO 3166-2:MM,Yes
-Namibia,,NAM,516,ISO 3166-2:NA,Yes
-Nauru,NR,NRU,520,ISO 3166-2:NR,Yes
-Nepal,NP,NPL,524,ISO 3166-2:NP,Yes
-Netherlands,NL,NLD,528,ISO 3166-2:NL,Yes
-New Caledonia,NC,NCL,540,ISO 3166-2:NC,No
-New Zealand,NZ,NZL,554,ISO 3166-2:NZ,Yes
-Nicaragua,NI,NIC,558,ISO 3166-2:NI,Yes
-Niger,NE,NER,562,ISO 3166-2:NE,Yes
-Nigeria,NG,NGA,566,ISO 3166-2:NG,Yes
-Niue,NU,NIU,570,ISO 3166-2:NU,No
-Norfolk Island,NF,NFK,574,ISO 3166-2:NF,No
-Northern Mariana Islands,MP,MNP,580,ISO 3166-2:MP,No
-Norway,NO,NOR,578,ISO 3166-2:NO,Yes
-Oman,OM,OMN,512,ISO 3166-2:OM,Yes
-Pakistan,PK,PAK,586,ISO 3166-2:PK,Yes
-Palau,PW,PLW,585,ISO 3166-2:PW,Yes
-Palestine,PS,PSE,275,ISO 3166-2:PS,No
-Panama,PA,PAN,591,ISO 3166-2:PA,Yes
-Papua New Guinea,PG,PNG,598,ISO 3166-2:PG,Yes
-Paraguay,PY,PRY,600,ISO 3166-2:PY,Yes
-Peru,PE,PER,604,ISO 3166-2:PE,Yes
-Philippines,PH,PHL,608,ISO 3166-2:PH,Yes
-Pitcairn,PN,PCN,612,ISO 3166-2:PN,No
-Poland,PL,POL,616,ISO 3166-2:PL,Yes
-Portugal,PT,PRT,620,ISO 3166-2:PT,Yes
-Puerto Rico,PR,PRI,630,ISO 3166-2:PR,No
-Qatar,QA,QAT,634,ISO 3166-2:QA,Yes
-Réunion,RE,REU,638,ISO 3166-2:RE,No
-Romania,RO,ROU,642,ISO 3166-2:RO,Yes
-Russia,RU,RUS,643,ISO 3166-2:RU,Yes
-Rwanda,RW,RWA,646,ISO 3166-2:RW,Yes
-Saint Barthélemy,BL,BLM,652,ISO 3166-2:BL,No
-"Saint Helena, Ascension and Tristan da Cunha",SH,SHN,654,ISO 3166-2:SH,No
-Saint Kitts and Nevis,KN,KNA,659,ISO 3166-2:KN,Yes
-Saint Lucia,LC,LCA,662,ISO 3166-2:LC,Yes
-Saint Martin (French part),MF,MAF,663,ISO 3166-2:MF,No
-Saint Pierre and Miquelon,PM,SPM,666,ISO 3166-2:PM,No
-Saint Vincent and the Grenadines,VC,VCT,670,ISO 3166-2:VC,Yes
-Samoa,WS,WSM,882,ISO 3166-2:WS,Yes
-San Marino,SM,SMR,674,ISO 3166-2:SM,Yes
-Sao Tome and Principe,ST,STP,678,ISO 3166-2:ST,Yes
-Saudi Arabia,SA,SAU,682,ISO 3166-2:SA,Yes
-Senegal,SN,SEN,686,ISO 3166-2:SN,Yes
-Serbia,RS,SRB,688,ISO 3166-2:RS,Yes
-Seychelles,SC,SYC,690,ISO 3166-2:SC,Yes
-Sierra Leone,SL,SLE,694,ISO 3166-2:SL,Yes
-Singapore,SG,SGP,702,ISO 3166-2:SG,Yes
-Sint Maarten (Dutch part),SX,SXM,534,ISO 3166-2:SX,No
-Slovakia,SK,SVK,703,ISO 3166-2:SK,Yes
-Slovenia,SI,SVN,705,ISO 3166-2:SI,Yes
-Solomon Islands,SB,SLB,90,ISO 3166-2:SB,Yes
-Somalia,SO,SOM,706,ISO 3166-2:SO,Yes
-South Africa,ZA,ZAF,710,ISO 3166-2:ZA,Yes
-South Georgia and the South Sandwich Islands,GS,SGS,239,ISO 3166-2:GS,No
-South Sudan,SS,SSD,728,ISO 3166-2:SS,Yes
-Spain,ES,ESP,724,ISO 3166-2:ES,Yes
-Sri Lanka,LK,LKA,144,ISO 3166-2:LK,Yes
-Sudan,SD,SDN,729,ISO 3166-2:SD,Yes
-Suriname,SR,SUR,740,ISO 3166-2:SR,Yes
-Svalbard and Jan Mayen,SJ,SJM,744,ISO 3166-2:SJ,No
-Sweden,SE,SWE,752,ISO 3166-2:SE,Yes
-Switzerland,CH,CHE,756,ISO 3166-2:CH,Yes
-Syria,SY,SYR,760,ISO 3166-2:SY,Yes
-Taiwan,TW,TWN,158,ISO 3166-2:TW,No
-Tajikistan,TJ,TJK,762,ISO 3166-2:TJ,Yes
-Tanzania,TZ,TZA,834,ISO 3166-2:TZ,Yes
-Thailand,TH,THA,764,ISO 3166-2:TH,Yes
-Timor-Leste,TL,TLS,626,ISO 3166-2:TL,Yes
-Togo,TG,TGO,768,ISO 3166-2:TG,Yes
-Tokelau,TK,TKL,772,ISO 3166-2:TK,No
-Tonga,TO,TON,776,ISO 3166-2:TO,Yes
-Trinidad and Tobago,TT,TTO,780,ISO 3166-2:TT,Yes
-Tunisia,TN,TUN,788,ISO 3166-2:TN,Yes
-Turkey,TR,TUR,792,ISO 3166-2:TR,Yes
-Turkmenistan,TM,TKM,795,ISO 3166-2:TM,Yes
-Turks and Caicos Islands,TC,TCA,796,ISO 3166-2:TC,No
-Tuvalu,TV,TUV,798,ISO 3166-2:TV,Yes
-Uganda,UG,UGA,800,ISO 3166-2:UG,Yes
-Ukraine,UA,UKR,804,ISO 3166-2:UA,Yes
-United Arab Emirates,AE,ARE,784,ISO 3166-2:AE,Yes
-United Kingdom,GB,GBR,826,ISO 3166-2:GB,Yes
-United States,US,USA,840,ISO 3166-2:US,Yes
-United States Minor Outlying Islands,UM,UMI,581,ISO 3166-2:UM,No
-Uruguay,UY,URY,858,ISO 3166-2:UY,Yes
-Uzbekistan,UZ,UZB,860,ISO 3166-2:UZ,Yes
-Vanuatu,VU,VUT,548,ISO 3166-2:VU,Yes
-Venezuela (Bolivarian Republic of),VE,VEN,862,ISO 3166-2:VE,Yes
-Vietnam,VN,VNM,704,ISO 3166-2:VN,Yes
-Virgin Islands (British),VG,VGB,92,ISO 3166-2:VG,No
-Virgin Islands (U.S.),VI,VIR,850,ISO 3166-2:VI,No
-Wallis and Futuna,WF,WLF,876,ISO 3166-2:WF,No
-Western Sahara,EH,ESH,732,ISO 3166-2:EH,No
-Yemen,YE,YEM,887,ISO 3166-2:YE,Yes
-Zambia,ZM,ZMB,894,ISO 3166-2:ZM,Yes
-Zimbabwe,ZW,ZWE,716,ISO 3166-2:ZW,Yes
+en_name,Alternative names,alpha-2,alpha-3,numeric code,ISO 3166-2 subdivision code,independent,UN member,UN admission date,UN observer,EU member,UNASUL member,Sovereignty dispute,See also,Further information on status and recognition of sovereignty
+Afghanistan,,AF,AFG,4,ISO 3166-2:AF,True,True,1946-11-19,False,False,False,None,United Nations Assistance Mission in Afghanistan,
+Åland Islands,,AX,ALA,248,ISO 3166-2:AX,False,False,,False,False,False,,,
+Albania,,AL,ALB,8,ISO 3166-2:AL,True,True,1955-12-14,False,False,False,None,,
+Algeria,,DZ,DZA,12,ISO 3166-2:DZ,True,True,1962-10-08,False,False,False,None,,
+American Samoa,,AS,ASM,16,ISO 3166-2:AS,False,False,,False,False,False,,,
+Andorra,,AD,AND,20,ISO 3166-2:AD,True,True,1993-07-28,False,False,False,None,,"Andorra is a co-principality in which the office of head of state is jointly held ex officio by the French president and the bishop of the Roman Catholic diocese of Urgell, who himself is appointed by the Holy See."
+Angola,,AO,AGO,24,ISO 3166-2:AO,True,True,1976-12-01,False,False,False,None,,
+Anguilla,,AI,AIA,660,ISO 3166-2:AI,False,False,,False,False,False,,,
+Antarctica,,AQ,ATA,10,ISO 3166-2:AQ,False,False,,False,False,False,,,
+Antigua and Barbuda,,AG,ATG,28,ISO 3166-2:AG,True,True,1981-11-11,False,False,False,None,,"Antigua and Barbuda is a Commonwealth realm with 1 autonomous region, Barbuda."
+Argentina,,AR,ARG,32,ISO 3166-2:AR,True,True,1945-10-24,False,False,True,None,,Argentina is a federation of 23 provinces and 1 autonomous city.
+Armenia,,AM,ARM,51,ISO 3166-2:AM,True,True,1992-03-02,False,False,False,None,Former member: Union of Soviet Socialist Republics,Not recognized by Pakistan. See Armenia–Pakistan relations and Nagorno-Karabakh conflict.
+Aruba,,AW,ABW,533,ISO 3166-2:AW,False,False,,False,False,False,,,
+Australia,,AU,AUS,36,ISO 3166-2:AU,True,True,1945-11-01,False,False,False,None,Australia and the United Nations,Australia is a Commonwealth realm and a federation of six states and 10 territories. The external territories of Australia are:  Ashmore and Cartier Islands  Australian Antarctic Territory  Christmas Island  Cocos (Keeling) Islands  Coral Sea Islands Territory  Heard Island and McDonald Islands  Norfolk Island
+Austria,,AT,AUT,40,ISO 3166-2:AT,True,True,1955-12-14,False,True,False,None,,Austria is a federation of nine states (Bundesländer).
+Azerbaijan,,AZ,AZE,31,ISO 3166-2:AZ,True,True,1992-03-02,False,False,False,None,Former member: Union of Soviet Socialist Republics,"Azerbaijan contains two autonomous regions, Nakhchivan and Nagorno-Karabakh (Dağlıq Qarabağ). The Republic of Artsakh, a de facto state, has been established in the latter."
+Bahamas,,BS,BHS,44,ISO 3166-2:BS,True,True,1973-09-18,False,False,False,None,,The Bahamas is a Commonwealth realm.
+Bahrain,,BH,BHR,48,ISO 3166-2:BH,True,True,1971-09-21,False,False,False,None,,
+Bangladesh,,BD,BGD,50,ISO 3166-2:BD,True,True,1974-09-17,False,False,False,None,,
+Barbados,,BB,BRB,52,ISO 3166-2:BB,True,True,1966-12-09,False,False,False,None,,Barbados is a Commonwealth realm.
+Belarus,,BY,BLR,112,ISO 3166-2:BY,True,True,1945-10-24,False,False,False,None,Former member: Byelorussian Soviet Socialist Republic,Belarus forms the Union State jointly with Russia.
+Belgium,,BE,BEL,56,ISO 3166-2:BE,True,True,1945-12-27,False,True,False,None,,Belgium is a federation divided into linguistic communities and regions.
+Belize,,BZ,BLZ,84,ISO 3166-2:BZ,True,True,1981-09-25,False,False,False,None,,Belize is a Commonwealth realm.
+Benin,,BJ,BEN,204,ISO 3166-2:BJ,True,True,1960-09-20,False,False,False,None,,
+Bermuda,,BM,BMU,60,ISO 3166-2:BM,False,False,,False,False,False,,,
+Bhutan,,BT,BTN,64,ISO 3166-2:BT,True,True,1971-09-21,False,False,False,None,,
+Bolivia,,BO,BOL,68,ISO 3166-2:BO,True,True,1945-11-14,False,False,False,,,
+"Bonaire, Sint Eustatius and Saba",,BQ,BES,535,ISO 3166-2:BQ,False,False,,False,False,False,,,
+Bosnia and Herzegovina,,BA,BIH,70,ISO 3166-2:BA,True,True,1992-05-22,False,False,False,None,Former member: Yugoslavia,"Bosnia and Herzegovina is a federation of two constituent units:  Federation of Bosnia and Herzegovina  Republika Srpska and Brčko District, a self-governing administrative unit."
+Botswana,,BW,BWA,72,ISO 3166-2:BW,True,True,1966-10-17,False,False,False,None,,
+Bouvet Island,,BV,BVT,74,ISO 3166-2:BV,False,False,,False,False,False,,,
+Brazil,,BR,BRA,76,ISO 3166-2:BR,True,True,1945-10-24,False,False,True,None,Brazil and the United Nations,Brazil is a federation of 26 states and 1 federal district.
+British Indian Ocean Territory,,IO,IOT,86,ISO 3166-2:IO,False,False,,False,False,False,,,
+Brunei Darussalam,,BN,BRN,96,ISO 3166-2:BN,True,True,1984-09-21,False,False,False,,,
+Bulgaria,,BG,BGR,100,ISO 3166-2:BG,True,True,1955-12-14,False,True,False,None,,
+Burkina Faso,,BF,BFA,854,ISO 3166-2:BF,True,True,1960-09-20,False,False,False,None,,
+Burundi,,BI,BDI,108,ISO 3166-2:BI,True,True,1962-09-18,False,False,False,None,,
+Cabo Verde,,CV,CPV,132,ISO 3166-2:CV,True,True,1975-09-16,False,False,False,,,
+Cambodia,,KH,KHM,116,ISO 3166-2:KH,True,True,1955-12-14,False,False,False,None,,
+Cameroon,,CM,CMR,120,ISO 3166-2:CM,True,True,1960-09-20,False,False,False,None,,
+Canada,,CA,CAN,124,ISO 3166-2:CA,True,True,1945-11-09,False,False,False,None,Canada and the United Nations,Canada is a Commonwealth realm and a federation of 10 provinces and 3 territories.
+Cayman Islands,,KY,CYM,136,ISO 3166-2:KY,False,False,,False,False,False,,,
+Central African Republic,,CF,CAF,140,ISO 3166-2:CF,True,True,1960-09-20,False,False,False,None,,
+Chad,,TD,TCD,148,ISO 3166-2:TD,True,True,1960-09-20,False,False,False,None,,
+Chile,,CL,CHL,152,ISO 3166-2:CL,True,True,1945-10-24,False,False,True,None,,"Chile has two ""special territories"" in the Valparaíso Region: Easter Island and Juan Fernández Islands"
+China,,CN,CHN,156,ISO 3166-2:CN,True,True,1945-10-24,False,False,False,Partially unrecognized. Claimed by the Republic of China,Former member: Republic of China and China and the United Nations,"The People's Republic of China (PRC) contains five autonomous regions: Guangxi Inner Mongolia Ningxia Xinjiang Tibet Additionally, it has sovereignty over the Special Administrative Regions of:   Hong Kong  Macau China claims, but does not control Taiwan, which is governed by a rival administration (the Republic of China) that claims all of China as its territory. China is not recognised by 19 UN member states and the Holy See, which, with the exception of Bhutan, recognise Taiwan instead. China controls part of the territory of Kashmir, which is disputed by India and Pakistan."
+Christmas Island,,CX,CXR,162,ISO 3166-2:CX,False,False,,False,False,False,,,
+Cocos (Keeling) Islands,,CC,CCK,166,ISO 3166-2:CC,False,False,,False,False,False,,,
+Colombia,,CO,COL,170,ISO 3166-2:CO,True,True,1945-11-05,False,False,True,None,,
+Comoros,,KM,COM,174,ISO 3166-2:KM,True,True,1975-11-12,False,False,False,None,,Comoros is a federation of 3 islands.
+Congo,,CG,COG,178,ISO 3166-2:CG,True,True,1960-09-20,False,False,False,,,
+Cook Islands,,CK,COK,184,ISO 3166-2:CK,False,False,,False,False,False,,,
+Costa Rica,,CR,CRI,188,ISO 3166-2:CR,True,True,1945-11-02,False,False,False,None,,
+Côte d'Ivoire,,CI,CIV,384,ISO 3166-2:CI,True,True,1960-09-20,False,False,False,,,
+Croatia,,HR,HRV,191,ISO 3166-2:HR,True,True,1992-05-22,False,True,False,None,Former member: Yugoslavia,
+Cuba,,CU,CUB,192,ISO 3166-2:CU,True,True,1945-10-24,False,False,False,None,,
+Curaçao,,CW,CUW,531,ISO 3166-2:CW,False,False,,False,False,False,,,
+Cyprus,,CY,CYP,196,ISO 3166-2:CY,True,True,1960-09-20,False,True,False,Not recognized by Turkey,,"The northeastern part of the island is the de facto state of Northern Cyprus. See Foreign relations of Cyprus and Cyprus dispute. Turkey refers to the Republic of Cyprus government as ""The Greek Cypriot Administration of Southern Cyprus""."
+Czech Republic,,CZ,CZE,203,ISO 3166-2:CZ,True,True,1993-01-19,False,True,False,None,Former member: Czechoslovakia,
+Denmark,,DK,DNK,208,ISO 3166-2:DK,True,True,1945-10-24,False,True,False,None,,"The Kingdom of Denmark includes 2 self-governing territories:  Faroe Islands  Greenland The continental territory of Denmark, the Faroe Islands, and Greenland form the three constituent countries of the Kingdom. The designation ""Denmark"" can refer either to continental Denmark or to the short name for the entire Kingdom (e.g. in international organizations). The Kingdom of Denmark as a whole is a member of the EU, but EU law does not apply to the Faroe Islands and Greenland. Also see Greenland Treaty."
+Djibouti,,DJ,DJI,262,ISO 3166-2:DJ,True,True,1977-09-20,False,False,False,None,,
+Dominica,,DM,DMA,212,ISO 3166-2:DM,True,True,1978-12-18,False,False,False,None,,
+Dominican Republic,,DO,DOM,214,ISO 3166-2:DO,True,True,1945-10-24,False,False,False,None,,
+Ecuador,,EC,ECU,218,ISO 3166-2:EC,True,True,1945-12-21,False,False,True,None,,
+Egypt,,EG,EGY,818,ISO 3166-2:EG,True,True,1945-10-24,False,False,False,None,Former member: United Arab Republic,
+El Salvador,,SV,SLV,222,ISO 3166-2:SV,True,True,1945-10-24,False,False,False,None,,
+Equatorial Guinea,,GQ,GNQ,226,ISO 3166-2:GQ,True,True,1968-11-12,False,False,False,None,,
+Eritrea,,ER,ERI,232,ISO 3166-2:ER,True,True,1993-05-28,False,False,False,None,,
+Estonia,,EE,EST,233,ISO 3166-2:EE,True,True,1991-09-17,False,True,False,None,Former member: Union of Soviet Socialist Republics,
+Eswatini,,SZ,SWZ,748,ISO 3166-2:SZ,True,True,1968-09-24,False,False,False,,,
+Ethiopia,,ET,ETH,231,ISO 3166-2:ET,True,True,1945-11-13,False,False,False,None,,Ethiopia is a federation of nine regions and two chartered cities.
+Falkland Islands (Malvinas),,FK,FLK,238,ISO 3166-2:FK,False,False,,False,False,False,,,
+Faroe Islands,,FO,FRO,234,ISO 3166-2:FO,False,False,,False,False,False,,,
+Fiji,,FJ,FJI,242,ISO 3166-2:FJ,True,True,1970-10-13,False,False,False,None,Fiji and the United Nations,"Fiji contains 1 autonomous region, Rotuma."
+Finland,,FI,FIN,246,ISO 3166-2:FI,True,True,1955-12-14,False,True,False,None,,Åland is a neutral and demilitarised autonomous region of Finland.
+France,,FR,FRA,250,ISO 3166-2:FR,True,True,1945-10-24,False,False,True,None,France and the United Nations,"France contains five overseas regions/departments: French Guiana, Guadeloupe, Martinique, Mayotte, and Réunion. France also includes the overseas territories of:  Clipperton Island  French Polynesia  New Caledonia  Saint Barthélemy  Saint Martin  Saint Pierre and Miquelon  Wallis and Futuna  French Southern and Antarctic Lands"
+French Guiana,,GF,GUF,254,ISO 3166-2:GF,False,False,,False,False,False,,,
+French Polynesia,,PF,PYF,258,ISO 3166-2:PF,False,False,,False,False,False,,,
+French Southern Territories,,TF,ATF,260,ISO 3166-2:TF,False,False,,False,False,False,,,
+Gabon,,GA,GAB,266,ISO 3166-2:GA,True,True,1960-09-20,False,False,False,None,,
+Gambia,,GM,GMB,270,ISO 3166-2:GM,True,True,1965-09-21,False,False,False,None,,
+Georgia,,GE,GEO,268,ISO 3166-2:GE,True,True,1992-07-31,False,False,False,None,Former member: Union of Soviet Socialist Republics,"Georgia contains two autonomous republics, Adjara and Abkhazia. In Abkhazia and South Ossetia, de facto states have been formed."
+Germany,,DE,DEU,276,ISO 3166-2:DE,True,True,1973-09-18,False,True,False,None,Former member: German Democratic Republic and Germany and the United Nations. Germany is a federation of 16 federated states (Länder).
+Ghana,,GH,GHA,288,ISO 3166-2:GH,True,True,1957-03-08,False,False,False,None,,
+Gibraltar,,GI,GIB,292,ISO 3166-2:GI,False,False,,False,False,False,,,
+Greece,,GR,GRC,300,ISO 3166-2:GR,True,True,1945-10-25,False,True,False,None,,"Mount Athos is an autonomous part of Greece that is jointly governed by the multinational ""Holy Community"" on the mountain and a civil governor appointed by the Greek government."
+Greenland,,GL,GRL,304,ISO 3166-2:GL,False,False,,False,False,False,,,
+Grenada,,GD,GRD,308,ISO 3166-2:GD,True,True,1974-09-17,False,False,False,None,,Grenada is a Commonwealth realm.
+Guadeloupe,,GP,GLP,312,ISO 3166-2:GP,False,False,,False,False,False,,,
+Guam,,GU,GUM,316,ISO 3166-2:GU,False,False,,False,False,False,,,
+Guatemala,,GT,GTM,320,ISO 3166-2:GT,True,True,1945-11-21,False,False,False,None,,
+Guernsey,,GG,GGY,831,ISO 3166-2:GG,False,False,,False,False,False,,,
+Guinea,,GN,GIN,324,ISO 3166-2:GN,True,True,1958-12-12,False,False,False,None,,
+Guinea-Bissau,,GW,GNB,624,ISO 3166-2:GW,True,True,1974-09-17,False,False,False,None,,
+Guyana,,GY,GUY,328,ISO 3166-2:GY,True,True,1966-09-20,False,False,True,None,,
+Haiti,,HT,HTI,332,ISO 3166-2:HT,True,True,1945-10-24,False,False,False,None,,
+Heard Island and McDonald Islands,,HM,HMD,334,ISO 3166-2:HM,False,False,,False,False,False,,,
+Holy See,,VA,VAT,336,ISO 3166-2:VA,True,False,,False,False,False,,,
+Honduras,,HN,HND,340,ISO 3166-2:HN,True,True,1945-12-17,False,False,False,None,,
+Hong Kong,,HK,HKG,344,ISO 3166-2:HK,False,False,,False,False,False,,,
+Hungary,,HU,HUN,348,ISO 3166-2:HU,True,True,1955-12-14,False,True,False,None,,
+Iceland,,IS,ISL,352,ISO 3166-2:IS,True,True,1946-11-19,False,False,False,None,,
+India,,IN,IND,356,ISO 3166-2:IN,True,True,1945-10-30,False,False,False,None,India and the United Nations,"India is a federation of 29 states and seven union territories. India claims the entire territory of Kashmir as one of its states, but only exercises control over part of it, while the rest is controlled by the People's Republic of China and Pakistan."
+Indonesia,,ID,IDN,360,ISO 3166-2:ID,True,True,1950-09-28,False,False,False,None,Withdrawal of Indonesia (1965–1966) and Indonesia and the United Nations,"Indonesia has five provinces with official special autonomy status: Aceh, Jakarta SCR, Yogyakarta SR, Papua, and West Papua."
+Iran,,IR,IRN,364,ISO 3166-2:IR,True,True,1945-10-24,False,False,False,None,,
+Iraq,,IQ,IRQ,368,ISO 3166-2:IQ,True,True,1945-12-21,False,False,False,None,,"Iraq is a federation of 19 governorates, five of which make up the autonomous Iraqi Kurdistan."
+Ireland,,IE,IRL,372,ISO 3166-2:IE,True,True,1955-12-14,False,True,False,None,,
+Isle of Man,,IM,IMN,833,ISO 3166-2:IM,False,False,,False,False,False,,,
+Israel,,IL,ISR,376,ISO 3166-2:IL,True,True,1949-05-11,False,False,False,Partially unrecognized,"Israel, Palestine, and the United Nations","Israel exerts strong control over the territory claimed by Palestine. Israel annexed East Jerusalem, an annexation not recognised by the international community. Israel maintains varying levels of control over the rest of the West Bank, and although Israel no longer has a permanent civilian or military presence in the Gaza Strip, following its unilateral disengagement, it is still considered by some to be the occupying power under international law.      Israel is not recognised as a state by 32 UN members (including most Arab states) nor by the SADR."
+Italy,,IT,ITA,380,ISO 3166-2:IT,True,True,1955-12-14,False,True,False,None,,"Italy has 5 autonomous regions, with varying levels of autonomy from the central government of Italy, and known officially as ""special status regions"":  Aosta Valley  Friuli-Venezia Giulia  Sardinia  Sicily  Trentino-Alto Adige/Südtirol"
+Jamaica,,JM,JAM,388,ISO 3166-2:JM,True,True,1962-09-18,False,False,False,None,,Jamaica is a Commonwealth realm.
+Japan,,JP,JPN,392,ISO 3166-2:JP,True,True,1956-12-18,False,False,False,None,Japan and the United Nations,
+Jersey,,JE,JEY,832,ISO 3166-2:JE,False,False,,False,False,False,,,
+Jordan,,JO,JOR,400,ISO 3166-2:JO,True,True,1955-12-14,False,False,False,None,,
+Kazakhstan,,KZ,KAZ,398,ISO 3166-2:KZ,True,True,1992-03-02,False,False,False,None,Former member: Union of Soviet Socialist Republics,
+Kenya,,KE,KEN,404,ISO 3166-2:KE,True,True,1963-12-16,False,False,False,None,,
+Kiribati,,KI,KIR,296,ISO 3166-2:KI,True,True,1999-09-14,False,False,False,None,,
+North Korea,,KP,PRK,408,ISO 3166-2:KP,True,True,1991-09-17,False,False,False,Claimed by South Korea,,"North Korea is not recognised by three UN members: France, Japan and South Korea."
+South Korea,,KR,KOR,410,ISO 3166-2:KR,True,True,1991-09-17,False,False,False,Claimed by North Korea,Korea and the United Nations,South Korea has 1 autonomous region: Jejudo South Korea is not recognised by one UN member: North Korea.
+Kuwait,,KW,KWT,414,ISO 3166-2:KW,True,True,1963-05-14,False,False,False,None,,
+Kyrgyzstan,,KG,KGZ,417,ISO 3166-2:KG,True,True,1992-03-02,False,False,False,None,Former member: Union of Soviet Socialist Republics,
+Lao People's Democratic Republic,,LA,LAO,418,ISO 3166-2:LA,True,True,1955-12-14,False,False,False,,,
+Latvia,,LV,LVA,428,ISO 3166-2:LV,True,True,1991-09-17,False,True,False,None,Former member: Union of Soviet Socialist Republics,
+Lebanon,,LB,LBN,422,ISO 3166-2:LB,True,True,1945-10-24,False,False,False,None,,
+Lesotho,,LS,LSO,426,ISO 3166-2:LS,True,True,1966-10-17,False,False,False,None,,
+Liberia,,LR,LBR,430,ISO 3166-2:LR,True,True,1945-11-02,False,False,False,None,,
+Libya,,LY,LBY,434,ISO 3166-2:LY,True,True,1955-12-14,False,False,False,None,,
+Liechtenstein,,LI,LIE,438,ISO 3166-2:LI,True,True,1990-09-18,False,False,False,None,,
+Lithuania,,LT,LTU,440,ISO 3166-2:LT,True,True,1991-09-17,False,True,False,None,Former member: Union of Soviet Socialist Republics,
+Luxembourg,,LU,LUX,442,ISO 3166-2:LU,True,True,1945-10-24,False,True,False,None,Luxembourg and the United Nations,
+Macao,,MO,MAC,446,ISO 3166-2:MO,False,False,,False,False,False,,,
+Macedonia,,MK,MKD,807,ISO 3166-2:MK,True,True,1993-04-08,False,False,False,,,
+Madagascar,,MG,MDG,450,ISO 3166-2:MG,True,True,1960-09-20,False,False,False,None,,
+Malawi,,MW,MWI,454,ISO 3166-2:MW,True,True,1964-12-01,False,False,False,None,,
+Malaysia,,MY,MYS,458,ISO 3166-2:MY,True,True,1957-09-17,False,False,False,None,Former member: Federation of Malaya and Malaysia and the United Nations,Malaysia is a federation of 13 states and three federal territories.
+Maldives,,MV,MDV,462,ISO 3166-2:MV,True,True,1965-09-21,False,False,False,None,,
+Mali,,ML,MLI,466,ISO 3166-2:ML,True,True,1960-09-28,False,False,False,None,,
+Malta,,MT,MLT,470,ISO 3166-2:MT,True,True,1964-12-01,False,True,False,None,,
+Marshall Islands,,MH,MHL,584,ISO 3166-2:MH,True,True,1991-09-17,False,False,False,None,Marshall Islands and the United Nations,Under Compact of Free Association with the United States.
+Martinique,,MQ,MTQ,474,ISO 3166-2:MQ,False,False,,False,False,False,,,
+Mauritania,,MR,MRT,478,ISO 3166-2:MR,True,True,1961-10-27,False,False,False,None,,
+Mauritius,,MU,MUS,480,ISO 3166-2:MU,True,True,1968-04-24,False,False,False,None,,"Mauritius has an autonomous island, Rodrigues."
+Mayotte,,YT,MYT,175,ISO 3166-2:YT,False,False,,False,False,False,,,
+Mexico,,MX,MEX,484,ISO 3166-2:MX,True,True,1945-11-07,False,False,False,None,Mexico and the United Nations,Mexico is a federation of 31 states and one autonomous city.
+Micronesia,,FM,FSM,583,ISO 3166-2:FM,True,True,1991-09-17,False,False,False,,,
+Moldova,,MD,MDA,498,ISO 3166-2:MD,True,True,1992-03-02,False,False,False,,,
+Monaco,,MC,MCO,492,ISO 3166-2:MC,True,True,1993-05-28,False,False,False,None,,
+Mongolia,,MN,MNG,496,ISO 3166-2:MN,True,True,1961-10-27,False,False,False,None,,
+Montenegro,,ME,MNE,499,ISO 3166-2:ME,True,True,2006-06-28,False,False,False,None,Former member: Yugoslavia,
+Montserrat,,MS,MSR,500,ISO 3166-2:MS,False,False,,False,False,False,,,
+Morocco,,MA,MAR,504,ISO 3166-2:MA,True,True,1956-11-12,False,False,False,None,,"Morocco claims sovereignty over Western Sahara and controls most of it, which is disputed by the Sahrawi Arab Democratic Republic."
+Mozambique,,MZ,MOZ,508,ISO 3166-2:MZ,True,True,1975-09-16,False,False,False,None,,
+Myanmar,Burma,MM,MMR,104,ISO 3166-2:MM,True,True,1948-04-19,False,False,False,None,,
+Namibia,,,NAM,516,ISO 3166-2:NA,True,True,1990-04-23,False,False,False,None,,
+Nauru,,NR,NRU,520,ISO 3166-2:NR,True,True,1999-09-14,False,False,False,None,,
+Nepal,,NP,NPL,524,ISO 3166-2:NP,True,True,1955-12-14,False,False,False,None,,Nepal is a federation composed of 14 zones.
+Netherlands,,NL,NLD,528,ISO 3166-2:NL,True,True,1945-12-10,False,True,False,None,,"The Kingdom of the Netherlands includes four areas with substantial autonomy:  Aruba  Curaçao  Netherlands  Sint Maarten The continental part of the Netherlands, Aruba, Curaçao, and Sint Maarten form the four constituent countries of the Kingdom. Three other territories (Bonaire, Saba, and Sint Eustatius) are special municipalities of the continental Netherlands. The designation ""Netherlands"" can refer either to the continental Netherlands or to the short name for the entire Kingdom (e.g. in international organizations). The Kingdom of the Netherlands as a whole is a member of the EU, but EU law applies only to parts within Europe."
+New Caledonia,,NC,NCL,540,ISO 3166-2:NC,False,False,,False,False,False,,,
+New Zealand,,NZ,NZL,554,ISO 3166-2:NZ,True,True,1945-10-24,False,False,False,None,New Zealand and the United Nations,"New Zealand is a Commonwealth realm, and has the dependent territories of:  Ross Dependency  Tokelau New Zealand has responsibilities for (but no rights of control over) two freely associated states:   Cook Islands  Niue The Cook Islands and Niue have diplomatic relations with 46 and 18 UN members respectively. They have full treaty-making capacity in the UN, and are members of some UN specialized agencies."
+Nicaragua,,NI,NIC,558,ISO 3166-2:NI,True,True,1945-10-24,False,False,False,None,,"Nicaragua contains two autonomous regions, Atlántico Sur and Atlántico Norte."
+Niger,,NE,NER,562,ISO 3166-2:NE,True,True,1960-09-20,False,False,False,None,,
+Nigeria,,NG,NGA,566,ISO 3166-2:NG,True,True,1960-10-07,False,False,False,None,,Nigeria is a federation of 36 states and 1 federal territory.
+Niue,,NU,NIU,570,ISO 3166-2:NU,False,False,,False,False,False,,,
+Norfolk Island,,NF,NFK,574,ISO 3166-2:NF,False,False,,False,False,False,,,
+Northern Mariana Islands,,MP,MNP,580,ISO 3166-2:MP,False,False,,False,False,False,,,
+Norway,,NO,NOR,578,ISO 3166-2:NO,True,True,1945-11-27,False,False,False,None,,"Svalbard is an integral part of Norway, but has a special status due to the Svalbard Treaty. Jan Mayen is an island that is an integral part of Norway, although unincorporated. Norway has the dependent territories of:  Bouvet Island Peter I Island Queen Maud Land"
+Oman,,OM,OMN,512,ISO 3166-2:OM,True,True,1971-10-07,False,False,False,None,,
+Pakistan,,PK,PAK,586,ISO 3166-2:PK,True,True,1947-09-30,False,False,False,None,Pakistan and the United Nations,"Pakistan is a federation of four provinces, 1 capital territory, and tribal regions. Pakistan disputes the entire territory of Kashmir with India, and part of it with the People's Republic of China. It exercises control over certain portions of Kashmir, but has not officially annexed any of it, instead regarding it as a disputed territory. The portions that it controls are divided into two territories, administered separately from Pakistan proper:  Azad Kashmir  Gilgit Baltistan Azad Kashmir describes itself as a ""self-governing state under Pakistani control"", while Gilgit-Baltistan is described in its governance order as a group of ""areas"" with self-government. These territories are not usually regarded as sovereign, as they do not fulfill the criteria set out by the declarative theory of statehood (for example, their current laws do not allow them to engage independently in relations with other states). Several state functions of these territories (such as foreign affairs and defence) are performed by Pakistan."
+Palau,,PW,PLW,585,ISO 3166-2:PW,True,True,1994-12-15,False,False,False,None,,Under Compact of Free Association with the United States.
+Palestine,,PS,PSE,275,ISO 3166-2:PS,False,False,,True,False,False,Partially unrecognized. Disputed by Israel,,"The declared State of Palestine has received diplomatic recognition from 137 states. The proclaimed state has no agreed territorial borders, or effective control on much of the territory that it proclaimed. The Palestinian National Authority is an interim administrative body formed as a result of the Oslo Accords that exercises limited autonomous jurisdiction within the Palestinian territories. In foreign relations, Palestine is represented by the Palestine Liberation Organization. The State of Palestine is a member state of UNESCO, and an observer state in the UN."
+Panama,,PA,PAN,591,ISO 3166-2:PA,True,True,1945-11-13,False,False,False,None,,
+Papua New Guinea,,PG,PNG,598,ISO 3166-2:PG,True,True,1975-10-10,False,False,False,None,,"Papua New Guinea is a Commonwealth realm with 1 autonomous region, Bougainville."
+Paraguay,,PY,PRY,600,ISO 3166-2:PY,True,True,1945-10-24,False,False,True,None,,
+Peru,,PE,PER,604,ISO 3166-2:PE,True,True,1945-10-31,False,False,True,None,,
+Philippines,,PH,PHL,608,ISO 3166-2:PH,True,True,1945-10-24,False,False,False,None,Philippines and the United Nations,"The Philippines contains one autonomous region, Autonomous Region in Muslim Mindanao."
+Pitcairn,,PN,PCN,612,ISO 3166-2:PN,False,False,,False,False,False,,,
+Poland,,PL,POL,616,ISO 3166-2:PL,True,True,1945-10-24,False,True,False,None,,
+Portugal,,PT,PRT,620,ISO 3166-2:PT,True,True,1955-12-14,False,True,False,None,,"Portugal contains two autonomous regions, Azores and Madeira."
+Puerto Rico,,PR,PRI,630,ISO 3166-2:PR,False,False,,False,False,False,,,
+Qatar,,QA,QAT,634,ISO 3166-2:QA,True,True,1971-09-21,False,False,False,None,,
+Réunion,,RE,REU,638,ISO 3166-2:RE,False,False,,False,False,False,,,
+Romania,,RO,ROU,642,ISO 3166-2:RO,True,True,1955-12-14,False,True,False,None,,
+Russia,,RU,RUS,643,ISO 3166-2:RU,True,True,1945-10-24,False,False,False,None,,"Russia is officially a federation of 85 federal subjects (republics, oblasts, krais, autonomous okrugs, federal cities, and an autonomous oblast). Several of the federal subjects are ethnic republics. Russia also forms the Union State jointly with Belarus."
+Rwanda,,RW,RWA,646,ISO 3166-2:RW,True,True,1962-09-18,False,False,False,None,,
+Saint Barthélemy,,BL,BLM,652,ISO 3166-2:BL,False,False,,False,False,False,,,
+"Saint Helena, Ascension and Tristan da Cunha",,SH,SHN,654,ISO 3166-2:SH,False,False,,False,False,False,,,
+Saint Kitts and Nevis,,KN,KNA,659,ISO 3166-2:KN,True,True,1983-09-23,False,False,False,None,,"Saint Kitts and Nevis is a Commonwealth realm and is a federation of two islands, St. Kitts and Nevis."
+Saint Lucia,,LC,LCA,662,ISO 3166-2:LC,True,True,1979-09-18,False,False,False,None,,Saint Lucia is a Commonwealth realm.
+Saint Martin (French part),,MF,MAF,663,ISO 3166-2:MF,False,False,,False,False,False,,,
+Saint Pierre and Miquelon,,PM,SPM,666,ISO 3166-2:PM,False,False,,False,False,False,,,
+Saint Vincent and the Grenadines,,VC,VCT,670,ISO 3166-2:VC,True,True,1980-09-16,False,False,False,None,,Saint Vincent and the Grenadines is a Commonwealth realm.
+Samoa,,WS,WSM,882,ISO 3166-2:WS,True,True,1976-12-15,False,False,False,None,,
+San Marino,,SM,SMR,674,ISO 3166-2:SM,True,True,1992-03-02,False,False,False,None,,
+Sao Tome and Principe,,ST,STP,678,ISO 3166-2:ST,True,True,1975-09-16,False,False,False,,,
+Saudi Arabia,,SA,SAU,682,ISO 3166-2:SA,True,True,1945-10-24,False,False,False,None,,
+Senegal,,SN,SEN,686,ISO 3166-2:SN,True,True,1960-09-28,False,False,False,None,,
+Serbia,,RS,SRB,688,ISO 3166-2:RS,True,True,2000-11-01,False,False,False,None,"Former member: Yugoslavia, Serbia and Montenegro and Serbia and the United Nations","Serbia contains two autonomous regions, Vojvodina and Kosovo and Metohija. The latter is under the de facto control of the Republic of Kosovo."
+Seychelles,,SC,SYC,690,ISO 3166-2:SC,True,True,1976-09-21,False,False,False,None,,
+Sierra Leone,,SL,SLE,694,ISO 3166-2:SL,True,True,1961-09-27,False,False,False,None,,
+Singapore,,SG,SGP,702,ISO 3166-2:SG,True,True,1965-09-21,False,False,False,None,Former member: Malaysia and Singapore and the United Nations,
+Sint Maarten (Dutch part),,SX,SXM,534,ISO 3166-2:SX,False,False,,False,False,False,,,
+Slovakia,,SK,SVK,703,ISO 3166-2:SK,True,True,1993-01-19,False,True,False,None,Former member: Czechoslovakia,
+Slovenia,,SI,SVN,705,ISO 3166-2:SI,True,True,1992-05-22,False,True,False,None,Former member: Yugoslavia,
+Solomon Islands,,SB,SLB,90,ISO 3166-2:SB,True,True,1978-09-19,False,False,False,None,,The Solomon Islands is a Commonwealth realm.
+Somalia,,SO,SOM,706,ISO 3166-2:SO,True,True,1960-09-20,False,False,False,None,,"Somalia has two self-declared autonomous regions: Puntland and Galmudug, while the territory of Somaliland has formed an unrecognised de facto state."
+South Africa,,ZA,ZAF,710,ISO 3166-2:ZA,True,True,1945-11-07,False,False,False,None,,
+South Georgia and the South Sandwich Islands,,GS,SGS,239,ISO 3166-2:GS,False,False,,False,False,False,,,
+South Sudan,,SS,SSD,728,ISO 3166-2:SS,True,True,2011-07-14,False,False,False,None,,"South Sudan is a federation of 28 states. The Abyei Area is a zone with ""special administrative status"" established by the Comprehensive Peace Agreement in 2005. It is de-jure a condominium of South Sudan and Sudan, but de facto administered by South Sudan."
+Spain,,ES,ESP,724,ISO 3166-2:ES,True,True,1955-12-14,False,True,False,None,,Spain is divided into 17 autonomous communities and 2 special autonomous cities.
+Sri Lanka,,LK,LKA,144,ISO 3166-2:LK,True,True,1955-12-14,False,False,False,None,,
+Sudan,,SD,SDN,729,ISO 3166-2:SD,True,True,1956-11-12,False,False,False,None,,"Sudan is a federation of 18 states. Sudan claims the Abyei Area, which is currently under UN protection and governed by South Sudan."
+Suriname,,SR,SUR,740,ISO 3166-2:SR,True,True,1975-12-04,False,False,True,None,,
+Svalbard and Jan Mayen,,SJ,SJM,744,ISO 3166-2:SJ,False,False,,False,False,False,,,
+Sweden,,SE,SWE,752,ISO 3166-2:SE,True,True,1946-11-19,False,True,False,None,,
+Switzerland,,CH,CHE,756,ISO 3166-2:CH,True,True,2002-09-10,False,False,False,None,,Switzerland is a federation of 26 cantons.
+Syria,,SY,SYR,760,ISO 3166-2:SY,True,True,1945-10-24,False,False,False,None,,"The Syrian National Coalition, which is recognized as the legitimate representative of the Syrian people by 20 UN members, has established an interim government to rule rebel controlled territory during the Syrian civil war. Syria has one self-declared autonomous region: Rojava."
+Taiwan,,TW,TWN,158,ISO 3166-2:TW,False,False,,False,False,False,,,
+Tajikistan,,TJ,TJK,762,ISO 3166-2:TJ,True,True,1992-03-02,False,False,False,None,Former member: Union of Soviet Socialist Republics,"Tajikistan contains 1 autonomous region, Gorno-Badakhshan Autonomous Province."
+Tanzania,,TZ,TZA,834,ISO 3166-2:TZ,True,True,1961-12-14,False,False,False,None,Former member: Tanganyika and Zanzibar,"Tanzania contains 1 autonomous region, Zanzibar."
+Thailand,,TH,THA,764,ISO 3166-2:TH,True,True,1946-12-16,False,False,False,None,,
+Timor-Leste,,TL,TLS,626,ISO 3166-2:TL,True,True,2002-09-27,False,False,False,,,
+Togo,,TG,TGO,768,ISO 3166-2:TG,True,True,1960-09-20,False,False,False,None,,
+Tokelau,,TK,TKL,772,ISO 3166-2:TK,False,False,,False,False,False,,,
+Tonga,,TO,TON,776,ISO 3166-2:TO,True,True,1999-09-14,False,False,False,None,,
+Trinidad and Tobago,,TT,TTO,780,ISO 3166-2:TT,True,True,1962-09-18,False,False,False,None,Trinidad and Tobago and the United Nations,"Trinidad and Tobago contains 1 autonomous region, Tobago."
+Tunisia,,TN,TUN,788,ISO 3166-2:TN,True,True,1956-11-12,False,False,False,None,,
+Turkey,,TR,TUR,792,ISO 3166-2:TR,True,True,1945-10-24,False,False,False,None,,
+Turkmenistan,,TM,TKM,795,ISO 3166-2:TM,True,True,1992-03-02,False,False,False,None,Former member: Union of Soviet Socialist Republics,
+Turks and Caicos Islands,,TC,TCA,796,ISO 3166-2:TC,False,False,,False,False,False,,,
+Tuvalu,,TV,TUV,798,ISO 3166-2:TV,True,True,2000-09-05,False,False,False,None,Tuvalu and the United Nations,Tuvalu is a Commonwealth realm.
+Uganda,,UG,UGA,800,ISO 3166-2:UG,True,True,1962-10-25,False,False,False,None,,
+Ukraine,,UA,UKR,804,ISO 3166-2:UA,True,True,1945-10-24,False,False,False,None,Former member: Ukrainian Soviet Socialist Republic,"Ukraine contains an autonomous republic, Crimea. In 2014 Russia annexed the region along with Sevastopol turning them in one of its federal subjects as Republic of Crimea and city of Sevastopol."
+United Arab Emirates,,AE,ARE,784,ISO 3166-2:AE,True,True,1971-12-09,False,False,False,None,,The United Arab Emirates is a federation of seven emirates.
+United Kingdom,,GB,GBR,826,ISO 3166-2:GB,True,True,1945-10-24,False,True,False,None,,"The United Kingdom is a Commonwealth realm consisting of  four constituent countries: England, Northern Ireland, Scotland, and Wales. The United Kingdom has the following overseas territories:  Akrotiri and Dhekelia  Anguilla  Bermuda  British Indian Ocean Territory  British Virgin Islands  Cayman Islands  Falkland Islands  Gibraltar  Montserrat  Pitcairn Islands  Saint Helena, Ascension and Tristan da Cunha  South Georgia and the South Sandwich Islands  Turks and Caicos Islands  British Antarctic Territory The British monarch has direct sovereignty over three self-governing Crown dependencies:   Bailiwick of Guernsey  Isle of Man  Bailiwick of Jersey"
+United States,,US,USA,840,ISO 3166-2:US,True,True,1945-10-24,False,False,False,None,,The United States is a federation of 50 states and 1 federal district with shared sovereignty. The Federal government of the United States has sovereignty over the following inhabited possessions and commonwealths:  American Samoa  Guam  Northern Mariana Islands  Puerto Rico  U.S. Virgin Islands It also has sovereignty over several uninhabited territories:  Baker Island Howland Island Jarvis Island Johnston Atoll Kingman Reef Midway Atoll Navassa Island Wake Island It also has sovereignty over the following incorporated territories:  Palmyra Atoll Three sovereign states have become associated states of the United States under the Compact of Free Association:   Marshall Islands – Republic of the Marshall Islands  Micronesia – Federated States of Micronesia  Palau – Republic of Palau It also disputes sovereignty over the following territories:  Bajo Nuevo Bank Serranilla Bank
+United States Minor Outlying Islands,,UM,UMI,581,ISO 3166-2:UM,False,False,,False,False,False,,,
+Uruguay,,UY,URY,858,ISO 3166-2:UY,True,True,1945-12-18,False,False,True,None,,
+Uzbekistan,,UZ,UZB,860,ISO 3166-2:UZ,True,True,1992-03-02,False,False,False,None,Former member: Union of Soviet Socialist Republics,"Uzbekistan contains 1 autonomous region, Karakalpakstan."
+Vanuatu,,VU,VUT,548,ISO 3166-2:VU,True,True,1981-09-15,False,False,False,None,Vanuatu and the United Nations,
+Venezuela,,VE,VEN,862,ISO 3166-2:VE,True,True,1945-11-15,False,False,True,None,,"Venezuela is a federation of 23 states, 1 capital district, and federal dependencies."
+Vietnam,,VN,VNM,704,ISO 3166-2:VN,True,True,1977-09-20,False,False,False,None,,
+Virgin Islands (British),,VG,VGB,92,ISO 3166-2:VG,False,False,,False,False,False,,,
+Virgin Islands (U.S.),,VI,VIR,850,ISO 3166-2:VI,False,False,,False,False,False,,,
+Wallis and Futuna,,WF,WLF,876,ISO 3166-2:WF,False,False,,False,False,False,,,
+Western Sahara,,EH,ESH,732,ISO 3166-2:EH,False,False,,False,False,False,,,
+Yemen,,YE,YEM,887,ISO 3166-2:YE,True,True,1947-09-30,False,False,False,None,Former member: Yemen and Democratic Yemen,
+Zambia,,ZM,ZMB,894,ISO 3166-2:ZM,True,True,1964-12-01,False,False,False,None,,
+Zimbabwe,,ZW,ZWE,716,ISO 3166-2:ZW,True,True,1980-08-25,False,False,False,None,,
