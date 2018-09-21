@@ -14,7 +14,6 @@ import os
 import pickle
 import platform
 import sys
-import time
 
 # Make it work for Python 2+3 and with Unicode
 import io as io_stl
@@ -322,8 +321,8 @@ def get_modification_datetime(filepath):
     modification_datetime : datetime.datetime
 
     """
-    import pytz
-    tz = pytz.timezone(time.tzname[0])
+    import tzlocal
+    tz = tzlocal.get_localzone()
     mtime = datetime.fromtimestamp(os.path.getmtime(filepath))
     return mtime.replace(tzinfo=tz)
 
@@ -340,8 +339,8 @@ def get_access_datetime(filepath):
     -------
     access_datetime : datetime.datetime
     """
-    import pytz
-    tz = pytz.timezone(time.tzname[0])
+    import tzlocal
+    tz = tzlocal.get_localzone()
     mtime = datetime.fromtimestamp(os.path.getatime(filepath))
     return mtime.replace(tzinfo=tz)
 

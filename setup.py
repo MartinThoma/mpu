@@ -24,7 +24,7 @@ def my_test_suite():
 
 requires_datetime = ['pytz']
 requires_image = ['Pillow']
-requires_io = ['pytz']
+requires_io = ['pytz', 'tzlocal']
 requires_aws = ['boto3']
 requires_all = (['pandas', 'python-magic'] + requires_datetime +
                 requires_image + requires_io + requires_aws)
