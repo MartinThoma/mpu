@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
 # internal modules
-from [[package_name]]._version import __version__
+from [[project_name]]._version import __version__

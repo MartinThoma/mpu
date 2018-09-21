@@ -40,8 +40,7 @@ def run_init(args):
         if not os.path.exists(dir_path):
             os.makedirs(dir_path)
 
-    script_paths = [os.path.join(root, project_name + '/__init__.py'),
-                    os.path.join(root, 'README.md'),
+    script_paths = [os.path.join(root, 'README.md'),
                     os.path.join(root, 'tests/__init__.py'),
                     ]
     for script_path in script_paths:
@@ -63,7 +62,7 @@ def run_init(args):
                                        'package/templates/coveragerc.txt'),
                     os.path.join(root, '.coveragerc')),
                     (resource_filename('mpu', 'package/templates/init.py.txt'),
-                    os.path.join(root, project_name + '__init__.py')),
+                    os.path.join(root, project_name + '/__init__.py')),
                     ]
     translate = {'[[project_name]]': project_data['project_name'],
                  '[[license]]': project_data['license'],
