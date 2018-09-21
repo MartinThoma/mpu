@@ -24,18 +24,18 @@ class PackageTest(unittest.TestCase):
 
     @patch('mpu.package.cli.text_input', return_value='foobar')
     def test_get_package_data(self, input_patch):
-        self.assertEquals(mpu.package.cli._get_package_data(),
-                          {'project_name': 'foobar',
-                           'license': 'foobar',
-                           'author': 'foobar',
-                           'email': 'foobar'})
+        self.assertEqual(mpu.package.cli._get_package_data(),
+                         {'project_name': 'foobar',
+                          'license': 'foobar',
+                          'author': 'foobar',
+                          'email': 'foobar'})
 
     def test_adjust_template(self):
         _, sink = mkstemp(prefix='mpu_', suffix='init.py.txt')
         source = resource_filename('mpu', 'package/templates/init.py.txt')
         copyfile(source, sink)
 
-        translate = {'[[package_name]]': 'foobar_project'}
+        translate = {'[[project_name]]': 'foobar_project'}
         mpu.package.cli._adjust_template(sink, translate)
 
         expected = '''# -*- coding: utf-8 -*-
@@ -45,7 +45,7 @@ from foobar_project._version import __version__
 '''
         with open(sink) as f:
             content = f.read()
-        self.assertEquals(content, expected)
+        self.assertEqual(content, expected)
         os.remove(sink)  # cleanup of mkstemp
 
     @patch('mpu.package.cli.text_input', return_value='foobar')

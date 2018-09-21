@@ -3,6 +3,7 @@
 
 # core modules
 import unittest
+import warnings
 
 # internal modules
 from mpu.decorators import timing, deprecated
@@ -20,11 +21,12 @@ class DecoratorTests(unittest.TestCase):
         fib(2)
 
     def test_deprecated(self):
-        @deprecated
-        def fib(n):
-            if n < 1:
-                return n
-            else:
-                return fib(n - 1) + fib(n - 2)
+        with warnings.catch_warnings(record=True) as w:
+            @deprecated
+            def fib(n):
+                if n < 1:
+                    return n
+                else:
+                    return fib(n - 1) + fib(n - 2)
 
-        fib(2)
+            fib(2)

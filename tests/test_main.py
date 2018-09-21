@@ -11,9 +11,9 @@ from mpu import parallel_for, haversine_distance, clip
 class DatastructuresInit(unittest.TestCase):
 
     def test_clip(self):
-        self.assertEquals(clip(42), 42)
-        self.assertEquals(clip(42, 0, 100), 42)
-        self.assertEquals(clip(42, 0, 42.0), 42)
+        self.assertEqual(clip(42), 42)
+        self.assertEqual(clip(42, 0, 100), 42)
+        self.assertEqual(clip(42, 0, 42.0), 42)
 
     def test_parallel_for(self):
         import time
@@ -24,7 +24,7 @@ class DatastructuresInit(unittest.TestCase):
             return i + j
         parameters = list((i, i + 1) for i in range(50))
         out = parallel_for(looping_function, parameters)
-        self.assertEquals(out, [2 * i + 1 for i in range(50)])
+        self.assertEqual(out, [2 * i + 1 for i in range(50)])
 
     def test_haversine(self):
         with self.assertRaises(ValueError):

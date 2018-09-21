@@ -21,4 +21,4 @@ class MathTest(unittest.TestCase):
             mpu.math.factorize(4.0)
 
     def test_argmax(self):
-        self.assertEquals(mpu.math.argmax([1, 2, 3]), 2)
+        self.assertEqual(mpu.math.argmax([1, 2, 3]), 2)
