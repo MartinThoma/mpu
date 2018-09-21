@@ -60,10 +60,10 @@ def run_init(args):
                                        'package/templates/_version.py.txt'),
                     os.path.join(root, project_name + '/_version.py')),
                     (resource_filename('mpu',
-                                       'package/templates/.coveragerc.txt'),
+                                       'package/templates/coveragerc.txt'),
                     os.path.join(root, '.coveragerc')),
                     (resource_filename('mpu', 'package/templates/init.py.txt'),
-                    os.path.join(root, '__init__.py')),
+                    os.path.join(root, project_name + '__init__.py')),
                     ]
     translate = {'[[project_name]]': project_data['project_name'],
                  '[[license]]': project_data['license'],
