@@ -81,7 +81,7 @@ French Southern Territories,,TF,ATF,260,ISO 3166-2:TF,False,False,,False,False,F
 Gabon,,GA,GAB,266,ISO 3166-2:GA,True,True,1960-09-20,False,False,False,None,,
 Gambia,,GM,GMB,270,ISO 3166-2:GM,True,True,1965-09-21,False,False,False,None,,
 Georgia,,GE,GEO,268,ISO 3166-2:GE,True,True,1992-07-31,False,False,False,None,Former member: Union of Soviet Socialist Republics,"Georgia contains two autonomous republics, Adjara and Abkhazia. In Abkhazia and South Ossetia, de facto states have been formed."
-Germany,,DE,DEU,276,ISO 3166-2:DE,True,True,1973-09-18,False,True,False,None,Former member: German Democratic Republic and Germany and the United Nations. Germany is a federation of 16 federated states (Länder).
+Germany,,DE,DEU,276,ISO 3166-2:DE,True,True,1973-09-18,False,True,False,None,,Former member: German Democratic Republic and Germany and the United Nations. Germany is a federation of 16 federated states (Länder).
 Ghana,,GH,GHA,288,ISO 3166-2:GH,True,True,1957-03-08,False,False,False,None,,
 Gibraltar,,GI,GIB,292,ISO 3166-2:GI,False,False,,False,False,False,,,
 Greece,,GR,GRC,300,ISO 3166-2:GR,True,True,1945-10-25,False,True,False,None,,"Mount Athos is an autonomous part of Greece that is jointly governed by the multinational ""Holy Community"" on the mountain and a civil governor appointed by the Greek government."
