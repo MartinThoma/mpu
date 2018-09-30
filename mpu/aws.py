@@ -83,6 +83,9 @@ def s3_download(source, destination,
     destination : str
     exists_strategy : {'raise', 'replace', 'abort'}
         What is done when the destination already exists?
+        * The strategy `raise` means a RuntimeError is raised,
+        * the strategy `replace` means the local file is replaced,
+        * the strategy `abort` means the download is not done.
     profile_name : str, optional
         AWS profile
 
