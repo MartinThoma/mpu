@@ -4,11 +4,23 @@
 # core modules
 import unittest
 
+# 3rd party modules
+import pandas as pd
+
 # internal modules
-from mpu.pd import example_df
+import mpu.pd
 
 
 class DatastructuresTest(unittest.TestCase):
 
     def test_example_df(self):
-        example_df()
+        mpu.pd.example_df()
+
+    def test_describe(self):
+        mpu.pd.describe(mpu.pd.example_df())
+
+    def test_describe_int(self):
+        column_info = {'int': ['numbers']}
+        df = pd.DataFrame({'numbers': [1, 2, 3, 100, 500]})
+        mpu.pd._describe_int(df, column_info)
+        mpu.pd.describe(df, column_info)
