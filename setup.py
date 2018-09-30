@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # core modules
 from setuptools import find_packages
 from setuptools import setup
