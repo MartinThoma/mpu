@@ -23,3 +23,7 @@ class DatetimeTest(unittest.TestCase):
                                     .astimezone(tz),
                                     hours=1).isoformat()
         self.assertEqual(out, '1918-04-15T03:00:00+02:00')
+
+    def test_generate_fail(self):
+        with self.assertRaises(ValueError):
+            mpu.datetime.generate(datetime(2018, 1, 1), datetime(2018, 1, 1))
