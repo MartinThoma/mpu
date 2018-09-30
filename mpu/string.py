@@ -155,6 +155,34 @@ def str2bool(string_, default='raise'):
                          .format(string_))
 
 
+def str2str_or_none(string_):
+    """
+    Convert a string to a str or to None.
+
+    Parameters
+    ----------
+    string_ : str
+
+    Returns
+    -------
+    str_or_none : bool or None
+
+    Examples
+    --------
+    >>> str2str_or_none('True')
+    'True'
+    >>> str2str_or_none('1')
+    '1'
+    >>> str2str_or_none('0')
+    '0'
+    >>> str2str_or_none('undefined')
+    """
+    if is_none(string_, default=False):
+        return None
+    else:
+        return string_
+
+
 def str2bool_or_none(string_, default='raise'):
     """
     Convert a string to a bool or to None.
