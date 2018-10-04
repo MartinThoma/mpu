@@ -3,6 +3,8 @@ python:
   - 2.7
   - 3.5
   - 3.6
+before_install:
+  - sudo rm -f /etc/boto.cfg  # https://github.com/travis-ci/travis-ci/issues/7940#issuecomment-310759657
 install:
   - pip install coveralls tox-travis
 script:
