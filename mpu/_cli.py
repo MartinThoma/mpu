@@ -1,9 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Example for a simple program with a command line parser."""
+"""
+The _cli module is for providing the CLI of mpu.
+
+Please do not import anything from it.
+"""
 
 import mpu.package
+
+
+def main():
+    """Command line interface of mpu."""
+    parser = get_parser()
+    args = parser.parse_args()
+    if hasattr(args, 'func') and args.func:
+        args.func(args)
+    else:
+        parser.print_help()
 
 
 def get_parser():
@@ -18,8 +32,3 @@ def get_parser():
     package_parser = subparsers.add_parser('package')
     mpu.package.cli.get_parser(package_parser)
     return parser
-
-if __name__ == "__main__":
-    args = get_parser().parse_args()
-    if args.func:
-        args.func(args)

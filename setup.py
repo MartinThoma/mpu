@@ -48,7 +48,9 @@ config = {
                        'datetime': requires_datetime,
                        'image': requires_image,
                        'io': requires_io},
-    'scripts': ['bin/mpu'],
+    'entry_points': {
+        'console_scripts': ['mpu=mpu._cli:main']
+    },
     'platforms': ['Linux'],
     'url': 'https://github.com/MartinThoma/mpu',
     'license': 'MIT',
