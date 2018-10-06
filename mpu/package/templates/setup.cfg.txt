@@ -2,7 +2,7 @@
 description-file = README.md
 
 [tool:pytest]
-addopts = ./tests/ --doctest-modules --mccabe --cov=./[[project_name]] --cov-append --cov-report html:tests/reports/coverage-html --cov-report xml:tests/reports/coverage.xml --pep8 --ignore=docs/
+addopts = ./tests/ --doctest-modules --mccabe --cov=./[[project_name]] --cov-append --cov-report html:tests/reports/coverage-html --cov-report xml:tests/reports/coverage.xml --pep8 --ignore=docs/ --durations=3
 doctest_encoding = utf-8
 mccabe-complexity=10
 
