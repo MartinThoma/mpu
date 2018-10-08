@@ -48,9 +48,9 @@ class EList(list):
         filtered_list : EList
         """
         new_list = []
-        for index, el in enumerate(self):
+        for index, element in enumerate(self):
             if index not in indices:
-                new_list.append(el)
+                new_list.append(element)
         return EList(new_list)
 
 

@@ -4,6 +4,7 @@
 """Convenience functions for AWS interactions."""
 
 # core modules
+import enum
 import os
 
 # 3rd party modules
@@ -70,8 +71,16 @@ def s3_read(source, profile_name=None):
     return body.read()
 
 
+class ExistsStrategy(enum.Enum):
+    """Strategies what to do when a file already exists."""
+
+    RAISE = 'raise'
+    REPLACE = 'replace'
+    ABORT = 'abort'
+
+
 def s3_download(source, destination,
-                exists_strategy='raise',
+                exists_strategy=ExistsStrategy.RAISE,
                 profile_name=None):
     """
     Copy a file from an S3 source to a local destination.
@@ -83,9 +92,9 @@ def s3_download(source, destination,
     destination : str
     exists_strategy : {'raise', 'replace', 'abort'}
         What is done when the destination already exists?
-        * The strategy `raise` means a RuntimeError is raised,
-        * the strategy `replace` means the local file is replaced,
-        * the strategy `abort` means the download is not done.
+        * `ExistsStrategy.RAISE` means a RuntimeError is raised,
+        * `ExistsStrategy.REPLACE` means the local file is replaced,
+        * `ExistsStrategy.ABORT` means the download is not done.
     profile_name : str, optional
         AWS profile
 
@@ -97,18 +106,17 @@ def s3_download(source, destination,
         AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN.
         See https://boto3.readthedocs.io/en/latest/guide/configuration.html
     """
-    exists_strategies = ['raise', 'replace', 'abort']
-    if exists_strategy not in exists_strategies:
+    if not isinstance(exists_strategy, ExistsStrategy):
         raise ValueError('exists_strategy \'{}\' is not in {}'
-                         .format(exists_strategy, exists_strategies))
+                         .format(exists_strategy, ExistsStrategy))
     session = boto3.Session(profile_name=profile_name)
     s3 = session.resource('s3')
     bucket_name, key = _s3_path_split(source)
     if os.path.isfile(destination):
-        if exists_strategy is 'raise':
+        if exists_strategy is ExistsStrategy.RAISE:
             raise RuntimeError('File \'{}\' already exists.'
                                .format(destination))
-        elif exists_strategy is 'abort':
+        elif exists_strategy is ExistsStrategy.ABORT:
             return
     s3.Bucket(bucket_name).download_file(key, destination)
 

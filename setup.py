@@ -25,6 +25,7 @@ def my_test_suite():
     test_suite = test_loader.discover('tests', pattern='test_*.py')
     return test_suite
 
+
 requires_datetime = ['pytz']
 requires_image = ['Pillow']
 requires_io = ['pytz', 'tzlocal']
@@ -34,7 +35,7 @@ requires_all = (['pandas', 'python-magic'] + requires_datetime +
 
 config = {
     'name': 'mpu',
-    'version': __version__,
+    'version': __version__,  # noqa
     'author': 'Martin Thoma',
     'author_email': 'info@martin-thoma.de',
     'maintainer': 'Martin Thoma',

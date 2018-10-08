@@ -7,8 +7,8 @@ import random
 import math as math_stl
 
 # internal modules
-from mpu._version import __version__
-from mpu import units, io, shell, string
+from mpu._version import __version__  # noqa
+from mpu import units, io, shell, string  # noqa
 
 
 def parallel_for(loop_function, parameters, nb_threads=100):
@@ -83,8 +83,8 @@ def consistent_shuffle(*lists):
     """
     perm = list(range(len(lists[0])))
     random.shuffle(perm)
-    lists = tuple([lists[i][index] for index in perm]
-                  for i in range(len(lists)))
+    lists = tuple([sublist[index] for index in perm]
+                  for sublist in lists)
     return lists
 
 

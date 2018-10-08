@@ -326,9 +326,9 @@ def is_iban(potential_iban):
     if len(potential_iban) < min([int(el['length']) for el in data]):
         return False
     country = None
-    for el in data:
-        if el['iban_fields'][:2] == potential_iban[:2]:
-            country = el
+    for element in data:
+        if element['iban_fields'][:2] == potential_iban[:2]:
+            country = element
             break
     if country is None:
         return False

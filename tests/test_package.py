@@ -7,7 +7,7 @@ from shutil import copyfile
 from tempfile import mkstemp, mkdtemp
 try:
     from unittest.mock import patch
-except:
+except ImportError:
     from mock import patch  # Python 2.7
 import os
 import unittest

@@ -21,7 +21,7 @@ class DecoratorTests(unittest.TestCase):
         fib(2)
 
     def test_deprecated(self):
-        with warnings.catch_warnings(record=True) as w:
+        with warnings.catch_warnings(record=True):
             @deprecated
             def fib(n):
                 if n < 1:

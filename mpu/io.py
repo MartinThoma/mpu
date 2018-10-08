@@ -275,9 +275,9 @@ def hash(filepath, method='sha1', buffer_size=65536):
         raise NotImplementedError('Only md5 and sha1 hashes are known, but '
                                   ' \'{}\' was specified.'.format(method))
 
-    with open(filepath, 'rb') as f:
+    with open(filepath, 'rb') as fp:
         while True:
-            data = f.read(buffer_size)
+            data = fp.read(buffer_size)
             if not data:
                 break
             hash_function.update(data)
@@ -322,9 +322,9 @@ def get_modification_datetime(filepath):
 
     """
     import tzlocal
-    tz = tzlocal.get_localzone()
+    timezone = tzlocal.get_localzone()
     mtime = datetime.fromtimestamp(os.path.getmtime(filepath))
-    return mtime.replace(tzinfo=tz)
+    return mtime.replace(tzinfo=timezone)
 
 
 def get_access_datetime(filepath):

@@ -1,1 +1,1 @@
-import mpu.package.cli
+import mpu.package.cli  # noqa

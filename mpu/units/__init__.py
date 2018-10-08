@@ -251,9 +251,7 @@ def get_currency(currency_str):
         reader = csv.reader(fp, delimiter=',', quotechar='"')
         next(reader, None)  # skip the headers
         for row in reader:
-            is_currency = (row[0] == currency_str or
-                           row[1] == currency_str or
-                           row[2] == currency_str)
+            is_currency = currency_str in [row[0], row[1], row[2]]
             if is_currency:
                 entity = row[0]
                 name = row[1]

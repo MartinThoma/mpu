@@ -45,17 +45,17 @@ class AWSTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             mpu.aws.s3_download('s3://mybucket/example_test.csv',
                                 destination,
-                                exists_strategy='raise')
+                                exists_strategy=mpu.aws.ExistsStrategy.RAISE)
         with self.assertRaises(ValueError):
             mpu.aws.s3_download('s3://mybucket/example_test.csv',
                                 destination,
                                 exists_strategy='raises')
         mpu.aws.s3_download('s3://mybucket/example_test.csv',
                             destination,
-                            exists_strategy='abort')
+                            exists_strategy=mpu.aws.ExistsStrategy.ABORT)
         mpu.aws.s3_download('s3://mybucket/example_test.csv',
                             destination,
-                            exists_strategy='replace')
+                            exists_strategy=mpu.aws.ExistsStrategy.REPLACE)
 
         mpu.aws.s3_read('s3://mybucket/example_test.csv')
         os.remove(destination)  # cleanup of mkstemp

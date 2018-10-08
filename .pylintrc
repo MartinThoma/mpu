@@ -1,0 +1,5 @@
+[MASTER]
+load-plugins=pylint.extensions.mccabe
+
+[MESSAGES CONTROL]
+disable=R0205,R1705,C0411,C0413,C0103,C1801,C0325

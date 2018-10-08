@@ -110,4 +110,4 @@ def text_input(text):
     if sys.version_info > (3, 0):
         return input(text)
     else:
-        return raw_input(text)
+        return raw_input(text)  # noqa

@@ -11,12 +11,12 @@ from mpu.datastructures import EList
 class DatastructuresTest(unittest.TestCase):
 
     def test_EList_empty(self):
-        l = EList()
-        self.assertEqual(len(l), 0)
+        elist = EList()
+        self.assertEqual(len(elist), 0)
 
     def test_EList_getitem(self):
-        l = EList([2, 3, 5, 7, 11])
-        self.assertEqual(l[2], 5)
-        self.assertEqual(l[0], 2)
-        self.assertEqual(l[1], 3)
-        self.assertEqual(l[4], 11)
+        elist = EList([2, 3, 5, 7, 11])
+        self.assertEqual(elist[2], 5)
+        self.assertEqual(elist[0], 2)
+        self.assertEqual(elist[1], 3)
+        self.assertEqual(elist[4], 11)
