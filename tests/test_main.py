@@ -5,7 +5,7 @@
 import unittest
 
 # internal modules
-from mpu import parallel_for, haversine_distance, clip
+from mpu import parallel_for, haversine_distance, clip, is_in_intervall
 
 
 class DatastructuresInit(unittest.TestCase):
@@ -35,3 +35,10 @@ class DatastructuresInit(unittest.TestCase):
             haversine_distance((0, 0), (-200, 0))
         with self.assertRaises(ValueError):
             haversine_distance((0, 0), (0, -200))
+
+    def test_is_in_intervall_raises(self):
+        with self.assertRaises(ValueError):
+            is_in_intervall(10, 20, 100)
+
+    def test_is_in_intervall_ok(self):
+        is_in_intervall(10, 10, 100)

@@ -138,3 +138,20 @@ def haversine_distance(origin, destination):
     d = radius * c
 
     return d
+
+
+def is_in_intervall(value, min_value, max_value, name='variable'):
+    """
+    Raise an exception if value is not in an interval.
+
+    Parameters
+    ----------
+    value : orderable
+    min_value : orderable
+    max_value : orderable
+    name : str
+        Name of the variable to print in exception.
+    """
+    if not (min_value <= value <= max_value):
+        raise ValueError('{}={} is not in [{}, {}]'
+                         .format(name, value, min_value, max_value))
