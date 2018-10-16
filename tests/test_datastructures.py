@@ -5,7 +5,7 @@
 import unittest
 
 # internal modules
-from mpu.datastructures import EList
+from mpu.datastructures import EList, flatten
 
 
 class DatastructuresTest(unittest.TestCase):
@@ -20,3 +20,6 @@ class DatastructuresTest(unittest.TestCase):
         self.assertEqual(elist[0], 2)
         self.assertEqual(elist[1], 3)
         self.assertEqual(elist[4], 11)
+
+    def test_flatten_string(self):
+        assert flatten(['foobar']) == ['foobar']

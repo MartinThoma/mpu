@@ -54,13 +54,15 @@ class EList(list):
         return EList(new_list)
 
 
-def flatten(iterable):
+def flatten(iterable, string_flattening=False):
     """
     Flatten an given iterable of iterables into one list.
 
     Parameters
     ----------
     iterable : iterable
+    string_flattening : bool
+        If this is False, then strings are NOT flattened
 
     Returns
     -------
@@ -79,7 +81,11 @@ def flatten(iterable):
     """
     flat_list = []
     for item in iterable:
-        if isinstance(item, collections.Iterable):
+        is_iterable = (isinstance(item, collections.Iterable) and
+                       (string_flattening or
+                        (not string_flattening and not isinstance(item, str))
+                        ))
+        if is_iterable:
             flat_list.extend(flatten(item))
         else:
             flat_list.append(item)
