@@ -2,10 +2,17 @@
 # -*- coding: utf-8 -*-
 
 # core modules
+import sys
+import traceback
 import unittest
 
 # internal modules
-from mpu import parallel_for, haversine_distance, clip, is_in_intervall
+from mpu import (clip,
+                 exception_logging,
+                 haversine_distance,
+                 is_in_intervall,
+                 parallel_for,
+                 )
 
 
 class DatastructuresInit(unittest.TestCase):
@@ -42,3 +49,16 @@ class DatastructuresInit(unittest.TestCase):
 
     def test_is_in_intervall_ok(self):
         is_in_intervall(10, 10, 100)
+
+    def test_exception_logging(self):
+        def raise_exception():
+            try:
+                raise Exception
+            except Exception:
+                ex_type, ex, tb = sys.exc_info()
+                traceback.print_tb(tb)
+            return tb
+
+        exception_logging(exctype='ValueError',
+                          value=None,
+                          tb=raise_exception())

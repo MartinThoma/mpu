@@ -3,8 +3,10 @@
 from __future__ import absolute_import
 
 # core modules
-import random
+import logging
 import math as math_stl
+import random
+import traceback
 
 # internal modules
 from mpu._version import __version__  # noqa
@@ -155,3 +157,20 @@ def is_in_intervall(value, min_value, max_value, name='variable'):
     if not (min_value <= value <= max_value):
         raise ValueError('{}={} is not in [{}, {}]'
                          .format(name, value, min_value, max_value))
+
+
+def exception_logging(exctype, value, tb):
+    """
+    Log exception by using the root logger.
+
+    Use it as `sys.excepthook = exception_logging`.
+
+    Parameters
+    ----------
+    exctype : type
+    value : NameError
+    tb : traceback
+    """
+    write_val = {'exception_type': str(exctype),
+                 'message': str(traceback.format_tb(tb, 10))}
+    logging.exception(str(write_val))
