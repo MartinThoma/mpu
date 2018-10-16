@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-String manipulation and verification.
+String manipulation, verification and formatting.
 
 For more complex checks, you might want to use the
 [validators](http://validators.readthedocs.io) package.
@@ -371,3 +371,34 @@ def _calculate_german_iban_checksum(iban,
     number = sum(int(value) * 10**i for i, value in enumerate(number[::-1]))
     checksum = 98 - (number % 97)
     return str(checksum)
+
+
+def human_readable_bytes(nb_bytes, suffix='B'):
+    """
+    Convert a byte number into a human readable format.
+
+    Parameters
+    ----------
+    nb_bytes : number
+    suffix : str, optional (default: "B")
+
+    Returns
+    -------
+    size_str : str
+
+    Examples
+    --------
+    >>> human_readable_bytes(123)
+    '123.0 B'
+
+    >>> human_readable_bytes(1025)
+    '1.0 KiB'
+
+    >>> human_readable_bytes(9671406556917033397649423)
+    '8.0 YiB'
+    """
+    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
+        if abs(nb_bytes) < 1024.0:
+            return '%3.1f %s%s' % (nb_bytes, unit, suffix)
+        nb_bytes /= 1024.0
+    return '%.1f %s%s' % (nb_bytes, 'Yi', suffix)
