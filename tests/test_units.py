@@ -5,7 +5,7 @@
 import unittest
 
 # 3rd party modules
-import simplejson
+import simplejson  # has for_json
 
 # internal modules
 from mpu.units import Money, Currency, get_currency

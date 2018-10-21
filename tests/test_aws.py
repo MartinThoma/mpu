@@ -13,7 +13,7 @@ from moto import mock_s3
 import boto3
 
 # internal modules
-import mpu
+import mpu.aws
 
 
 class AWSTest(unittest.TestCase):
