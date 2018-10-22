@@ -8,5 +8,9 @@ clean:
 package:
 	make clean
 	./create_package.sh
-muation-test:
-	cosmic-ray init cr-config.yaml cr_session && cosmic-ray exec cr_session && cosmic-ray dump cr_session | cr-report
+
+mutation-test:
+	cosmic-ray init cr-config.yaml cr_session && cosmic-ray exec cr_session
+
+mutation-report:
+	cosmic-ray dump cr_session | cr-report

@@ -20,5 +20,10 @@ class MathTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             mpu.math.factorize(4.0)
 
+    def test_factorize(self):
+        assert mpu.math.factorize(-17) == [-1, 17]
+        assert mpu.math.factorize(8) == [2, 2, 2]
+        assert mpu.math.factorize(1) == [1]
+
     def test_argmax(self):
         self.assertEqual(mpu.math.argmax([1, 2, 3]), 2)
