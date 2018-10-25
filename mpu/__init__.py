@@ -90,6 +90,74 @@ def consistent_shuffle(*lists):
     return lists
 
 
+class Location(object):
+    """
+    Define a single point.
+
+    Parameters
+    ----------
+    latitude : float
+        in [-90, 90] - from North to South
+    longitude : float
+        in [-180, 180] - from West to East
+    """
+
+    def __init__(self, latitude, longitude):
+        self.latitude = latitude
+        self.longitude = longitude
+
+    @property
+    def latitude(self):
+        """Getter for latiutde."""
+        return self._latitude
+
+    @property
+    def longitude(self):
+        """Getter for longitude."""
+        return self._longitude
+
+    @latitude.setter
+    def latitude(self, latitude):
+        """Setter for latiutde."""
+        if not (-90 <= latitude <= 90):
+            raise ValueError('latitude was {}, but has to be in [-90, 90]'
+                             .format(latitude))
+        self._latitude = latitude
+
+    @longitude.setter
+    def longitude(self, longitude):
+        """Setter for longitude."""
+        if not (-180 <= longitude <= 180):
+            raise ValueError('longitude was {}, but has to be in [-180, 180]'
+                             .format(longitude))
+        self._longitude = longitude
+
+    def get_google_maps_link(self):
+        """Get a Google Maps link to this location."""
+        return ('https://www.google.com/maps/place/{},{}'
+                .format(self.latitude, self.longitude))
+
+    def distance(self, there):
+        """
+        Calculate the distance from this location to there.
+
+        Parameters
+        ----------
+        there : Location
+
+        Returns
+        -------
+        distance_in_m : float
+        """
+        return haversine_distance((self.latitude, self.longitude),
+                                  (there.latitude, there.longitude))
+
+    def __repr__(self):
+        return 'Location({}, {})'.format(self.latitude, self.longitude)
+
+    __str__ = __repr__
+
+
 def haversine_distance(origin, destination):
     """
     Calculate the Haversine distance.

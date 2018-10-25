@@ -12,6 +12,7 @@ from mpu import (clip,
                  haversine_distance,
                  is_in_intervall,
                  parallel_for,
+                 Location
                  )
 
 
@@ -62,3 +63,8 @@ class DatastructuresInit(unittest.TestCase):
         exception_logging(exctype='ValueError',
                           value=None,
                           tb=raise_exception())
+
+    def test_location_class(self):
+        munich = Location(48.137222222222, 11.575555555556)
+        berlin = Location(52.518611111111, 13.408333333333)
+        assert abs(munich.distance(berlin) - 506.7) < 10
