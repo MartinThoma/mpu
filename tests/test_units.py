@@ -124,6 +124,7 @@ class MoneyTests(unittest.TestCase):
         d = Money('0.5', 'USD')
         self.assertEqual(a > b, True)
         self.assertEqual(a < b, False)
+        self.assertEqual(b < a, True)
         self.assertEqual(a >= b, True)
         self.assertEqual(a <= b, False)
         self.assertEqual(a > c, False)
