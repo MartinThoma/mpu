@@ -1,4 +1,4 @@
-moto==1.3.3
+moto
 pandas
 simplejson
-boto3==1.7.84
+boto3

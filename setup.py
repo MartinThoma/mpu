@@ -29,7 +29,7 @@ def my_test_suite():
 requires_datetime = ['pytz']
 requires_image = ['Pillow']
 requires_io = ['pytz', 'tzlocal']
-requires_aws = ['boto3']
+requires_aws = ['boto3>=1.9.0']
 requires_tests = ['pytest', 'pytest-cov', 'pytest-mccabe', 'pytest-flake8',
                   'simplejson']
 requires_all = (['pandas', 'python-magic'] + requires_datetime +
