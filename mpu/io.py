@@ -231,6 +231,28 @@ def _write_pickle(filepath, data, kwargs):
     return data
 
 
+def urlread(url, encoding='utf8'):
+    """
+    Read the content of an URL.
+
+    Parameters
+    ----------
+    url : str
+
+    Returns
+    -------
+    content : str
+    """
+    try:
+        from urllib.request import urlopen
+    except ImportError:
+        from urllib2 import urlopen
+    response = urlopen(url)
+    content = response.read()
+    content = content.decode(encoding)
+    return content
+
+
 def download(source, sink=None):
     """
     Download a file.

@@ -9,7 +9,7 @@ import pkg_resources
 import unittest
 
 # internal modules
-from mpu.io import (download, read, write, _write_jsonl)
+from mpu.io import (download, read, write, _write_jsonl, urlread)
 import mpu.io
 
 
@@ -22,6 +22,11 @@ class IoTest(unittest.TestCase):
         download(source, sink)
         self.assertEqual(os.path.getsize(sink), 116087)
         os.remove(sink)  # cleanup of mkstemp
+
+    def test_urlread(self):
+        url = 'http://example.com'
+        sample = urlread(url)
+        assert sample.startswith('<!doctype html>')
 
     def test_download_without_path(self):
         source = ('https://upload.wikimedia.org/wikipedia/commons/e/e9/'
