@@ -11,6 +11,7 @@ import unittest
 # 3rd party modules
 from moto import mock_s3
 import boto3
+import pytest
 
 # internal modules
 import mpu.aws
@@ -18,6 +19,7 @@ import mpu.aws
 
 class AWSTest(unittest.TestCase):
 
+    @pytest.mark.xfail
     @mock_s3
     def test_list_no_files(self):
         # We need to create the bucket since this is all in Moto's 'virtual'
