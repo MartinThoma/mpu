@@ -20,5 +20,5 @@ class ShellTest(unittest.TestCase):
         except ImportError:
             from StringIO import StringIO
         import sys
-        sys.stdin = StringIO("foo\nbar")
+        sys.stdin = StringIO(u"foo\nbar")
         text_input('foo')
