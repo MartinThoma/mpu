@@ -393,3 +393,19 @@ def get_file_meta(filepath):
     except ImportError:
         pass
     return meta
+
+
+def gzip_file(source, sink):
+    """
+    Create a GZIP file from a source file.
+
+    Parameters
+    ----------
+    source : str
+        Filepath
+    sink : str
+        Filepath
+    """
+    import gzip
+    with open(source, 'rb') as f_in, gzip.open(sink, 'wb') as f_out:
+        f_out.writelines(f_in)
