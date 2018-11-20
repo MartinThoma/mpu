@@ -110,7 +110,7 @@ class IoTest(unittest.TestCase):
     def test_read_hdf5(self):
         path = '../tests/files/example.hdf5'
         source = pkg_resources.resource_filename('mpu', path)
-        with self.assertRaises(Exception):
+        with self.assertRaises(NotImplementedError):
             read(source)
 
     def test_read_json(self):
@@ -227,7 +227,7 @@ class IoTest(unittest.TestCase):
 
     def test_read_h5(self):
         source = pkg_resources.resource_filename('mpu', 'io.py')
-        with self.assertRaises(Exception):
+        with self.assertRaises(NotImplementedError):
             read(source)
 
     def test_hash(self):

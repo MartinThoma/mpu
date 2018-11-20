@@ -50,7 +50,7 @@ def generate(minimum, maximum, local_random=random.Random()):
     ----------
     minimum : datetime object
     maximum : datetime object
-    local_random : int, optional (default: 0)
+    local_random : random.Random, optional
 
     Returns
     -------

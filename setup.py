@@ -7,9 +7,7 @@ from setuptools import setup
 import io
 import os
 import unittest
-
-# internal modules
-exec(open('mpu/_version.py').read())
+import re
 
 
 def read(file_name):
@@ -17,6 +15,15 @@ def read(file_name):
     with io.open(os.path.join(os.path.dirname(__file__), file_name),
                  encoding='utf-8') as f:
         return f.read()
+
+
+def get_version():
+    """Get the version string of mpu."""
+    root_dir = os.path.dirname(__file__)
+    with open(os.path.join(root_dir, 'mpu', '_version.py')) as f:
+        init = f.read()
+    version_pattern = re.compile(r'__version__ = \'(.*?)\'')
+    return version_pattern.search(init).group(1)
 
 
 def my_test_suite():
@@ -37,7 +44,7 @@ requires_all = (['pandas', 'python-magic'] + requires_datetime +
 
 config = {
     'name': 'mpu',
-    'version': __version__,  # noqa
+    'version': get_version(),
     'author': 'Martin Thoma',
     'author_email': 'info@martin-thoma.de',
     'maintainer': 'Martin Thoma',

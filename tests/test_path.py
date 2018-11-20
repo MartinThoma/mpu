@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # core modules
-import unittest
 import pkg_resources
+import unittest
 
 # internal modules
 from mpu.path import get_all_files, get_from_package

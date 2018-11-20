@@ -31,8 +31,8 @@ def parallel_for(loop_function, parameters, nb_threads=100):
     -------
     return_values : list of return values
     """
-    import multiprocessing.pool
     from contextlib import closing
+    import multiprocessing.pool
     with closing(multiprocessing.pool.ThreadPool(nb_threads)) as pool:
         return pool.map(loop_function, parameters)
 
@@ -111,11 +111,6 @@ class Location(object):
         """Getter for latiutde."""
         return self._latitude
 
-    @property
-    def longitude(self):
-        """Getter for longitude."""
-        return self._longitude
-
     @latitude.setter
     def latitude(self, latitude):
         """Setter for latiutde."""
@@ -123,6 +118,11 @@ class Location(object):
             raise ValueError('latitude was {}, but has to be in [-90, 90]'
                              .format(latitude))
         self._latitude = latitude
+
+    @property
+    def longitude(self):
+        """Getter for longitude."""
+        return self._longitude
 
     @longitude.setter
     def longitude(self, longitude):

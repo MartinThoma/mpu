@@ -6,6 +6,10 @@
 # core modules
 import collections
 from copy import deepcopy
+try:
+    from typing import List, Any, Iterable  # noqa
+except ImportError:
+    pass
 
 
 class EList(list):
@@ -41,7 +45,7 @@ class EList(list):
 
         Parameters
         ----------
-        indices : list
+        indices : List[int]
 
         Returns
         -------
@@ -200,7 +204,7 @@ def set_dict_value(dictionary, keys, value):
     Parameters
     ----------
     dictionary : dict
-    keys : list
+    keys : List
     value : object
 
     Returns

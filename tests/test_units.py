@@ -18,16 +18,16 @@ class MoneyTests(unittest.TestCase):
         self.assertEqual(str(a), '0.10 Euro')
         b = Money('0.1', 'USD')
         self.assertEqual(str(b), '0.10 US Dollar')
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             Money('0.1', 'foobar')
         c = Money((1, 100), 'EUR')
         d = Money(5, 'ESP')
         self.assertEqual(str(c), '0.01 Euro')
         self.assertEqual(repr(c), '0.01 Euro')
         self.assertEqual(str(d), '5.00 Spanish Peseta')
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             Money((5, 100, 42), 'EUR')
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             Money(0.1, 'EUR')
         non_currency = Money('0.1', None)
         self.assertEqual(str(non_currency), '0.10')
@@ -92,28 +92,28 @@ class MoneyTests(unittest.TestCase):
         self.assertEqual(str(a - b), '0.40 Euro')
         self.assertEqual(-a, aneg)
         self.assertEqual(+a, a)
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             a - c
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             a - 2
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             a - 2.0
         self.assertEqual(str(a + b), '0.60 Euro')
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             a + c
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             a + 2
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             a + 2.0
         self.assertEqual(str(2 * a), '1.00 Euro')
         self.assertEqual(str(a / b), '5')
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             a / c
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             a * 3.141
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             3.141 * a
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             a / '0.1'
         self.assertEqual(str(a / 2), '0.25 Euro')
 
@@ -158,7 +158,7 @@ class MoneyTests(unittest.TestCase):
         self.assertEqual(eur == usd, False)
         self.assertEqual(eur == 2, False)
         self.assertEqual(eur != usd, True)
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             Currency(name=2,
                      code='EUR',
                      numeric_code=123,
@@ -167,7 +167,7 @@ class MoneyTests(unittest.TestCase):
                      entities=['Germany'],
                      withdrawal_date=None,
                      subunits=2)
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             Currency(name='Euro',
                      code=2,
                      numeric_code=123,
@@ -176,7 +176,7 @@ class MoneyTests(unittest.TestCase):
                      entities=['Germany'],
                      withdrawal_date=None,
                      subunits=2)
-        with self.assertRaises(Exception):
+        with self.assertRaises(ValueError):
             Currency(name='Euro',
                      code='EUR',
                      numeric_code=123,

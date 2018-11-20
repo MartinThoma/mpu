@@ -4,10 +4,14 @@
 """Enhancing printed terminal output."""
 
 # core modules
+try:
+    from typing import List, Any  # noqa
+except ImportError:
+    pass
 import sys
 
 
-class Codes:
+class Codes(object):
     """Escape sequences for enhanced shell output."""
 
     RESET_ALL = '\033[0m'
@@ -63,7 +67,7 @@ class Codes:
     BACKGROUND_WHITE = '\033[107m'
 
 
-def print_table(table):
+def print_table(table):  # type: (List[List[Any]]) -> None
     """
     Print as a table.
 
@@ -93,7 +97,7 @@ def print_table(table):
         print(formatter.format(*row))
 
 
-def text_input(text):
+def text_input(text):  # type: (str) -> str
     """
     Ask the user for textual input.
 

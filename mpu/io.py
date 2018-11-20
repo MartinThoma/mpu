@@ -18,7 +18,7 @@ import sys
 # Make it work for Python 2+3 and with Unicode
 import io as io_stl
 try:
-    to_unicode = unicode
+    to_unicode = unicode  # type: ignore
 except NameError:
     to_unicode = str
 
