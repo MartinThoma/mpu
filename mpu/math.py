@@ -178,3 +178,51 @@ def argmax(iterable):
             max_value = value
             max_index = index
     return max_index
+
+
+def round_up(x, decimal_places):
+    """
+    Round a float up to decimal_places.
+
+    Parameters
+    ----------
+    x : float
+    decimal_places : int
+
+    Returns
+    -------
+    rounded_float : float
+
+    Examples
+    --------
+    >>> round_up(1.23456, 3)
+    1.235
+    >>> round_up(1.23456, 2)
+    1.24
+    """
+    return round(x + 5 * 10**(-1 * (decimal_places + 1)), decimal_places)
+
+
+def round_down(x, decimal_places):
+    """
+    Round a float down to decimal_places.
+
+    Parameters
+    ----------
+    x : float
+    decimal_places : int
+
+    Returns
+    -------
+    rounded_float : float
+
+    Examples
+    --------
+    >>> round_down(1.23456, 3)
+    1.234
+    >>> round_down(1.23456, 2)
+    1.23
+    """
+    from math import floor
+    d = int('1' + ('0' * decimal_places))
+    return floor(x * d) / d
