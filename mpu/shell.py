@@ -7,7 +7,7 @@
 import sys
 
 
-class Codes:
+class Codes(object):
     """Escape sequences for enhanced shell output."""
 
     RESET_ALL = '\033[0m'

@@ -66,7 +66,7 @@ def flatten(iterable, string_flattening=False):
 
     Returns
     -------
-    flat_list : list
+    flat_list : List
 
     Examples
     --------
@@ -200,7 +200,7 @@ def set_dict_value(dictionary, keys, value):
     Parameters
     ----------
     dictionary : dict
-    keys : list
+    keys : List[Any]
     value : object
 
     Returns

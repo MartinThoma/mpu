@@ -4,6 +4,7 @@
 """Convenience functions for AWS interactions."""
 
 # core modules
+from collections import namedtuple
 import enum
 import os
 
@@ -23,7 +24,7 @@ def list_files(bucket, profile_name=None):
 
     Returns
     -------
-    s3_paths : list
+    s3_paths : List[str]
     """
     session = boto3.Session(profile_name=profile_name)
     conn = session.client('s3')
@@ -140,6 +141,9 @@ def s3_upload(source, destination, profile_name=None):
         s3.Bucket(bucket_name).put_object(Key=key, Body=data)
 
 
+S3Path = namedtuple('S3Path', ['bucket_name', 'key'])
+
+
 def _s3_path_split(s3_path):
     """
     Split an S3 path into bucket and key.
@@ -156,11 +160,11 @@ def _s3_path_split(s3_path):
     Examples
     --------
     >>> _s3_path_split('s3://my-bucket/foo/bar.jpg')
-    ('my-bucket', 'foo/bar.jpg')
+    S3Path(bucket_name='my-bucket', key='foo/bar.jpg')
     """
     if not s3_path.startswith('s3://'):
         raise ValueError('s3_path is expected to start with \'s3://\', '
                          'but was {}'.format(s3_path))
     bucket_key = s3_path[len('s3://'):]
     bucket_name, key = bucket_key.split('/', 1)
-    return bucket_name, key
+    return S3Path(bucket_name, key)
