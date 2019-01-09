@@ -219,3 +219,34 @@ def set_dict_value(dictionary, keys, value):
         dictionary = dictionary.setdefault(key, {})
     dictionary[keys[-1]] = value
     return orig
+
+
+def does_keychain_exist(dict_, list_):
+    """
+    Check if a sequence of keys exist in a nested dictionary.
+
+    Parameters
+    ----------
+    dict_ : Dict[str/int/tuple, Any]
+    list_ : List[str/int/tuple]
+
+    Returns
+    -------
+    keychain_exists : bool
+
+    Examples
+    --------
+    >>> d = {'a': {'b': {'c': 'd'}}}
+    >>> l_exists = ['a', 'b']
+    >>> does_keychain_exist(d, l_exists)
+    True
+
+    >>> l_no_existant = ['a', 'c']
+    >>> does_keychain_exist(d, l_no_existant)
+    False
+    """
+    for key in list_:
+        if key not in dict_:
+            return False
+        dict_ = dict_[key]
+    return True
