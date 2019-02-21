@@ -189,7 +189,7 @@ def haversine_distance(origin, destination):
     if not (-90.0 <= lat1 <= 90):
         raise ValueError('lat1={:2.2f}, but must be in [-90,+90]'.format(lat1))
     if not (-90.0 <= lat2 <= 90):
-        raise ValueError('lat2={:2.2f}, but must be in [-90,+90]'.format(lat1))
+        raise ValueError('lat2={:2.2f}, but must be in [-90,+90]'.format(lat2))
     if not (-180.0 <= lon1 <= 180):
         raise ValueError('lon1={:2.2f}, but must be in [-180,+180]'
                          .format(lat1))
