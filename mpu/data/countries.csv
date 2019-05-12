@@ -29,14 +29,14 @@ Bolivia,,BO,BOL,68,ISO 3166-2:BO,True,True,1945-11-14,False,False,False,,,,-22.8
 "Bonaire, Sint Eustatius and Saba",,BQ,BES,535,ISO 3166-2:BQ,False,False,,False,False,False,,,,,,,,Kralendijk,,,
 Bosnia and Herzegovina,,BA,BIH,70,ISO 3166-2:BA,True,True,1992-05-22,False,False,False,None,Former member: Yugoslavia,"Bosnia and Herzegovina is a federation of two constituent units:  Federation of Bosnia and Herzegovina  Republika Srpska and Brčko District, a self-governing administrative unit.",42.65,19.59976,45.2337767604,15.7500260759,Sarajevo,43.86666666666667,18.416667,Europe
 Botswana,,BW,BWA,72,ISO 3166-2:BW,True,True,1966-10-17,False,False,False,None,,,-26.8285429827,29.4321883481,-17.6618156877,19.8954577979,Gaborone,-24.63333333333333,25.9,Africa
-Bouvet Island,,BV,BVT,74,ISO 3166-2:BV,False,False,,False,False,False,,,,,,,,,,,
+Bouvet Island,Bouvetøya,BV,BVT,74,ISO 3166-2:BV,False,False,,False,False,False,,,,,,,,,,,
 Brazil,,BR,BRA,76,ISO 3166-2:BR,True,True,1945-10-24,False,False,True,None,Brazil and the United Nations,Brazil is a federation of 26 states and 1 federal district.,-33.7683777809,-34.7299934555,5.24448639569,-73.9872354804,Brasília,-15.783333333333333,-47.916667,South America
 British Indian Ocean Territory,,IO,IOT,86,ISO 3166-2:IO,False,False,,False,False,False,,,,,,,,,-7.3,72.4,Africa
 Brunei Darussalam,,BN,BRN,96,ISO 3166-2:BN,True,True,1984-09-21,False,False,False,,,,4.007636827,115.450710484,5.44772980389,114.204016555,Bandar Seri Begawan,4.883333333333333,114.933333,Asia
 Bulgaria,,BG,BGR,100,ISO 3166-2:BG,True,True,1955-12-14,False,True,False,None,,,41.2344859889,28.5580814959,44.2349230007,22.3805257504,Sofia,42.68333333333333,23.316667000000002,Europe
 Burkina Faso,,BF,BFA,854,ISO 3166-2:BF,True,True,1960-09-20,False,False,False,None,,,9.61083486576,2.17710778159,15.1161577418,-5.47056494793,Ouagadougou,12.366666666666667,-1.516667,Africa
 Burundi,,BI,BDI,108,ISO 3166-2:BI,True,True,1962-09-18,False,False,False,None,,,-4.49998341229,30.752262811,-2.34848683025,29.0249263852,Bujumbura,-3.3666666666666667,29.35,Africa
-Cabo Verde,,CV,CPV,132,ISO 3166-2:CV,True,True,1975-09-16,False,False,False,,,,,,,,Praia,14.916666666666664,-23.516667,Africa
+Cape Verde,Cabo Verde,CV,CPV,132,ISO 3166-2:CV,True,True,1975-09-16,False,False,False,,,,,,,,Praia,14.916666666666664,-23.516667,Africa
 Cambodia,,KH,KHM,116,ISO 3166-2:KH,True,True,1955-12-14,False,False,False,None,,,10.4865436874,107.614547968,14.5705838078,102.3480994,Phnom Penh,11.55,104.91666699999999,Asia
 Cameroon,,CM,CMR,120,ISO 3166-2:CM,True,True,1960-09-20,False,False,False,None,,,1.72767263428,16.0128524106,12.8593962671,8.48881554529,Yaoundé,3.8666666666666663,11.516667,Africa
 Canada,,CA,CAN,124,ISO 3166-2:CA,True,True,1945-11-09,False,False,False,None,Canada and the United Nations,Canada is a Commonwealth realm and a federation of 10 provinces and 3 territories.,41.6751050889,-52.6480987209,83.23324,-140.99778,Ottawa,45.41666666666666,-75.7,Central America
@@ -52,7 +52,7 @@ Comoros,,KM,COM,174,ISO 3166-2:KM,True,True,1975-11-12,False,False,False,None,,C
 Congo,,CG,COG,178,ISO 3166-2:CG,True,True,1960-09-20,False,False,False,,,,-5.03798674888,18.4530652198,3.72819651938,11.0937728207,Brazzaville,-4.25,15.283332999999999,Africa
 Cook Islands,,CK,COK,184,ISO 3166-2:CK,False,False,,False,False,False,,,,,,,,Avarua,-21.2,-159.76666699999998,Australia
 Costa Rica,,CR,CRI,188,ISO 3166-2:CR,True,True,1945-11-02,False,False,False,None,,,8.22502798099,-82.5461962552,11.2171192489,-85.94172543,San José,9.933333333333334,-84.083333,Central America
-Côte d'Ivoire,,CI,CIV,384,ISO 3166-2:CI,True,True,1960-09-20,False,False,False,,,,4.33828847902,-2.56218950033,10.5240607772,-8.60288021487,Yamoussoukro,6.816666666666666,-5.266667,Africa
+Ivory Coast,Côte d'Ivoire,CI,CIV,384,ISO 3166-2:CI,True,True,1960-09-20,False,False,False,,,,4.33828847902,-2.56218950033,10.5240607772,-8.60288021487,Yamoussoukro,6.816666666666666,-5.266667,Africa
 Croatia,,HR,HRV,191,ISO 3166-2:HR,True,True,1992-05-22,False,True,False,None,Former member: Yugoslavia,,42.47999136,19.3904757016,46.5037509222,13.6569755388,Zagreb,45.8,16.0,Europe
 Cuba,,CU,CUB,192,ISO 3166-2:CU,True,True,1945-10-24,False,False,False,None,,,19.8554808619,-74.1780248685,23.1886107447,-84.9749110583,Havana,23.11666666666667,-82.35,North America
 Curaçao,,CW,CUW,531,ISO 3166-2:CW,False,False,,False,False,False,,,,,,,,Willemstad,12.1,-68.916667,North America
@@ -68,7 +68,7 @@ El Salvador,,SV,SLV,222,ISO 3166-2:SV,True,True,1945-10-24,False,False,False,Non
 Equatorial Guinea,,GQ,GNQ,226,ISO 3166-2:GQ,True,True,1968-11-12,False,False,False,None,,,1.01011953369,11.285078973,2.28386607504,9.3056132341,Malabo,3.75,8.783333,Africa
 Eritrea,,ER,ERI,232,ISO 3166-2:ER,True,True,1993-05-28,False,False,False,None,,,12.4554157577,43.0812260272,17.9983074,36.3231889178,Asmara,15.333333333333336,38.933333000000005,Africa
 Estonia,,EE,EST,233,ISO 3166-2:EE,True,True,1991-09-17,False,True,False,None,Former member: Union of Soviet Socialist Republics,,57.4745283067,28.1316992531,59.6110903998,23.3397953631,Tallinn,59.43333333333333,24.716667,Europe
-Eswatini,,SZ,SWZ,748,ISO 3166-2:SZ,True,True,1968-09-24,False,False,False,,,,-27.2858794085,32.0716654803,-25.660190525,30.6766085141,,-26.316666666666666,31.133333,Africa
+Eswatini,,SZ,SWZ,748,ISO 3166-2:SZ,True,True,1968-09-24,False,False,False,,,Swaziland,-27.2858794085,32.0716654803,-25.660190525,30.6766085141,,-26.316666666666666,31.133333,Africa
 Ethiopia,,ET,ETH,231,ISO 3166-2:ET,True,True,1945-11-13,False,False,False,None,,Ethiopia is a federation of nine regions and two chartered cities.,3.42206,47.78942,14.95943,32.95418,Addis Ababa,9.033333333333333,38.7,Africa
 Falkland Islands (Malvinas),,FK,FLK,238,ISO 3166-2:FK,False,False,,False,False,False,,,,-52.3,-57.75,-51.1,-61.2,Stanley,-51.7,-57.85,South America
 Faroe Islands,,FO,FRO,234,ISO 3166-2:FO,False,False,,False,False,False,,,,,,,,Tórshavn,62.0,-6.766667,Europe
