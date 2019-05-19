@@ -5,6 +5,7 @@
 
 # core modules
 from collections import namedtuple
+from tempfile import mkstemp
 import enum
 import os
 
@@ -12,7 +13,7 @@ import os
 import boto3
 
 
-def list_files(bucket, profile_name=None):
+def list_files(bucket, prefix=None, profile_name=None):
     """
     List up to 1000 files in a bucket.
 
@@ -29,14 +30,13 @@ def list_files(bucket, profile_name=None):
     session = boto3.Session(profile_name=profile_name)
     conn = session.client('s3')
     keys = []
-    ret = conn.list_objects(Bucket=bucket)
-    print(ret)
+    ret = conn.list_objects_v2(Bucket=bucket, Prefix=prefix)
     if 'Contents' not in ret:
         return []
     # Make this a generator in future and use the marker:
     # https://boto3.readthedocs.io/en/latest/reference/services/
     #     s3.html#S3.Client.list_objects
-    for key in conn.list_objects(Bucket=bucket)['Contents']:
+    for key in conn.list_objects_v2(Bucket=bucket, Prefix=prefix)['Contents']:
         keys.append('s3://' + bucket + '/' + key['Key'])
     return keys
 
@@ -80,7 +80,7 @@ class ExistsStrategy(enum.Enum):
     ABORT = 'abort'
 
 
-def s3_download(source, destination,
+def s3_download(source, destination=None,
                 exists_strategy=ExistsStrategy.RAISE,
                 profile_name=None):
     """
@@ -90,7 +90,8 @@ def s3_download(source, destination,
     ----------
     source : str
         Path starting with s3://, e.g. 's3://bucket-name/key/foo.bar'
-    destination : str
+    destination : str, optional
+        If none is given, a temporary file is created
     exists_strategy : {'raise', 'replace', 'abort'}
         What is done when the destination already exists?
         * `ExistsStrategy.RAISE` means a RuntimeError is raised,
@@ -98,6 +99,11 @@ def s3_download(source, destination,
         * `ExistsStrategy.ABORT` means the download is not done.
     profile_name : str, optional
         AWS profile
+
+    Returns
+    -------
+    download_path : str
+        Path of the downloaded file.
 
     Raises
     ------
@@ -119,7 +125,12 @@ def s3_download(source, destination,
                                .format(destination))
         elif exists_strategy is ExistsStrategy.ABORT:
             return
+    if destination is None:
+        _, filename = os.path.split(source)
+        prefix, suffix = os.path.splitext(filename)
+        destination = mkstemp(prefix=prefix, suffix=suffix)
     s3.Bucket(bucket_name).download_file(key, destination)
+    return destination
 
 
 def s3_upload(source, destination, profile_name=None):
