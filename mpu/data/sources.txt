@@ -1,0 +1,3 @@
+## laguages.csv.gz
+
+Credits to https://github.com/annexare/Countries/blob/master/data/languages.json
