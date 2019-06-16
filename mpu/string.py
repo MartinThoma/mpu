@@ -11,7 +11,7 @@ For more complex checks, you might want to use the
 # core modules
 from email.utils import parseaddr
 import pkg_resources
-import string
+import string as string_stl
 
 # internal modules
 import mpu.io
@@ -422,6 +422,6 @@ def partial_format(string_, formatting_dict):
     class FormatDict(dict):
         def __missing__(self, key):
             return '{' + key + '}'
-    formatter = string.Formatter()
+    formatter = string_stl.Formatter()
     mapping = FormatDict(formatting_dict)
     return formatter.vformat(string_, (), mapping)
