@@ -11,7 +11,6 @@ For more complex checks, you might want to use the
 # core modules
 from email.utils import parseaddr
 import pkg_resources
-import string as string_stl
 
 # internal modules
 import mpu.io
@@ -403,25 +402,3 @@ def human_readable_bytes(nb_bytes, suffix='B'):
             return '%3.1f %s%s' % (nb_bytes, unit, suffix)
         nb_bytes /= 1024.0
     return '%.1f %s%s' % (nb_bytes, 'Yi', suffix)
-
-
-def partial_format(string_, formatting_dict):
-    """
-    Partially format a string.
-
-    Parameters
-    ----------
-    string_ : str
-    formatting_dict : Dict[str, Any]
-
-    Examples
-    --------
-    >>> partial_format('{prename} {surname}', {'surname': 'Smith'})
-    '{prename} Smith'
-    """
-    class FormatDict(dict):
-        def __missing__(self, key):
-            return '{' + key + '}'
-    formatter = string_stl.Formatter()
-    mapping = FormatDict(formatting_dict)
-    return formatter.vformat(string_, (), mapping)
