@@ -119,16 +119,16 @@ def s3_download(source, destination=None,
     session = boto3.Session(profile_name=profile_name)
     s3 = session.resource('s3')
     bucket_name, key = _s3_path_split(source)
-    if os.path.isfile(destination):
+    if destination is None:
+        _, filename = os.path.split(source)
+        prefix, suffix = os.path.splitext(filename)
+        destination = mkstemp(prefix=prefix, suffix=suffix)
+    elif os.path.isfile(destination):
         if exists_strategy is ExistsStrategy.RAISE:
             raise RuntimeError('File \'{}\' already exists.'
                                .format(destination))
         elif exists_strategy is ExistsStrategy.ABORT:
             return
-    if destination is None:
-        _, filename = os.path.split(source)
-        prefix, suffix = os.path.splitext(filename)
-        destination = mkstemp(prefix=prefix, suffix=suffix)
     s3.Bucket(bucket_name).download_file(key, destination)
     return destination
 
