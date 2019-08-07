@@ -122,7 +122,7 @@ def s3_download(source, destination=None,
     if destination is None:
         _, filename = os.path.split(source)
         prefix, suffix = os.path.splitext(filename)
-        destination = mkstemp(prefix=prefix, suffix=suffix)
+        _, destination = mkstemp(prefix=prefix, suffix=suffix)
     elif os.path.isfile(destination):
         if exists_strategy is ExistsStrategy.RAISE:
             raise RuntimeError('File \'{}\' already exists.'
