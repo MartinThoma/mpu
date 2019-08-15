@@ -78,8 +78,8 @@ def run_init(args):
 def _get_package_data():
     project_data = {}
     project_data['project_name'] = text_input('Python package name: ')
-    project_data['license'] = (text_input('License [default: MIT]: ') or
-                               'MIT')
+    project_data['license'] = (text_input('License [default: MIT]: ')
+                               or 'MIT')
     project_data['author'] = text_input('Author: ')
     project_data['email'] = text_input('E-mail: ')
     return project_data

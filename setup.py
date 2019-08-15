@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""mpu: Martins Python Utilities."""
+
 # core modules
 from setuptools import find_packages
 from setuptools import setup
@@ -32,8 +34,8 @@ requires_io = ['pytz', 'tzlocal']
 requires_aws = ['boto3']
 requires_tests = ['pytest', 'pytest-cov', 'pytest-mccabe', 'pytest-flake8',
                   'simplejson']
-requires_all = (['pandas', 'python-magic'] + requires_datetime +
-                requires_image + requires_io + requires_aws + requires_tests)
+requires_all = (['pandas', 'python-magic'] + requires_datetime
+                + requires_image + requires_io + requires_aws + requires_tests)
 
 config = {
     'name': 'mpu',

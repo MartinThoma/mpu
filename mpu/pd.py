@@ -98,9 +98,9 @@ def _get_column_info(df, dtype):
         counter_obj = df[column_name].value_counts()
         value_list = counter_obj.keys().tolist()
         value_count = len(value_list)
-        is_suspicious_cat = (value_count <= 50 and
-                             str(df[column_name].dtype) != 'category' and
-                             column_name not in dtype)
+        is_suspicious_cat = (value_count <= 50
+                             and str(df[column_name].dtype) != 'category'
+                             and column_name not in dtype)
         if is_suspicious_cat:
             logger.warning("Column '{}' has only {} different values ({}). "
                            "You might want to make it a 'category'"
@@ -114,19 +114,19 @@ def _get_column_info(df, dtype):
         column_info_meta[column_name]['top_count_val'] = top_count_val
         column_info_meta[column_name]['value_list'] = value_list
         column_info_meta[column_name]['value_count'] = value_count
-        is_int_type = (df[column_name].dtype in integer_types or
-                       column_name in dtype and
-                       dtype[column_name] in integer_types)
-        is_float_type = (df[column_name].dtype in float_types or
-                         column_name in dtype and
-                         dtype[column_name] in float_types)
-        is_cat_type = (str(df[column_name].dtype) in ['category', 'bool'] or
-                       column_name in dtype and
-                       dtype[column_name] in ['category', 'bool'])
+        is_int_type = (df[column_name].dtype in integer_types
+                       or column_name in dtype
+                       and dtype[column_name] in integer_types)
+        is_float_type = (df[column_name].dtype in float_types
+                         or column_name in dtype
+                         and dtype[column_name] in float_types)
+        is_cat_type = (str(df[column_name].dtype) in ['category', 'bool']
+                       or column_name in dtype
+                       and dtype[column_name] in ['category', 'bool'])
         is_time_type = (str(df[column_name].dtype) in time_types)
-        is_other_type = (str(df[column_name].dtype) in other_types or
-                         column_name in dtype and
-                         dtype[column_name] in other_types)
+        is_other_type = (str(df[column_name].dtype) in other_types
+                         or column_name in dtype
+                         and dtype[column_name] in other_types)
         if is_int_type:
             column_info['int'].append(column_name)
         elif is_float_type:

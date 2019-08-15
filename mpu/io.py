@@ -61,15 +61,15 @@ def read(filepath, **kwargs):
         with open(filepath, 'rb') as handle:
             data = pickle.load(handle)
         return data
-    elif (filepath.lower().endswith('.yml') or
-          filepath.lower().endswith('.yaml')):
+    elif (filepath.lower().endswith('.yml')
+          or filepath.lower().endswith('.yaml')):
         raise NotImplementedError('YAML is not supported, because you need '
                                   'PyYAML in Python3. '
                                   'See '
                                   'https://stackoverflow.com/a/42054860/562769'
                                   ' as a guide how to use it.')
-    elif (filepath.lower().endswith('.h5') or
-          filepath.lower().endswith('.hdf5')):
+    elif (filepath.lower().endswith('.h5')
+          or filepath.lower().endswith('.hdf5')):
         raise NotImplementedError('HDF5 is not supported. See '
                                   'https://stackoverflow.com/a/41586571/562769'
                                   ' as a guide how to use it.')
@@ -155,15 +155,15 @@ def write(filepath, data, **kwargs):
         return _write_jsonl(filepath, data, kwargs)
     elif filepath.lower().endswith('.pickle'):
         return _write_pickle(filepath, data, kwargs)
-    elif (filepath.lower().endswith('.yml') or
-          filepath.lower().endswith('.yaml')):
+    elif (filepath.lower().endswith('.yml')
+          or filepath.lower().endswith('.yaml')):
         raise NotImplementedError('YAML is not supported, because you need '
                                   'PyYAML in Python3. '
                                   'See '
                                   'https://stackoverflow.com/a/42054860/562769'
                                   ' as a guide how to use it.')
-    elif (filepath.lower().endswith('.h5') or
-          filepath.lower().endswith('.hdf5')):
+    elif (filepath.lower().endswith('.h5')
+          or filepath.lower().endswith('.hdf5')):
         raise NotImplementedError('YAML is not supported. See '
                                   'https://stackoverflow.com/a/41586571/562769'
                                   ' as a guide how to use it.')

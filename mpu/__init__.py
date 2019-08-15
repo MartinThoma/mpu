@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+"""mpu: Martins Python Utilities."""
+
 from __future__ import absolute_import
 
 # core modules
@@ -153,6 +155,7 @@ class Location(object):
                                   (there.latitude, there.longitude))
 
     def __repr__(self):
+        """Get an unambiguous representation."""
         return 'Location({}, {})'.format(self.latitude, self.longitude)
 
     __str__ = __repr__
@@ -200,10 +203,10 @@ def haversine_distance(origin, destination):
 
     dlat = math_stl.radians(lat2 - lat1)
     dlon = math_stl.radians(lon2 - lon1)
-    a = (math_stl.sin(dlat / 2) * math_stl.sin(dlat / 2) +
-         math_stl.cos(math_stl.radians(lat1)) *
-         math_stl.cos(math_stl.radians(lat2)) *
-         math_stl.sin(dlon / 2) * math_stl.sin(dlon / 2))
+    a = (math_stl.sin(dlat / 2) * math_stl.sin(dlat / 2)
+         + math_stl.cos(math_stl.radians(lat1))
+         * math_stl.cos(math_stl.radians(lat2))
+         * math_stl.sin(dlon / 2) * math_stl.sin(dlon / 2))
     c = 2 * math_stl.atan2(math_stl.sqrt(a), math_stl.sqrt(1 - a))
     d = radius * c
 
