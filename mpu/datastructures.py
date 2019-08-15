@@ -30,6 +30,17 @@ class EList(list):
         list.__init__(self, *args)
 
     def __getitem__(self, key):
+        """
+        Retrieve one or multiple elements.
+
+        Parameters
+        ----------
+        key : int or List[int]
+
+        Returns
+        -------
+        value : EList or element
+        """
         if isinstance(key, list):
             return EList([self[index] for index in key])
         else:
@@ -92,7 +103,7 @@ def flatten(iterable, string_flattening=False):
 
 
 def dict_merge(dict_left, dict_right, merge_method="take_left_shallow"):
-    """
+    r"""
     Merge two dictionaries.
 
     This method does NOT modify dict_left or dict_right!
@@ -256,7 +267,60 @@ def does_keychain_exist(dict_, list_):
     return True
 
 
-class Interval(object):
+class IntervalLike(object):
+    """
+    Anything like an interval or a union of an interval.
+
+    As mpu supports Python 2.7 until 2020 and does not want to include extra
+    dependencies, ABC cannot be used.
+    """
+
+    def is_empty(self):
+        """Return if the IntervalLike is empty."""
+        raise NotImplementedError()
+
+    def issubset(self, other):
+        """
+        Check if the interval "self" is completely inside of other.
+
+        Parameters
+        ----------
+        other : IntervalLike
+
+        Returns
+        -------
+        is_inside : bool
+        """
+
+    def union(self, other):
+        """
+        Combine two Intervals.
+
+        Parameters
+        ----------
+        other : IntervalLike
+
+        Returns
+        -------
+        interval_union : IntervalLike
+        """
+        raise NotImplementedError()
+
+    def intersection(self, other):
+        """
+        Intersect two IntervalLike objects.
+
+        Parameters
+        ----------
+        other : IntervalLike
+
+        Returns
+        -------
+        intersected : IntervalLike
+        """
+
+
+class Interval(IntervalLike):
     """
     Representation of an interval.
 
@@ -283,6 +347,17 @@ class Interval(object):
         return self.left is None
 
     def union(self, other):
+        """
+        Combine two Intervals.
+
+        Parameters
+        ----------
+        other : IntervalLike
+
+        Returns
+        -------
+        interval_union : IntervalLike
+        """
         # Capture special cases
         if self.is_empty():
             return other
@@ -311,6 +386,17 @@ class Interval(object):
                                       .format(self, other))
 
     def intersection(self, other):
+        """
+        Intersect two IntervalLike objects.
+
+        Parameters
+        ----------
+        other : IntervalLike
+
+        Returns
+        -------
+        intersected : IntervalLike
+        """
         # Any intersection with an empty interval is empty
         if self.is_empty() or other.is_empty():
             return Interval(None, None)
@@ -337,12 +423,14 @@ class Interval(object):
             raise NotImplementedError(error_string)
 
     def __repr__(self):
+        """Get an unambiguous representation."""
         if self.is_empty():
             return "Interval()"
         else:
             return "Interval({}, {})".format(self.left, self.right)
 
     def __str__(self):
+        """Get an human-readable representation."""
         if self.is_empty():
             return "[]"
         else:
@@ -352,6 +440,7 @@ class Interval(object):
     __or__ = union
 
     def __eq__(self, other):
+        """Check if other is equal to this object."""
         if isinstance(other, (Interval, IntervalUnion)):
             return self.issubset(other) and other.issubset(self)
         else:
@@ -363,7 +452,7 @@ class Interval(object):
 
         Parameters
         ----------
-        other : Interval
+        other : IntervalLike
 
         Returns
         -------
@@ -390,7 +479,9 @@ class Interval(object):
             )
 
 
-class IntervalUnion(object):
+class IntervalUnion(IntervalLike):
+    """A union of Intervals."""
+
     def __init__(self, intervals):
         assert isinstance(intervals, list)
         self.intervals = []
@@ -541,9 +632,11 @@ class IntervalUnion(object):
             )
 
     def __repr__(self):
+        """Get an unambiguous representation."""
         return str(self.intervals)
 
     def __eq__(self, other):
+        """Check if other is equal to this object."""
         if isinstance(other, (IntervalUnion, Interval)):
             return self.issubset(other) and other.issubset(self)
         else:
