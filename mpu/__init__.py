@@ -113,11 +113,6 @@ class Location(object):
         """Getter for latiutde."""
         return self._latitude
 
-    @property
-    def longitude(self):
-        """Getter for longitude."""
-        return self._longitude
-
     @latitude.setter
     def latitude(self, latitude):
         """Setter for latiutde."""
@@ -125,6 +120,11 @@ class Location(object):
             raise ValueError('latitude was {}, but has to be in [-90, 90]'
                              .format(latitude))
         self._latitude = latitude
+
+    @property
+    def longitude(self):
+        """Getter for longitude."""
+        return self._longitude
 
     @longitude.setter
     def longitude(self, longitude):
