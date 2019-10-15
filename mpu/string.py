@@ -8,11 +8,13 @@ For more complex checks, you might want to use the
 [validators](http://validators.readthedocs.io) package.
 """
 
-# core modules
+# Core Library
 from email.utils import parseaddr
+
+# Third party
 import pkg_resources
 
-# internal modules
+# First party
 import mpu.io
 
 

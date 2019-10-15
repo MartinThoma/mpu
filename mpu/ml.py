@@ -4,7 +4,7 @@
 """Machine Learning functions."""
 
 
-# internal modules
+# First party
 from mpu.math import argmax
 
 

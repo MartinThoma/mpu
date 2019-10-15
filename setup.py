@@ -3,15 +3,13 @@
 
 """mpu: Martins Python Utilities."""
 
-# core modules
-from setuptools import find_packages
-from setuptools import setup
+# Core Library
 import io
 import os
 import unittest
 
-# internal modules
-exec(open('mpu/_version.py').read())
+# Third party
+from setuptools import find_packages, setup
 
 
 def read(file_name):
@@ -39,7 +37,7 @@ requires_all = (['pandas', 'python-magic'] + requires_datetime
 
 config = {
     'name': 'mpu',
-    'version': __version__,  # noqa
+    'version': '0.20.0',  # keep in sync with mpu/_version.py
     'author': 'Martin Thoma',
     'author_email': 'info@martin-thoma.de',
     'maintainer': 'Martin Thoma',

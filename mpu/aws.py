@@ -3,13 +3,13 @@
 
 """Convenience functions for AWS interactions."""
 
-# core modules
-from collections import namedtuple
-from tempfile import mkstemp
+# Core Library
 import enum
 import os
+from collections import namedtuple
+from tempfile import mkstemp
 
-# 3rd party modules
+# Third party
 import boto3
 
 

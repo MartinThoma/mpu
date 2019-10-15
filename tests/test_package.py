@@ -1,20 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
-from pkg_resources import resource_filename
+# Core Library
+import os
+import shutil
+import unittest
 from shutil import copyfile
-from tempfile import mkstemp, mkdtemp
+from tempfile import mkdtemp, mkstemp
+
+# Third party
+from pkg_resources import resource_filename
+
+# First party
+import mpu.package.cli
+
 try:
     from unittest.mock import patch
 except ImportError:
     from mock import patch  # Python 2.7
-import os
-import unittest
-import shutil
-
-# internal modules
-import mpu.package.cli
 
 
 class PackageTest(unittest.TestCase):

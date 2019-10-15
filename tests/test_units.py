@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
+# Core Library
 import unittest
 
-# 3rd party modules
+# Third party
 import simplejson  # has for_json
 
-# internal modules
-from mpu.units import Money, Currency, get_currency
+# First party
+from mpu.units import Currency, Money, get_currency
 
 
 class MoneyTests(unittest.TestCase):

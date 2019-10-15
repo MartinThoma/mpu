@@ -14,10 +14,10 @@ Standard libraries are:
 
 from __future__ import absolute_import
 
-# core functions
-from functools import reduce
+# Core Library
 import math as math_stl
 import operator
+from functools import reduce
 
 
 def generate_primes():

@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
-from tempfile import mkstemp
+# Core Library
 import datetime
 import os
-import pkg_resources
 import unittest
+from tempfile import mkstemp
 
-# internal modules
-from mpu.io import (download, read, write, _write_jsonl, urlread)
+# Third party
+import pkg_resources
+
+# First party
 import mpu.io
+from mpu.io import _write_jsonl, download, read, urlread, write
 
 
 class IoTest(unittest.TestCase):

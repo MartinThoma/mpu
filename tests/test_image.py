@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
+# Core Library
 import unittest
+
+# Third party
 import pkg_resources
 
-# internal modules
+# First party
 from mpu.image import get_meta
 
 

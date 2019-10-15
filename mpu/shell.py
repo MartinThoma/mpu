@@ -3,7 +3,7 @@
 
 """Enhancing printed terminal output."""
 
-# core modules
+# Core Library
 import sys
 
 

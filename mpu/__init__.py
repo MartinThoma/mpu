@@ -4,15 +4,15 @@
 
 from __future__ import absolute_import
 
-# core modules
+# Core Library
 import logging
 import math as math_stl
 import random
 import traceback
 
-# internal modules
+# First party
+from mpu import io, shell, string, units  # noqa
 from mpu._version import __version__  # noqa
-from mpu import units, io, shell, string  # noqa
 
 
 def parallel_for(loop_function, parameters, nb_threads=100):

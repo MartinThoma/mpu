@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
+# Core Library
 import unittest
 
-# 3rd party modules
+# Third party
 import pandas as pd
 
-# internal modules
+# First party
 import mpu.pd
 
 

@@ -5,15 +5,15 @@
 
 from __future__ import absolute_import
 
-# core modules
+# Core Library
 import datetime as dt
 import logging
+
+# Third party
+import pandas as pd
 import pkg_resources
 
-# 3rd party modules
-import pandas as pd
-
-# internal modules
+# First party
 import mpu.shell
 
 countries_file = pkg_resources.resource_filename('mpu', 'data/countries.csv')

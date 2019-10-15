@@ -3,14 +3,14 @@
 
 from __future__ import absolute_import
 
-# core modules
+# Core Library
 import unittest
-
-# 3rd pary modules
 from datetime import datetime
+
+# Third party
 import pytz
 
-# internal modules
+# First party
 import mpu.datetime
 
 

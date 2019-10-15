@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
+# Core Library
 import unittest
 
-# internal modules
+# First party
 import mpu.string
 
 

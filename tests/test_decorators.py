@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
+# Core Library
 import unittest
 import warnings
 
-# internal modules
-from mpu.decorators import timing, deprecated
+# First party
+from mpu.decorators import deprecated, timing
 
 
 class DecoratorTests(unittest.TestCase):

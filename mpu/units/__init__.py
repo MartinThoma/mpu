@@ -5,11 +5,13 @@
 
 from __future__ import absolute_import
 
-# core modules
+# Core Library
 import csv
 import fractions
-import pkg_resources
 from functools import total_ordering
+
+# Third party
+import pkg_resources
 
 
 @total_ordering

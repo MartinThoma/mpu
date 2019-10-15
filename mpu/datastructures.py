@@ -3,7 +3,7 @@
 
 """Utility datastructures."""
 
-# core modules
+# Core Library
 import collections
 from copy import deepcopy
 

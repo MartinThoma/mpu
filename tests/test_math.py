@@ -3,10 +3,10 @@
 
 from __future__ import absolute_import
 
-# core modules
+# Core Library
 import unittest
 
-# internal modules
+# First party
 import mpu.math
 
 

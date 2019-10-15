@@ -1,18 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
-from tempfile import mkstemp
+# Core Library
 import filecmp
 import os
-import pkg_resources
 import unittest
+from tempfile import mkstemp
 
-# 3rd party modules
-from moto import mock_s3
+# Third party
 import boto3
+import pkg_resources
 import pytest
+from moto import mock_s3
 
+# First party
 # internal modules
 import mpu.aws
 

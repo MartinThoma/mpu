@@ -3,8 +3,10 @@
 
 """Functions for path manipultion and retrival of files."""
 
-# core modules
+# Core Library
 import os
+
+# Third party
 import pkg_resources
 
 

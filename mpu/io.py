@@ -5,25 +5,24 @@
 
 from __future__ import absolute_import
 
-# core modules
-from datetime import datetime
+# Core Library
 import csv
 import hashlib
+import io as io_stl  # Make it work for Python 2+3 and with Unicode
 import json
 import os
 import pickle
 import platform
 import sys
+from datetime import datetime
 
-# Make it work for Python 2+3 and with Unicode
-import io as io_stl
+# First party
+from mpu.datastructures import EList
+
 try:
     to_unicode = unicode
 except NameError:
     to_unicode = str
-
-# internal modules
-from mpu.datastructures import EList
 
 
 def read(filepath, **kwargs):

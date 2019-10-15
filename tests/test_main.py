@@ -1,19 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
+# Core Library
 import sys
 import traceback
 import unittest
 
-# internal modules
-from mpu import (clip,
-                 exception_logging,
-                 haversine_distance,
-                 is_in_intervall,
-                 parallel_for,
-                 Location
-                 )
+# First party
+from mpu import (
+    Location,
+    clip,
+    exception_logging,
+    haversine_distance,
+    is_in_intervall,
+    parallel_for,
+)
 
 
 class DatastructuresInit(unittest.TestCase):

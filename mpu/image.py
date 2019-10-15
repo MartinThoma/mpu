@@ -3,7 +3,7 @@
 
 """Image manipulation."""
 
-# internal modules
+# First party
 import mpu
 
 

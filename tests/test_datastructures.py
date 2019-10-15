@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
+# Core Library
 import unittest
 from datetime import datetime
 
-# 3rd party modules
+# Third party
 import pytest
 
-# internal modules
-from mpu.datastructures import EList, flatten, Interval, IntervalUnion
+# First party
+from mpu.datastructures import EList, Interval, IntervalUnion, flatten
 
 
 class DatastructuresTest(unittest.TestCase):

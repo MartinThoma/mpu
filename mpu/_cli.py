@@ -7,6 +7,7 @@ The _cli module is for providing the CLI of mpu.
 Please do not import anything from it.
 """
 
+# First party
 import mpu.package
 
 

@@ -107,3 +107,5 @@ tests/reports/
 
 lambda.zip
 venv-lambda/
+report/
+cr_session.json

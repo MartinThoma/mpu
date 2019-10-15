@@ -5,11 +5,11 @@
 
 from __future__ import absolute_import
 
-# core modules
+# Core Library
 import datetime as dt
 import random
 
-# 3rd party modules
+# Third party
 import pytz
 
 

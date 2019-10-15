@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# core modules
+# Core Library
 import unittest
+
+# Third party
 import pkg_resources
 
-# internal modules
+# First party
 from mpu.path import get_all_files, get_from_package
 
 

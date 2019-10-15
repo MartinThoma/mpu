@@ -3,11 +3,11 @@
 
 """Decorators which are not in `functools`."""
 
-# core modules
-from time import time
+# Core Library
 import functools
 import sys
 import warnings
+from time import time
 
 
 def timing(func):

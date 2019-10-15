@@ -3,13 +3,15 @@
 
 """Machine Learning functions."""
 
-# core modules
-from pkg_resources import resource_filename
-from shutil import copyfile
+# Core Library
 import os
 import re
+from shutil import copyfile
 
-# internal modules
+# Third party
+from pkg_resources import resource_filename
+
+# First party
 from mpu.shell import text_input
 
 
