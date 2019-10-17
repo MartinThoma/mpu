@@ -39,8 +39,8 @@ class IoTest(unittest.TestCase):
         os.remove(sink)  # cleanup of mkstemp
 
     def test_read_csv(self):
-        path = '../tests/files/example.csv'
-        source = pkg_resources.resource_filename('mpu', path)
+        path = 'files/example.csv'
+        source = pkg_resources.resource_filename(__name__, path)
         data_real = read(source)
         data_exp = [['a', 'b', 'c'],
                     ['1', "A towel,", '1.0'],
@@ -58,8 +58,8 @@ class IoTest(unittest.TestCase):
         self.assertEqual(data_real, data_exp[1:])
 
     def test_read_csv_dicts(self):
-        path = '../tests/files/example.csv'
-        source = pkg_resources.resource_filename('mpu', path)
+        path = 'files/example.csv'
+        source = pkg_resources.resource_filename(__name__, path)
         data_real = read(source, format='dicts')
         data_exp = [{'a': '1', 'b': "A towel,", 'c': '1.0'},
                     {'a': '42', 'b': " it says, ", 'c': '2.0'},
@@ -110,14 +110,14 @@ class IoTest(unittest.TestCase):
         os.remove(filepath)  # cleanup of mkstemp
 
     def test_read_hdf5(self):
-        path = '../tests/files/example.hdf5'
-        source = pkg_resources.resource_filename('mpu', path)
+        path = 'files/example.hdf5'
+        source = pkg_resources.resource_filename(__name__, path)
         with self.assertRaises(NotImplementedError):
             read(source)
 
     def test_read_json(self):
-        path = '../tests/files/example.json'
-        source = pkg_resources.resource_filename('mpu', path)
+        path = 'files/example.json'
+        source = pkg_resources.resource_filename(__name__, path)
         data_real = read(source)
 
         data_exp = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
@@ -128,8 +128,8 @@ class IoTest(unittest.TestCase):
         self.assertEqual(data_real, data_exp)
 
     def test_read_jsonl(self):
-        path = '../tests/files/example.jsonl'
-        source = pkg_resources.resource_filename('mpu', path)
+        path = 'files/example.jsonl'
+        source = pkg_resources.resource_filename(__name__, path)
         data_real = read(source)
         data_exp = [{"some": "thing"},
                     {"foo": 17, "bar": False, "quux": True},
@@ -140,8 +140,8 @@ class IoTest(unittest.TestCase):
             self.assertEqual(real, exp_)
 
     def test_read_pickle(self):
-        path = '../tests/files/example.pickle'
-        source = pkg_resources.resource_filename('mpu', path)
+        path = 'files/example.pickle'
+        source = pkg_resources.resource_filename(__name__, path)
         data_real = read(source)
 
         data_exp = {'a list': [1, 42, 3.141, 1337, 'help', u'€'],
@@ -233,8 +233,8 @@ class IoTest(unittest.TestCase):
             read(source)
 
     def test_hash(self):
-        path = '../tests/files/example.pickle'
-        source = pkg_resources.resource_filename('mpu', path)
+        path = 'files/example.pickle'
+        source = pkg_resources.resource_filename(__name__, path)
         self.assertEqual(mpu.io.hash(source),
                          'e845794fde22e7a33dd389ed0f5381ae042154c1')
         self.assertEqual(mpu.io.hash(source, method='md5'),

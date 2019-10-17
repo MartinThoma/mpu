@@ -14,8 +14,8 @@ from mpu.path import get_all_files, get_from_package
 class ImageTests(unittest.TestCase):
 
     def test_get_meta(self):
-        path = '../tests/files'
-        root = pkg_resources.resource_filename('mpu', path)
+        path = 'files'
+        root = pkg_resources.resource_filename(__name__, path)
         meta = get_all_files(root)
         self.assertEqual(len(meta), 5)
 

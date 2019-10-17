@@ -30,8 +30,8 @@ class AWSTest(unittest.TestCase):
         self.assertEqual(mpu.aws.list_files('mybucket'), [])
 
         # Test upload
-        path = '../tests/files/example.csv'
-        local_path = pkg_resources.resource_filename('mpu', path)
+        path = 'files/example.csv'
+        local_path = pkg_resources.resource_filename(__name__, path)
         mpu.aws.s3_upload(local_path, 's3://mybucket/example_test.csv')
         self.assertEqual(mpu.aws.list_files('mybucket'),
                          ['s3://mybucket/example_test.csv'])
