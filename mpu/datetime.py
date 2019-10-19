@@ -68,7 +68,7 @@ def generate(minimum, maximum, local_random=random.Random()):
     datetime.datetime(2018, 1, 1, 18, 11, 27, 260414)
     """
     if not (minimum < maximum):
-        raise ValueError('{} is not smaller than {}'.format(minimum, maximum))
+        raise ValueError("{} is not smaller than {}".format(minimum, maximum))
 
     # Python 3 allows direct multiplication of timedelta with a float, but
     # Python 2.7 does not. Hence this work-around.

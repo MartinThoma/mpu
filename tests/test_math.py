@@ -3,22 +3,22 @@
 
 from __future__ import absolute_import
 
-# Core Library
-import unittest
+# Third party
+import pytest
 
 # First party
 import mpu.math
 
 
-class MathTest(unittest.TestCase):
+def test_factorize_zero():
+    with pytest.raises(ValueError):
+        mpu.math.factorize(0)
 
-    def test_factorize_zero(self):
-        with self.assertRaises(ValueError):
-            mpu.math.factorize(0)
 
-    def test_factorize_float(self):
-        with self.assertRaises(ValueError):
-            mpu.math.factorize(4.0)
+def test_factorize_float():
+    with pytest.raises(ValueError):
+        mpu.math.factorize(4.0)
 
-    def test_argmax(self):
-        self.assertEqual(mpu.math.argmax([1, 2, 3]), 2)
+
+def test_argmax():
+    assert mpu.math.argmax([1, 2, 3]) == 2

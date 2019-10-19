@@ -35,6 +35,7 @@ def parallel_for(loop_function, parameters, nb_threads=100):
     """
     import multiprocessing.pool
     from contextlib import closing
+
     with closing(multiprocessing.pool.ThreadPool(nb_threads)) as pool:
         return pool.map(loop_function, parameters)
 
@@ -87,8 +88,7 @@ def consistent_shuffle(*lists):
     """
     perm = list(range(len(lists[0])))
     random.shuffle(perm)
-    lists = tuple([sublist[index] for index in perm]
-                  for sublist in lists)
+    lists = tuple([sublist[index] for index in perm] for sublist in lists)
     return lists
 
 
@@ -117,8 +117,9 @@ class Location(object):
     def latitude(self, latitude):
         """Setter for latiutde."""
         if not (-90 <= latitude <= 90):
-            raise ValueError('latitude was {}, but has to be in [-90, 90]'
-                             .format(latitude))
+            raise ValueError(
+                "latitude was {}, but has to be in [-90, 90]".format(latitude)
+            )
         self._latitude = latitude
 
     @property
@@ -130,14 +131,15 @@ class Location(object):
     def longitude(self, longitude):
         """Setter for longitude."""
         if not (-180 <= longitude <= 180):
-            raise ValueError('longitude was {}, but has to be in [-180, 180]'
+            raise ValueError("longitude was {}, but has to be in [-180, 180]"
                              .format(longitude))
         self._longitude = longitude
 
     def get_google_maps_link(self):
         """Get a Google Maps link to this location."""
-        return ('https://www.google.com/maps/place/{},{}'
-                .format(self.latitude, self.longitude))
+        return "https://www.google.com/maps/place/{},{}".format(
+            self.latitude, self.longitude
+        )
 
     def distance(self, there):
         """
@@ -151,12 +153,13 @@ class Location(object):
         -------
         distance_in_m : float
         """
-        return haversine_distance((self.latitude, self.longitude),
-                                  (there.latitude, there.longitude))
+        return haversine_distance(
+            (self.latitude, self.longitude), (there.latitude, there.longitude)
+        )
 
     def __repr__(self):
         """Get an unambiguous representation."""
-        return 'Location({}, {})'.format(self.latitude, self.longitude)
+        return "Location({}, {})".format(self.latitude, self.longitude)
 
     __str__ = __repr__
 
@@ -190,14 +193,14 @@ def haversine_distance(origin, destination):
     lat1, lon1 = origin
     lat2, lon2 = destination
     if not (-90.0 <= lat1 <= 90):
-        raise ValueError('lat1={:2.2f}, but must be in [-90,+90]'.format(lat1))
+        raise ValueError("lat1={:2.2f}, but must be in [-90,+90]".format(lat1))
     if not (-90.0 <= lat2 <= 90):
-        raise ValueError('lat2={:2.2f}, but must be in [-90,+90]'.format(lat2))
+        raise ValueError("lat2={:2.2f}, but must be in [-90,+90]".format(lat2))
     if not (-180.0 <= lon1 <= 180):
-        raise ValueError('lon1={:2.2f}, but must be in [-180,+180]'
+        raise ValueError("lon1={:2.2f}, but must be in [-180,+180]"
                          .format(lat1))
     if not (-180.0 <= lon2 <= 180):
-        raise ValueError('lon1={:2.2f}, but must be in [-180,+180]'
+        raise ValueError("lon1={:2.2f}, but must be in [-180,+180]"
                          .format(lat1))
     radius = 6371  # km
 
@@ -213,7 +216,7 @@ def haversine_distance(origin, destination):
     return d
 
 
-def is_in_intervall(value, min_value, max_value, name='variable'):
+def is_in_intervall(value, min_value, max_value, name="variable"):
     """
     Raise an exception if value is not in an interval.
 
@@ -226,7 +229,7 @@ def is_in_intervall(value, min_value, max_value, name='variable'):
         Name of the variable to print in exception.
     """
     if not (min_value <= value <= max_value):
-        raise ValueError('{}={} is not in [{}, {}]'
+        raise ValueError("{}={} is not in [{}, {}]"
                          .format(name, value, min_value, max_value))
 
 
@@ -242,6 +245,8 @@ def exception_logging(exctype, value, tb):
     value : NameError
     tb : traceback
     """
-    write_val = {'exception_type': str(exctype),
-                 'message': str(traceback.format_tb(tb, 10))}
+    write_val = {
+        "exception_type": str(exctype),
+        "message": str(traceback.format_tb(tb, 10)),
+    }
     logging.exception(str(write_val))

@@ -48,68 +48,71 @@ def read(filepath, **kwargs):
     -------
     data : str or bytes
     """
-    if filepath.lower().endswith('.csv'):
+    if filepath.lower().endswith(".csv"):
         return _read_csv(filepath, kwargs)
-    elif filepath.lower().endswith('.json'):
+    elif filepath.lower().endswith(".json"):
         with open(filepath) as data_file:
             data = json.load(data_file, **kwargs)
         return data
-    elif filepath.lower().endswith('.jsonl'):
+    elif filepath.lower().endswith(".jsonl"):
         return _read_jsonl(filepath, kwargs)
-    elif filepath.lower().endswith('.pickle'):
-        with open(filepath, 'rb') as handle:
+    elif filepath.lower().endswith(".pickle"):
+        with open(filepath, "rb") as handle:
             data = pickle.load(handle)
         return data
-    elif (filepath.lower().endswith('.yml')
-          or filepath.lower().endswith('.yaml')):
-        raise NotImplementedError('YAML is not supported, because you need '
-                                  'PyYAML in Python3. '
-                                  'See '
-                                  'https://stackoverflow.com/a/42054860/562769'
-                                  ' as a guide how to use it.')
-    elif (filepath.lower().endswith('.h5')
-          or filepath.lower().endswith('.hdf5')):
-        raise NotImplementedError('HDF5 is not supported. See '
-                                  'https://stackoverflow.com/a/41586571/562769'
-                                  ' as a guide how to use it.')
+    elif (filepath.lower().endswith(".yml")
+          or filepath.lower().endswith(".yaml")):
+        raise NotImplementedError(
+            "YAML is not supported, because you need "
+            "PyYAML in Python3. "
+            "See "
+            "https://stackoverflow.com/a/42054860/562769"
+            " as a guide how to use it."
+        )
+    elif (filepath.lower().endswith(".h5")
+          or filepath.lower().endswith(".hdf5")):
+        raise NotImplementedError(
+            "HDF5 is not supported. See "
+            "https://stackoverflow.com/a/41586571/562769"
+            " as a guide how to use it."
+        )
     else:
-        raise NotImplementedError('File \'{}\' is not known.'.format(filepath))
+        raise NotImplementedError("File '{}' is not known.".format(filepath))
 
 
 def _read_csv(filepath, kwargs):
     """See documentation of mpu.io.read."""
-    if 'delimiter' not in kwargs:
-        kwargs['delimiter'] = ','
-    if 'quotechar' not in kwargs:
-        kwargs['quotechar'] = '"'
-    if 'skiprows' not in kwargs:
-        kwargs['skiprows'] = []
-    if isinstance(kwargs['skiprows'], int):
-        kwargs['skiprows'] = [i for i in range(kwargs['skiprows'])]
-    if 'format' in kwargs:
-        format_ = kwargs['format']
-        kwargs.pop('format', None)
+    if "delimiter" not in kwargs:
+        kwargs["delimiter"] = ","
+    if "quotechar" not in kwargs:
+        kwargs["quotechar"] = '"'
+    if "skiprows" not in kwargs:
+        kwargs["skiprows"] = []
+    if isinstance(kwargs["skiprows"], int):
+        kwargs["skiprows"] = [i for i in range(kwargs["skiprows"])]
+    if "format" in kwargs:
+        format_ = kwargs["format"]
+        kwargs.pop("format", None)
     else:
-        format_ = 'default'
-    skiprows = kwargs['skiprows']
-    kwargs.pop('skiprows', None)
+        format_ = "default"
+    skiprows = kwargs["skiprows"]
+    kwargs.pop("skiprows", None)
 
-    kwargs_open = {'newline': ''}
-    mode = 'r'
+    kwargs_open = {"newline": ""}
+    mode = "r"
     if sys.version_info < (3, 0):
-        kwargs_open.pop('newline', None)
-        mode = 'rb'
+        kwargs_open.pop("newline", None)
+        mode = "rb"
     with open(filepath, mode, **kwargs_open) as fp:
-        if format_ == 'default':
+        if format_ == "default":
             reader = csv.reader(fp, **kwargs)
             data = EList([row for row in reader])
             data = data.remove_indices(skiprows)
-        elif format_ == 'dicts':
+        elif format_ == "dicts":
             reader_list = csv.DictReader(fp, **kwargs)
             data = [row for row in reader_list]
         else:
-            raise NotImplementedError('Format \'{}\' unknown'
-                                      .format(format_))
+            raise NotImplementedError("Format '{}' unknown".format(format_))
     return data
 
 
@@ -117,8 +120,7 @@ def _read_jsonl(filepath, kwargs):
     """See documentation of mpu.io.read."""
     with open(filepath) as data_file:
         data = [json.loads(line, **kwargs)
-                for line in data_file
-                if len(line) > 0]
+                for line in data_file if len(line) > 0]
     return data
 
 
@@ -146,43 +148,47 @@ def write(filepath, data, **kwargs):
     -------
     data : str or bytes
     """
-    if filepath.lower().endswith('.csv'):
+    if filepath.lower().endswith(".csv"):
         return _write_csv(filepath, data, kwargs)
-    elif filepath.lower().endswith('.json'):
+    elif filepath.lower().endswith(".json"):
         return _write_json(filepath, data, kwargs)
-    elif filepath.lower().endswith('.jsonl'):
+    elif filepath.lower().endswith(".jsonl"):
         return _write_jsonl(filepath, data, kwargs)
-    elif filepath.lower().endswith('.pickle'):
+    elif filepath.lower().endswith(".pickle"):
         return _write_pickle(filepath, data, kwargs)
-    elif (filepath.lower().endswith('.yml')
-          or filepath.lower().endswith('.yaml')):
-        raise NotImplementedError('YAML is not supported, because you need '
-                                  'PyYAML in Python3. '
-                                  'See '
-                                  'https://stackoverflow.com/a/42054860/562769'
-                                  ' as a guide how to use it.')
-    elif (filepath.lower().endswith('.h5')
-          or filepath.lower().endswith('.hdf5')):
-        raise NotImplementedError('YAML is not supported. See '
-                                  'https://stackoverflow.com/a/41586571/562769'
-                                  ' as a guide how to use it.')
+    elif (filepath.lower().endswith(".yml")
+          or filepath.lower().endswith(".yaml")):
+        raise NotImplementedError(
+            "YAML is not supported, because you need "
+            "PyYAML in Python3. "
+            "See "
+            "https://stackoverflow.com/a/42054860/562769"
+            " as a guide how to use it."
+        )
+    elif (filepath.lower().endswith(".h5")
+          or filepath.lower().endswith(".hdf5")):
+        raise NotImplementedError(
+            "YAML is not supported. See "
+            "https://stackoverflow.com/a/41586571/562769"
+            " as a guide how to use it."
+        )
     else:
-        raise NotImplementedError('File \'{}\' is not known.'.format(filepath))
+        raise NotImplementedError("File '{}' is not known.".format(filepath))
 
 
 def _write_csv(filepath, data, kwargs):
     """See documentation of mpu.io.write."""
-    kwargs_open = {'newline': ''}
-    mode = 'w'
+    kwargs_open = {"newline": ""}
+    mode = "w"
     if sys.version_info < (3, 0):
-        kwargs_open.pop('newline', None)
-        mode = 'wb'
+        kwargs_open.pop("newline", None)
+        mode = "wb"
     with open(filepath, mode, **kwargs_open) as fp:
-        if 'delimiter' not in kwargs:
-            kwargs['delimiter'] = ','
-        if 'quotechar' not in kwargs:
-            kwargs['quotechar'] = '"'
-        with open(filepath, 'w') as fp:
+        if "delimiter" not in kwargs:
+            kwargs["delimiter"] = ","
+        if "quotechar" not in kwargs:
+            kwargs["quotechar"] = '"'
+        with open(filepath, "w") as fp:
             writer = csv.writer(fp, **kwargs)
             writer.writerows(data)
     return data
@@ -190,15 +196,15 @@ def _write_csv(filepath, data, kwargs):
 
 def _write_json(filepath, data, kwargs):
     """See documentation of mpu.io.write."""
-    with io_stl.open(filepath, 'w', encoding='utf8') as outfile:
-        if 'indent' not in kwargs:
-            kwargs['indent'] = 4
-        if 'sort_keys' not in kwargs:
-            kwargs['sort_keys'] = True
-        if 'separators' not in kwargs:
-            kwargs['separators'] = (',', ': ')
-        if 'ensure_ascii' not in kwargs:
-            kwargs['ensure_ascii'] = False
+    with io_stl.open(filepath, "w", encoding="utf8") as outfile:
+        if "indent" not in kwargs:
+            kwargs["indent"] = 4
+        if "sort_keys" not in kwargs:
+            kwargs["sort_keys"] = True
+        if "separators" not in kwargs:
+            kwargs["separators"] = (",", ": ")
+        if "ensure_ascii" not in kwargs:
+            kwargs["ensure_ascii"] = False
         str_ = json.dumps(data, **kwargs)
         outfile.write(to_unicode(str_))
     return data
@@ -206,31 +212,31 @@ def _write_json(filepath, data, kwargs):
 
 def _write_jsonl(filepath, data, kwargs):
     """See documentation of mpu.io.write."""
-    with io_stl.open(filepath, 'w', encoding='utf8') as outfile:
-        kwargs['indent'] = None  # JSON has to be on one line!
-        if 'sort_keys' not in kwargs:
-            kwargs['sort_keys'] = True
-        if 'separators' not in kwargs:
-            kwargs['separators'] = (',', ': ')
-        if 'ensure_ascii' not in kwargs:
-            kwargs['ensure_ascii'] = False
+    with io_stl.open(filepath, "w", encoding="utf8") as outfile:
+        kwargs["indent"] = None  # JSON has to be on one line!
+        if "sort_keys" not in kwargs:
+            kwargs["sort_keys"] = True
+        if "separators" not in kwargs:
+            kwargs["separators"] = (",", ": ")
+        if "ensure_ascii" not in kwargs:
+            kwargs["ensure_ascii"] = False
         for line in data:
             str_ = json.dumps(line, **kwargs)
             outfile.write(to_unicode(str_))
-            outfile.write(u'\n')
+            outfile.write(u"\n")
     return data
 
 
 def _write_pickle(filepath, data, kwargs):
     """See documentation of mpu.io.write."""
-    if 'protocol' not in kwargs:
-        kwargs['protocol'] = pickle.HIGHEST_PROTOCOL
-    with open(filepath, 'wb') as handle:
+    if "protocol" not in kwargs:
+        kwargs["protocol"] = pickle.HIGHEST_PROTOCOL
+    with open(filepath, "wb") as handle:
         pickle.dump(data, handle, **kwargs)
     return data
 
 
-def urlread(url, encoding='utf8'):
+def urlread(url, encoding="utf8"):
     """
     Read the content of an URL.
 
@@ -273,7 +279,7 @@ def download(source, sink=None):
     return sink
 
 
-def hash(filepath, method='sha1', buffer_size=65536):
+def hash(filepath, method="sha1", buffer_size=65536):
     """
     Calculate a hash of a local file.
 
@@ -288,15 +294,17 @@ def hash(filepath, method='sha1', buffer_size=65536):
     -------
     hash : str
     """
-    if method == 'sha1':
+    if method == "sha1":
         hash_function = hashlib.sha1()
-    elif method == 'md5':
+    elif method == "md5":
         hash_function = hashlib.md5()
     else:
-        raise NotImplementedError('Only md5 and sha1 hashes are known, but '
-                                  ' \'{}\' was specified.'.format(method))
+        raise NotImplementedError(
+            "Only md5 and sha1 hashes are known, but "
+            " '{}' was specified.".format(method)
+        )
 
-    with open(filepath, 'rb') as fp:
+    with open(filepath, "rb") as fp:
         while True:
             data = fp.read(buffer_size)
             if not data:
@@ -317,7 +325,7 @@ def get_creation_datetime(filepath):
     -------
     creation_datetime : datetime.datetime or None
     """
-    if platform.system() == 'Windows':
+    if platform.system() == "Windows":
         return datetime.fromtimestamp(os.path.getctime(filepath))
     else:
         stat = os.stat(filepath)
@@ -343,6 +351,7 @@ def get_modification_datetime(filepath):
 
     """
     import tzlocal
+
     timezone = tzlocal.get_localzone()
     mtime = datetime.fromtimestamp(os.path.getmtime(filepath))
     return mtime.replace(tzinfo=timezone)
@@ -361,6 +370,7 @@ def get_access_datetime(filepath):
     access_datetime : datetime.datetime
     """
     import tzlocal
+
     tz = tzlocal.get_localzone()
     mtime = datetime.fromtimestamp(os.path.getatime(filepath))
     return mtime.replace(tzinfo=tz)
@@ -379,16 +389,17 @@ def get_file_meta(filepath):
     meta : dict
     """
     meta = {}
-    meta['filepath'] = os.path.abspath(filepath)
-    meta['creation_datetime'] = get_creation_datetime(filepath)
-    meta['last_access_datetime'] = get_access_datetime(filepath)
-    meta['modification_datetime'] = get_modification_datetime(filepath)
+    meta["filepath"] = os.path.abspath(filepath)
+    meta["creation_datetime"] = get_creation_datetime(filepath)
+    meta["last_access_datetime"] = get_access_datetime(filepath)
+    meta["modification_datetime"] = get_modification_datetime(filepath)
     try:
         import magic
+
         f_mime = magic.Magic(mime=True, uncompress=True)
         f_other = magic.Magic(mime=False, uncompress=True)
-        meta['mime'] = f_mime.from_file(meta['filepath'])
-        meta['magic-type'] = f_other.from_file(meta['filepath'])
+        meta["mime"] = f_mime.from_file(meta["filepath"])
+        meta["magic-type"] = f_other.from_file(meta["filepath"])
     except ImportError:
         pass
     return meta
@@ -406,5 +417,6 @@ def gzip_file(source, sink):
         Filepath
     """
     import gzip
-    with open(source, 'rb') as f_in, gzip.open(sink, 'wb') as f_out:
+
+    with open(source, "rb") as f_in, gzip.open(sink, "wb") as f_out:
         f_out.writelines(f_in)

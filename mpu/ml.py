@@ -34,8 +34,9 @@ def indices2one_hot(indices, nb_classes):
     [[1, 0], [0, 1], [0, 1]]
     """
     if nb_classes < 1:
-        raise ValueError('nb_classes={}, but positive number expected'
-                         .format(nb_classes))
+        raise ValueError(
+            "nb_classes={}, but positive number expected".format(nb_classes)
+        )
 
     one_hot = []
     for index in indices:

@@ -28,16 +28,16 @@ def list_files(bucket, prefix=None, profile_name=None):
     s3_paths : List[str]
     """
     session = boto3.Session(profile_name=profile_name)
-    conn = session.client('s3')
+    conn = session.client("s3")
     keys = []
     ret = conn.list_objects_v2(Bucket=bucket, Prefix=prefix)
-    if 'Contents' not in ret:
+    if "Contents" not in ret:
         return []
     # Make this a generator in future and use the marker:
     # https://boto3.readthedocs.io/en/latest/reference/services/
     #     s3.html#S3.Client.list_objects
-    for key in conn.list_objects_v2(Bucket=bucket, Prefix=prefix)['Contents']:
-        keys.append('s3://' + bucket + '/' + key['Key'])
+    for key in conn.list_objects_v2(Bucket=bucket, Prefix=prefix)["Contents"]:
+        keys.append("s3://" + bucket + "/" + key["Key"])
     return keys
 
 
@@ -65,19 +65,19 @@ def s3_read(source, profile_name=None):
         See https://boto3.readthedocs.io/en/latest/guide/configuration.html
     """
     session = boto3.Session(profile_name=profile_name)
-    s3 = session.client('s3')
+    s3 = session.client("s3")
     bucket_name, key = _s3_path_split(source)
     s3_object = s3.get_object(Bucket=bucket_name, Key=key)
-    body = s3_object['Body']
+    body = s3_object["Body"]
     return body.read()
 
 
 class ExistsStrategy(enum.Enum):
     """Strategies what to do when a file already exists."""
 
-    RAISE = 'raise'
-    REPLACE = 'replace'
-    ABORT = 'abort'
+    RAISE = "raise"
+    REPLACE = "replace"
+    ABORT = "abort"
 
 
 def s3_download(source, destination=None,
@@ -114,10 +114,10 @@ def s3_download(source, destination=None,
         See https://boto3.readthedocs.io/en/latest/guide/configuration.html
     """
     if not isinstance(exists_strategy, ExistsStrategy):
-        raise ValueError('exists_strategy \'{}\' is not in {}'
+        raise ValueError("exists_strategy '{}' is not in {}"
                          .format(exists_strategy, ExistsStrategy))
     session = boto3.Session(profile_name=profile_name)
-    s3 = session.resource('s3')
+    s3 = session.resource("s3")
     bucket_name, key = _s3_path_split(source)
     if destination is None:
         _, filename = os.path.split(source)
@@ -125,8 +125,7 @@ def s3_download(source, destination=None,
         _, destination = mkstemp(prefix=prefix, suffix=suffix)
     elif os.path.isfile(destination):
         if exists_strategy is ExistsStrategy.RAISE:
-            raise RuntimeError('File \'{}\' already exists.'
-                               .format(destination))
+            raise RuntimeError("File '{}' already exists.".format(destination))
         elif exists_strategy is ExistsStrategy.ABORT:
             return
     s3.Bucket(bucket_name).download_file(key, destination)
@@ -146,13 +145,13 @@ def s3_upload(source, destination, profile_name=None):
         AWS profile
     """
     session = boto3.Session(profile_name=profile_name)
-    s3 = session.resource('s3')
+    s3 = session.resource("s3")
     bucket_name, key = _s3_path_split(destination)
-    with open(source, 'rb') as data:
+    with open(source, "rb") as data:
         s3.Bucket(bucket_name).put_object(Key=key, Body=data)
 
 
-S3Path = namedtuple('S3Path', ['bucket_name', 'key'])
+S3Path = namedtuple("S3Path", ["bucket_name", "key"])
 
 
 def _s3_path_split(s3_path):
@@ -173,9 +172,11 @@ def _s3_path_split(s3_path):
     >>> _s3_path_split('s3://my-bucket/foo/bar.jpg')
     S3Path(bucket_name='my-bucket', key='foo/bar.jpg')
     """
-    if not s3_path.startswith('s3://'):
-        raise ValueError('s3_path is expected to start with \'s3://\', '
-                         'but was {}'.format(s3_path))
-    bucket_key = s3_path[len('s3://'):]
-    bucket_name, key = bucket_key.split('/', 1)
+    if not s3_path.startswith("s3://"):
+        raise ValueError(
+            "s3_path is expected to start with 's3://', " "but was {}"
+            .format(s3_path)
+        )
+    bucket_key = s3_path[len("s3://"):]
+    bucket_name, key = bucket_key.split("/", 1)
     return S3Path(bucket_name, key)

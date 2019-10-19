@@ -1,203 +1,218 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Core Library
-import unittest
-
 # Third party
 import simplejson  # has for_json
+import pytest
 
 # First party
 from mpu.units import Currency, Money, get_currency
 
 
-class MoneyTests(unittest.TestCase):
+def test_get_currency():
+    a = Money("0.1", "EUR")
+    assert str(a) == "0.10 Euro"
+    b = Money("0.1", "USD")
+    assert str(b) == "0.10 US Dollar"
+    with pytest.raises(ValueError):
+        Money("0.1", "foobar")
+    c = Money((1, 100), "EUR")
+    d = Money(5, "ESP")
+    assert str(c) == "0.01 Euro"
+    assert repr(c) == "0.01 Euro"
+    assert str(d) == "5.00 Spanish Peseta"
+    with pytest.raises(ValueError):
+        Money((5, 100, 42), "EUR")
+    with pytest.raises(ValueError):
+        Money(0.1, "EUR")
+    non_currency = Money("0.1", None)
+    assert str(non_currency) == "0.10"
+    with pytest.raises(ValueError):
+        Money(1, a)
 
-    def test_get_currency(self):
-        a = Money('0.1', 'EUR')
-        self.assertEqual(str(a), '0.10 Euro')
-        b = Money('0.1', 'USD')
-        self.assertEqual(str(b), '0.10 US Dollar')
-        with self.assertRaises(ValueError):
-            Money('0.1', 'foobar')
-        c = Money((1, 100), 'EUR')
-        d = Money(5, 'ESP')
-        self.assertEqual(str(c), '0.01 Euro')
-        self.assertEqual(repr(c), '0.01 Euro')
-        self.assertEqual(str(d), '5.00 Spanish Peseta')
-        with self.assertRaises(ValueError):
-            Money((5, 100, 42), 'EUR')
-        with self.assertRaises(ValueError):
-            Money(0.1, 'EUR')
-        non_currency = Money('0.1', None)
-        self.assertEqual(str(non_currency), '0.10')
-        with self.assertRaises(ValueError):
-            Money(1, a)
 
-    def test_currency_for_json(self):
-        usd = get_currency('USD')
-        dump = simplejson.dumps(usd, for_json=True)
-        dict_ = simplejson.loads(dump)
-        undump = Currency.from_json(dict_)
-        self.assertEqual(usd, undump)
+def test_currency_for_json():
+    usd = get_currency("USD")
+    dump = simplejson.dumps(usd, for_json=True)
+    dict_ = simplejson.loads(dump)
+    undump = Currency.from_json(dict_)
+    assert usd == undump
 
-    def test_money_json_magic(self):
-        usd = Money('0.1', 'USD')
-        usd_dict = usd.__json__()
-        dump = simplejson.dumps(usd_dict)
-        dict_ = simplejson.loads(dump)
-        undump = Money.from_json(dict_)
-        self.assertEqual(usd, undump)
 
-    def test_money_json_magic_none(self):
-        usd = Money('0.1', None)
-        usd_dict = usd.__json__()
-        dump = simplejson.dumps(usd_dict)
-        dict_ = simplejson.loads(dump)
-        undump = Money.from_json(dict_)
-        self.assertEqual(usd, undump)
+def test_money_json_magic():
+    usd = Money("0.1", "USD")
+    usd_dict = usd.__json__()
+    dump = simplejson.dumps(usd_dict)
+    dict_ = simplejson.loads(dump)
+    undump = Money.from_json(dict_)
+    assert usd == undump
 
-    def test_money_conversion_float(self):
-        """Test if one can convert Money instances to float."""
-        a = Money('1337.00', None)
-        self.assertEqual(float(a), 1337.0)
-        b = Money('42.00', 'USD')
-        self.assertEqual(float(b), 42.0)
 
-    def test_money_floatingpoint_issue1(self):
-        """This test is the reason why one should not use float for money."""
-        a = Money('10.00', None)
-        b = Money('1.2', None)
-        self.assertEqual(str(a + b - a), str(b))
+def test_money_json_magic_none():
+    usd = Money("0.1", None)
+    usd_dict = usd.__json__()
+    dump = simplejson.dumps(usd_dict)
+    dict_ = simplejson.loads(dump)
+    undump = Money.from_json(dict_)
+    assert usd == undump
 
-    def test_money_floatingpoint_issue2(self):
-        """This test is the reason why one should not use float for money."""
-        a = Money('10.00', None)
-        b = Money('1.2', None)
-        self.assertEqual(str((a + b - a) * 10**14 - b * 10**14), '0.00')
 
-    def test_currency_operations(self):
-        a = Money('0.5', 'EUR')
-        aneg = Money('-0.5', 'EUR')
-        b = Money('0.1', 'EUR')
-        c = Money('0.1', 'USD')
-        d = Money('0.5', 'EUR')
-        self.assertEqual(a == b, False)
-        self.assertEqual(a == 0.5, False)
-        self.assertEqual(a == d, True)
-        self.assertEqual(a == c, False)
-        self.assertEqual(a != b, True)
-        self.assertEqual(a != d, False)
-        self.assertEqual(a != c, True)
-        self.assertEqual(str(a - b), '0.40 Euro')
-        self.assertEqual(-a, aneg)
-        self.assertEqual(+a, a)
-        with self.assertRaises(ValueError):
-            a - c
-        with self.assertRaises(ValueError):
-            a - 2
-        with self.assertRaises(ValueError):
-            a - 2.0
-        self.assertEqual(str(a + b), '0.60 Euro')
-        with self.assertRaises(ValueError):
-            a + c
-        with self.assertRaises(ValueError):
-            a + 2
-        with self.assertRaises(ValueError):
-            a + 2.0
-        self.assertEqual(str(2 * a), '1.00 Euro')
-        self.assertEqual(str(a / b), '5')
-        with self.assertRaises(ValueError):
-            a / c
-        with self.assertRaises(ValueError):
-            a * 3.141
-        with self.assertRaises(ValueError):
-            3.141 * a
-        with self.assertRaises(ValueError):
-            a / '0.1'
-        self.assertEqual(str(a / 2), '0.25 Euro')
+def test_money_conversion_float():
+    """Test if one can convert Money instances to float."""
+    a = Money("1337.00", None)
+    assert float(a) == 1337.0
+    b = Money("42.00", "USD")
+    assert float(b) == 42.0
 
-    def test_currency_comperators(self):
-        a = Money('0.5', 'EUR')
-        b = Money('0.1', 'EUR')
-        c = Money('0.5', 'EUR')
-        d = Money('0.5', 'USD')
-        self.assertEqual(a > b, True)
-        self.assertEqual(a < b, False)
-        self.assertEqual(a >= b, True)
-        self.assertEqual(a <= b, False)
-        self.assertEqual(a > c, False)
-        self.assertEqual(a < c, False)
-        self.assertEqual(a >= c, True)
-        self.assertEqual(a <= c, True)
 
-        self.assertEqual(c > d, False)
-        self.assertEqual(c < d, False)
-        self.assertEqual(c == d, False)
-        self.assertEqual(c < 1, False)
-        self.assertEqual(c > 1, False)
+def test_money_floatingpoint_issue1():
+    """The test is the reason why one should not use float for money."""
+    a = Money("10.00", None)
+    b = Money("1.2", None)
+    assert str(a + b - a) == str(b)
 
-    def test_currency(self):
-        eur = Currency(name='Euro',
-                       code='EUR',
-                       numeric_code=123,
-                       symbol='€',
-                       exponent=2,
-                       entities=['Germany'],
-                       withdrawal_date=None,
-                       subunits=2)
-        usd = Currency(name='US Dollar',
-                       code='USD',
-                       numeric_code=456,
-                       symbol='$',
-                       exponent=2,
-                       entities=['United States of America'],
-                       withdrawal_date=None,
-                       subunits=2)
-        repr(eur)
-        self.assertEqual(eur == usd, False)
-        self.assertEqual(eur == 2, False)
-        self.assertEqual(eur != usd, True)
-        with self.assertRaises(ValueError):
-            Currency(name=2,
-                     code='EUR',
-                     numeric_code=123,
-                     symbol='€',
-                     exponent=2,
-                     entities=['Germany'],
-                     withdrawal_date=None,
-                     subunits=2)
-        with self.assertRaises(ValueError):
-            Currency(name='Euro',
-                     code=2,
-                     numeric_code=123,
-                     symbol='€',
-                     exponent=2,
-                     entities=['Germany'],
-                     withdrawal_date=None,
-                     subunits=2)
-        with self.assertRaises(ValueError):
-            Currency(name='Euro',
-                     code='EUR',
-                     numeric_code=123,
-                     symbol='€',
-                     exponent='2',
-                     entities=['Germany'],
-                     withdrawal_date=None,
-                     subunits=2)
 
-    def test_formatting(self):
-        non_currency = Money('12.2', None)
-        self.assertEqual('{}'.format(non_currency), '12.20')
-        self.assertEqual('{:0.2f,symbol}'.format(non_currency), '12.20')
-        self.assertEqual('{:0.2f,postsymbol}'.format(non_currency), '12.20')
-        self.assertEqual('{:0.2f,shortcode}'.format(non_currency), '12.20')
-        self.assertEqual('{:0.2f,postshortcode}'.format(non_currency),
-                         '12.20')
+def test_money_floatingpoint_issue2():
+    """The test is the reason why one should not use float for money."""
+    a = Money("10.00", None)
+    b = Money("1.2", None)
+    assert str((a + b - a) * 10 ** 14 - b * 10 ** 14) == "0.00"
 
-        a = Money('12.20', 'USD')
-        self.assertEqual('{}'.format(a), '12.20 USD')
-        self.assertEqual('{:0.2f,symbol}'.format(a), '$12.20')
-        self.assertEqual('{:0.2f,postsymbol}'.format(a), '12.20$')
-        self.assertEqual('{:0.2f,shortcode}'.format(a), 'USD 12.20')
-        self.assertEqual('{:0.2f,postshortcode}'.format(a), '12.20 USD')
+
+def test_currency_operations():
+    a = Money("0.5", "EUR")
+    aneg = Money("-0.5", "EUR")
+    b = Money("0.1", "EUR")
+    c = Money("0.1", "USD")
+    d = Money("0.5", "EUR")
+    assert (a == b) is False
+    assert (a == 0.5) is False
+    assert a == d
+    assert (a == c) is False
+    assert a != b
+    assert (a != d) is False
+    assert a != c
+    assert str(a - b) == "0.40 Euro"
+    assert -a == aneg
+    assert +a == a
+    with pytest.raises(ValueError):
+        a - c
+    with pytest.raises(ValueError):
+        a - 2
+    with pytest.raises(ValueError):
+        a - 2.0
+    assert str(a + b) == "0.60 Euro"
+    with pytest.raises(ValueError):
+        a + c
+    with pytest.raises(ValueError):
+        a + 2
+    with pytest.raises(ValueError):
+        a + 2.0
+    assert str(2 * a) == "1.00 Euro"
+    assert str(a / b) == "5"
+    with pytest.raises(ValueError):
+        a / c
+    with pytest.raises(ValueError):
+        a * 3.141
+    with pytest.raises(ValueError):
+        3.141 * a
+    with pytest.raises(ValueError):
+        a / "0.1"
+    assert str(a / 2) == "0.25 Euro"
+
+
+def test_currency_comperators():
+    a = Money("0.5", "EUR")
+    b = Money("0.1", "EUR")
+    c = Money("0.5", "EUR")
+    d = Money("0.5", "USD")
+    assert a > b
+    assert (a < b) is False
+    assert a >= b
+    assert (a <= b) is False
+    assert (a > c) is False
+    assert (a < c) is False
+    assert a >= c
+    assert a <= c
+
+    assert (c > d) is False
+    assert (c < d) is False
+    assert (c == d)is False
+    assert (c < 1) is False
+    assert (c > 1) is False
+
+
+def test_currency():
+    eur = Currency(
+        name="Euro",
+        code="EUR",
+        numeric_code=123,
+        symbol="€",
+        exponent=2,
+        entities=["Germany"],
+        withdrawal_date=None,
+        subunits=2,
+    )
+    usd = Currency(
+        name="US Dollar",
+        code="USD",
+        numeric_code=456,
+        symbol="$",
+        exponent=2,
+        entities=["United States of America"],
+        withdrawal_date=None,
+        subunits=2,
+    )
+    repr(eur)
+    assert (eur == usd) is False
+    assert (eur == 2) is False
+    assert eur != usd
+    with pytest.raises(ValueError):
+        Currency(
+            name=2,
+            code="EUR",
+            numeric_code=123,
+            symbol="€",
+            exponent=2,
+            entities=["Germany"],
+            withdrawal_date=None,
+            subunits=2,
+        )
+    with pytest.raises(ValueError):
+        Currency(
+            name="Euro",
+            code=2,
+            numeric_code=123,
+            symbol="€",
+            exponent=2,
+            entities=["Germany"],
+            withdrawal_date=None,
+            subunits=2,
+        )
+    with pytest.raises(ValueError):
+        Currency(
+            name="Euro",
+            code="EUR",
+            numeric_code=123,
+            symbol="€",
+            exponent="2",
+            entities=["Germany"],
+            withdrawal_date=None,
+            subunits=2,
+        )
+
+
+def test_formatting():
+    non_currency = Money("12.2", None)
+    assert "{}".format(non_currency) == "12.20"
+    assert "{:0.2f,symbol}".format(non_currency) == "12.20"
+    assert "{:0.2f,postsymbol}".format(non_currency) == "12.20"
+    assert "{:0.2f,shortcode}".format(non_currency) == "12.20"
+    assert "{:0.2f,postshortcode}".format(non_currency) == "12.20"
+
+    a = Money("12.20", "USD")
+    assert "{}".format(a) == "12.20 USD"
+    assert "{:0.2f,symbol}".format(a) == "$12.20"
+    assert "{:0.2f,postsymbol}".format(a) == "12.20$"
+    assert "{:0.2f,shortcode}".format(a) == "USD 12.20"
+    assert "{:0.2f,postshortcode}".format(a) == "12.20 USD"

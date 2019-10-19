@@ -48,9 +48,11 @@ class Money(object):
                                  .format(value))
             self.value = fractions.Fraction(value[0], value[1])
         elif isinstance(value, float):
-            raise ValueError('floats can be ambiguous. Please convert it to '
-                             'two integers (nominator and denominator) and '
-                             'pass a tuple to the constructor.')
+            raise ValueError(
+                "floats can be ambiguous. Please convert it to "
+                "two integers (nominator and denominator) and "
+                "pass a tuple to the constructor."
+            )
         else:
             self.value = fractions.Fraction(value)  # convert to Decimal
 
@@ -64,31 +66,36 @@ class Money(object):
         elif isinstance(currency, strtype):
             self.currency = get_currency(currency)
         elif currency is None:
-            self.currency = Currency(name='',
-                                     code='',
-                                     numeric_code=None,
-                                     symbol='',
-                                     exponent=None,
-                                     entities=None,
-                                     withdrawal_date=None,
-                                     subunits=None)
+            self.currency = Currency(
+                name="",
+                code="",
+                numeric_code=None,
+                symbol="",
+                exponent=None,
+                entities=None,
+                withdrawal_date=None,
+                subunits=None,
+            )
         else:
-            raise ValueError('currency is of type={}, but should be str or '
-                             'Currency'
-                             .format(type(currency)))
+            raise ValueError(
+                "currency is of type={}, but should be str or "
+                "Currency".format(type(currency))
+            )
 
     def __str__(self):
         exponent = 2
         if self.currency.exponent is not None:
             exponent = self.currency.exponent
         if self.currency.numeric_code is None:
-            return '{value:0.{exponent}f}'.format(exponent=exponent,
-                                                  value=float(self.value))
+            return "{value:0.{exponent}f}".format(
+                exponent=exponent, value=float(self.value)
+            )
         else:
-            return ('{value:0.{exponent}f} {currency}'
-                    .format(exponent=exponent,
-                            value=float(self.value),
-                            currency=self.currency))
+            return "{value:0.{exponent}f} {currency}".format(
+                exponent=exponent,
+                value=float(self.value),
+                currency=self.currency
+            )
 
     def __repr__(self):
         return str(self)
@@ -97,90 +104,107 @@ class Money(object):
         if isinstance(other, (int, fractions.Fraction)):
             return Money(self.value * other, self.currency)
         else:
-            raise ValueError(('Multiplication with type \'{}\' is not '
-                              'supported').format(type(other)))
+            raise ValueError(
+                ("Multiplication with type '{}' is not " "supported").format(
+                    type(other)
+                )
+            )
 
     def __format__(self, spec):
-        if ',' not in spec:
-            if spec == '':
+        if "," not in spec:
+            if spec == "":
                 exponent = 2
                 if self.currency.exponent is not None:
                     exponent = self.currency.exponent
-                spec = '0.{exponent:}f'.format(exponent=exponent)
+                spec = "0.{exponent:}f".format(exponent=exponent)
             value_formatter = spec
-            value_str = ('{:' + value_formatter + '}'
-                         ).format(float(self.value))
-            symbol_formatter = 'postshortcode'
+            symbol_formatter = "postshortcode"
         else:
-            value_formatter, symbol_formatter = spec.split(',')
-            value_str = ('{:' + value_formatter + '}'
-                         ).format(float(self.value))
-        if symbol_formatter == 'symbol':
-            sep = ''
+            value_formatter, symbol_formatter = spec.split(",")
+        value_str = ("{:" + value_formatter + "}").format(float(self.value))
+
+        if symbol_formatter == "symbol":
+            sep = ""
             return self.currency.symbol + sep + value_str
-        elif symbol_formatter == 'postsymbol':
-            sep = ''
+        elif symbol_formatter == "postsymbol":
+            sep = ""
             return value_str + sep + self.currency.symbol
-        elif symbol_formatter == 'shortcode':
-            sep = ' '
+        elif symbol_formatter == "shortcode":
+            sep = " "
             if self.currency.numeric_code is None:
-                sep = ''
+                sep = ""
             return self.currency.code + sep + value_str
-        elif symbol_formatter == 'postshortcode':
-            sep = ' '
+        elif symbol_formatter == "postshortcode":
+            sep = " "
             if self.currency.numeric_code is None:
-                sep = ''
+                sep = ""
             return value_str + sep + self.currency.code
         else:
-            raise NotImplementedError('The formatter \'{}\' is not '
-                                      'implemented for the Money class.'
-                                      .format(symbol_formatter))
+            raise NotImplementedError(
+                "The formatter '{}' is not "
+                "implemented for the Money class.".format(symbol_formatter)
+            )
 
     def __add__(self, other):
         if isinstance(other, Money):
             if self.currency == other.currency:
                 return Money(self.value + other.value, self.currency)
             else:
-                raise ValueError(('Addition of currency \'{}\' and \'{}\' is '
-                                  'not supported. You need an exchange rate.')
-                                 .format(self.currency, other.currency))
+                raise ValueError(
+                    (
+                        "Addition of currency '{}' and '{}' is "
+                        "not supported. You need an exchange rate."
+                    ).format(self.currency, other.currency)
+                )
         else:
-            raise ValueError(('Addition with type \'{}\' is not '
-                              'supported').format(type(other)))
+            raise ValueError(
+                ("Addition with type '{}' is not " "supported")
+                .format(type(other))
+            )
 
     def __sub__(self, other):
         if isinstance(other, Money):
             if self.currency == other.currency:
                 return Money(self.value - other.value, self.currency)
             else:
-                raise ValueError(('Subtraction of currency \'{}\' and \'{}\' '
-                                  'is not supported. You need an exchange '
-                                  'rate.')
-                                 .format(self.currency, other.currency))
+                raise ValueError(
+                    (
+                        "Subtraction of currency '{}' and '{}' "
+                        "is not supported. You need an exchange "
+                        "rate."
+                    ).format(self.currency, other.currency)
+                )
         else:
-            raise ValueError(('Subtraction with type \'{}\' is not '
-                              'supported').format(type(other)))
+            raise ValueError(
+                ("Subtraction with type '{}' is not " "supported")
+                .format(type(other))
+            )
 
     def __truediv__(self, other):
         if isinstance(other, Money):
             if self.currency == other.currency:
                 return self.value / other.value
             else:
-                raise ValueError(('Division of currency \'{}\' and \'{}\' '
-                                  'is not supported. You need an exchange '
-                                  'rate.')
-                                 .format(self.currency, other.currency))
+                raise ValueError(
+                    (
+                        "Division of currency '{}' and '{}' "
+                        "is not supported. You need an exchange "
+                        "rate."
+                    ).format(self.currency, other.currency)
+                )
         elif isinstance(other, (int, fractions.Fraction)):
             return Money(self.value / other, self.currency)
         else:
-            raise ValueError(('Division with type \'{}\' is not '
-                              'supported').format(type(other)))
+            raise ValueError(
+                ("Division with type '{}' is not " "supported")
+                .format(type(other))
+            )
 
     __div__ = __truediv__
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
-            same_currency = (self.currency == other.currency)
+            same_currency = self.currency == other.currency
             return (self.value == other.value) and same_currency
         else:
             return False
@@ -221,9 +245,9 @@ class Money(object):
         if self.currency.numeric_code is None:
             currency = None
         return {
-            'value': '{}'.format(self.value),
-            'currency': currency,
-            '__python__': 'mpu.units:Money.from_json',
+            "value": "{}".format(self.value),
+            "currency": currency,
+            "__python__": "mpu.units:Money.from_json",
         }
 
     for_json = __json__
@@ -231,7 +255,7 @@ class Money(object):
     @classmethod
     def from_json(cls, json):
         """Create a Money object from a JSON dump."""
-        obj = cls(json['value'], json['currency'])
+        obj = cls(json["value"], json["currency"])
         return obj
 
 
@@ -247,10 +271,10 @@ def get_currency(currency_str):
     -------
     currency : Currency
     """
-    path = 'units/currencies.csv'  # always use slash in Python packages
-    filepath = pkg_resources.resource_filename('mpu', path)
-    with open(filepath, 'r') as fp:
-        reader = csv.reader(fp, delimiter=',', quotechar='"')
+    path = "units/currencies.csv"  # always use slash in Python packages
+    filepath = pkg_resources.resource_filename("mpu", path)
+    with open(filepath, "r") as fp:
+        reader = csv.reader(fp, delimiter=",", quotechar='"')
         next(reader, None)  # skip the headers
         for row in reader:
             is_currency = currency_str in [row[0], row[1], row[2]]
@@ -269,38 +293,48 @@ def get_currency(currency_str):
                 else:
                     withdrawal_date = None
                 subunits = row[7]
-                return Currency(name=name,
-                                code=code,
-                                numeric_code=numeric_code,
-                                symbol=symbol,
-                                exponent=exponent,
-                                entities=[entity],
-                                withdrawal_date=withdrawal_date,
-                                subunits=subunits)
-    raise ValueError('Could not find currency \'{}\''.format(currency_str))
+                return Currency(
+                    name=name,
+                    code=code,
+                    numeric_code=numeric_code,
+                    symbol=symbol,
+                    exponent=exponent,
+                    entities=[entity],
+                    withdrawal_date=withdrawal_date,
+                    subunits=subunits,
+                )
+    raise ValueError("Could not find currency '{}'".format(currency_str))
 
 
 class Currency(object):
     """Currency base class which contains information similar to ISO 4217."""
 
-    def __init__(self,
-                 name,
-                 code,
-                 numeric_code,
-                 symbol,
-                 exponent,
-                 entities,
-                 withdrawal_date,
-                 subunits):
+    def __init__(
+        self,
+        name,
+        code,
+        numeric_code,
+        symbol,
+        exponent,
+        entities,
+        withdrawal_date,
+        subunits,
+    ):
         if not isinstance(name, str):
-            raise ValueError('A currencies name has to be of type str, but '
-                             'was: {}'.format(type(name)))
+            raise ValueError(
+                "A currencies name has to be of type str, but "
+                "was: {}".format(type(name))
+            )
         if not isinstance(code, str):
-            raise ValueError('A currencies code has to be of type str, but '
-                             'was: {}'.format(type(code)))
+            raise ValueError(
+                "A currencies code has to be of type str, but "
+                "was: {}".format(type(code))
+            )
         if not isinstance(exponent, (type(None), int)):
-            raise ValueError('A currencies exponent has to be of type None '
-                             'or int, but was: {}'.format(type(code)))
+            raise ValueError(
+                "A currencies exponent has to be of type None "
+                "or int, but was: {}".format(type(code))
+            )
 
         self.name = name
         self.code = code
@@ -324,24 +358,25 @@ class Currency(object):
         return self.name
 
     def __repr__(self):
-        return ('Currency(name={name}, code={code}, '
-                'numeric_code={numeric_code})'
-                .format(name=self.name,
-                        code=self.code,
-                        numeric_code=self.numeric_code))
+        return (
+            "Currency(name={name}, code={code}, "
+            "numeric_code={numeric_code})".format(
+                name=self.name, code=self.code, numeric_code=self.numeric_code
+            )
+        )
 
     def __json__(self):
         """Return a JSON-serializable object."""
         return {
-            'name': self.name,
-            'code': self.code,
-            'numeric_code': self.numeric_code,
-            'symbol': self.symbol,
-            'exponent': self.exponent,
-            'entities': self.entities,
-            'withdrawal_date': self.withdrawal_date,
-            'subunits': self.subunits,
-            '__python__': 'mpu.units:Currency.from_json',
+            "name": self.name,
+            "code": self.code,
+            "numeric_code": self.numeric_code,
+            "symbol": self.symbol,
+            "exponent": self.exponent,
+            "entities": self.entities,
+            "withdrawal_date": self.withdrawal_date,
+            "subunits": self.subunits,
+            "__python__": "mpu.units:Currency.from_json",
         }
 
     for_json = __json__
@@ -349,12 +384,14 @@ class Currency(object):
     @classmethod
     def from_json(cls, json):
         """Create a Currency object from a JSON dump."""
-        obj = cls(name=json['name'],
-                  code=json['code'],
-                  numeric_code=json['numeric_code'],
-                  symbol=json['symbol'],
-                  exponent=json['exponent'],
-                  entities=json['entities'],
-                  withdrawal_date=json['withdrawal_date'],
-                  subunits=json['subunits'])
+        obj = cls(
+            name=json["name"],
+            code=json["code"],
+            numeric_code=json["numeric_code"],
+            symbol=json["symbol"],
+            exponent=json["exponent"],
+            entities=json["entities"],
+            withdrawal_date=json["withdrawal_date"],
+            subunits=json["subunits"],
+        )
         return obj

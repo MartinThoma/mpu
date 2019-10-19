@@ -17,9 +17,12 @@ def timing(func):
         t0 = time()
         result = func(*args, **kw)
         t1 = time()
-        print('func:%r args:[%r, %r] took: %2.4f sec' %
-              (func.__name__, args, kw, t1 - t0))
+        print(
+            "func:%r args:[%r, %r] took: %2.4f sec" %
+            (func.__name__, args, kw, t1 - t0)
+        )
         return result
+
     return wrap
 
 
@@ -36,14 +39,15 @@ def deprecated(func):
                 "Call to deprecated function {}.".format(func.__name__),
                 category=DeprecationWarning,
                 filename=func.func_code.co_filename,
-                lineno=func.func_code.co_firstlineno + 1
+                lineno=func.func_code.co_firstlineno + 1,
             )
         else:
             warnings.warn_explicit(
                 "Call to deprecated function {}.".format(func.__name__),
                 category=DeprecationWarning,
                 filename=func.__code__.co_filename,
-                lineno=func.__code__.co_firstlineno + 1
+                lineno=func.__code__.co_firstlineno + 1,
             )
         return func(*args, **kwargs)
+
     return new_func

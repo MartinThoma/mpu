@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 # Core Library
-import unittest
 from datetime import datetime
 
 # Third party
@@ -12,20 +11,21 @@ import pytest
 from mpu.datastructures import EList, Interval, IntervalUnion, flatten
 
 
-class DatastructuresTest(unittest.TestCase):
-    def test_EList_empty(self):
-        elist = EList()
-        self.assertEqual(len(elist), 0)
+def test_EList_empty():
+    elist = EList()
+    assert len(elist) == 0
 
-    def test_EList_getitem(self):
-        elist = EList([2, 3, 5, 7, 11])
-        self.assertEqual(elist[2], 5)
-        self.assertEqual(elist[0], 2)
-        self.assertEqual(elist[1], 3)
-        self.assertEqual(elist[4], 11)
 
-    def test_flatten_string(self):
-        assert flatten(["foobar"]) == ["foobar"]
+def test_EList_getitem():
+    elist = EList([2, 3, 5, 7, 11])
+    assert elist[2] == 5
+    assert elist[0] == 2
+    assert elist[1] == 3
+    assert elist[4] == 11
+
+
+def test_flatten_string():
+    assert flatten(["foobar"]) == ["foobar"]
 
 
 def test_interval_creation_successes():

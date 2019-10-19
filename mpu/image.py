@@ -22,14 +22,15 @@ def get_meta(filepath):
     meta = {}
     try:
         from PIL import Image
+
         with Image.open(filepath) as img:
             width, height = img.size
-        meta['width'] = width
-        meta['height'] = height
-        meta['channels'] = len(img.mode)  # RGB, RGBA - does this always work?
+        meta["width"] = width
+        meta["height"] = height
+        meta["channels"] = len(img.mode)  # RGB, RGBA - does this always work?
     except ImportError:
         pass
 
     # Get times - creation, last edit, last open
-    meta['file'] = mpu.io.get_file_meta(filepath)
+    meta["file"] = mpu.io.get_file_meta(filepath)
     return meta

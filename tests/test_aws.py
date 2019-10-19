@@ -19,50 +19,58 @@ import mpu.aws
 
 
 class AWSTest(unittest.TestCase):
-
     @pytest.mark.xfail
     @mock_s3
     def test_list_no_files(self):
         # We need to create the bucket since this is all in Moto's 'virtual'
         # AWS account
-        conn = boto3.resource('s3', region_name='us-east-1')
-        conn.create_bucket(Bucket='mybucket')
-        self.assertEqual(mpu.aws.list_files('mybucket'), [])
+        conn = boto3.resource("s3", region_name="us-east-1")
+        conn.create_bucket(Bucket="mybucket")
+        self.assertEqual(mpu.aws.list_files("mybucket"), [])
 
         # Test upload
-        path = 'files/example.csv'
+        path = "files/example.csv"
         local_path = pkg_resources.resource_filename(__name__, path)
-        mpu.aws.s3_upload(local_path, 's3://mybucket/example_test.csv')
-        self.assertEqual(mpu.aws.list_files('mybucket'),
-                         ['s3://mybucket/example_test.csv'])
+        mpu.aws.s3_upload(local_path, "s3://mybucket/example_test.csv")
+        self.assertEqual(
+            mpu.aws.list_files("mybucket"), ["s3://mybucket/example_test.csv"]
+        )
 
         # Test download
-        _, destination = mkstemp(suffix='example.csv')
+        _, destination = mkstemp(suffix="example.csv")
         os.remove(destination)  # make sure this file does NOT exist
-        mpu.aws.s3_download('s3://mybucket/example_test.csv', destination)
+        mpu.aws.s3_download("s3://mybucket/example_test.csv", destination)
         self.assertTrue(filecmp.cmp(destination, local_path))
         os.remove(destination)  # cleanup of mkstemp
 
         # Test download: File exists
-        _, destination = mkstemp(suffix='example.csv')
+        _, destination = mkstemp(suffix="example.csv")
         with self.assertRaises(RuntimeError):
-            mpu.aws.s3_download('s3://mybucket/example_test.csv',
-                                destination,
-                                exists_strategy=mpu.aws.ExistsStrategy.RAISE)
+            mpu.aws.s3_download(
+                "s3://mybucket/example_test.csv",
+                destination,
+                exists_strategy=mpu.aws.ExistsStrategy.RAISE,
+            )
         with self.assertRaises(ValueError):
-            mpu.aws.s3_download('s3://mybucket/example_test.csv',
-                                destination,
-                                exists_strategy='raises')
-        mpu.aws.s3_download('s3://mybucket/example_test.csv',
-                            destination,
-                            exists_strategy=mpu.aws.ExistsStrategy.ABORT)
-        mpu.aws.s3_download('s3://mybucket/example_test.csv',
-                            destination,
-                            exists_strategy=mpu.aws.ExistsStrategy.REPLACE)
+            mpu.aws.s3_download(
+                "s3://mybucket/example_test.csv",
+                destination,
+                exists_strategy="raises"
+            )
+        mpu.aws.s3_download(
+            "s3://mybucket/example_test.csv",
+            destination,
+            exists_strategy=mpu.aws.ExistsStrategy.ABORT,
+        )
+        mpu.aws.s3_download(
+            "s3://mybucket/example_test.csv",
+            destination,
+            exists_strategy=mpu.aws.ExistsStrategy.REPLACE,
+        )
 
-        mpu.aws.s3_read('s3://mybucket/example_test.csv')
+        mpu.aws.s3_read("s3://mybucket/example_test.csv")
         os.remove(destination)  # cleanup of mkstemp
 
     def test_s3_path_split(self):
         with self.assertRaises(ValueError):
-            mpu.aws._s3_path_split('foo/bar')
+            mpu.aws._s3_path_split("foo/bar")

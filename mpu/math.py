@@ -85,12 +85,12 @@ def factorize(number):
     [1]
     """
     if not isinstance(number, int):
-        raise ValueError('integer expected, but type(number)={}'
+        raise ValueError("integer expected, but type(number)={}"
                          .format(type(number)))
     if number < 0:
         return [-1] + factorize(number * (-1))
     elif number == 0:
-        raise ValueError('All primes are prime factors of 0.')
+        raise ValueError("All primes are prime factors of 0.")
     else:
         for i in range(2, int(math_stl.ceil(number**0.5)) + 1):
             if number % i == 0:
@@ -195,6 +195,10 @@ def round_up(x, decimal_places):
 
     Examples
     --------
+    >>> round_up(1.2344, 3)
+    1.235
+    >>> round_up(1.234, 3)
+    1.234
     >>> round_up(1.23456, 3)
     1.235
     >>> round_up(1.23456, 2)
@@ -224,5 +228,6 @@ def round_down(x, decimal_places):
     1.23
     """
     from math import floor
-    d = int('1' + ('0' * decimal_places))
+
+    d = int("1" + ("0" * decimal_places))
     return floor(x * d) / d

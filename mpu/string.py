@@ -52,8 +52,10 @@ def is_email(potential_email_address):
     """
     context, mail = parseaddr(potential_email_address)
     first_condition = len(context) == 0
-    dot_after_at = ('@' in potential_email_address
-                    and '.' in potential_email_address.split('@')[1])
+    dot_after_at = (
+        "@" in potential_email_address
+        and "." in potential_email_address.split("@")[1]
+    )
     return first_condition and dot_after_at
 
 
@@ -125,7 +127,7 @@ def is_float(potential_float):
         return False
 
 
-def str2bool(string_, default='raise'):
+def str2bool(string_, default="raise"):
     """
     Convert a string to a bool.
 
@@ -148,14 +150,14 @@ def str2bool(string_, default='raise'):
     >>> str2bool('0')
     False
     """
-    true = ['true', 't', '1', 'y', 'yes', 'enabled', 'enable', 'on']
-    false = ['false', 'f', '0', 'n', 'no', 'disabled', 'disable', 'off']
+    true = ["true", "t", "1", "y", "yes", "enabled", "enable", "on"]
+    false = ["false", "f", "0", "n", "no", "disabled", "disable", "off"]
     if string_.lower() in true:
         return True
     elif string_.lower() in false or (not default):
         return False
     else:
-        raise ValueError('The value \'{}\' cannot be mapped to boolean.'
+        raise ValueError("The value '{}' cannot be mapped to boolean."
                          .format(string_))
 
 
@@ -187,7 +189,7 @@ def str2str_or_none(string_):
         return string_
 
 
-def str2bool_or_none(string_, default='raise'):
+def str2bool_or_none(string_, default="raise"):
     """
     Convert a string to a bool or to None.
 
@@ -267,7 +269,7 @@ def str2int_or_none(string_):
         return int(string_)
 
 
-def is_none(string_, default='raise'):
+def is_none(string_, default="raise"):
     """
     Check if a string is equivalent to None.
 
@@ -288,13 +290,13 @@ def is_none(string_, default='raise'):
     >>> is_none('undefined', default=False)
     True
     """
-    none = ['none', 'undefined', 'unknown', 'null', '']
+    none = ["none", "undefined", "unknown", "null", ""]
     if string_.lower() in none:
         return True
     elif not default:
         return False
     else:
-        raise ValueError('The value \'{}\' cannot be mapped to none.'
+        raise ValueError("The value '{}' cannot be mapped to none."
                          .format(string_))
 
 
@@ -323,35 +325,38 @@ def is_iban(potential_iban):
     >>> is_iban('DE89 3704 0044 0532 0130 01')
     False
     """
-    path = 'data/iban.csv'  # always use slash in Python packages
-    filepath = pkg_resources.resource_filename('mpu', path)
-    data = mpu.io.read(filepath, delimiter=';', format='dicts')
-    potential_iban = potential_iban.replace(' ', '')  # Remove spaces
-    if len(potential_iban) < min([int(el['length']) for el in data]):
+    path = "data/iban.csv"  # always use slash in Python packages
+    filepath = pkg_resources.resource_filename("mpu", path)
+    data = mpu.io.read(filepath, delimiter=";", format="dicts")
+    potential_iban = potential_iban.replace(" ", "")  # Remove spaces
+    if len(potential_iban) < min([int(el["length"]) for el in data]):
         return False
     country = None
     for element in data:
-        if element['iban_fields'][:2] == potential_iban[:2]:
+        if element["iban_fields"][:2] == potential_iban[:2]:
             country = element
             break
     if country is None:
         return False
-    if len(potential_iban) != int(country['length']):
+    if len(potential_iban) != int(country["length"]):
         return False
-    if country['country_en'] == 'Germany':
-        checksum_val = [value
-                        for field_type, value in
-                        zip(country['iban_fields'], potential_iban)
-                        if field_type == 'k']
-        checksum_val = ''.join(checksum_val)
-        checksum_exp = _calculate_german_iban_checksum(potential_iban,
-                                                       country['iban_fields'])
+    if country["country_en"] == "Germany":
+        checksum_val = [
+            value
+            for field_type, value in
+            zip(country["iban_fields"], potential_iban)
+            if field_type == "k"
+        ]
+        checksum_val = "".join(checksum_val)
+        checksum_exp = _calculate_german_iban_checksum(
+            potential_iban, country["iban_fields"]
+        )
         return checksum_val == checksum_exp
     return True
 
 
 def _calculate_german_iban_checksum(iban,
-                                    iban_fields='DEkkbbbbbbbbcccccccccc'):
+                                    iban_fields="DEkkbbbbbbbbcccccccccc"):
     """
     Calculate the checksam of the German IBAN format.
 
@@ -361,23 +366,35 @@ def _calculate_german_iban_checksum(iban,
     >>> _calculate_german_iban_checksum(iban)
     '41'
     """
-    number = [value
-              for field_type, value in zip(iban_fields, iban)
-              if field_type in ['b', 'c']]
-    translate = {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5',
-                 '6': '6', '7': '7', '8': '8', '9': '9'}
-    for i in range(ord('A'), ord('Z') + 1):
-        translate[chr(i)] = str(i - ord('A') + 10)
-    for val in 'DE00':
+    number = [
+        value
+        for field_type, value in zip(iban_fields, iban)
+        if field_type in ["b", "c"]
+    ]
+    translate = {
+        "0": "0",
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
+    }
+    for i in range(ord("A"), ord("Z") + 1):
+        translate[chr(i)] = str(i - ord("A") + 10)
+    for val in "DE00":
         translated = translate[val]
         for char in translated:
             number.append(char)
-    number = sum(int(value) * 10**i for i, value in enumerate(number[::-1]))
+    number = sum(int(value) * 10 ** i for i, value in enumerate(number[::-1]))
     checksum = 98 - (number % 97)
     return str(checksum)
 
 
-def human_readable_bytes(nb_bytes, suffix='B'):
+def human_readable_bytes(nb_bytes, suffix="B"):
     """
     Convert a byte number into a human readable format.
 
@@ -401,8 +418,8 @@ def human_readable_bytes(nb_bytes, suffix='B'):
     >>> human_readable_bytes(9671406556917033397649423)
     '8.0 YiB'
     """
-    for unit in ['', 'Ki', 'Mi', 'Gi', 'Ti', 'Pi', 'Ei', 'Zi']:
+    for unit in ["", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"]:
         if abs(nb_bytes) < 1024.0:
-            return '%3.1f %s%s' % (nb_bytes, unit, suffix)
+            return "%3.1f %s%s" % (nb_bytes, unit, suffix)
         nb_bytes /= 1024.0
-    return '%.1f %s%s' % (nb_bytes, 'Yi', suffix)
+    return "%.1f %s%s" % (nb_bytes, "Yi", suffix)
