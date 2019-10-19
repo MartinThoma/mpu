@@ -9,4 +9,4 @@ package:
 	make clean
 	./create_package.sh
 muation-test:
-	cosmic-ray init cr-config.toml cr_session.sqlite && cosmic-ray exec cr_session.sqlite && cr-html cr_session.sqlite > cr-report.html
+	mutmut run

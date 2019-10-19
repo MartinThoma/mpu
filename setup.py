@@ -37,7 +37,7 @@ requires_all = (['pandas', 'python-magic'] + requires_datetime
 
 config = {
     'name': 'mpu',
-    'version': '0.20.0',  # keep in sync with mpu/_version.py
+    'version': '0.21.0',  # keep in sync with mpu/_version.py
     'author': 'Martin Thoma',
     'author_email': 'info@martin-thoma.de',
     'maintainer': 'Martin Thoma',
@@ -53,9 +53,6 @@ config = {
                        'io': requires_io,
                        'tests': requires_tests},
     'tests_require': requires_tests,
-    'entry_points': {
-        'console_scripts': ['mpu=mpu._cli:main']
-    },
     'platforms': ['Linux'],
     'url': 'https://github.com/MartinThoma/mpu',
     'license': 'MIT',

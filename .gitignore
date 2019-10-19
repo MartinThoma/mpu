@@ -108,6 +108,6 @@ tests/reports/
 lambda.zip
 venv-lambda/
 report/
-cr_session.json
-cr-report.html
-cr_session.sqlite
+
+# https://pypi.org/project/mutmut/
+.mutmut-cache
