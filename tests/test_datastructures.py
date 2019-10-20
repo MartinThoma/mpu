@@ -8,7 +8,13 @@ from datetime import datetime
 import pytest
 
 # First party
-from mpu.datastructures import EList, Interval, IntervalUnion, flatten
+from mpu.datastructures import (
+    EList,
+    Interval,
+    IntervalUnion,
+    dict_merge,
+    flatten,
+)
 
 
 def test_EList_empty():
@@ -22,6 +28,42 @@ def test_EList_getitem():
     assert elist[0] == 2
     assert elist[1] == 3
     assert elist[4] == 11
+
+
+def test_dict_merge_take_left_deep():
+    """Check if editing a nested dict has effects on the merged one."""
+    a = {'1': {'2': [0, 1, 2]}}
+    b = {'2': '3'}
+    merged = dict_merge(a, b, merge_method="take_left_deep")
+    a['1']['2'].append(42)
+    assert 42 not in merged['1']['2']
+
+
+def test_dict_merge_take_right_deep():
+    """Check if editing a nested dict has effects on the merged one."""
+    a = {'1': {'2': [0, 1, 2]}}
+    b = {'2': '3'}
+    merged = dict_merge(a, b, merge_method="take_right_deep")
+    a['1']['2'].append(42)
+    assert 42 not in merged['1']['2']
+
+
+def test_dict_merge_take_left_shallow():
+    """Check if editing a nested dict has effects on the merged one."""
+    a = {'1': {'2': [0, 1, 2]}}
+    b = {'2': '3'}
+    merged = dict_merge(a, b, merge_method="take_left_shallow")
+    a['1']['2'].append(42)
+    assert 42 not in merged['1']['2']
+
+
+def test_dict_merge_take_right_shallow():
+    """Check if editing a nested dict has effects on the merged one."""
+    a = {'1': {'2': [0, 1, 2]}}
+    b = {'2': '3'}
+    merged = dict_merge(a, b, merge_method="take_right_shallow")
+    a['1']['2'].append(42)
+    assert 42 not in merged['1']['2']
 
 
 def test_flatten_string():
@@ -264,3 +306,37 @@ def test_interval_union_equality():
 def test_interval_union_is_empty():
     iu = IntervalUnion([[], [], []])
     assert iu.is_empty()
+
+
+def test_interval_and():
+    i1 = Interval(0, 10)
+    i2 = Interval(5, 20)
+    i3 = Interval(5, 10)
+    assert i1 & i2 == i3
+
+
+def test_interval_or():
+    i1 = Interval(0, 10)
+    i2 = Interval(5, 20)
+    i3 = Interval(0, 20)
+    assert i1 | i2 == i3
+
+
+def test_interval_str():
+    i1 = Interval(0, 10)
+    assert str(i1) == "[0, 10]"
+
+
+def test_interval_repr():
+    i1 = Interval(0, 10)
+    assert repr(i1) == "Interval(0, 10)"
+
+
+def test_interval_union_str():
+    iu1 = IntervalUnion([[0, 1], [2, 3]])
+    assert str(iu1) == "[Interval(0, 1), Interval(2, 3)]"
+
+
+def test_interval_union_repr():
+    iu1 = IntervalUnion([[0, 1], [2, 3]])
+    assert repr(iu1) == "IntervalUnion([Interval(0, 1), Interval(2, 3)])"

@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # Third party
-import simplejson  # has for_json
 import pytest
+import simplejson  # has for_json
 
 # First party
 from mpu.units import Currency, Money, get_currency

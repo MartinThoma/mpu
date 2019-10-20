@@ -154,7 +154,6 @@ def dict_merge(dict_left, dict_right, merge_method="take_left_shallow"):
     >>> out == expected
     True
     """
-    new_dict = {}
     if merge_method in ["take_right_shallow", "take_right_deep"]:
         return _dict_merge_right(dict_left, dict_right, merge_method)
     elif merge_method == "take_left_shallow":
@@ -186,7 +185,7 @@ def _dict_merge_right(dict_left, dict_right, merge_method):
     new_dict = deepcopy(dict_left)
     for key, value in dict_right.items():
         if key not in new_dict:
-            new_dict[key] = value
+            new_dict[key] = deepcopy(value)
         else:
             recurse = (
                 merge_method == "take_right_deep"
@@ -224,9 +223,9 @@ def set_dict_value(dictionary, keys, value):
 
     Examples
     --------
-    >>> d = {'a': {'b': 'c', 'd': 'e'}}
-    >>> expected = {'a': {'b': 'foobar', 'd': 'e'}}
-    >>> set_dict_value(d, ['a', 'b'], 'foobar') == expected
+    >>> d = {'a': {'b': {'c': 'x', 'f': 'g'}, 'd': 'e'}}
+    >>> expected = {'a': {'b': {'c': 'foobar', 'f': 'g'}, 'd': 'e'}}
+    >>> set_dict_value(d, ['a', 'b', 'c'], 'foobar') == expected
     True
     """
     orig = dictionary
@@ -633,6 +632,9 @@ class IntervalUnion(IntervalLike):
 
     def __repr__(self):
         """Get an unambiguous representation."""
+        return "IntervalUnion(" + str(self.intervals) + ")"
+
+    def __str__(self):
         return str(self.intervals)
 
     def __eq__(self, other):
