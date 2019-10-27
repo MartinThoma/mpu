@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test the mpu.units module."""
+
 # Third party
 import pytest
 import simplejson  # has for_json

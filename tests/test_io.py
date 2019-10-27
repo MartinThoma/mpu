@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test the mpu.io module."""
+
 # Core Library
 import datetime
 import os

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""Test the mpu.datastructures module."""
+
 # Core Library
 from datetime import datetime
 
