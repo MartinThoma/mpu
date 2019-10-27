@@ -10,3 +10,5 @@ package:
 	./create_package.sh
 muation-test:
 	mutmut run
+bandit:
+	bandit -r mpu

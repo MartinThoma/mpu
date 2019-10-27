@@ -482,7 +482,8 @@ class IntervalUnion(IntervalLike):
     """A union of Intervals."""
 
     def __init__(self, intervals):
-        assert isinstance(intervals, list)
+        if not isinstance(intervals, list):
+            raise TypeError("'{}' is not a list".format(type(intervals)))
         self.intervals = []
         for interval in intervals:
             if isinstance(interval, Interval):
