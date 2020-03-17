@@ -34,38 +34,38 @@ def test_EList_getitem():
 
 def test_dict_merge_take_left_deep():
     """Check if editing a nested dict has effects on the merged one."""
-    a = {'1': {'2': [0, 1, 2]}}
-    b = {'2': '3'}
+    a = {"1": {"2": [0, 1, 2]}}
+    b = {"2": "3"}
     merged = dict_merge(a, b, merge_method="take_left_deep")
-    a['1']['2'].append(42)
-    assert 42 not in merged['1']['2']
+    a["1"]["2"].append(42)
+    assert 42 not in merged["1"]["2"]
 
 
 def test_dict_merge_take_right_deep():
     """Check if editing a nested dict has effects on the merged one."""
-    a = {'1': {'2': [0, 1, 2]}}
-    b = {'2': '3'}
+    a = {"1": {"2": [0, 1, 2]}}
+    b = {"2": "3"}
     merged = dict_merge(a, b, merge_method="take_right_deep")
-    a['1']['2'].append(42)
-    assert 42 not in merged['1']['2']
+    a["1"]["2"].append(42)
+    assert 42 not in merged["1"]["2"]
 
 
 def test_dict_merge_take_left_shallow():
     """Check if editing a nested dict has effects on the merged one."""
-    a = {'1': {'2': [0, 1, 2]}}
-    b = {'2': '3'}
+    a = {"1": {"2": [0, 1, 2]}}
+    b = {"2": "3"}
     merged = dict_merge(a, b, merge_method="take_left_shallow")
-    a['1']['2'].append(42)
-    assert 42 not in merged['1']['2']
+    a["1"]["2"].append(42)
+    assert 42 not in merged["1"]["2"]
 
 
 def test_dict_merge_take_right_shallow():
     """Check if editing a nested dict has effects on the merged one."""
-    a = {'1': {'2': [0, 1, 2]}}
-    b = {'2': '3'}
+    a = {"1": {"2": [0, 1, 2]}}
+    b = {"2": "3"}
     merged = dict_merge(a, b, merge_method="take_right_shallow")
-    a['1']['2'].append(42)
-    assert 42 not in merged['1']['2']
+    a["1"]["2"].append(42)
+    assert 42 not in merged["1"]["2"]
 
 
 def test_flatten_string():

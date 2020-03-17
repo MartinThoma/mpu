@@ -420,6 +420,6 @@ def human_readable_bytes(nb_bytes, suffix="B"):
     """
     for unit in ["", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"]:
         if abs(nb_bytes) < 1024.0:
-            return "%3.1f %s%s" % (nb_bytes, unit, suffix)
+            return "{:3.1f} {}{}".format(nb_bytes, unit, suffix)
         nb_bytes /= 1024.0
-    return "%.1f %s%s" % (nb_bytes, "Yi", suffix)
+    return "{:.1f} {}{}".format(nb_bytes, "Yi", suffix)

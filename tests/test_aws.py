@@ -54,7 +54,7 @@ def test_list_no_files():
         mpu.aws.s3_download(
             "s3://mybucket/example_test.csv",
             destination,
-            exists_strategy="raises"
+            exists_strategy="raises",
         )
     mpu.aws.s3_download(
         "s3://mybucket/example_test.csv",

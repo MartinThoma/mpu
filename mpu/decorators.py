@@ -12,6 +12,7 @@ from time import time
 
 def timing(func):
     """Measure the execution time of a function call and print the result."""
+
     @functools.wraps(func)
     def wrap(*args, **kw):
         t0 = time()
@@ -32,6 +33,7 @@ def deprecated(func):
 
     It will result in a warning being emitted when the function is used.
     """
+
     @functools.wraps(func)
     def new_func(*args, **kwargs):
         if sys.version_info < (3, 0):

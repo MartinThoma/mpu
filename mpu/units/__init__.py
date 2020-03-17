@@ -94,7 +94,7 @@ class Money(object):
             return "{value:0.{exponent}f} {currency}".format(
                 exponent=exponent,
                 value=float(self.value),
-                currency=self.currency
+                currency=self.currency,
             )
 
     def __repr__(self):

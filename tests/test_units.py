@@ -139,7 +139,7 @@ def test_currency_comperators():
 
     assert (c > d) is False
     assert (c < d) is False
-    assert (c == d)is False
+    assert (c == d) is False
     assert (c < 1) is False
     assert (c > 1) is False
 
