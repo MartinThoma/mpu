@@ -19,12 +19,12 @@ from mpu.datastructures import (
 )
 
 
-def test_EList_empty():
+def test_elist_empty():
     elist = EList()
     assert len(elist) == 0
 
 
-def test_EList_getitem():
+def test_elist_getitem():
     elist = EList([2, 3, 5, 7, 11])
     assert elist[2] == 5
     assert elist[0] == 2
