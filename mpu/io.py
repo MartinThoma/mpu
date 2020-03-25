@@ -19,11 +19,6 @@ from datetime import datetime
 # First party
 from mpu.datastructures import EList
 
-try:
-    to_unicode = unicode
-except NameError:
-    to_unicode = str
-
 
 def read(filepath, **kwargs):
     """
@@ -206,7 +201,7 @@ def _write_json(filepath, data, kwargs):
         if "ensure_ascii" not in kwargs:
             kwargs["ensure_ascii"] = False
         str_ = json.dumps(data, **kwargs)
-        outfile.write(to_unicode(str_))
+        outfile.write(str_)
     return data
 
 
@@ -222,7 +217,7 @@ def _write_jsonl(filepath, data, kwargs):
             kwargs["ensure_ascii"] = False
         for line in data:
             str_ = json.dumps(line, **kwargs)
-            outfile.write(to_unicode(str_))
+            outfile.write(str_)
             outfile.write(u"\n")
     return data
 
