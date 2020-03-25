@@ -47,11 +47,6 @@ class TrieNode(object):
     def push(self, value: str):
         if self.is_frozen:
             raise RuntimeError("The node is frozen. You may not edit it.")
-        # if value == self._value:
-        #     logger.debug("The pushed value is the value of the current node")
-        #     self.count += 1
-        #     self.is_word = True
-        #     return
         if value == self._value and len(value) == 0:
             # This is the root node
             self.is_word = True
@@ -120,9 +115,8 @@ class Trie(AbstractTrie):
 
     def autocomplete(self, prefix):
         found_prefix, subtrie = self.get_subtrie(prefix)
-        if subtrie is not None:
-            for word in subtrie:
-                yield found_prefix + word
+        for word in subtrie:
+            yield found_prefix + word
 
     def get_subtrie(self, prefix) -> Tuple[str, TrieNode]:
         if self._root is None:
@@ -131,9 +125,7 @@ class Trie(AbstractTrie):
 
     def __iter__(self):
         self._iteration_index = -1
-        self._child_values = []
-        if self._root is not None:
-            self._child_values = [element for element in self._root]
+        self._child_values = [element for element in self._root]
         return self
 
     def __next__(self):

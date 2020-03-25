@@ -3,8 +3,10 @@
 
 """Test the mpu.datastructures.char_trie module."""
 
+import pytest
+
 # First party
-from mpu.datastructures.trie.char_trie import Trie
+from mpu.datastructures.trie.char_trie import Trie, TrieNode
 
 
 def test_trie_print():
@@ -34,3 +36,13 @@ def test_trie_print():
       t"""
     assert trie_data == expected
     trie.print(print_stdout=True)
+
+
+def test_create_trie_node_with_children():
+    TrieNode("b", children={"a": TrieNode("a")})
+
+
+def test_trie_node_push():
+    node = TrieNode(value="a")
+    with pytest.raises(ValueError):
+        node.push("")

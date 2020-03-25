@@ -28,7 +28,7 @@ def test_trie_add_same(Trie):
 
 
 @pytest.mark.parametrize("Trie", all_tries)
-def test_empty_trie_iter(Trie):
+def test_empty_trie_iter_empty(Trie):
     trie = Trie()
     assert [word for word in trie] == []
 

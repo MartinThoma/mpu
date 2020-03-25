@@ -1,8 +1,5 @@
-# Third party
-import pytest
-
 # First party
-from mpu.datastructures.trie.string_trie import Trie, TrieNode
+from mpu.datastructures.trie.string_trie import Trie
 
 
 def test_trie_print():
@@ -28,12 +25,6 @@ def test_trie_creation_prefix_search():
     expected = set(["tom", "tomcat", "tomatoe"])
     prefix, subtrie = trie.get_subtrie("tom")
     assert set(prefix + element for element in subtrie) == expected
-
-
-def test_frozen_node_push():
-    node = TrieNode("a", freeze=True)
-    with pytest.raises(RuntimeError):
-        node.push("b")
 
 
 def test_get_subtrie_direct_hit2():

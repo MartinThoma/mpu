@@ -3,9 +3,12 @@ import pytest
 
 # First party
 from mpu.datastructures.trie.char_trie import EMPTY_NODE as CHAR_EMPTY_NODE
-from mpu.datastructures.trie.char_trie import Trie as CharTrie
+from mpu.datastructures.trie.char_trie import Trie as CharTrie, TrieNode as CharTrieNode
 from mpu.datastructures.trie.string_trie import EMPTY_NODE as STRING_EMPTY_NODE
-from mpu.datastructures.trie.string_trie import Trie as StringTrie
+from mpu.datastructures.trie.string_trie import (
+    Trie as StringTrie,
+    TrieNode as StringTrieNode,
+)
 
 nodebased_tries = [CharTrie, StringTrie]
 nodebased_tries_empty_nodes = [
@@ -81,3 +84,16 @@ def test_trie_creation_prefix_search(Trie):
     expected = set(["tom", "tomcat", "tomatoe"])
     prefix, subtrie = trie.get_subtrie("tom")
     assert set(prefix + element for element in subtrie) == expected
+
+
+@pytest.mark.parametrize("TrieNode", [CharTrieNode, StringTrieNode])
+def test_frozen_node_push(TrieNode):
+    node = TrieNode("a", freeze=True)
+    with pytest.raises(RuntimeError):
+        node.push("b")
+
+
+@pytest.mark.parametrize("Trie", nodebased_tries)
+def test_push_empty(Trie):
+    trie = Trie()
+    trie.push("")
