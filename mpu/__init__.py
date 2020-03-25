@@ -131,8 +131,9 @@ class Location(object):
     def longitude(self, longitude):
         """Setter for longitude."""
         if not (-180 <= longitude <= 180):
-            raise ValueError("longitude was {}, but has to be in [-180, 180]"
-                             .format(longitude))
+            raise ValueError(
+                "longitude was {}, but has to be in [-180, 180]".format(longitude)
+            )
         self._longitude = longitude
 
     def get_google_maps_link(self):
@@ -197,19 +198,18 @@ def haversine_distance(origin, destination):
     if not (-90.0 <= lat2 <= 90):
         raise ValueError("lat2={:2.2f}, but must be in [-90,+90]".format(lat2))
     if not (-180.0 <= lon1 <= 180):
-        raise ValueError("lon1={:2.2f}, but must be in [-180,+180]"
-                         .format(lat1))
+        raise ValueError("lon1={:2.2f}, but must be in [-180,+180]".format(lat1))
     if not (-180.0 <= lon2 <= 180):
-        raise ValueError("lon1={:2.2f}, but must be in [-180,+180]"
-                         .format(lat1))
+        raise ValueError("lon1={:2.2f}, but must be in [-180,+180]".format(lat1))
     radius = 6371  # km
 
     dlat = math_stl.radians(lat2 - lat1)
     dlon = math_stl.radians(lon2 - lon1)
-    a = (math_stl.sin(dlat / 2) * math_stl.sin(dlat / 2)
-         + math_stl.cos(math_stl.radians(lat1))
-         * math_stl.cos(math_stl.radians(lat2))
-         * math_stl.sin(dlon / 2) * math_stl.sin(dlon / 2))
+    a = math_stl.sin(dlat / 2) * math_stl.sin(dlat / 2) + math_stl.cos(
+        math_stl.radians(lat1)
+    ) * math_stl.cos(math_stl.radians(lat2)) * math_stl.sin(dlon / 2) * math_stl.sin(
+        dlon / 2
+    )
     c = 2 * math_stl.atan2(math_stl.sqrt(a), math_stl.sqrt(1 - a))
     d = radius * c
 
@@ -229,8 +229,9 @@ def is_in_intervall(value, min_value, max_value, name="variable"):
         Name of the variable to print in exception.
     """
     if not (min_value <= value <= max_value):
-        raise ValueError("{}={} is not in [{}, {}]"
-                         .format(name, value, min_value, max_value))
+        raise ValueError(
+            "{}={} is not in [{}, {}]".format(name, value, min_value, max_value)
+        )
 
 
 def exception_logging(exctype, value, tb):

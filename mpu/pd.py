@@ -23,12 +23,7 @@ logger = logging.getLogger("mpu")
 
 def example_df():
     """Create an example dataframe."""
-    country_names = ["Germany",
-                     "France",
-                     "Indonesia",
-                     "Ireland",
-                     "Spain",
-                     "Vatican"]
+    country_names = ["Germany", "France", "Indonesia", "Ireland", "Spain", "Vatican"]
     population = [82521653, 66991000, 255461700, 4761865, 46549045, None]
     population_time = [
         dt.datetime(2016, 12, 1),
@@ -91,11 +86,7 @@ def describe(df, dtype=None):
 
 
 def _get_column_info(df, dtype):
-    column_info = {"int": [],
-                   "float": [],
-                   "category": [],
-                   "other": [],
-                   "time": []}
+    column_info = {"int": [], "float": [], "category": [], "other": [], "time": []}
     float_types = ["float64"]
     integer_types = ["int64", "uint8"]
     time_types = ["datetime64[ns]"]
@@ -158,8 +149,7 @@ def _get_column_info(df, dtype):
             column_info["time"].append(column_name)
         else:
             logger.warning(
-                "mpu.pd.describe does not know type '{}'"
-                .format(df[column_name].dtype)
+                "mpu.pd.describe does not know type '{}'".format(df[column_name].dtype)
             )
     return column_info, column_info_meta
 
@@ -167,15 +157,7 @@ def _get_column_info(df, dtype):
 def _describe_int(df, column_info):
     print("\n## Integer Columns")
     table = [
-        ["Column name",
-         "Non-nan",
-         "mean",
-         "std",
-         "min",
-         "25%",
-         "50%",
-         "75%",
-         "max"]
+        ["Column name", "Non-nan", "mean", "std", "min", "25%", "50%", "75%", "max"]
     ]
     for column_name in column_info["int"]:
         row = []
@@ -195,15 +177,7 @@ def _describe_int(df, column_info):
 def _describe_float(df, column_info):
     print("\n## Float Columns")
     table = [
-        ["Column name",
-         "Non-nan",
-         "mean",
-         "std",
-         "min",
-         "25%",
-         "50%",
-         "75%",
-         "max"]
+        ["Column name", "Non-nan", "mean", "std", "min", "25%", "50%", "75%", "max"]
     ]
     for column_name in column_info["float"]:
         row = []
@@ -222,12 +196,7 @@ def _describe_float(df, column_info):
 
 def _describe_category(df, column_info, column_info_meta):
     print("\n## Category Columns")
-    table = [["Column name",
-              "Non-nan",
-              "unique",
-              "top el",
-              "top (count)",
-              "rest"]]
+    table = [["Column name", "Non-nan", "unique", "top el", "top (count)", "rest"]]
     for column_name in column_info["category"]:
         row = []
         row.append(column_name)
@@ -244,13 +213,7 @@ def _describe_category(df, column_info, column_info_meta):
 def _describe_time(df, column_info, column_info_meta):
     print("\n## Time Columns")
     table = [
-        ["Column name",
-         "Non-nan",
-         "unique",
-         "top el",
-         "top (count)",
-         "min",
-         "max"]
+        ["Column name", "Non-nan", "unique", "top el", "top (count)", "min", "max"]
     ]
     for column_name in column_info["time"]:
         row = []

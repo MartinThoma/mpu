@@ -200,9 +200,7 @@ def _dict_merge_right(dict_left, dict_right, merge_method):
             )
             if recurse:
                 new_dict[key] = dict_merge(
-                    dict_left[key],
-                    dict_right[key],
-                    merge_method="take_right_deep",
+                    dict_left[key], dict_right[key], merge_method="take_right_deep",
                 )
             else:
                 new_dict[key] = value
@@ -387,8 +385,7 @@ class Interval(IntervalLike):
             return other
         else:  # noqa
             # This should never happen
-            raise NotImplementedError("Can't merge {} and {}"
-                                      .format(self, other))
+            raise NotImplementedError("Can't merge {} and {}".format(self, other))
 
     def intersection(self, other):
         """
@@ -596,8 +593,7 @@ class IntervalUnion(IntervalLike):
         elif isinstance(other, IntervalUnion):
             self.intervals += other.intervals
         else:
-            raise RuntimeError("Union with type={} not supported"
-                               .format(type(other)))
+            raise RuntimeError("Union with type={} not supported".format(type(other)))
         self._simplify()
         return self
 

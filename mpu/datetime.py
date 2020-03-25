@@ -33,8 +33,8 @@ def add_time(datetime_obj, days=0, hours=0, minutes=0, seconds=0):
     datetime : datetime.datetime
     """
     seconds += minutes * 60
-    seconds += hours * 60**2
-    seconds += days * 24 * 60**2
+    seconds += hours * 60 ** 2
+    seconds += days * 24 * 60 ** 2
     t14 = datetime_obj + dt.timedelta(seconds=seconds)  # Invalid timezone!
     t14 = t14.astimezone(pytz.utc).astimezone(t14.tzinfo)  # Fix the timezone
     return t14

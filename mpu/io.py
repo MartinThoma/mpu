@@ -55,8 +55,7 @@ def read(filepath, **kwargs):
         with open(filepath, "rb") as handle:
             data = pickle.load(handle)
         return data
-    elif (filepath.lower().endswith(".yml")
-          or filepath.lower().endswith(".yaml")):
+    elif filepath.lower().endswith(".yml") or filepath.lower().endswith(".yaml"):
         raise NotImplementedError(
             "YAML is not supported, because you need "
             "PyYAML in Python3. "
@@ -64,8 +63,7 @@ def read(filepath, **kwargs):
             "https://stackoverflow.com/a/42054860/562769"
             " as a guide how to use it."
         )
-    elif (filepath.lower().endswith(".h5")
-          or filepath.lower().endswith(".hdf5")):
+    elif filepath.lower().endswith(".h5") or filepath.lower().endswith(".hdf5"):
         raise NotImplementedError(
             "HDF5 is not supported. See "
             "https://stackoverflow.com/a/41586571/562769"
@@ -114,8 +112,7 @@ def _read_csv(filepath, kwargs):
 def _read_jsonl(filepath, kwargs):
     """See documentation of mpu.io.read."""
     with open(filepath) as data_file:
-        data = [json.loads(line, **kwargs)
-                for line in data_file if len(line) > 0]
+        data = [json.loads(line, **kwargs) for line in data_file if len(line) > 0]
     return data
 
 
@@ -151,8 +148,7 @@ def write(filepath, data, **kwargs):
         return _write_jsonl(filepath, data, kwargs)
     elif filepath.lower().endswith(".pickle"):
         return _write_pickle(filepath, data, kwargs)
-    elif (filepath.lower().endswith(".yml")
-          or filepath.lower().endswith(".yaml")):
+    elif filepath.lower().endswith(".yml") or filepath.lower().endswith(".yaml"):
         raise NotImplementedError(
             "YAML is not supported, because you need "
             "PyYAML in Python3. "
@@ -160,8 +156,7 @@ def write(filepath, data, **kwargs):
             "https://stackoverflow.com/a/42054860/562769"
             " as a guide how to use it."
         )
-    elif (filepath.lower().endswith(".h5")
-          or filepath.lower().endswith(".hdf5")):
+    elif filepath.lower().endswith(".h5") or filepath.lower().endswith(".hdf5"):
         raise NotImplementedError(
             "YAML is not supported. See "
             "https://stackoverflow.com/a/41586571/562769"

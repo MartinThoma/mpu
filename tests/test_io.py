@@ -211,9 +211,7 @@ def test_write_jsonl_all_params():
     _write_jsonl(
         filepath,
         data,
-        kwargs={"sort_keys": True,
-                "separators": (",", ": "),
-                "ensure_ascii": True},
+        kwargs={"sort_keys": True, "separators": (",", ": "), "ensure_ascii": True},
     )
     data_read = read(filepath)
     assert data == data_read

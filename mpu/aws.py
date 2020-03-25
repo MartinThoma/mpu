@@ -80,9 +80,9 @@ class ExistsStrategy(enum.Enum):
     ABORT = "abort"
 
 
-def s3_download(source, destination=None,
-                exists_strategy=ExistsStrategy.RAISE,
-                profile_name=None):
+def s3_download(
+    source, destination=None, exists_strategy=ExistsStrategy.RAISE, profile_name=None
+):
     """
     Copy a file from an S3 source to a local destination.
 
@@ -114,8 +114,9 @@ def s3_download(source, destination=None,
         See https://boto3.readthedocs.io/en/latest/guide/configuration.html
     """
     if not isinstance(exists_strategy, ExistsStrategy):
-        raise ValueError("exists_strategy '{}' is not in {}"
-                         .format(exists_strategy, ExistsStrategy))
+        raise ValueError(
+            "exists_strategy '{}' is not in {}".format(exists_strategy, ExistsStrategy)
+        )
     session = boto3.Session(profile_name=profile_name)
     s3 = session.resource("s3")
     bucket_name, key = _s3_path_split(source)
@@ -174,9 +175,8 @@ def _s3_path_split(s3_path):
     """
     if not s3_path.startswith("s3://"):
         raise ValueError(
-            "s3_path is expected to start with 's3://', " "but was {}"
-            .format(s3_path)
+            "s3_path is expected to start with 's3://', " "but was {}".format(s3_path)
         )
-    bucket_key = s3_path[len("s3://"):]
+    bucket_key = s3_path[len("s3://") :]
     bucket_name, key = bucket_key.split("/", 1)
     return S3Path(bucket_name, key)

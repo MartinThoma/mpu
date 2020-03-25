@@ -53,8 +53,7 @@ def is_email(potential_email_address):
     context, mail = parseaddr(potential_email_address)
     first_condition = len(context) == 0
     dot_after_at = (
-        "@" in potential_email_address
-        and "." in potential_email_address.split("@")[1]
+        "@" in potential_email_address and "." in potential_email_address.split("@")[1]
     )
     return first_condition and dot_after_at
 
@@ -157,8 +156,7 @@ def str2bool(string_, default="raise"):
     elif string_.lower() in false or (not default):
         return False
     else:
-        raise ValueError("The value '{}' cannot be mapped to boolean."
-                         .format(string_))
+        raise ValueError("The value '{}' cannot be mapped to boolean.".format(string_))
 
 
 def str2str_or_none(string_):
@@ -296,8 +294,7 @@ def is_none(string_, default="raise"):
     elif not default:
         return False
     else:
-        raise ValueError("The value '{}' cannot be mapped to none."
-                         .format(string_))
+        raise ValueError("The value '{}' cannot be mapped to none.".format(string_))
 
 
 def is_iban(potential_iban):
@@ -343,8 +340,7 @@ def is_iban(potential_iban):
     if country["country_en"] == "Germany":
         checksum_val = [
             value
-            for field_type, value in
-            zip(country["iban_fields"], potential_iban)
+            for field_type, value in zip(country["iban_fields"], potential_iban)
             if field_type == "k"
         ]
         checksum_val = "".join(checksum_val)
@@ -355,8 +351,7 @@ def is_iban(potential_iban):
     return True
 
 
-def _calculate_german_iban_checksum(iban,
-                                    iban_fields="DEkkbbbbbbbbcccccccccc"):
+def _calculate_german_iban_checksum(iban, iban_fields="DEkkbbbbbbbbcccccccccc"):
     """
     Calculate the checksam of the German IBAN format.
 

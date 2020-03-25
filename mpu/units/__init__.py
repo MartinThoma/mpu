@@ -43,9 +43,12 @@ class Money(object):
         # Handle value
         if isinstance(value, tuple):
             if len(value) != 2:
-                raise ValueError(('value was {}, but only tuples of length 2 '
-                                  'str, int and decimal are allowed.')
-                                 .format(value))
+                raise ValueError(
+                    (
+                        "value was {}, but only tuples of length 2 "
+                        "str, int and decimal are allowed."
+                    ).format(value)
+                )
             self.value = fractions.Fraction(value[0], value[1])
         elif isinstance(value, float):
             raise ValueError(
@@ -92,9 +95,7 @@ class Money(object):
             )
         else:
             return "{value:0.{exponent}f} {currency}".format(
-                exponent=exponent,
-                value=float(self.value),
-                currency=self.currency,
+                exponent=exponent, value=float(self.value), currency=self.currency,
             )
 
     def __repr__(self):
@@ -158,8 +159,7 @@ class Money(object):
                 )
         else:
             raise ValueError(
-                ("Addition with type '{}' is not " "supported")
-                .format(type(other))
+                ("Addition with type '{}' is not " "supported").format(type(other))
             )
 
     def __sub__(self, other):
@@ -176,8 +176,7 @@ class Money(object):
                 )
         else:
             raise ValueError(
-                ("Subtraction with type '{}' is not " "supported")
-                .format(type(other))
+                ("Subtraction with type '{}' is not " "supported").format(type(other))
             )
 
     def __truediv__(self, other):
@@ -196,8 +195,7 @@ class Money(object):
             return Money(self.value / other, self.currency)
         else:
             raise ValueError(
-                ("Division with type '{}' is not " "supported")
-                .format(type(other))
+                ("Division with type '{}' is not " "supported").format(type(other))
             )
 
     __div__ = __truediv__
