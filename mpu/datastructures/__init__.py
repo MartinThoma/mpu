@@ -5,7 +5,13 @@
 
 # Core Library
 import collections
+import logging
 from copy import deepcopy
+
+# First party
+from mpu.datastructures.trie import Trie  # noqa
+
+logger = logging.getLogger(__name__)
 
 
 class EList(list):
@@ -92,7 +98,7 @@ def flatten(iterable, string_flattening=False):
     """
     flat_list = []
     for item in iterable:
-        is_iterable = isinstance(item, collections.Iterable) and (
+        is_iterable = isinstance(item, collections.abc.Iterable) and (
             string_flattening or (not isinstance(item, str))
         )
         if is_iterable:
