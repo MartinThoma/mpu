@@ -3,12 +3,11 @@ import pytest
 
 # First party
 from mpu.datastructures.trie.char_trie import EMPTY_NODE as CHAR_EMPTY_NODE
-from mpu.datastructures.trie.char_trie import Trie as CharTrie, TrieNode as CharTrieNode
+from mpu.datastructures.trie.char_trie import Trie as CharTrie
+from mpu.datastructures.trie.char_trie import TrieNode as CharTrieNode
 from mpu.datastructures.trie.string_trie import EMPTY_NODE as STRING_EMPTY_NODE
-from mpu.datastructures.trie.string_trie import (
-    Trie as StringTrie,
-    TrieNode as StringTrieNode,
-)
+from mpu.datastructures.trie.string_trie import Trie as StringTrie
+from mpu.datastructures.trie.string_trie import TrieNode as StringTrieNode
 
 nodebased_tries = [CharTrie, StringTrie]
 nodebased_tries_empty_nodes = [

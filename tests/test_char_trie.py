@@ -3,6 +3,7 @@
 
 """Test the mpu.datastructures.char_trie module."""
 
+# Third party
 import pytest
 
 # First party
