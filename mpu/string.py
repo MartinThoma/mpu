@@ -9,7 +9,9 @@ For more complex checks, you might want to use the
 """
 
 # Core Library
+import socket
 from email.utils import parseaddr
+from typing import Optional, Union
 
 # Third party
 import pkg_resources
@@ -18,7 +20,7 @@ import pkg_resources
 import mpu.io
 
 
-def is_email(potential_email_address):
+def is_email(potential_email_address: str) -> bool:
     """
     Check if potential_email_address is a valid e-mail address.
 
@@ -58,7 +60,7 @@ def is_email(potential_email_address):
     return first_condition and dot_after_at
 
 
-def is_int(potential_int):
+def is_int(potential_int: str) -> bool:
     """
     Check if potential_int is a valid integer.
 
@@ -94,7 +96,7 @@ def is_int(potential_int):
         return False
 
 
-def is_float(potential_float):
+def is_float(potential_float: str) -> bool:
     """
     Check if potential_float is a valid float.
 
@@ -126,7 +128,7 @@ def is_float(potential_float):
         return False
 
 
-def str2bool(string_, default="raise"):
+def str2bool(string_: str, default="raise") -> bool:
     """
     Convert a string to a bool.
 
@@ -159,7 +161,7 @@ def str2bool(string_, default="raise"):
         raise ValueError("The value '{}' cannot be mapped to boolean.".format(string_))
 
 
-def str2str_or_none(string_):
+def str2str_or_none(string_: str) -> Optional[str]:
     """
     Convert a string to a str or to None.
 
@@ -187,7 +189,7 @@ def str2str_or_none(string_):
         return string_
 
 
-def str2bool_or_none(string_, default="raise"):
+def str2bool_or_none(string_: str, default="raise") -> Optional[bool]:
     """
     Convert a string to a bool or to None.
 
@@ -217,7 +219,7 @@ def str2bool_or_none(string_, default="raise"):
         return str2bool(string_, default)
 
 
-def str2float_or_none(string_):
+def str2float_or_none(string_: str) -> Optional[float]:
     """
     Convert a string to a float or to None.
 
@@ -243,7 +245,7 @@ def str2float_or_none(string_):
         return float(string_)
 
 
-def str2int_or_none(string_):
+def str2int_or_none(string_: str) -> Optional[int]:
     """
     Convert a string to a int or to None.
 
@@ -267,7 +269,7 @@ def str2int_or_none(string_):
         return int(string_)
 
 
-def is_none(string_, default="raise"):
+def is_none(string_: str, default="raise") -> bool:
     """
     Check if a string is equivalent to None.
 
@@ -297,7 +299,7 @@ def is_none(string_, default="raise"):
         raise ValueError("The value '{}' cannot be mapped to none.".format(string_))
 
 
-def is_iban(potential_iban):
+def is_iban(potential_iban: str) -> bool:
     """
     Check if a string is a valid IBAN number.
 
@@ -351,9 +353,59 @@ def is_iban(potential_iban):
     return True
 
 
-def _calculate_german_iban_checksum(iban, iban_fields="DEkkbbbbbbbbcccccccccc"):
+def is_ipv4(
+    potential_ipv4: str,
+    allow_leading_zeros: bool = False,
+    allow_shortened_addresses=False,
+) -> bool:
     """
-    Calculate the checksam of the German IBAN format.
+    Check if a string is a valid IPv4 address.
+
+    Parameters
+    ----------
+    potential_ipv4 : str
+
+    Returns
+    -------
+    is_valid : bool
+
+    Examples
+    --------
+    >>> is_ipv4("192.168.0.4")
+    True
+    >>> is_ipv4("192.168..4")
+    False
+    >>> is_ipv4("192.168.01.4", allow_leading_zeros=True)
+    True
+    >>> is_ipv4("192.168.01.4", allow_leading_zeros=False)
+    False
+    >>> is_ipv4("256.168.01.4")
+    False
+    >>> is_ipv4("4", allow_shortened_addresses=True)
+    True
+    >>> is_ipv4("4", allow_shortened_addresses=False)
+    False
+    """
+    if not allow_shortened_addresses:
+        if potential_ipv4.count(".") != 3:
+            return False
+    try:
+        socket.inet_aton(potential_ipv4)
+    except socket.error:
+        return False
+    if allow_leading_zeros:
+        return True
+    else:
+        return all(
+            len(block) == 1 or block[0] != "0" for block in potential_ipv4.split(".")
+        )
+
+
+def _calculate_german_iban_checksum(
+    iban: str, iban_fields: str = "DEkkbbbbbbbbcccccccccc"
+) -> str:
+    """
+    Calculate the checksum of the German IBAN format.
 
     Examples
     --------
@@ -389,13 +441,13 @@ def _calculate_german_iban_checksum(iban, iban_fields="DEkkbbbbbbbbcccccccccc"):
     return str(checksum)
 
 
-def human_readable_bytes(nb_bytes, suffix="B"):
+def human_readable_bytes(nb_bytes: Union[int, float], suffix: str = "B") -> str:
     """
     Convert a byte number into a human readable format.
 
     Parameters
     ----------
-    nb_bytes : number
+    nb_bytes : Union[int, float]
     suffix : str, optional (default: "B")
 
     Returns
