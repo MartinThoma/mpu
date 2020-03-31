@@ -230,3 +230,41 @@ def round_down(x, decimal_places):
 
     d = int("1" + ("0" * decimal_places))
     return floor(x * d) / d
+
+
+def gcd(a: int, b: int) -> int:
+    """
+    Calculate the greatest common divisor.
+
+    Currently, this uses the Euclidean algorithm.
+
+    Parameters
+    ----------
+    a : int
+        Non-zero
+    b : int
+
+    Returns
+    -------
+    greatest_common_divisor : int
+
+    Examples
+    --------
+    >>> gcd(1, 7)
+    1
+    >>> gcd(-1, -1)
+    1
+    >>> gcd(1337, 42)
+    7
+    >>> gcd(-1337, -42)
+    7
+    >>> gcd(120, 364)
+    4
+    >>> gcd(273, 1870)
+    1
+    """
+    if a == 0 or b == 0:
+        raise ValueError("gcd(a={a}, b={b}) is undefined")
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
