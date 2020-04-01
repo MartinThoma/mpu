@@ -4,7 +4,9 @@ upload:
 clean:
 	python setup.py clean --all
 	pyclean .
-	rm -rf *.pyc __pycache__ build dist mpu.egg-info mpu/__pycache__ mpu/units/__pycache__ lambda.zip venv-lambda tests/__pycache__ tests/reports docs/build .pytest_cache .tox .coverage
+	rm -rf *.pyc build dist tests/reports docs/build .pytest_cache .tox .coverage
+	rm -rf mpu.egg-info lambda.zip venv-lambda
+	rm -rf __pycache__ mpu/datastructures/trie/__pycache__ mpu/__pycache__ mpu/units/__pycache__ tests/__pycache__
 package:
 	make clean
 	./create_package.sh
