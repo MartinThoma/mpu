@@ -11,15 +11,20 @@ class ListNode(metaclass=ABCMeta):
     def value(self):
         """Read the value attribute"""
 
+    @property
     @abstractmethod
     def next(self):
         """Read the next attribute"""
 
+    @next.setter
+    def next(self, next_):
+        """Write the next attribute"""
+
 
 class SinglyLinkedListNode(ListNode):
     def __init__(self, value):
-        self.value = value
-        self.next = None  # Optional[SinglyLinkedListNode]
+        self._value = value
+        self._next = None  # Optional[SinglyLinkedListNode]
 
     @property
     def value(self):

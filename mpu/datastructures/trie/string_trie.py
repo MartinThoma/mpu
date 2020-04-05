@@ -1,6 +1,6 @@
 # Core Library
 import logging
-from typing import List, Set, Tuple
+from typing import Any, List, Set, Tuple
 
 # First party
 from mpu.datastructures.trie.base import AbstractTrie
@@ -151,7 +151,9 @@ class Trie(AbstractTrie):
     def __len__(self):
         return self._length
 
-    def __contains__(self, element: str) -> bool:
+    def __contains__(self, element: Any) -> bool:
+        if not isinstance(element, str):
+            return False
         found_prefix, subtrie = self.get_subtrie(element)
         return subtrie.is_word and found_prefix + subtrie._value == element
 
