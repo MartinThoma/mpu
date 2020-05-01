@@ -1,9 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Handle units - currently only currencies."""
 
-from __future__ import absolute_import
 
 # Core Library
 import csv
@@ -15,7 +13,7 @@ import pkg_resources
 
 
 @total_ordering
-class Money(object):
+class Money:
     """
     Unit of account.
 
@@ -271,7 +269,7 @@ def get_currency(currency_str):
     """
     path = "units/currencies.csv"  # always use slash in Python packages
     filepath = pkg_resources.resource_filename("mpu", path)
-    with open(filepath, "r") as fp:
+    with open(filepath) as fp:
         reader = csv.reader(fp, delimiter=",", quotechar='"')
         next(reader, None)  # skip the headers
         for row in reader:
@@ -304,7 +302,7 @@ def get_currency(currency_str):
     raise ValueError("Could not find currency '{}'".format(currency_str))
 
 
-class Currency(object):
+class Currency:
     """Currency base class which contains information similar to ISO 4217."""
 
     def __init__(

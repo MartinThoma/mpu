@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """
 Mathematical functions which are not adequately covered by standard libraries.
@@ -12,7 +11,6 @@ Standard libraries are:
 
 """
 
-from __future__ import absolute_import
 
 # Core Library
 import math as math_stl

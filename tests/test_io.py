@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Test the mpu.io module."""
 
@@ -141,7 +140,7 @@ def test_read_json():
     data_real = read(source)
 
     data_exp = {
-        "a list": [1, 42, 3.141, 1337, "help", u"€"],
+        "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
@@ -168,7 +167,7 @@ def test_read_pickle():
     data_real = read(source)
 
     data_exp = {
-        "a list": [1, 42, 3.141, 1337, "help", u"€"],
+        "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
@@ -178,7 +177,7 @@ def test_read_pickle():
 def test_write_json():
     _, filepath = mkstemp(suffix=".json", prefix="mpu_test")
     data = {
-        "a list": [1, 42, 3.141, 1337, "help", u"€"],
+        "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
@@ -221,7 +220,7 @@ def test_write_jsonl_all_params():
 def test_write_json_params():
     _, filepath = mkstemp(suffix=".json", prefix="mpu_test")
     data = {
-        "a list": [1, 42, 3.141, 1337, "help", u"€"],
+        "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
@@ -241,7 +240,7 @@ def test_write_json_params():
 def test_write_pickle():
     _, filepath = mkstemp(suffix=".pickle", prefix="mpu_test")
     data = {
-        "a list": [1, 42, 3.141, 1337, "help", u"€"],
+        "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
@@ -254,7 +253,7 @@ def test_write_pickle():
 def test_write_pickle_protocol():
     _, filepath = mkstemp(suffix=".pickle", prefix="mpu_test")
     data = {
-        "a list": [1, 42, 3.141, 1337, "help", u"€"],
+        "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }

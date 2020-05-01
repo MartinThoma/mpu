@@ -8,7 +8,7 @@ from mpu.datastructures.trie.base import AbstractTrie
 logger = logging.getLogger(__name__)
 
 
-class TrieNode(object):
+class TrieNode:
     def __init__(self, value, is_word=False, count=0, children=None, freeze=False):
         if children is None:
             children = dict()

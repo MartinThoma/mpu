@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 # First party
 from mpu.shell import Codes, text_input
@@ -17,5 +16,5 @@ def test_text_input():
         from StringIO import StringIO
     import sys
 
-    sys.stdin = StringIO(u"foo\nbar")
+    sys.stdin = StringIO("foo\nbar")
     text_input("foo")

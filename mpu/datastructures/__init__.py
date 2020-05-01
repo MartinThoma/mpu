@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Utility datastructures."""
 
@@ -270,7 +269,7 @@ def does_keychain_exist(dict_, list_):
     return True
 
 
-class IntervalLike(object):
+class IntervalLike:
     """
     Anything like an interval or a union of an interval.
 

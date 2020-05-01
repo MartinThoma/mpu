@@ -18,8 +18,7 @@ class FullPrefixDict(AbstractTrie):
         return self._len
 
     def __iter__(self):
-        for word in self._prefix2words[""]:
-            yield word
+        yield from self._prefix2words[""]
 
     def push(self, element):
         self._len += 1

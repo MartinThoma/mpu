@@ -80,9 +80,9 @@ def test_get_subtrie_empty(Trie):
 def test_trie_creation_prefix_search(Trie):
     data = ["dog", "cat", "cattle", "tom", "d", "tomcat", "tomatoe"]
     trie = Trie(data)
-    expected = set(["tom", "tomcat", "tomatoe"])
+    expected = {"tom", "tomcat", "tomatoe"}
     prefix, subtrie = trie.get_subtrie("tom")
-    assert set(prefix + element for element in subtrie) == expected
+    assert {prefix + element for element in subtrie} == expected
 
 
 @pytest.mark.parametrize("TrieNode", [CharTrieNode, StringTrieNode])

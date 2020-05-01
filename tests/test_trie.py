@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Test the mpu.datastructures.trie module."""
 
@@ -18,7 +17,7 @@ all_tries = [CharTrie, StringTrie, FullPrefixDict]
 def test_trie_creation(Trie):
     data = ["dog", "cat", "cattle", "tom", "dinosaur", "tomcat", "tomatoe"]
     trie = Trie(data)
-    assert set(element for element in trie) == set(data)
+    assert {element for element in trie} == set(data)
 
 
 @pytest.mark.parametrize("Trie", all_tries)

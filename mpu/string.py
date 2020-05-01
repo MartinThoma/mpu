@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """
 String manipulation, verification and formatting.
@@ -391,7 +390,7 @@ def is_ipv4(
             return False
     try:
         socket.inet_aton(potential_ipv4)
-    except socket.error:
+    except OSError:
         return False
     if allow_leading_zeros:
         return True

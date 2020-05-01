@@ -8,7 +8,7 @@ from mpu.datastructures.trie.base import AbstractTrie
 logger = logging.getLogger(__name__)
 
 
-class TrieNode(object):
+class TrieNode:
     def __init__(self, value, is_word=False, count=0, children=None, freeze=False):
         if children is None:
             children = set()
@@ -73,7 +73,7 @@ class TrieNode(object):
             self._value = shared_prefix
             self.count = 1
             self.is_word = True
-            self.children = set([new_child])
+            self.children = {new_child}
         elif len(shared_prefix) == len(self._value):
             logger.debug(
                 f"The current node={self._value} is a prefix "
@@ -104,7 +104,7 @@ class TrieNode(object):
             self.is_word = False
             self.count = 0
             self._value = shared_prefix
-            self.children = set([old_data, new_data])
+            self.children = {old_data, new_data}
 
     def __iter__(self):
         self._iteration_queue: List[TrieNode, str] = [(self, "")]

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Reading and writing common file formats."""
 
-from __future__ import absolute_import
 
 # Core Library
 import csv
@@ -213,7 +211,7 @@ def _write_jsonl(filepath, data, kwargs):
         for line in data:
             str_ = json.dumps(line, **kwargs)
             outfile.write(str_)
-            outfile.write(u"\n")
+            outfile.write("\n")
     return data
 
 

@@ -1,13 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Enhancing printed terminal output."""
 
-# Core Library
-import sys
 
-
-class Codes(object):
+class Codes:
     """Escape sequences for enhanced shell output."""
 
     RESET_ALL = "\033[0m"
@@ -107,7 +103,4 @@ def text_input(text):
     inputed_text : str
         What the user wrote.
     """
-    if sys.version_info > (3, 0):
-        return input(text)
-    else:
-        return raw_input(text)  # noqa
+    return input(text)

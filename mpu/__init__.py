@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
-
 """mpu: Martins Python Utilities."""
 
-from __future__ import absolute_import
 
 # Core Library
 import logging
@@ -92,7 +89,7 @@ def consistent_shuffle(*lists):
     return lists
 
 
-class Location(object):
+class Location:
     """
     Define a single point.
 

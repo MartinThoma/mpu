@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # mpu documentation build configuration file, created by
 # sphinx-quickstart on Wed May  2 22:11:51 2018.
@@ -63,9 +62,9 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = u"mpu"
-copyright = u"2018, Martin Thoma"
-author = u"Martin Thoma"
+project = "mpu"
+copyright = "2018, Martin Thoma"
+author = "Martin Thoma"
 
 # The short X.Y version.
 version = ".".join(mpu.__version__.split(".", 2)[:2])
@@ -248,7 +247,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "mpu.tex", u"mpu Documentation", u"Martin Thoma", "manual")
+    (master_doc, "mpu.tex", "mpu Documentation", "Martin Thoma", "manual")
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -276,7 +275,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "mpu", u"mpu Documentation", [author], 1)]
+man_pages = [(master_doc, "mpu", "mpu Documentation", [author], 1)]
 
 # If true, show URL addresses after external links.
 # man_show_urls = False
@@ -291,7 +290,7 @@ texinfo_documents = [
     (
         master_doc,
         "mpu",
-        u"mpu Documentation",
+        "mpu Documentation",
         author,
         "mpu",
         "One line description of project.",
