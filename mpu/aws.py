@@ -13,7 +13,7 @@ from tempfile import mkstemp
 import boto3
 
 
-def list_files(bucket, prefix=None, profile_name=None):
+def list_files(bucket, prefix="", profile_name=None):
     """
     List up to 1000 files in a bucket.
 
