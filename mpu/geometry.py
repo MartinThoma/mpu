@@ -130,8 +130,6 @@ class LineSegment:
             if self.angle() in [90, 270]:
                 # The line segment is not a function
                 x = self.p1.x
-
-                assert x == other.p1.x
                 return _get_straight_line_intersection(
                     x, other.p1.y, other.p2.y, self.p1.y, self.p2.y
                 )
@@ -151,7 +149,6 @@ class LineSegment:
                 x = self.p1.x
 
                 if other.angle() in [90, 270]:
-                    assert x == other.p1.x
                     return _get_straight_line_intersection(
                         x, other.p1.y, other.p2.y, self.p1.y, self.p2.y
                     )
