@@ -34,8 +34,10 @@ Contents:
    datastructures
    datetime
    decorators
+   geometry
    image
    io
+   math
    ml
    path
    pd
