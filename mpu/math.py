@@ -5,9 +5,9 @@ Mathematical functions which are not adequately covered by standard libraries.
 
 Standard libraries are:
 
-* [`math`](https://docs.python.org/3/library/math.html)
-* [`scipy`](https://docs.scipy.org/doc/scipy/reference/)
-* [`sympy`](http://docs.sympy.org/latest/index.html)
+* `math <https://docs.python.org/3/library/math.html>`_
+* `scipy <https://docs.scipy.org/doc/scipy/reference/>`_
+* `sympy <http://docs.sympy.org/latest/index.html>`_
 
 """
 
