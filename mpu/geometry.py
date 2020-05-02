@@ -3,8 +3,8 @@ Create and manipulate two-dimensional geometrical entities such as lines.
 
 For more advanced use cases, see:
 
-* sympy.geometry
-* [Shapely](https://pypi.org/project/Shapely/)
+* `sympy.geometry <https://docs.sympy.org/latest/modules/geometry/index.html>`_
+* `Shapely <https://pypi.org/project/Shapely/>`_
 """
 
 # Core Library

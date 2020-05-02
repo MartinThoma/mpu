@@ -6,13 +6,18 @@ import logging
 import math as math_stl
 import random
 import traceback
+from typing import Any, Callable, List, Tuple, Union
 
 # First party
 from mpu import io, shell, string, units  # noqa
 from mpu._version import __version__  # noqa
 
 
-def parallel_for(loop_function, parameters, nb_threads=100):
+def parallel_for(
+    loop_function: Callable[[Any], Any],
+    parameters: List[Tuple[Any, ...]],
+    nb_threads: int = 100,
+) -> List[Any]:
     """
     Execute the loop body in parallel.
 
@@ -22,8 +27,9 @@ def parallel_for(loop_function, parameters, nb_threads=100):
 
     Parameters
     ----------
-    loop_function : Python function which takes a tuple as input
-    parameters : List of tuples
+    loop_function : Callable
+        Python function which takes a tuple as input
+    parameters : List[Tuple]
         Each element here should be executed in parallel.
 
     Returns
@@ -37,7 +43,11 @@ def parallel_for(loop_function, parameters, nb_threads=100):
         return pool.map(loop_function, parameters)
 
 
-def clip(number, lowest=None, highest=None):
+def clip(
+    number: Union[int, float],
+    lowest: Union[None, int, float] = None,
+    highest: Union[None, int, float] = None,
+) -> Union[int, float]:
     """
     Clip a number to a given lowest / highest value.
 
@@ -63,7 +73,7 @@ def clip(number, lowest=None, highest=None):
     return number
 
 
-def consistent_shuffle(*lists):
+def consistent_shuffle(*lists: List[List[Any]]) -> Tuple[List[Any], ...]:
     """
     Shuffle lists consistently.
 
@@ -101,17 +111,17 @@ class Location:
         in [-180, 180] - from West to East
     """
 
-    def __init__(self, latitude, longitude):
+    def __init__(self, latitude: float, longitude: float):
         self.latitude = latitude
         self.longitude = longitude
 
     @property
-    def latitude(self):
+    def latitude(self) -> float:
         """Getter for latiutde."""
         return self._latitude
 
     @latitude.setter
-    def latitude(self, latitude):
+    def latitude(self, latitude: float):
         """Setter for latiutde."""
         if not (-90 <= latitude <= 90):
             raise ValueError(
@@ -120,12 +130,12 @@ class Location:
         self._latitude = latitude
 
     @property
-    def longitude(self):
+    def longitude(self) -> float:
         """Getter for longitude."""
         return self._longitude
 
     @longitude.setter
-    def longitude(self, longitude):
+    def longitude(self, longitude: float):
         """Setter for longitude."""
         if not (-180 <= longitude <= 180):
             raise ValueError(
@@ -139,7 +149,7 @@ class Location:
             self.latitude, self.longitude
         )
 
-    def distance(self, there):
+    def distance(self, there: "Location") -> float:
         """
         Calculate the distance from this location to there.
 
@@ -162,15 +172,17 @@ class Location:
     __str__ = __repr__
 
 
-def haversine_distance(origin, destination):
+def haversine_distance(
+    origin: Tuple[float, float], destination: Tuple[float, float]
+) -> float:
     """
     Calculate the Haversine distance.
 
     Parameters
     ----------
-    origin : tuple of float
+    origin : Tuple[float, float]
         (lat, long)
-    destination : tuple of float
+    destination : Tuple[float, float]
         (lat, long)
 
     Returns
