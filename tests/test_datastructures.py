@@ -341,3 +341,9 @@ def test_interval_union_str():
 def test_interval_union_repr():
     iu1 = IntervalUnion([[0, 1], [2, 3]])
     assert repr(iu1) == "IntervalUnion([Interval(0, 1), Interval(2, 3)])"
+
+
+def test_interval_intersection_non_interval():
+    i1 = Interval(0, 10)
+    iu1 = IntervalUnion([[0, 1], [2, 3]])
+    i1.intersection(iu1) == iu1

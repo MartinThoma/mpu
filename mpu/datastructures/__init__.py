@@ -402,6 +402,9 @@ class Interval(IntervalLike):
         if self.is_empty() or other.is_empty():
             return Interval(None, None)
 
+        if isinstance(other, IntervalUnion):
+            return other.intersection(self)
+
         # Standardize - after this step, the other.left is left of self.left
         if other.left > self.left:
             other, self = self, other
