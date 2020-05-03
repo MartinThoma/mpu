@@ -6,7 +6,7 @@
 import pytest
 
 # First party
-from mpu.datastructures.trie.char_trie import Trie, TrieNode
+from mpu.datastructures.trie.char_trie import EMPTY_NODE, Trie, TrieNode
 
 
 def test_trie_print():
@@ -46,3 +46,13 @@ def test_trie_node_push():
     node = TrieNode(value="a")
     with pytest.raises(ValueError):
         node.push("")
+
+
+def test_get_subtrie_from_empty():
+    node = Trie()
+    prefix, node = node.get_subtrie("")
+    assert prefix == ""
+    assert node._value == EMPTY_NODE._value
+    assert node.is_word == EMPTY_NODE.is_word
+    assert node.count == EMPTY_NODE.count
+    assert node.children == EMPTY_NODE.children

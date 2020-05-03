@@ -119,8 +119,6 @@ class Trie(AbstractTrie):
             yield found_prefix + word
 
     def get_subtrie(self, prefix) -> Tuple[str, TrieNode]:
-        if self._root is None:
-            return ("", EMPTY_NODE)
         return self._root.get_subtrie(prefix)
 
     def __iter__(self):
