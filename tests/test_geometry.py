@@ -45,6 +45,11 @@ def test_line_segment_simplify():
     assert str(line_segment1.simplify()) == "LineSegment [(0|0) to (42|0)]"
 
 
+def test_line_segment_simplify_self():
+    line_segment1 = LineSegment(Point(0, 0), Point(42, 0))
+    assert str(line_segment1.simplify()) == "LineSegment [(0|0) to (42|0)]"
+
+
 def test_line_segment_equality():
     line_segment1 = LineSegment(Point(0, 0), Point(42, 0))
     line_segment2 = LineSegment(Point(42, 0), Point(0, 0))
@@ -111,6 +116,23 @@ def test_line_segment_point_intersection4():
     ls2 = LineSegment(Point(0, 0), Point(20, 20))
     assert ls1.intersect(ls2) == Point(4, 4)
     assert ls2.intersect(ls1) == Point(4, 4)
+
+
+def test_line_segment_point_intersection_horizontal_vertical_cross():
+    """A single point intersection"""
+    ls1 = LineSegment(Point(-4, 0), Point(4, 0))
+    ls2 = LineSegment(Point(0, -4), Point(0, 4))
+    assert ls1.intersect(ls2) == Point(0, 0)
+    assert ls2.intersect(ls1) == Point(0, 0)
+
+
+def test_line_segment_point_intersection_up_down():
+    """A single point intersection"""
+    ls1 = LineSegment(Point(0, -4), Point(0, 4))
+    ls2 = LineSegment(Point(0, 2), Point(0, -2))
+    expected = LineSegment(Point(0, -2), Point(0, 2))
+    assert ls1.intersect(ls2).simplify() == expected
+    assert ls2.intersect(ls1).simplify() == expected
 
 
 def test_line_segment_length():

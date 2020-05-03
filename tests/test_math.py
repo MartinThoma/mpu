@@ -20,3 +20,8 @@ def test_factorize_float():
 
 def test_argmax():
     assert mpu.math.argmax([1, 2, 3]) == 2
+
+
+def test_gcd_fail():
+    with pytest.raises(ValueError):
+        mpu.math.gcd(0, 7)
