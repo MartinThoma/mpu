@@ -10,7 +10,7 @@ For more complex checks, you might want to use the
 # Core Library
 import socket
 from email.utils import parseaddr
-from typing import Optional, Union
+from typing import List, Optional, Union
 
 # Third party
 import pkg_resources
@@ -339,12 +339,12 @@ def is_iban(potential_iban: str) -> bool:
     if len(potential_iban) != int(country["length"]):
         return False
     if country["country_en"] == "Germany":
-        checksum_val = [
+        checksum_vals = [
             value
             for field_type, value in zip(country["iban_fields"], potential_iban)
             if field_type == "k"
         ]
-        checksum_val = "".join(checksum_val)
+        checksum_val = "".join(checksum_vals)
         checksum_exp = _calculate_german_iban_checksum(
             potential_iban, country["iban_fields"]
         )
@@ -412,7 +412,7 @@ def _calculate_german_iban_checksum(
     >>> _calculate_german_iban_checksum(iban)
     '41'
     """
-    number = [
+    numbers: List[str] = [
         value
         for field_type, value in zip(iban_fields, iban)
         if field_type in ["b", "c"]
@@ -434,8 +434,8 @@ def _calculate_german_iban_checksum(
     for val in "DE00":
         translated = translate[val]
         for char in translated:
-            number.append(char)
-    number = sum(int(value) * 10 ** i for i, value in enumerate(number[::-1]))
+            numbers.append(char)
+    number = sum(int(value) * 10 ** i for i, value in enumerate(numbers[::-1]))
     checksum = 98 - (number % 97)
     return str(checksum)
 

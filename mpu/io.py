@@ -6,19 +6,17 @@
 # Core Library
 import csv
 import hashlib
-import io as io_stl  # Make it work for Python 2+3 and with Unicode
 import json
 import os
 import pickle
 import platform
-import sys
 from datetime import datetime
 
 # First party
 from mpu.datastructures import EList
 
 
-def read(filepath, **kwargs):
+def read(filepath: str, **kwargs):
     """
     Read a file.
 
@@ -39,7 +37,7 @@ def read(filepath, **kwargs):
 
     Returns
     -------
-    data : str or bytes
+    data : Union[str, bytes] or other (e.g. format=dicts)
     """
     if filepath.lower().endswith(".csv"):
         return _read_csv(filepath, kwargs)
@@ -71,7 +69,7 @@ def read(filepath, **kwargs):
         raise NotImplementedError("File '{}' is not known.".format(filepath))
 
 
-def _read_csv(filepath, kwargs):
+def _read_csv(filepath: str, kwargs):
     """See documentation of mpu.io.read."""
     if "delimiter" not in kwargs:
         kwargs["delimiter"] = ","
@@ -89,16 +87,11 @@ def _read_csv(filepath, kwargs):
     skiprows = kwargs["skiprows"]
     kwargs.pop("skiprows", None)
 
-    kwargs_open = {"newline": ""}
-    mode = "r"
-    if sys.version_info < (3, 0):
-        kwargs_open.pop("newline", None)
-        mode = "rb"
-    with open(filepath, mode, **kwargs_open) as fp:
+    with open(filepath) as fp:
         if format_ == "default":
             reader = csv.reader(fp, **kwargs)
-            data = EList([row for row in reader])
-            data = data.remove_indices(skiprows)
+            data_tmp = EList([row for row in reader])
+            data = data_tmp.remove_indices(skiprows)
         elif format_ == "dicts":
             reader_list = csv.DictReader(fp, **kwargs)
             data = [row for row in reader_list]
@@ -107,14 +100,14 @@ def _read_csv(filepath, kwargs):
     return data
 
 
-def _read_jsonl(filepath, kwargs):
+def _read_jsonl(filepath: str, kwargs):
     """See documentation of mpu.io.read."""
     with open(filepath) as data_file:
         data = [json.loads(line, **kwargs) for line in data_file if len(line) > 0]
     return data
 
 
-def write(filepath, data, **kwargs):
+def write(filepath: str, data, **kwargs):
     """
     Write a file.
 
@@ -164,14 +157,9 @@ def write(filepath, data, **kwargs):
         raise NotImplementedError("File '{}' is not known.".format(filepath))
 
 
-def _write_csv(filepath, data, kwargs):
+def _write_csv(filepath: str, data, kwargs):
     """See documentation of mpu.io.write."""
-    kwargs_open = {"newline": ""}
-    mode = "w"
-    if sys.version_info < (3, 0):
-        kwargs_open.pop("newline", None)
-        mode = "wb"
-    with open(filepath, mode, **kwargs_open) as fp:
+    with open(filepath, "w") as fp:
         if "delimiter" not in kwargs:
             kwargs["delimiter"] = ","
         if "quotechar" not in kwargs:
@@ -182,9 +170,9 @@ def _write_csv(filepath, data, kwargs):
     return data
 
 
-def _write_json(filepath, data, kwargs):
+def _write_json(filepath: str, data, kwargs):
     """See documentation of mpu.io.write."""
-    with io_stl.open(filepath, "w", encoding="utf8") as outfile:
+    with open(filepath, "w", encoding="utf8") as outfile:
         if "indent" not in kwargs:
             kwargs["indent"] = 4
         if "sort_keys" not in kwargs:
@@ -198,9 +186,9 @@ def _write_json(filepath, data, kwargs):
     return data
 
 
-def _write_jsonl(filepath, data, kwargs):
+def _write_jsonl(filepath: str, data, kwargs):
     """See documentation of mpu.io.write."""
-    with io_stl.open(filepath, "w", encoding="utf8") as outfile:
+    with open(filepath, "w", encoding="utf8") as outfile:
         kwargs["indent"] = None  # JSON has to be on one line!
         if "sort_keys" not in kwargs:
             kwargs["sort_keys"] = True
@@ -215,7 +203,7 @@ def _write_jsonl(filepath, data, kwargs):
     return data
 
 
-def _write_pickle(filepath, data, kwargs):
+def _write_pickle(filepath: str, data, kwargs):
     """See documentation of mpu.io.write."""
     if "protocol" not in kwargs:
         kwargs["protocol"] = pickle.HIGHEST_PROTOCOL
@@ -224,7 +212,7 @@ def _write_pickle(filepath, data, kwargs):
     return data
 
 
-def urlread(url, encoding="utf8"):
+def urlread(url: str, encoding="utf8"):
     """
     Read the content of an URL.
 
@@ -236,17 +224,15 @@ def urlread(url, encoding="utf8"):
     -------
     content : str
     """
-    try:
-        from urllib.request import urlopen
-    except ImportError:
-        from urllib2 import urlopen
+    from urllib.request import urlopen
+
     response = urlopen(url)
     content = response.read()
     content = content.decode(encoding)
     return content
 
 
-def download(source, sink=None):
+def download(source: str, sink=None):
     """
     Download a file.
 
@@ -257,17 +243,15 @@ def download(source, sink=None):
     sink : str or None (default: same filename in current directory)
         Where the file gets stored. Some filepath in the local file system.
     """
-    try:
-        from urllib.request import urlretrieve  # Python 3
-    except ImportError:
-        from urllib import urlretrieve  # Python 2
+    from urllib.request import urlretrieve
+
     if sink is None:
         sink = os.path.abspath(os.path.split(source)[1])
     urlretrieve(source, sink)
     return sink
 
 
-def hash(filepath, method="sha1", buffer_size=65536):
+def hash(filepath: str, method="sha1", buffer_size=65536):
     """
     Calculate a hash of a local file.
 
@@ -301,7 +285,7 @@ def hash(filepath, method="sha1", buffer_size=65536):
     return hash_function.hexdigest()
 
 
-def get_creation_datetime(filepath):
+def get_creation_datetime(filepath: str):
     """
     Get the date that a file was created.
 
@@ -325,7 +309,7 @@ def get_creation_datetime(filepath):
             return None
 
 
-def get_modification_datetime(filepath):
+def get_modification_datetime(filepath: str):
     """
     Get the datetime that a file was last modified.
 
@@ -345,7 +329,7 @@ def get_modification_datetime(filepath):
     return mtime.replace(tzinfo=timezone)
 
 
-def get_access_datetime(filepath):
+def get_access_datetime(filepath: str):
     """
     Get the last time filepath was accessed.
 
@@ -364,7 +348,7 @@ def get_access_datetime(filepath):
     return mtime.replace(tzinfo=tz)
 
 
-def get_file_meta(filepath):
+def get_file_meta(filepath: str):
     """
     Get meta-information about a file.
 
@@ -393,7 +377,7 @@ def get_file_meta(filepath):
     return meta
 
 
-def gzip_file(source, sink):
+def gzip_file(source: str, sink: str):
     """
     Create a GZIP file from a source file.
 

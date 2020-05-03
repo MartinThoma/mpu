@@ -151,7 +151,7 @@ class Trie(AbstractTrie):
     def __len__(self):
         return self._length
 
-    def __contains__(self, element: str) -> bool:
+    def __contains__(self, element) -> bool:
         found_prefix, subtrie = self.get_subtrie(element)
         return subtrie.is_word and found_prefix + subtrie._value == element
 

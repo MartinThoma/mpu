@@ -5,7 +5,7 @@
 # Core Library
 import datetime
 import os
-from tempfile import mkstemp
+from tempfile import NamedTemporaryFile
 
 # Third party
 import pkg_resources
@@ -13,7 +13,7 @@ import pytest
 
 # First party
 import mpu.io
-from mpu.io import _write_jsonl, download, read, urlread, write
+from mpu.io import _write_jsonl, download, gzip_file, read, urlread, write
 
 
 def test_download_with_path():
@@ -21,10 +21,9 @@ def test_download_with_path():
         "https://upload.wikimedia.org/wikipedia/commons/e/e9/"
         "Aurelia-aurita-3-1-style.jpg"
     )
-    _, sink = mkstemp(suffix="image.jpg")
-    download(source, sink)
-    assert os.path.getsize(sink) == 116087
-    os.remove(sink)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix="image.jpg") as sink:
+        download(source, sink.name)
+        assert os.path.getsize(sink.name) == 116087
 
 
 def test_urlread():
@@ -49,16 +48,22 @@ def test_read_csv():
     source = pkg_resources.resource_filename(__name__, path)
     data_real = read(source)
     data_exp = [
-        ["a", "b", "c"],
-        ["1", "A towel,", "1.0"],
-        ["42", " it says, ", "2.0"],
-        ["1337", "is about the most ", "-1"],
-        ["0", "massively useful thing ", "123"],
-        ["-2", "an interstellar hitchhiker can have.\r\n", "3"],
-        ["3.141", "Special char test: €üößł", "2.7"],
+        ["a", "b", "c"],  # 0
+        ["1", "A towel,", "1.0"],  # 1
+        ["42", " it says, ", "2.0"],  # 2
+        ["1337", "is about the most ", "-1"],  # 3
+        ["0", "massively useful thing ", "123"],  # 4
+        ["-2", "an interstellar hitchhiker can have.\n", "3"],  # 5
+        ["3.141", "Special char test: €üößł", "2.7"],  # 6
     ]
     assert len(data_real) == len(data_exp)
     assert data_real[0] == data_exp[0]
+    assert data_real[1] == data_exp[1]
+    assert data_real[2] == data_exp[2]
+    assert data_real[3] == data_exp[3]
+    assert data_real[4] == data_exp[4]
+    assert data_real[5] == data_exp[5]
+    assert data_real[6] == data_exp[6]
     assert data_real == data_exp
     data_real = read(source, skiprows=1)
     assert data_real == data_exp[1:]
@@ -75,7 +80,7 @@ def test_read_csv_dicts():
         {"a": "42", "b": " it says, ", "c": "2.0"},
         {"a": "1337", "b": "is about the most ", "c": "-1"},
         {"a": "0", "b": "massively useful thing ", "c": "123"},
-        {"a": "-2", "b": "an interstellar hitchhiker can have.\r\n", "c": "3"},
+        {"a": "-2", "b": "an interstellar hitchhiker can have.\n", "c": "3"},
         {"a": "3.141", "b": "Special char test: €üößł", "c": "2.7"},
     ]
     assert len(data_real) == len(data_exp)
@@ -84,47 +89,44 @@ def test_read_csv_dicts():
 
 
 def test_write_csv():
-    _, filepath = mkstemp(suffix=".csv", prefix="mpu_test")
     data = [
         ["1", "A towel,", "1.0"],
         ["42", " it says, ", "2.0"],
         ["1337", "is about the most ", "-1"],
         ["0", "massively useful thing ", "123"],
-        ["-2", "an interstellar hitchhiker can have.\r\n", "3"],
+        ["-2", "an interstellar hitchhiker can have.\n", "3"],
     ]
-    write(filepath, data)
-    data_read = read(filepath)
-    assert data == data_read
-    os.remove(filepath)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix=".csv", prefix="mpu_test") as filepath:
+        write(filepath.name, data)
+        data_read = read(filepath.name)
+        assert data == data_read
 
 
 def test_write_h5():
-    _, filepath = mkstemp(suffix=".hdf5", prefix="mpu_test")
     data = [
         ["1", "A towel,", "1.0"],
         ["42", " it says, ", "2.0"],
         ["1337", "is about the most ", "-1"],
         ["0", "massively useful thing ", "123"],
-        ["-2", "an interstellar hitchhiker can have.\r\n", "3"],
+        ["-2", "an interstellar hitchhiker can have.\n", "3"],
     ]
-    with pytest.raises(NotImplementedError):
-        write(filepath, data)
-    os.remove(filepath)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix=".hdf5", prefix="mpu_test") as filepath:
+        with pytest.raises(NotImplementedError):
+            write(filepath.name, data)
 
 
 def test_write_csv_params():
-    _, filepath = mkstemp(suffix=".csv", prefix="mpu_test")
     data = [
         ["1", "A towel,", "1.0"],
         ["42", " it says, ", "2.0"],
         ["1337", "is about the most ", "-1"],
         ["0", "massively useful thing ", "123"],
-        ["-2", "an interstellar hitchhiker can have.\r\n", "3"],
+        ["-2", "an interstellar hitchhiker can have.\n", "3"],
     ]
-    write(filepath, data, delimiter=",", quotechar='"')
-    data_read = read(filepath, delimiter=",", quotechar='"')
-    assert data == data_read
-    os.remove(filepath)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix=".csv", prefix="mpu_test") as filepath:
+        write(filepath.name, data, delimiter=",", quotechar='"')
+        data_read = read(filepath.name, delimiter=",", quotechar='"')
+        assert data == data_read
 
 
 def test_read_hdf5():
@@ -175,98 +177,99 @@ def test_read_pickle():
 
 
 def test_write_json():
-    _, filepath = mkstemp(suffix=".json", prefix="mpu_test")
     data = {
         "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
-    write(filepath, data)
-    data_read = read(filepath)
-    assert data == data_read
-    os.remove(filepath)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix=".json", prefix="mpu_test") as filepath:
+        write(filepath.name, data)
+        data_read = read(filepath.name)
+        assert data == data_read
 
 
 def test_write_jsonl():
-    _, filepath = mkstemp(suffix=".jsonl", prefix="mpu_test")
     data = [
         {"some": "thing"},
         {"foo": 17, "bar": False, "quux": True},
         {"may": {"include": "nested", "objects": ["and", "arrays"]}},
     ]
-    write(filepath, data)
-    data_read = read(filepath)
-    assert data == data_read
-    os.remove(filepath)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix=".jsonl", prefix="mpu_test") as filepath:
+        write(filepath.name, data)
+        data_read = read(filepath.name)
+        assert data == data_read
 
 
 def test_write_jsonl_all_params():
-    _, filepath = mkstemp(suffix=".jsonl", prefix="mpu_test")
     data = [
         {"some": "thing"},
         {"foo": 17, "bar": False, "quux": True},
         {"may": {"include": "nested", "objects": ["and", "arrays"]}},
     ]
-    _write_jsonl(
-        filepath,
-        data,
-        kwargs={"sort_keys": True, "separators": (",", ": "), "ensure_ascii": True},
-    )
-    data_read = read(filepath)
-    assert data == data_read
-    os.remove(filepath)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix=".jsonl", prefix="mpu_test") as filepath:
+        _write_jsonl(
+            filepath.name,
+            data,
+            kwargs={"sort_keys": True, "separators": (",", ": "), "ensure_ascii": True},
+        )
+        data_read = read(filepath.name)
+        assert data == data_read
 
 
 def test_write_json_params():
-    _, filepath = mkstemp(suffix=".json", prefix="mpu_test")
     data = {
         "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
-    write(
-        filepath,
-        data,
-        indent=4,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-    )
-    data_read = read(filepath)
-    assert data == data_read
-    os.remove(filepath)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix=".json", prefix="mpu_test") as filepath:
+        write(
+            filepath.name,
+            data,
+            indent=4,
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=False,
+        )
+        data_read = read(filepath.name)
+        assert data == data_read
 
 
 def test_write_pickle():
-    _, filepath = mkstemp(suffix=".pickle", prefix="mpu_test")
     data = {
         "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
-    write(filepath, data)
-    data_read = read(filepath)
-    assert data == data_read
-    os.remove(filepath)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix=".pickle", prefix="mpu_test") as filepath:
+        write(filepath.name, data)
+        data_read = read(filepath.name)
+        assert data == data_read
 
 
 def test_write_pickle_protocol():
-    _, filepath = mkstemp(suffix=".pickle", prefix="mpu_test")
     data = {
         "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
-    write(filepath, data, protocol=0)
-    data_read = read(filepath)
-    assert data == data_read
-    os.remove(filepath)  # cleanup of mkstemp
+    with NamedTemporaryFile(suffix=".pickle", prefix="mpu_test") as filepath:
+        write(filepath.name, data, protocol=0)
+        data_read = read(filepath.name)
+        assert data == data_read
 
 
 def test_read_h5():
     source = pkg_resources.resource_filename("mpu", "io.py")
     with pytest.raises(NotImplementedError):
         read(source)
+
+
+def test_gzip():
+    path = "files/example.csv"
+    source = pkg_resources.resource_filename(__name__, path)
+    with NamedTemporaryFile() as sink:
+        gzip_file(source, sink.name)
 
 
 def test_hash():

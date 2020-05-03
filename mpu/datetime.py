@@ -68,10 +68,7 @@ def generate(minimum, maximum, local_random=random.Random()):
     if not (minimum < maximum):
         raise ValueError("{} is not smaller than {}".format(minimum, maximum))
 
-    # Python 3 allows direct multiplication of timedelta with a float, but
-    # Python 2.7 does not. Hence this work-around.
     time_d = maximum - minimum
-    time_d_float = time_d.total_seconds()
-    time_d_rand = dt.timedelta(seconds=time_d_float * local_random.random())
+    time_d_rand = time_d * local_random.random()
     generated = minimum + time_d_rand
     return generated
