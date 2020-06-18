@@ -70,16 +70,13 @@ class LineSegment:
 
     def angle(self) -> float:
         """Get the angle of this line."""
-        xf, yf = self.p1.x, self.p1.y
-        xs, ys = self.p2.x, self.p2.y
-
-        min_x = min(xf, xs)
-        min_y = min(yf, ys)
-
-        x = max(xf - min_x, xs - min_x)
-        y = max(yf - min_y, ys - min_y)
-
-        return math.atan2(y, x) / math.pi * 180 % 360
+        dx = self.p2.x - self.p1.x
+        dy = self.p2.y - self.p1.y
+        theta = math.atan2(dy, dx)
+        angle = math.degrees(theta)  # angle is in (-180, 180]
+        if angle < 0:
+            angle = 360 + angle
+        return angle
 
     def _get_equation_parameters(self):
         if self.p1.x == self.p2.x:

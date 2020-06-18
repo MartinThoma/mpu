@@ -41,6 +41,10 @@ def test_list_no_files():
     assert filecmp.cmp(destination, local_path)
     os.remove(destination)  # cleanup of mkstemp
 
+    # Test download without destination
+    destination = mpu.aws.s3_download("s3://mybucket/example_test.csv")
+    os.remove(destination)
+
     # Test download: File exists
     _, destination = mkstemp(suffix="example.csv")
     with pytest.raises(RuntimeError):

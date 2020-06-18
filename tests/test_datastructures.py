@@ -131,6 +131,21 @@ def test_interval_union():
     assert Interval(3, 5).union(Interval(-1, 6)) == Interval(-1, 6)
 
 
+def test_impossible_union():
+    class Impossible:
+        def __init__(self):
+            self.left = -1
+            self.right = float("nan")
+
+        def is_empty(self):
+            return False
+
+    with pytest.raises(NotImplementedError):
+        interval = Interval(0, 1)
+        other = Impossible()
+        interval.union(other)
+
+
 def test_interval_intersection():
     i42 = Interval(42, 1337)
     assert Interval(None, None).intersection(i42) == Interval(None, None)
@@ -154,6 +169,43 @@ def test_interval_issubset():
     assert Interval(0, 10).issubset(Interval(0, 10))
 
 
+def test_impossible_issubset():
+    class Impossible:
+        def __init__(self):
+            self.left = -1
+            self.right = float("nan")
+
+        def is_empty(self):
+            return False
+
+    interval = Interval(0, 1)
+    other = Impossible()
+    with pytest.raises(RuntimeError):
+        interval.issubset(other)
+
+
+def test_interval_issubset_interval_union_not():
+    """
+    * Neither of both is empty.
+    * i2 is not a subset of i1
+    * i2 is an intervalUnion
+    """
+    i1 = Interval(1, 10)
+    i2 = IntervalUnion([[2, 3], [5, 7]])
+    assert not i1.issubset(i2)
+
+
+def test_interval_issubset_interval_union():
+    """
+    * Neither of both is empty.
+    * i2 is a subset of i1
+    * i2 is an intervalUnion
+    """
+    i1 = Interval(6, 7)
+    i2 = IntervalUnion([[2, 3], [5, 7]])
+    assert i1.issubset(i2)
+
+
 def test_interval_issubset_not():
     assert not Interval(-1, 2).issubset(Interval(0, 10))
     assert not Interval(0, 11).issubset(Interval(0, 10))
@@ -164,6 +216,11 @@ def test_interval_issubset_not():
 def test_interval_issubset_error():
     with pytest.raises(Exception):
         Interval(0, 1).issubset([0, 1])
+
+
+def test_interval_union_creation():
+    with pytest.raises(TypeError):
+        IntervalUnion("Foobar")
 
 
 def test_interval_union_simplification_empty():

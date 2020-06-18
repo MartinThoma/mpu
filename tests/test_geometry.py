@@ -1,9 +1,12 @@
 # Core Library
+import math
 import random
 from typing import List, Set
 
 # Third party
+import hypothesis.strategies as s
 import pytest
+from hypothesis import given
 
 # First party
 from mpu.geometry import (
@@ -18,6 +21,15 @@ from mpu.geometry import (
     is_point_right_of_line,
     line_segment_touches_or_crosses_line,
 )
+
+
+@given(s.floats(min_value=0.0, max_value=360.0))
+def test_angle(angle: float):
+    epsilon = 0.0001
+    x = math.cos(math.radians(angle))
+    y = math.sin(math.radians(angle))
+    ls = LineSegment(Point(0, 0), Point(x, y))
+    assert abs(ls.angle() - angle) < epsilon
 
 
 def test_antisymmetry_of_cross_product():
@@ -76,6 +88,14 @@ def test_line_segment_no_intersection2():
     ls2 = LineSegment(Point(0, 2), Point(0, 3))
     assert ls1.intersect(ls2) is None
     assert ls2.intersect(ls1) is None
+
+
+def test_line_segment_intersection_90_270():
+    """A single point intersection"""
+    ls1 = LineSegment(Point(0, 0), Point(0, 1))
+    ls2 = LineSegment(Point(0, 3), Point(0, 1))
+    assert ls1.intersect(ls2) == Point(0, 1)
+    assert ls2.intersect(ls1) == Point(0, 1)
 
 
 def test_line_segment_point_intersection():
@@ -148,7 +168,7 @@ def test_line_segment_angle():
     assert line_segment.angle() == 0
 
     line_segment = LineSegment(Point(0, 0), Point(-1, 0))
-    assert line_segment.angle() == 0
+    assert line_segment.angle() == 180
 
 
 def test_get_equation_parameters():

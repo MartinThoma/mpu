@@ -6,6 +6,7 @@
 # Core Library
 import datetime as dt
 import logging
+from typing import Any, Dict, List, Tuple
 
 # Third party
 import pandas as pd
@@ -83,13 +84,19 @@ def describe(df, dtype=None):
     return column_types
 
 
-def _get_column_info(df, dtype):
-    column_info = {"int": [], "float": [], "category": [], "other": [], "time": []}
+def _get_column_info(df: pd.DataFrame, dtype: Dict[str, str]) -> Tuple[Dict, Dict]:
+    column_info: Dict[str, List[str]] = {
+        "int": [],
+        "float": [],
+        "category": [],
+        "other": [],
+        "time": [],
+    }
     float_types = ["float64"]
     integer_types = ["int64", "uint8"]
     time_types = ["datetime64[ns]"]
     other_types = ["object", "category"]
-    column_info_meta = {}
+    column_info_meta : Dict[str, Dict[str, Any]] = {}
     for column_name in df:
         column_info_meta[column_name] = {}
         counter_obj = df[column_name].value_counts()
