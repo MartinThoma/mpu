@@ -26,7 +26,7 @@ It can, of course, also be installed via PyPI.
 
 ### Datastructures
 
-```python
+```python-repl
 >>> from mpu.datastructures import EList
 
 >>> l = EList([2, 1, 0])
@@ -46,7 +46,8 @@ To enhance your terminals output, you might want to do something like:
 
 ```python
 from mpu.shell import Codes
-print('{c.GREEN}{c.UNDERLINED}Works{c.RESET_ALL}'.format(c=Codes))
+
+print("{c.GREEN}{c.UNDERLINED}Works{c.RESET_ALL}".format(c=Codes))
 ```
 
 
@@ -57,6 +58,7 @@ for StackExchange answers.
 
 ```python
 from mpu.pd import example_df
+
 df = example_df()
 print(df)
 ```
@@ -79,9 +81,10 @@ gives
 ```python
 import mpu
 from fractions import Fraction
-gross_income = mpu.units.Money('2345.10', 'EUR')
-net_income = gross_income * Fraction('0.80')
-apartment = mpu.units.Money('501.23', 'EUR')
+
+gross_income = mpu.units.Money("2345.10", "EUR")
+net_income = gross_income * Fraction("0.80")
+apartment = mpu.units.Money("501.23", "EUR")
 savings = net_income - apartment
 print(savings)
 ```

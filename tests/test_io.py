@@ -5,15 +5,25 @@
 # Core Library
 import datetime
 import os
+import sys
 from tempfile import NamedTemporaryFile
 
 # Third party
+import mock
 import pkg_resources
 import pytest
 
 # First party
 import mpu.io
-from mpu.io import _write_jsonl, download, gzip_file, read, urlread, write
+from mpu.io import (
+    _write_jsonl,
+    download,
+    get_file_meta,
+    gzip_file,
+    read,
+    urlread,
+    write,
+)
 
 
 def test_download_with_path():
@@ -24,6 +34,23 @@ def test_download_with_path():
     with NamedTemporaryFile(suffix="image.jpg") as sink:
         download(source, sink.name)
         assert os.path.getsize(sink.name) == 116087
+
+
+def test_get_file_meta():
+    path = "files/example.json"
+    source = pkg_resources.resource_filename(__name__, path)
+    with mock.patch.dict(sys.modules, {"magic": None}):
+        meta = get_file_meta(source)
+    meta["filepath"] = None
+    meta["last_access_datetime"] = None
+    meta["modification_datetime"] = None
+    expected = {
+        "filepath": None,
+        "creation_datetime": None,
+        "last_access_datetime": None,
+        "modification_datetime": None,
+    }
+    assert meta == expected
 
 
 def test_urlread():
@@ -282,6 +309,12 @@ def test_hash():
 
 def test_get_creation_datetime():
     ret_val = mpu.io.get_creation_datetime(__file__)
+    assert isinstance(ret_val, (type(None), datetime.datetime))
+
+
+def test_get_creation_datetime_windows():
+    with mock.patch("platform.system", mock.MagicMock(return_value="Windows")):
+        ret_val = mpu.io.get_creation_datetime(__file__)
     assert isinstance(ret_val, (type(None), datetime.datetime))
 
 

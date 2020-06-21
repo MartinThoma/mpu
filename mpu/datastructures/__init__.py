@@ -382,9 +382,9 @@ class Interval(IntervalLike):
         elif other.right > self.right:
             # other is a superset of self
             return other
-        else:  # noqa
+        else:
             # This should never happen
-            raise NotImplementedError("Can't merge {} and {}".format(self, other))
+            raise NotImplementedError(f"Can't merge {self} and {other}")
 
     def intersection(self, other):
         """
@@ -421,10 +421,9 @@ class Interval(IntervalLike):
         elif other.right > self.right:
             # other is a superset of self
             return self
-        else:  # noqa
+        else:
             # This should never happen
-            error_string = "Can't intersect {} and {}".format(self, other)
-            raise NotImplementedError(error_string)
+            raise NotImplementedError(f"Can't intersect {self} and {other}")
 
     def __repr__(self):
         """Get an unambiguous representation."""
