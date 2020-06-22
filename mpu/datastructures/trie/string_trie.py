@@ -18,7 +18,9 @@ class TrieNode:
         self.count = count
         self.is_frozen = freeze
 
-    def get_subtrie(self, search_prefix: str, current_trie_node_prefix: str = ""):
+    def get_subtrie(
+        self, search_prefix: str, current_trie_node_prefix: str = ""
+    ) -> Tuple[str, "TrieNode"]:
         """
         Get the TrieNodes which represents the given prefix.
 

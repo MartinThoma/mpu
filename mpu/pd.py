@@ -96,7 +96,7 @@ def _get_column_info(df: pd.DataFrame, dtype: Dict[str, str]) -> Tuple[Dict, Dic
     integer_types = ["int64", "uint8"]
     time_types = ["datetime64[ns]"]
     other_types = ["object", "category"]
-    column_info_meta : Dict[str, Dict[str, Any]] = {}
+    column_info_meta: Dict[str, Dict[str, Any]] = {}
     for column_name in df:
         column_info_meta[column_name] = {}
         counter_obj = df[column_name].value_counts()

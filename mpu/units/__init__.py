@@ -7,9 +7,101 @@
 import csv
 import fractions
 from functools import total_ordering
+from typing import Tuple, Union
 
 # Third party
 import pkg_resources
+
+
+class Currency:
+    """Currency base class which contains information similar to ISO 4217."""
+
+    def __init__(
+        self,
+        name,
+        code,
+        numeric_code,
+        symbol,
+        exponent,
+        entities,
+        withdrawal_date,
+        subunits,
+    ):
+        if not isinstance(name, str):
+            raise ValueError(
+                "A currencies name has to be of type str, but "
+                "was: {}".format(type(name))
+            )
+        if not isinstance(code, str):
+            raise ValueError(
+                "A currencies code has to be of type str, but "
+                "was: {}".format(type(code))
+            )
+        if not isinstance(exponent, (type(None), int)):
+            raise ValueError(
+                "A currencies exponent has to be of type None "
+                "or int, but was: {}".format(type(code))
+            )
+
+        self.name = name
+        self.code = code
+        self.numeric_code = numeric_code
+        self.symbol = symbol
+        self.exponent = exponent
+        self.entities = entities
+        self.withdrawal_date = withdrawal_date
+        self.subunits = subunits
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self.numeric_code == other.numeric_code
+        else:
+            return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return (
+            "Currency(name={name}, code={code}, "
+            "numeric_code={numeric_code})".format(
+                name=self.name, code=self.code, numeric_code=self.numeric_code
+            )
+        )
+
+    def __json__(self):
+        """Return a JSON-serializable object."""
+        return {
+            "name": self.name,
+            "code": self.code,
+            "numeric_code": self.numeric_code,
+            "symbol": self.symbol,
+            "exponent": self.exponent,
+            "entities": self.entities,
+            "withdrawal_date": self.withdrawal_date,
+            "subunits": self.subunits,
+            "__python__": "mpu.units:Currency.from_json",
+        }
+
+    for_json = __json__
+
+    @classmethod
+    def from_json(cls, json):
+        """Create a Currency object from a JSON dump."""
+        obj = cls(
+            name=json["name"],
+            code=json["code"],
+            numeric_code=json["numeric_code"],
+            symbol=json["symbol"],
+            exponent=json["exponent"],
+            entities=json["entities"],
+            withdrawal_date=json["withdrawal_date"],
+            subunits=json["subunits"],
+        )
+        return obj
 
 
 @total_ordering
@@ -19,7 +111,7 @@ class Money:
 
     Parameters
     ----------
-    value : str, Fraction or int
+    value : Union[str, fractions.Fraction, int, Tuple]
     currency : Currency or str
 
     Examples
@@ -37,7 +129,11 @@ class Money:
     '500.00 USD'
     """
 
-    def __init__(self, value, currency):
+    def __init__(
+        self,
+        value: Union[str, fractions.Fraction, int, Tuple],
+        currency: Union[str, Currency],
+    ):
         # Handle value
         if isinstance(value, tuple):
             if len(value) != 2:
@@ -58,13 +154,9 @@ class Money:
             self.value = fractions.Fraction(value)  # convert to Decimal
 
         # Handle currency
-        try:
-            strtype = basestring
-        except NameError:
-            strtype = str
         if isinstance(currency, Currency):
             self.currency = currency
-        elif isinstance(currency, strtype):
+        elif isinstance(currency, str):
             self.currency = get_currency(currency)
         elif currency is None:
             self.currency = Currency(
@@ -300,94 +392,3 @@ def get_currency(currency_str):
                     subunits=subunits,
                 )
     raise ValueError("Could not find currency '{}'".format(currency_str))
-
-
-class Currency:
-    """Currency base class which contains information similar to ISO 4217."""
-
-    def __init__(
-        self,
-        name,
-        code,
-        numeric_code,
-        symbol,
-        exponent,
-        entities,
-        withdrawal_date,
-        subunits,
-    ):
-        if not isinstance(name, str):
-            raise ValueError(
-                "A currencies name has to be of type str, but "
-                "was: {}".format(type(name))
-            )
-        if not isinstance(code, str):
-            raise ValueError(
-                "A currencies code has to be of type str, but "
-                "was: {}".format(type(code))
-            )
-        if not isinstance(exponent, (type(None), int)):
-            raise ValueError(
-                "A currencies exponent has to be of type None "
-                "or int, but was: {}".format(type(code))
-            )
-
-        self.name = name
-        self.code = code
-        self.numeric_code = numeric_code
-        self.symbol = symbol
-        self.exponent = exponent
-        self.entities = entities
-        self.withdrawal_date = withdrawal_date
-        self.subunits = subunits
-
-    def __eq__(self, other):
-        if isinstance(other, self.__class__):
-            return self.numeric_code == other.numeric_code
-        else:
-            return False
-
-    def __ne__(self, other):
-        return not self.__eq__(other)
-
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return (
-            "Currency(name={name}, code={code}, "
-            "numeric_code={numeric_code})".format(
-                name=self.name, code=self.code, numeric_code=self.numeric_code
-            )
-        )
-
-    def __json__(self):
-        """Return a JSON-serializable object."""
-        return {
-            "name": self.name,
-            "code": self.code,
-            "numeric_code": self.numeric_code,
-            "symbol": self.symbol,
-            "exponent": self.exponent,
-            "entities": self.entities,
-            "withdrawal_date": self.withdrawal_date,
-            "subunits": self.subunits,
-            "__python__": "mpu.units:Currency.from_json",
-        }
-
-    for_json = __json__
-
-    @classmethod
-    def from_json(cls, json):
-        """Create a Currency object from a JSON dump."""
-        obj = cls(
-            name=json["name"],
-            code=json["code"],
-            numeric_code=json["numeric_code"],
-            symbol=json["symbol"],
-            exponent=json["exponent"],
-            entities=json["entities"],
-            withdrawal_date=json["withdrawal_date"],
-            subunits=json["subunits"],
-        )
-        return obj
