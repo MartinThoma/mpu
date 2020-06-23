@@ -11,6 +11,7 @@ import os
 import pickle
 import platform
 from datetime import datetime
+from typing import Dict, List
 
 # First party
 from mpu.datastructures import EList
@@ -31,7 +32,7 @@ def read(filepath: str, **kwargs):
     filepath : str
         Path to the file that should be read. This methods action depends
         mainly on the file extension.
-    kwargs : dict
+    kwargs : Dict
         Any keywords for the specific file format. For CSV, this is
         'delimiter', 'quotechar', 'skiprows', 'format'
 
@@ -39,6 +40,7 @@ def read(filepath: str, **kwargs):
     -------
     data : Union[str, bytes] or other (e.g. format=dicts)
     """
+    supported_formats = [".csv", ".json", ".jsonl", ".pickle"]
     if filepath.lower().endswith(".csv"):
         return _read_csv(filepath, kwargs)
     elif filepath.lower().endswith(".json"):
@@ -66,10 +68,14 @@ def read(filepath: str, **kwargs):
             " as a guide how to use it."
         )
     else:
-        raise NotImplementedError("File '{}' is not known.".format(filepath))
+        raise NotImplementedError(
+            f"File '{filepath}' does not end with one "
+            f"of the supported file name extensions. "
+            f"Supported are: {supported_formats}"
+        )
 
 
-def _read_csv(filepath: str, kwargs):
+def _read_csv(filepath: str, kwargs: Dict):
     """See documentation of mpu.io.read."""
     if "delimiter" not in kwargs:
         kwargs["delimiter"] = ","
@@ -100,7 +106,7 @@ def _read_csv(filepath: str, kwargs):
     return data
 
 
-def _read_jsonl(filepath: str, kwargs):
+def _read_jsonl(filepath: str, kwargs) -> List:
     """See documentation of mpu.io.read."""
     with open(filepath) as data_file:
         data = [json.loads(line, **kwargs) for line in data_file if len(line) > 0]
@@ -121,7 +127,8 @@ def write(filepath: str, data, **kwargs):
     ----------
     filepath : str
         Path to the file that should be read. This methods action depends
-        mainly on the file extension.
+        mainly on the file extension. Make sure that it ends in .csv, .json,
+        .jsonl, or .pickle.
     data : dict or list
         Content that should be written
     kwargs : dict
@@ -131,6 +138,7 @@ def write(filepath: str, data, **kwargs):
     -------
     data : str or bytes
     """
+    supported_formats = [".csv", ".json", ".jsonl", ".pickle"]
     if filepath.lower().endswith(".csv"):
         return _write_csv(filepath, data, kwargs)
     elif filepath.lower().endswith(".json"):
@@ -149,12 +157,15 @@ def write(filepath: str, data, **kwargs):
         )
     elif filepath.lower().endswith(".h5") or filepath.lower().endswith(".hdf5"):
         raise NotImplementedError(
-            "YAML is not supported. See "
+            "HDF5 is not supported. See "
             "https://stackoverflow.com/a/41586571/562769"
             " as a guide how to use it."
         )
     else:
-        raise NotImplementedError("File '{}' is not known.".format(filepath))
+        raise NotImplementedError(
+            f"File '{filepath}' does not end in one of the "
+            f"supported formats. Supported are: {supported_formats}"
+        )
 
 
 def _write_csv(filepath: str, data, kwargs):
