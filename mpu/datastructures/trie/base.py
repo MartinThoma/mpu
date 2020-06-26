@@ -8,4 +8,3 @@ class AbstractTrie(Collection):
     @abstractmethod
     def autocomplete(self, prefix: str) -> List[str]:
         """Return a list of all words with the given prefix."""
-        return []

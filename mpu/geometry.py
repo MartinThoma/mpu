@@ -9,7 +9,7 @@ For more advanced use cases, see:
 
 # Core Library
 import math
-from typing import FrozenSet, List, Set, Tuple, Union
+from typing import Any, FrozenSet, List, Set, Tuple, Union
 
 # First party
 from mpu.datastructures import Interval
@@ -31,17 +31,17 @@ class Point:
         self.x = x
         self.y = y
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"({self.x}|{self.y})"
 
     __repr__ = __str__
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         if not isinstance(other, Point):
             return False
         return self.x == other.x and self.y == other.y
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self.x, self.y))
 
 
@@ -64,7 +64,7 @@ class LineSegment:
         """Get the length of this line segment."""
         return ((self.p1.x - self.p2.x) ** 2 + (self.p1.y - self.p2.y) ** 2) ** 0.5
 
-    def is_point(self):
+    def is_point(self) -> bool:
         """Check if this LineSegment is a point."""
         return self.p1 == self.p2
 
@@ -78,7 +78,7 @@ class LineSegment:
             angle = 360 + angle
         return angle
 
-    def _get_equation_parameters(self):
+    def _get_equation_parameters(self) -> Tuple[float, float]:
         if self.p1.x == self.p2.x:
             raise ValueError("is not a function")
         # y1 = m*x1 + t
@@ -94,7 +94,7 @@ class LineSegment:
         t = y1 - m * x1
         return m, t
 
-    def simplify(self):
+    def simplify(self) -> Union[Point, "LineSegment"]:
         """Simplify this line segment to a point, if possible."""
         if self.is_point():
             return self.p1
@@ -103,7 +103,7 @@ class LineSegment:
         else:
             return self
 
-    def intersect(self, other) -> Union[None, "LineSegment", Point]:
+    def intersect(self, other: "LineSegment") -> Union[None, "LineSegment", Point]:
         """
         Get the intersection between this LineSegment and another LineSegment.
 
@@ -190,10 +190,10 @@ class LineSegment:
 
     __repr__ = __str__
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self.p1, self.p2, self.name))
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         if not isinstance(other, LineSegment):
             return False
         return self.name == other.name and (
@@ -202,7 +202,9 @@ class LineSegment:
         )
 
 
-def _get_straight_line_intersection(x, other_y1, other_y2, self_y1, self_y2):
+def _get_straight_line_intersection(
+    x: float, other_y1: float, other_y2: float, self_y1: float, self_y2: float
+) -> Union[Point, LineSegment]:
     """Get the intersection point of two straight vertical lines."""
     self_y = Interval(left=min(self_y1, self_y2), right=max(self_y1, self_y2))
     other_y = Interval(left=min(other_y1, other_y2), right=max(other_y1, other_y2))

@@ -6,13 +6,14 @@
 import functools
 import warnings
 from time import time
+from typing import Callable, Dict, List
 
 
-def timing(func):
+def timing(func: Callable) -> Callable:
     """Measure the execution time of a function call and print the result."""
 
     @functools.wraps(func)
-    def wrap(*args, **kw):
+    def wrap(*args: List, **kw: Dict) -> Callable:
         t0 = time()
         result = func(*args, **kw)
         t1 = time()
@@ -26,7 +27,7 @@ def timing(func):
     return wrap
 
 
-def deprecated(func):
+def deprecated(func: Callable) -> Callable:
     """
     Mark functions as deprecated.
 
@@ -34,7 +35,7 @@ def deprecated(func):
     """
 
     @functools.wraps(func)
-    def new_func(*args, **kwargs):
+    def new_func(*args: List, **kwargs: Dict) -> Callable:
         warnings.warn_explicit(
             "Call to deprecated function {}.".format(func.__name__),
             category=DeprecationWarning,

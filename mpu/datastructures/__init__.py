@@ -6,14 +6,28 @@
 import collections
 import logging
 from copy import deepcopy
+from typing import (
+    Any,
+    Dict,
+    Generic,
+    Iterable,
+    List,
+    Optional,
+    TypeVar,
+    Union,
+    cast,
+    overload,
+)
 
 # First party
 from mpu.datastructures.trie import Trie  # noqa
 
 logger = logging.getLogger(__name__)
 
+T = TypeVar("T")
 
-class EList(list):
+
+class EList(list, Generic[T]):
     """
     Enhanced List.
 
@@ -31,7 +45,7 @@ class EList(list):
     [0, 1, 2]
     """
 
-    def __init__(self, *args):
+    def __init__(self, *args: Iterable[T]):
         list.__init__(self, *args)
 
     def __getitem__(self, key):
@@ -51,13 +65,13 @@ class EList(list):
         else:
             return list.__getitem__(self, key)
 
-    def remove_indices(self, indices):
+    def remove_indices(self, indices: List[int]) -> "EList":
         """
         Remove rows by which have the given indices.
 
         Parameters
         ----------
-        indices : list
+        indices : List[int]
 
         Returns
         -------
@@ -70,13 +84,13 @@ class EList(list):
         return EList(new_list)
 
 
-def flatten(iterable, string_flattening=False):
+def flatten(iterable: Iterable, string_flattening: bool = False) -> List:
     """
     Flatten an given iterable of iterables into one list.
 
     Parameters
     ----------
-    iterable : iterable
+    iterable : Iterable
     string_flattening : bool
         If this is False, then strings are NOT flattened
 
@@ -107,7 +121,9 @@ def flatten(iterable, string_flattening=False):
     return flat_list
 
 
-def dict_merge(dict_left, dict_right, merge_method="take_left_shallow"):
+def dict_merge(
+    dict_left: Dict, dict_right: Dict, merge_method: str = "take_left_shallow"
+) -> Dict:
     r"""
     Merge two dictionaries.
 
@@ -117,8 +133,8 @@ def dict_merge(dict_left, dict_right, merge_method="take_left_shallow"):
 
     Parameters
     ----------
-    dict_left : dict
-    dict_right: dict
+    dict_left : Dict
+    dict_right: Dict
     merge_method : {'take_left_shallow', 'take_left_deep', \
                     'take_right_shallow', 'take_right_deep', \
                     'sum'}
@@ -133,7 +149,7 @@ def dict_merge(dict_left, dict_right, merge_method="take_left_shallow"):
 
     Returns
     -------
-    merged_dict : dict
+    merged_dict : Dict
 
     Examples
     --------
@@ -185,7 +201,7 @@ def dict_merge(dict_left, dict_right, merge_method="take_left_shallow"):
         )
 
 
-def _dict_merge_right(dict_left, dict_right, merge_method):
+def _dict_merge_right(dict_left: Dict, dict_right: Dict, merge_method: str) -> Dict:
     """See documentation of mpu.datastructures.dict_merge."""
     new_dict = deepcopy(dict_left)
     for key, value in dict_right.items():
@@ -206,7 +222,7 @@ def _dict_merge_right(dict_left, dict_right, merge_method):
     return new_dict
 
 
-def set_dict_value(dictionary, keys, value):
+def set_dict_value(dictionary: Dict, keys: List[Any], value: Any) -> Dict:
     """
     Set a value in a (nested) dictionary by defining a list of keys.
 
@@ -216,9 +232,9 @@ def set_dict_value(dictionary, keys, value):
 
     Parameters
     ----------
-    dictionary : dict
+    dictionary : Dict
     keys : List[Any]
-    value : object
+    value : Any
 
     Returns
     -------
@@ -238,7 +254,7 @@ def set_dict_value(dictionary, keys, value):
     return orig
 
 
-def does_keychain_exist(dict_, list_):
+def does_keychain_exist(dict_: Dict, list_: List) -> bool:
     """
     Check if a sequence of keys exist in a nested dictionary.
 
@@ -277,11 +293,11 @@ class IntervalLike:
     dependencies, ABC cannot be used.
     """
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """Return if the IntervalLike is empty."""
         raise NotImplementedError()
 
-    def issubset(self, other):
+    def issubset(self, other: "IntervalLike") -> bool:
         """
         Check if the interval "self" is completely inside of other.
 
@@ -344,11 +360,11 @@ class Interval(IntervalLike):
         self.left = left
         self.right = right
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """Return if the interval is empty."""
         return self.left is None
 
-    def union(self, other):
+    def union(self, other: IntervalLike) -> IntervalLike:
         """
         Combine two Intervals.
 
@@ -366,25 +382,42 @@ class Interval(IntervalLike):
         elif other.is_empty():
             return self
 
-        # Standardize - after this step, the other.left is left of self.left
-        if other.left > self.left:
-            other, self = self, other
+        if isinstance(other, Interval):
+            # Standardize - after this step, the other.left is left of self.left
+            if other.left > self.left:
+                other, self = self, other
 
-        # Go through all cases
-        if other.right < self.left:
-            # Completely disjunct
-            return IntervalUnion([self, other])
-        elif other.right == self.left:
-            # next to each other
-            return Interval(other.left, self.right)
-        elif other.right <= self.right:
-            return Interval(other.left, self.right)
-        elif other.right > self.right:
-            # other is a superset of self
-            return other
+            # Go through all cases
+            if other.right < self.left:
+                # Completely disjunct
+                return IntervalUnion([self, other])
+            elif other.right == self.left:
+                # next to each other
+                return Interval(other.left, self.right)
+            elif other.right <= self.right:
+                return Interval(other.left, self.right)
+            elif other.right > self.right:
+                # other is a superset of self
+                return other
+            else:
+                # This should never happen
+                raise NotImplementedError(f"Can't merge {self} and {other}")
+        elif isinstance(other, IntervalUnion):
+            union = cast(
+                Union[Interval, IntervalUnion],
+                IntervalUnion([[self.left, self.right]] + other.intervals)._simplify(),
+            )
+            return union
         else:
-            # This should never happen
             raise NotImplementedError(f"Can't merge {self} and {other}")
+
+    @overload
+    def intersection(self, other: "Interval") -> "Interval":
+        ...
+
+    @overload
+    def intersection(self, other: "IntervalUnion") -> IntervalLike:
+        ...
 
     def intersection(self, other):
         """
@@ -442,14 +475,14 @@ class Interval(IntervalLike):
     __and__ = intersection
     __or__ = union
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """Check if other is equal to this object."""
         if isinstance(other, (Interval, IntervalUnion)):
             return self.issubset(other) and other.issubset(self)
         else:
             return False
 
-    def issubset(self, other):
+    def issubset(self, other: IntervalLike) -> bool:
         """
         Check if the interval "self" is completely inside of other.
 
@@ -473,7 +506,7 @@ class Interval(IntervalLike):
             for interval in other.intervals:
                 if self.issubset(interval):
                     return True
-            return
+            return False
         else:
             raise RuntimeError(
                 "issubset is only defined on Interval and "
@@ -498,14 +531,14 @@ class IntervalUnion(IntervalLike):
                 else:
                     self.intervals.append(Interval(interval[0], interval[1]))
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """Return if the IntervalUnion is empty."""
         for interval in self.intervals:
             if not interval.is_empty():
                 return False
         return True
 
-    def issubset(self, other):
+    def issubset(self, other: IntervalLike) -> bool:
         """
         Check if this IntervalUnion is completely inside of `other`.
 
@@ -551,7 +584,7 @@ class IntervalUnion(IntervalLike):
             keypoints.append(interval.right)
         return keypoints
 
-    def _simplify(self):
+    def _simplify(self) -> Optional[IntervalLike]:
         """
         Simplify the representation of the components.
 
@@ -566,7 +599,7 @@ class IntervalUnion(IntervalLike):
             if it collapses to a single interval.
         """
         if len(self.intervals) == 0:
-            return
+            return None
         self.intervals = sorted(self.intervals, key=lambda n: n.left)
         simpler_intervals = [self.intervals[0]]
         for interval in self.intervals[1:]:
@@ -576,8 +609,9 @@ class IntervalUnion(IntervalLike):
             else:
                 simpler_intervals.append(interval)
         self.intervals = simpler_intervals
+        return self
 
-    def union(self, other):
+    def union(self, other: IntervalLike) -> IntervalLike:
         """
         Return the union between this IntervalUnion and another object.
 
@@ -598,7 +632,7 @@ class IntervalUnion(IntervalLike):
         self._simplify()
         return self
 
-    def intersection(self, other):
+    def intersection(self, other: IntervalLike) -> IntervalLike:
         """
         Return the intersection between this IntervalUnion and another object.
 

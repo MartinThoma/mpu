@@ -16,9 +16,10 @@ Standard libraries are:
 import math as math_stl
 import operator
 from functools import reduce
+from typing import Dict, Iterable, Iterator, List, Optional
 
 
-def generate_primes():
+def generate_primes() -> Iterator[int]:
     """
     Generate an infinite sequence of prime numbers.
 
@@ -35,7 +36,7 @@ def generate_primes():
     >>> next(g)
     5
     """
-    divisors = {}  # map number to at least one divisor
+    divisors: Dict[int, List[int]] = {}  # map number to at least one divisor
 
     candidate = 2  # next potential prime
 
@@ -59,7 +60,7 @@ def generate_primes():
         candidate += 1
 
 
-def factorize(number):
+def factorize(number: int) -> List[int]:
     """
     Get the prime factors of an integer except for 1.
 
@@ -69,7 +70,7 @@ def factorize(number):
 
     Returns
     -------
-    primes : iterable
+    primes : List[int]
 
     Examples
     --------
@@ -98,7 +99,7 @@ def factorize(number):
         return [number]
 
 
-def is_prime(number):
+def is_prime(number: int) -> bool:
     """
     Check if a number is prime.
 
@@ -122,7 +123,7 @@ def is_prime(number):
     return len(factorize(number)) == 1
 
 
-def product(iterable, start=1):
+def product(iterable: Iterable, start: int = 1) -> int:
     """
     Calculate the product of the iterables.
 
@@ -146,17 +147,17 @@ def product(iterable, start=1):
     return reduce(operator.mul, iterable, start)
 
 
-def argmax(iterable):
+def argmax(iterable: Iterable) -> Optional[int]:
     """
     Find the first index of the biggest value in the iterable.
 
     Parameters
     ----------
-    iterable : iterable
+    iterable : Iterable
 
     Returns
     -------
-    argmax : int
+    argmax : Optional[int]
 
     Examples
     --------
@@ -177,7 +178,7 @@ def argmax(iterable):
     return max_index
 
 
-def round_up(x, decimal_places):
+def round_up(x: float, decimal_places: int) -> float:
     """
     Round a float up to decimal_places.
 
@@ -204,7 +205,7 @@ def round_up(x, decimal_places):
     return round(x + 5 * 10 ** (-1 * (decimal_places + 1)), decimal_places)
 
 
-def round_down(x, decimal_places):
+def round_down(x: float, decimal_places: int) -> float:
     """
     Round a float down to decimal_places.
 

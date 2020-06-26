@@ -3,11 +3,14 @@
 """Machine Learning functions."""
 
 
+# Core Library
+from typing import Iterable, List
+
 # First party
 from mpu.math import argmax
 
 
-def indices2one_hot(indices, nb_classes):
+def indices2one_hot(indices: Iterable, nb_classes: int) -> List:
     """
     Convert an iterable of indices to one-hot encoded list.
 
@@ -15,7 +18,7 @@ def indices2one_hot(indices, nb_classes):
 
     Parameters
     ----------
-    indices : iterable
+    indices : Iterable
         iterable of indices
     nb_classes : int
         Number of classes
@@ -23,7 +26,7 @@ def indices2one_hot(indices, nb_classes):
 
     Returns
     -------
-    one_hot : list
+    one_hot : List
 
     Examples
     --------
@@ -44,17 +47,17 @@ def indices2one_hot(indices, nb_classes):
     return one_hot
 
 
-def one_hot2indices(one_hots):
+def one_hot2indices(one_hots: List) -> List:
     """
     Convert an iterable of one-hot encoded targets to a list of indices.
 
     Parameters
     ----------
-    one_hot : list
+    one_hot : List
 
     Returns
     -------
-    indices : list
+    indices : List
 
     Examples
     --------

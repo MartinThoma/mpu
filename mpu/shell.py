@@ -2,6 +2,9 @@
 
 """Enhancing printed terminal output."""
 
+# Core Library
+from typing import List
+
 
 class Codes:
     """Escape sequences for enhanced shell output."""
@@ -59,7 +62,7 @@ class Codes:
     BACKGROUND_WHITE = "\033[107m"
 
 
-def print_table(table):
+def print_table(table: List) -> None:
     """
     Print as a table.
 
@@ -67,7 +70,7 @@ def print_table(table):
 
     Parameters
     ----------
-    table : list
+    table : List
 
     Examples
     --------
@@ -89,7 +92,7 @@ def print_table(table):
         print(formatter.format(*row))
 
 
-def text_input(text):
+def text_input(text: str) -> str:
     """
     Ask the user for textual input.
 

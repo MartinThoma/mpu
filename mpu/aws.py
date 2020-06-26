@@ -7,12 +7,15 @@ import enum
 import os
 from collections import namedtuple
 from tempfile import mkstemp
+from typing import List, Optional, Tuple
 
 # Third party
 import boto3
 
 
-def list_files(bucket, prefix="", profile_name=None):
+def list_files(
+    bucket: str, prefix: str = "", profile_name: Optional[str] = None
+) -> List[str]:
     """
     List up to 1000 files in a bucket.
 
@@ -40,7 +43,7 @@ def list_files(bucket, prefix="", profile_name=None):
     return keys
 
 
-def s3_read(source, profile_name=None):
+def s3_read(source: str, profile_name: Optional[str] = None) -> bytes:
     """
     Read a file from an S3 source.
 
@@ -80,8 +83,11 @@ class ExistsStrategy(enum.Enum):
 
 
 def s3_download(
-    source, destination=None, exists_strategy=ExistsStrategy.RAISE, profile_name=None
-):
+    source: str,
+    destination: Optional[str] = None,
+    exists_strategy: ExistsStrategy = ExistsStrategy.RAISE,
+    profile_name: Optional[str] = None,
+) -> Optional[str]:
     """
     Copy a file from an S3 source to a local destination.
 
@@ -101,8 +107,8 @@ def s3_download(
 
     Returns
     -------
-    download_path : str
-        Path of the downloaded file.
+    download_path : Optional[str]
+        Path of the downloaded file, if any was downloaded.
 
     Raises
     ------
@@ -127,12 +133,14 @@ def s3_download(
         if exists_strategy is ExistsStrategy.RAISE:
             raise RuntimeError("File '{}' already exists.".format(destination))
         elif exists_strategy is ExistsStrategy.ABORT:
-            return
+            return None
     s3.Bucket(bucket_name).download_file(key, destination)
     return destination
 
 
-def s3_upload(source, destination, profile_name=None):
+def s3_upload(
+    source: str, destination: str, profile_name: Optional[str] = None
+) -> None:
     """
     Copy a file from a local source to an S3 destination.
 
@@ -154,7 +162,7 @@ def s3_upload(source, destination, profile_name=None):
 S3Path = namedtuple("S3Path", ["bucket_name", "key"])
 
 
-def _s3_path_split(s3_path):
+def _s3_path_split(s3_path: str) -> Tuple[str, str]:
     """
     Split an S3 path into bucket and key.
 

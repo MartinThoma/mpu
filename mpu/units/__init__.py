@@ -2,12 +2,11 @@
 
 """Handle units - currently only currencies."""
 
-
 # Core Library
 import csv
 import fractions
 from functools import total_ordering
-from typing import Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 # Third party
 import pkg_resources
@@ -18,14 +17,14 @@ class Currency:
 
     def __init__(
         self,
-        name,
-        code,
-        numeric_code,
-        symbol,
-        exponent,
-        entities,
-        withdrawal_date,
-        subunits,
+        name: str,
+        code: str,
+        numeric_code: str,
+        symbol: str,
+        exponent: Optional[int],
+        entities: Optional[List],
+        withdrawal_date: Optional[str],
+        subunits: Optional[str],
     ):
         if not isinstance(name, str):
             raise ValueError(
@@ -52,19 +51,19 @@ class Currency:
         self.withdrawal_date = withdrawal_date
         self.subunits = subunits
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         if isinstance(other, self.__class__):
             return self.numeric_code == other.numeric_code
         else:
             return False
 
-    def __ne__(self, other):
+    def __ne__(self, other: Any) -> bool:
         return not self.__eq__(other)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             "Currency(name={name}, code={code}, "
             "numeric_code={numeric_code})".format(
@@ -72,7 +71,7 @@ class Currency:
             )
         )
 
-    def __json__(self):
+    def __json__(self) -> Dict[str, Any]:
         """Return a JSON-serializable object."""
         return {
             "name": self.name,
@@ -89,7 +88,7 @@ class Currency:
     for_json = __json__
 
     @classmethod
-    def from_json(cls, json):
+    def from_json(cls, json: Dict) -> "Currency":
         """Create a Currency object from a JSON dump."""
         obj = cls(
             name=json["name"],
@@ -175,7 +174,7 @@ class Money:
                 "Currency".format(type(currency))
             )
 
-    def __str__(self):
+    def __str__(self) -> str:
         exponent = 2
         if self.currency.exponent is not None:
             exponent = self.currency.exponent
@@ -188,10 +187,10 @@ class Money:
                 exponent=exponent, value=float(self.value), currency=self.currency,
             )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return str(self)
 
-    def __mul__(self, other):
+    def __mul__(self, other: Union[int, fractions.Fraction]) -> "Money":
         if isinstance(other, (int, fractions.Fraction)):
             return Money(self.value * other, self.currency)
         else:
@@ -201,7 +200,7 @@ class Money:
                 )
             )
 
-    def __format__(self, spec):
+    def __format__(self, spec: str) -> str:
         if "," not in spec:
             if spec == "":
                 exponent = 2
@@ -236,40 +235,36 @@ class Money:
                 "implemented for the Money class.".format(symbol_formatter)
             )
 
-    def __add__(self, other):
-        if isinstance(other, Money):
-            if self.currency == other.currency:
-                return Money(self.value + other.value, self.currency)
-            else:
-                raise ValueError(
-                    (
-                        "Addition of currency '{}' and '{}' is "
-                        "not supported. You need an exchange rate."
-                    ).format(self.currency, other.currency)
-                )
-        else:
+    def __add__(self, other: "Money") -> "Money":
+        if not isinstance(other, Money):
             raise ValueError(
                 ("Addition with type '{}' is not " "supported").format(type(other))
             )
+        if not (self.currency == other.currency):
+            raise ValueError(
+                (
+                    "Addition of currency '{}' and '{}' is "
+                    "not supported. You need an exchange rate."
+                ).format(self.currency, other.currency)
+            )
+        return Money(self.value + other.value, self.currency)
 
-    def __sub__(self, other):
-        if isinstance(other, Money):
-            if self.currency == other.currency:
-                return Money(self.value - other.value, self.currency)
-            else:
-                raise ValueError(
-                    (
-                        "Subtraction of currency '{}' and '{}' "
-                        "is not supported. You need an exchange "
-                        "rate."
-                    ).format(self.currency, other.currency)
-                )
-        else:
+    def __sub__(self, other: "Money") -> "Money":
+        if not isinstance(other, Money):
             raise ValueError(
                 ("Subtraction with type '{}' is not " "supported").format(type(other))
             )
+        if not (self.currency == other.currency):
+            raise ValueError(
+                (
+                    "Subtraction of currency '{}' and '{}' "
+                    "is not supported. You need an exchange "
+                    "rate."
+                ).format(self.currency, other.currency)
+            )
+        return Money(self.value - other.value, self.currency)
 
-    def __truediv__(self, other):
+    def __truediv__(self, other: "Money") -> Union[float, "Money"]:
         if isinstance(other, Money):
             if self.currency == other.currency:
                 return self.value / other.value
@@ -290,19 +285,19 @@ class Money:
 
     __div__ = __truediv__
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         if isinstance(other, self.__class__):
             same_currency = self.currency == other.currency
             return (self.value == other.value) and same_currency
         else:
             return False
 
-    def __ne__(self, other):
+    def __ne__(self, other: Any) -> bool:
         return not self.__eq__(other)
 
     __rmul__ = __mul__
 
-    def __gt__(self, other):
+    def __gt__(self, other: "Money") -> bool:
         if not isinstance(other, self.__class__):
             return False
         elif self.currency != other.currency:
@@ -310,7 +305,7 @@ class Money:
         else:
             return self.value > other.value
 
-    def __lt__(self, other):
+    def __lt__(self, other: "Money") -> bool:
         if not isinstance(other, self.__class__):
             return False
         elif self.currency != other.currency:
@@ -318,16 +313,16 @@ class Money:
         else:
             return self.value < other.value
 
-    def __neg__(self):
+    def __neg__(self) -> "Money":
         return Money(-self.value, self.currency)
 
-    def __pos__(self):
+    def __pos__(self) -> "Money":
         return Money(self.value, self.currency)
 
-    def __float__(self):
+    def __float__(self) -> float:
         return float(self.value)
 
-    def __json__(self):
+    def __json__(self) -> Dict[str, Any]:
         """Return a JSON-serializable object."""
         currency = str(self.currency)
         if self.currency.numeric_code is None:
@@ -341,13 +336,13 @@ class Money:
     for_json = __json__
 
     @classmethod
-    def from_json(cls, json):
+    def from_json(cls, json: Dict[str, Any]) -> "Money":
         """Create a Money object from a JSON dump."""
         obj = cls(json["value"], json["currency"])
         return obj
 
 
-def get_currency(currency_str):
+def get_currency(currency_str: str) -> Currency:
     """
     Convert an identifier for a currency into a currency object.
 
@@ -377,7 +372,7 @@ def get_currency(currency_str):
                 else:
                     exponent = int(row[5])
                 if len(row[6]) > 0:
-                    withdrawal_date = row[6]
+                    withdrawal_date: Optional[str] = row[6]
                 else:
                     withdrawal_date = None
                 subunits = row[7]

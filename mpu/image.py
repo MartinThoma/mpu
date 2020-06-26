@@ -2,11 +2,14 @@
 
 """Image manipulation."""
 
+# Core Library
+from typing import Dict
+
 # First party
 import mpu
 
 
-def get_meta(filepath):
+def get_meta(filepath: str) -> Dict:
     """
     Get meta-information of an image.
 
@@ -16,7 +19,7 @@ def get_meta(filepath):
 
     Returns
     -------
-    meta : dict
+    meta : Dict
     """
     meta = {}
     try:

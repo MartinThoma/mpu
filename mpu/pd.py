@@ -6,7 +6,7 @@
 # Core Library
 import datetime as dt
 import logging
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 # Third party
 import pandas as pd
@@ -20,7 +20,7 @@ countries = pd.read_csv(countries_file)
 logger = logging.getLogger("mpu")
 
 
-def example_df():
+def example_df() -> pd.DataFrame:
     """Create an example dataframe."""
     country_names = ["Germany", "France", "Indonesia", "Ireland", "Spain", "Vatican"]
     population = [82521653, 66991000, 255461700, 4761865, 46549045, None]
@@ -45,14 +45,14 @@ def example_df():
     return df
 
 
-def describe(df, dtype=None):
+def describe(df: pd.DataFrame, dtype: Optional[Dict] = None) -> Dict:
     """
     Print a description of a Pandas dataframe.
 
     Parameters
     ----------
-    df : Pandas.DataFrame
-    dtype : dict
+    df : pd.DataFrame
+    dtype : Optional[Dict]
         Maps column names to types
     """
     if dtype is None:
@@ -159,7 +159,7 @@ def _get_column_info(df: pd.DataFrame, dtype: Dict[str, str]) -> Tuple[Dict, Dic
     return column_info, column_info_meta
 
 
-def _describe_int(df, column_info):
+def _describe_int(df: pd.DataFrame, column_info: Dict) -> None:
     print("\n## Integer Columns")
     table = [
         ["Column name", "Non-nan", "mean", "std", "min", "25%", "50%", "75%", "max"]
@@ -179,7 +179,7 @@ def _describe_int(df, column_info):
     mpu.shell.print_table(table)
 
 
-def _describe_float(df, column_info):
+def _describe_float(df: pd.DataFrame, column_info: Dict) -> None:
     print("\n## Float Columns")
     table = [
         ["Column name", "Non-nan", "mean", "std", "min", "25%", "50%", "75%", "max"]
@@ -199,7 +199,9 @@ def _describe_float(df, column_info):
     mpu.shell.print_table(table)
 
 
-def _describe_category(df, column_info, column_info_meta):
+def _describe_category(
+    df: pd.DataFrame, column_info: Dict, column_info_meta: Dict
+) -> None:
     print("\n## Category Columns")
     table = [["Column name", "Non-nan", "unique", "top el", "top (count)", "rest"]]
     for column_name in column_info["category"]:
@@ -215,7 +217,7 @@ def _describe_category(df, column_info, column_info_meta):
     mpu.shell.print_table(table)
 
 
-def _describe_time(df, column_info, column_info_meta):
+def _describe_time(df: pd.DataFrame, column_info: Dict, column_info_meta: Dict) -> None:
     print("\n## Time Columns")
     table = [
         ["Column name", "Non-nan", "unique", "top el", "top (count)", "min", "max"]
@@ -233,7 +235,9 @@ def _describe_time(df, column_info, column_info_meta):
     mpu.shell.print_table(table)
 
 
-def _describe_other(df, column_info, column_info_meta):
+def _describe_other(
+    df: pd.DataFrame, column_info: Dict, column_info_meta: Dict
+) -> None:
     print("\n## Other Columns")
     table = [["Column name", "Non-nan", "unique", "top", "(count)", "rest"]]
     for column_name in column_info["other"]:

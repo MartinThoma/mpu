@@ -4,12 +4,13 @@
 
 # Core Library
 import os
+from typing import List
 
 # Third party
 import pkg_resources
 
 
-def get_all_files(root, followlinks=False):
+def get_all_files(root: str, followlinks: bool = False) -> List:
     """
     Get all files within the given root directory.
 
@@ -23,7 +24,7 @@ def get_all_files(root, followlinks=False):
 
     Returns
     -------
-    filepaths : list
+    filepaths : List
         List of absolute paths to files
     """
     filepaths = []
@@ -33,7 +34,7 @@ def get_all_files(root, followlinks=False):
     return filepaths
 
 
-def get_from_package(package_name, path):
+def get_from_package(package_name: str, path: str) -> str:
     """
     Get the absolute path to a file in a package.
 

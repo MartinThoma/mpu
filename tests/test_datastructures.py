@@ -131,6 +131,13 @@ def test_interval_union():
     assert Interval(3, 5).union(Interval(-1, 6)) == Interval(-1, 6)
 
 
+def test_interval_union_interval_unition():
+    i01 = Interval(0, 1)
+    assert i01.union(IntervalUnion([[4, 5], [6, 7]])) == IntervalUnion(
+        [[0, 1], [4, 5], [6, 7]]
+    )
+
+
 def test_impossible_union():
     class Impossible:
         def __init__(self):
@@ -334,6 +341,13 @@ def test_interval_union_issubset_equal():
     iu2 = IntervalUnion([[0, 10], [20, 30], [40, 50]])
     assert iu1.issubset(iu2)
     assert iu2.issubset(iu1)
+
+
+def test_interval_union_issubset_not():
+    iu = IntervalUnion([[0, 10], [20, 30], [40, 50]])
+    interval = Interval(12, 14)
+    assert not iu.issubset(interval)
+    assert not interval.issubset(iu)
 
 
 def test_interval_union_issubset_part():

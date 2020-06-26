@@ -127,7 +127,7 @@ def is_float(potential_float: str) -> bool:
         return False
 
 
-def str2bool(string_: str, default="raise") -> bool:
+def str2bool(string_: str, default: Union[str, bool] = "raise") -> bool:
     """
     Convert a string to a bool.
 
@@ -188,7 +188,9 @@ def str2str_or_none(string_: str) -> Optional[str]:
         return string_
 
 
-def str2bool_or_none(string_: str, default="raise") -> Optional[bool]:
+def str2bool_or_none(
+    string_: str, default: Union[str, bool] = "raise"
+) -> Optional[bool]:
     """
     Convert a string to a bool or to None.
 
@@ -268,7 +270,7 @@ def str2int_or_none(string_: str) -> Optional[int]:
         return int(string_)
 
 
-def is_none(string_: str, default="raise") -> bool:
+def is_none(string_: str, default: Union[str, bool] = "raise") -> bool:
     """
     Check if a string is equivalent to None.
 
@@ -355,7 +357,7 @@ def is_iban(potential_iban: str) -> bool:
 def is_ipv4(
     potential_ipv4: str,
     allow_leading_zeros: bool = False,
-    allow_shortened_addresses=False,
+    allow_shortened_addresses: bool = False,
 ) -> bool:
     """
     Check if a string is a valid IPv4 address.

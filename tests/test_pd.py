@@ -30,6 +30,11 @@ def test_get_column_info_suspicious_categorical():
     mpu.pd._get_column_info(df, [])
 
 
+def test_get_column_info_nonsuspicious_categorical():
+    df = pd.DataFrame({"numbers": [i for i in range(200)]})
+    mpu.pd._get_column_info(df, [])
+
+
 def test_get_column_info_no_values():
     df = pd.DataFrame({"numbers": []})
     mpu.pd._get_column_info(df, [])

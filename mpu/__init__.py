@@ -6,11 +6,13 @@ import logging
 import math as math_stl
 import random
 import traceback
-from typing import Any, Callable, List, Tuple, Union
+from types import TracebackType
+from typing import Any, Callable, List, Optional, Tuple, Union
 
 # First party
 from mpu import io, shell, string, units  # noqa
 from mpu._version import __version__  # noqa
+from mpu.typing import Comparable
 
 
 def parallel_for(
@@ -121,7 +123,7 @@ class Location:
         return self._latitude
 
     @latitude.setter
-    def latitude(self, latitude: float):
+    def latitude(self, latitude: float) -> None:
         """Setter for latiutde."""
         if not (-90 <= latitude <= 90):
             raise ValueError(
@@ -135,7 +137,7 @@ class Location:
         return self._longitude
 
     @longitude.setter
-    def longitude(self, longitude: float):
+    def longitude(self, longitude: float) -> None:
         """Setter for longitude."""
         if not (-180 <= longitude <= 180):
             raise ValueError(
@@ -143,7 +145,7 @@ class Location:
             )
         self._longitude = longitude
 
-    def get_google_maps_link(self):
+    def get_google_maps_link(self) -> str:
         """Get a Google Maps link to this location."""
         return "https://www.google.com/maps/place/{},{}".format(
             self.latitude, self.longitude
@@ -165,7 +167,7 @@ class Location:
             (self.latitude, self.longitude), (there.latitude, there.longitude)
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Get an unambiguous representation."""
         return "Location({}, {})".format(self.latitude, self.longitude)
 
@@ -225,15 +227,20 @@ def haversine_distance(
     return d
 
 
-def is_in_intervall(value, min_value, max_value, name="variable"):
+def is_in_intervall(
+    value: Comparable,
+    min_value: Comparable,
+    max_value: Comparable,
+    name: str = "variable",
+) -> None:
     """
     Raise an exception if value is not in an interval.
 
     Parameters
     ----------
-    value : orderable
-    min_value : orderable
-    max_value : orderable
+    value : Comparable
+    min_value : Comparable
+    max_value : Comparable
     name : str
         Name of the variable to print in exception.
     """
@@ -243,7 +250,7 @@ def is_in_intervall(value, min_value, max_value, name="variable"):
         )
 
 
-def exception_logging(exctype, value, tb):
+def exception_logging(exctype: Any, value: Any, tb: Optional[TracebackType]) -> None:
     """
     Log exception by using the root logger.
 
