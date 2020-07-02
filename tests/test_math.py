@@ -21,6 +21,10 @@ def test_factorize_float(a_float):
         mpu.math.factorize(a_float)
 
 
+def test_factorize_at_border():
+    assert mpu.math.factorize(991 ** 2) == [991, 991]
+
+
 @given(s.integers(min_value=-(10 ** 6), max_value=10 ** 6))
 def test_factorize(an_integer):
     if an_integer == 0:
@@ -37,6 +41,32 @@ def test_argmax():
     assert mpu.math.argmax([1, 2, 3]) == 2
 
 
+@given(s.lists(s.integers(), min_size=1))
+def test_argmax_property(integer_list):
+    argmax = mpu.math.argmax(integer_list)
+    max_value = integer_list[argmax]
+    for el in integer_list:
+        assert el <= max_value
+
+
 def test_gcd_fail():
     with pytest.raises(ValueError):
         mpu.math.gcd(0, 7)
+
+
+@given(s.integers(), s.integers())
+def test_gcd_property(a, b):
+    if a == 0 or b == 0:
+        with pytest.raises(ValueError):
+            mpu.math.gcd(a, b)
+    else:
+        gcd = mpu.math.gcd(a, b)
+        assert a % gcd == 0
+        assert b % gcd == 0
+
+
+def test_generate_primes():
+    import itertools
+
+    first_primes = list(itertools.islice(mpu.math.generate_primes(), 10))
+    assert first_primes == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]

@@ -12,6 +12,7 @@ botocore==1.10.84         # via boto3, moto, s3transfer
 certifi==2020.6.20        # via requests
 cffi==1.14.0              # via cryptography
 chardet==3.0.4            # via requests
+click==7.1.2              # via mutmut
 cookies==2.2.1            # via moto
 coverage==5.1             # via pytest-cov
 cryptography==2.9.2       # via moto
@@ -19,25 +20,30 @@ docker==4.2.1             # via moto
 docutils==0.16            # via botocore
 filelock==3.0.12          # via pytest-mypy
 flake8==3.8.3             # via pytest-flake8
-hypothesis==5.16.2        # via -r test-requirements.in
+glob2==0.7                # via mutmut
+hypothesis==5.18.3        # via -r test-requirements.in
 idna==2.9                 # via requests
-importlib-metadata==1.6.1  # via jsonpickle
+importlib-metadata==1.7.0  # via jsonpickle
 jinja2==2.11.2            # via moto
 jmespath==0.10.0          # via boto3, botocore
 jsondiff==1.1.1           # via moto
 jsonpickle==1.4.1         # via aws-xray-sdk
+junit-xml==1.8            # via mutmut
 markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via flake8, pytest-mccabe
 mock==4.0.2               # via moto
 more-itertools==8.4.0     # via pytest
 moto==1.3.3               # via -r test-requirements.in
+mutmut==2.0.0             # via -r test-requirements.in
 mypy-extensions==0.4.3    # via mypy
-mypy==0.781               # via pytest-mypy
+mypy==0.782               # via pytest-mypy
 numpy==1.19.0             # via pandas
 packaging==20.4           # via pytest
 pandas==1.0.5             # via -r test-requirements.in
+parso==0.7.0              # via mutmut
 pluggy==0.13.1            # via pytest
-py==1.8.2                 # via pytest
+pony==0.7.13              # via mutmut
+py==1.9.0                 # via pytest
 pyaml==20.4.0             # via moto
 pycodestyle==2.6.0        # via flake8
 pycparser==2.20           # via cffi
@@ -55,12 +61,12 @@ requests==2.24.0          # via aws-xray-sdk, docker, moto, responses
 responses==0.10.15        # via moto
 s3transfer==0.1.13        # via boto3
 simplejson==3.17.0        # via -r test-requirements.in
-six==1.15.0               # via cryptography, docker, moto, packaging, python-dateutil, responses, websocket-client
+six==1.15.0               # via cryptography, docker, junit-xml, moto, packaging, python-dateutil, responses, websocket-client
 sortedcontainers==2.2.2   # via hypothesis
 typed-ast==1.4.1          # via mypy
 typing-extensions==3.7.4.2  # via mypy
 urllib3==1.25.9           # via requests
-wcwidth==0.2.4            # via pytest
+wcwidth==0.2.5            # via pytest
 websocket-client==0.57.0  # via docker
 werkzeug==1.0.1           # via moto
 wrapt==1.12.1             # via aws-xray-sdk

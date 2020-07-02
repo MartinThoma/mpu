@@ -8,3 +8,4 @@ pytest-flake8
 pytest-mccabe
 pytest-mypy
 simplejson
+mutmut

@@ -242,6 +242,7 @@ def gcd(a: int, b: int) -> int:
     a : int
         Non-zero
     b : int
+        Non-zero
 
     Returns
     -------

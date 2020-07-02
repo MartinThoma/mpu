@@ -17,7 +17,7 @@ import mpu.shell
 
 countries_file = pkg_resources.resource_filename("mpu", "data/countries.csv")
 countries = pd.read_csv(countries_file)
-logger = logging.getLogger("mpu")
+logger = logging.getLogger(__name__)
 
 
 def example_df() -> pd.DataFrame:
