@@ -90,13 +90,22 @@ def factorize(number: int) -> List[int]:
     elif number == 0:
         raise ValueError("All primes are prime factors of 0.")
     else:
-        for i in range(2, int(math_stl.ceil(number ** 0.5)) + 1):
+        factors = []
+        while number % 2 == 0:
+            factors.append(2)
+            number = number // 2
+        if number == 1:
+            if len(factors) > 0:
+                return factors
+            else:
+                return [1]
+        for i in range(3, int(math_stl.ceil(number ** 0.5)) + 1, 2):
             if number % i == 0:
                 if i == number:
-                    return [i]
+                    return factors + [i]
                 else:
-                    return [i] + factorize(int(number / i))
-        return [number]
+                    return factors + [i] + factorize(number // i)
+        return factors + [number]
 
 
 def is_prime(number: int) -> bool:
