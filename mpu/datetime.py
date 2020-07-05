@@ -66,7 +66,7 @@ def generate(minimum, maximum, local_random=random.Random()):
     datetime.datetime(2018, 1, 1, 18, 11, 27, 260414)
     """
     if not (minimum < maximum):
-        raise ValueError("{} is not smaller than {}".format(minimum, maximum))
+        raise ValueError(f"{minimum} is not smaller than {maximum}")
 
     time_d = maximum - minimum
     time_d_rand = time_d * local_random.random()

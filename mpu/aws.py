@@ -120,7 +120,7 @@ def s3_download(
     """
     if not isinstance(exists_strategy, ExistsStrategy):
         raise ValueError(
-            "exists_strategy '{}' is not in {}".format(exists_strategy, ExistsStrategy)
+            f"exists_strategy '{exists_strategy}' is not in {ExistsStrategy}"
         )
     session = boto3.Session(profile_name=profile_name)
     s3 = session.resource("s3")
@@ -131,7 +131,7 @@ def s3_download(
         _, destination = mkstemp(prefix=prefix, suffix=suffix)
     elif os.path.isfile(destination):
         if exists_strategy is ExistsStrategy.RAISE:
-            raise RuntimeError("File '{}' already exists.".format(destination))
+            raise RuntimeError(f"File '{destination}' already exists.")
         elif exists_strategy is ExistsStrategy.ABORT:
             return None
     s3.Bucket(bucket_name).download_file(key, destination)

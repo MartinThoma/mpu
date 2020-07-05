@@ -157,7 +157,7 @@ def str2bool(string_: str, default: Union[str, bool] = "raise") -> bool:
     elif string_.lower() in false or (not default):
         return False
     else:
-        raise ValueError("The value '{}' cannot be mapped to boolean.".format(string_))
+        raise ValueError(f"The value '{string_}' cannot be mapped to boolean.")
 
 
 def str2str_or_none(string_: str) -> Optional[str]:
@@ -297,7 +297,7 @@ def is_none(string_: str, default: Union[str, bool] = "raise") -> bool:
     elif not default:
         return False
     else:
-        raise ValueError("The value '{}' cannot be mapped to none.".format(string_))
+        raise ValueError(f"The value '{string_}' cannot be mapped to none.")
 
 
 def is_iban(potential_iban: str) -> bool:
@@ -468,6 +468,6 @@ def human_readable_bytes(nb_bytes: Union[int, float], suffix: str = "B") -> str:
     """
     for unit in ["", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"]:
         if abs(nb_bytes) < 1024.0:
-            return "{:3.1f} {}{}".format(nb_bytes, unit, suffix)
+            return f"{nb_bytes:3.1f} {unit}{suffix}"
         nb_bytes /= 1024.0
     return "{:.1f} {}{}".format(nb_bytes, "Yi", suffix)

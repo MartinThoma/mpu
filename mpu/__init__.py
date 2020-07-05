@@ -127,7 +127,7 @@ class Location:
         """Setter for latiutde."""
         if not (-90 <= latitude <= 90):
             raise ValueError(
-                "latitude was {}, but has to be in [-90, 90]".format(latitude)
+                f"latitude was {latitude}, but has to be in [-90, 90]"
             )
         self._latitude = latitude
 
@@ -141,7 +141,7 @@ class Location:
         """Setter for longitude."""
         if not (-180 <= longitude <= 180):
             raise ValueError(
-                "longitude was {}, but has to be in [-180, 180]".format(longitude)
+                f"longitude was {longitude}, but has to be in [-180, 180]"
             )
         self._longitude = longitude
 
@@ -169,7 +169,7 @@ class Location:
 
     def __repr__(self) -> str:
         """Get an unambiguous representation."""
-        return "Location({}, {})".format(self.latitude, self.longitude)
+        return f"Location({self.latitude}, {self.longitude})"
 
     __str__ = __repr__
 
@@ -205,13 +205,13 @@ def haversine_distance(
     lat1, lon1 = origin
     lat2, lon2 = destination
     if not (-90.0 <= lat1 <= 90):
-        raise ValueError("lat1={:2.2f}, but must be in [-90,+90]".format(lat1))
+        raise ValueError(f"lat1={lat1:2.2f}, but must be in [-90,+90]")
     if not (-90.0 <= lat2 <= 90):
-        raise ValueError("lat2={:2.2f}, but must be in [-90,+90]".format(lat2))
+        raise ValueError(f"lat2={lat2:2.2f}, but must be in [-90,+90]")
     if not (-180.0 <= lon1 <= 180):
-        raise ValueError("lon1={:2.2f}, but must be in [-180,+180]".format(lat1))
+        raise ValueError(f"lon1={lat1:2.2f}, but must be in [-180,+180]")
     if not (-180.0 <= lon2 <= 180):
-        raise ValueError("lon1={:2.2f}, but must be in [-180,+180]".format(lat1))
+        raise ValueError(f"lon1={lat1:2.2f}, but must be in [-180,+180]")
     radius = 6371  # km
 
     dlat = math_stl.radians(lat2 - lat1)
@@ -246,7 +246,7 @@ def is_in_intervall(
     """
     if not (min_value <= value <= max_value):
         raise ValueError(
-            "{}={} is not in [{}, {}]".format(name, value, min_value, max_value)
+            f"{name}={value} is not in [{min_value}, {max_value}]"
         )
 
 

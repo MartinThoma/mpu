@@ -205,15 +205,15 @@ def test_currency():
 
 def test_formatting():
     non_currency = Money("12.2", None)
-    assert "{}".format(non_currency) == "12.20"
-    assert "{:0.2f,symbol}".format(non_currency) == "12.20"
-    assert "{:0.2f,postsymbol}".format(non_currency) == "12.20"
-    assert "{:0.2f,shortcode}".format(non_currency) == "12.20"
-    assert "{:0.2f,postshortcode}".format(non_currency) == "12.20"
+    assert f"{non_currency}" == "12.20"
+    assert f"{non_currency:0.2f,symbol}" == "12.20"
+    assert f"{non_currency:0.2f,postsymbol}" == "12.20"
+    assert f"{non_currency:0.2f,shortcode}" == "12.20"
+    assert f"{non_currency:0.2f,postshortcode}" == "12.20"
 
     a = Money("12.20", "USD")
-    assert "{}".format(a) == "12.20 USD"
-    assert "{:0.2f,symbol}".format(a) == "$12.20"
-    assert "{:0.2f,postsymbol}".format(a) == "12.20$"
-    assert "{:0.2f,shortcode}".format(a) == "USD 12.20"
-    assert "{:0.2f,postshortcode}".format(a) == "12.20 USD"
+    assert f"{a}" == "12.20 USD"
+    assert f"{a:0.2f,symbol}" == "$12.20"
+    assert f"{a:0.2f,postsymbol}" == "12.20$"
+    assert f"{a:0.2f,shortcode}" == "USD 12.20"
+    assert f"{a:0.2f,postshortcode}" == "12.20 USD"

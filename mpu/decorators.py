@@ -37,7 +37,7 @@ def deprecated(func: Callable) -> Callable:
     @functools.wraps(func)
     def new_func(*args: List, **kwargs: Dict) -> Callable:
         warnings.warn_explicit(
-            "Call to deprecated function {}.".format(func.__name__),
+            f"Call to deprecated function {func.__name__}.",
             category=DeprecationWarning,
             filename=func.__code__.co_filename,
             lineno=func.__code__.co_firstlineno + 1,

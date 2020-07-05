@@ -37,7 +37,7 @@ def indices2one_hot(indices: Iterable, nb_classes: int) -> List:
     """
     if nb_classes < 1:
         raise ValueError(
-            "nb_classes={}, but positive number expected".format(nb_classes)
+            f"nb_classes={nb_classes}, but positive number expected"
         )
 
     one_hot = []

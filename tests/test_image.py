@@ -2,9 +2,9 @@
 
 # Core Library
 import sys
+from unittest import mock
 
 # Third party
-import mock
 import pkg_resources
 
 # First party

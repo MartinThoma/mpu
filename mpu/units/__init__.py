@@ -206,7 +206,7 @@ class Money:
                 exponent = 2
                 if self.currency.exponent is not None:
                     exponent = self.currency.exponent
-                spec = "0.{exponent:}f".format(exponent=exponent)
+                spec = f"0.{exponent}f"
             value_formatter = spec
             symbol_formatter = "postshortcode"
         else:
@@ -328,7 +328,7 @@ class Money:
         if self.currency.numeric_code is None:
             currency = None
         return {
-            "value": "{}".format(self.value),
+            "value": f"{self.value}",
             "currency": currency,
             "__python__": "mpu.units:Money.from_json",
         }
@@ -386,4 +386,4 @@ def get_currency(currency_str: str) -> Currency:
                     withdrawal_date=withdrawal_date,
                     subunits=subunits,
                 )
-    raise ValueError("Could not find currency '{}'".format(currency_str))
+    raise ValueError(f"Could not find currency '{currency_str}'")

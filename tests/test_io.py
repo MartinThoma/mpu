@@ -7,9 +7,9 @@ import datetime
 import os
 import sys
 from tempfile import NamedTemporaryFile
+from unittest import mock
 
 # Third party
-import mock
 import pkg_resources
 import pytest
 

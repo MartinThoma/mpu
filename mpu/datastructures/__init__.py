@@ -197,7 +197,7 @@ def dict_merge(
         return new_dict
     else:
         raise NotImplementedError(
-            "merge_method='{}' is not known.".format(merge_method)
+            f"merge_method='{merge_method}' is not known."
         )
 
 
@@ -463,14 +463,14 @@ class Interval(IntervalLike):
         if self.is_empty():
             return "Interval()"
         else:
-            return "Interval({}, {})".format(self.left, self.right)
+            return f"Interval({self.left}, {self.right})"
 
     def __str__(self):
         """Get an human-readable representation."""
         if self.is_empty():
             return "[]"
         else:
-            return "[{}, {}]".format(self.left, self.right)
+            return f"[{self.left}, {self.right}]"
 
     __and__ = intersection
     __or__ = union

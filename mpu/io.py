@@ -102,7 +102,7 @@ def _read_csv(filepath: str, kwargs: Dict) -> Union[List, Dict]:
             reader_list = csv.DictReader(fp, **kwargs)
             data = [row for row in reader_list]
         else:
-            raise NotImplementedError("Format '{}' unknown".format(format_))
+            raise NotImplementedError(f"Format '{format_}' unknown")
     return data
 
 
