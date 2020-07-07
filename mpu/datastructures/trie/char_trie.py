@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class TrieNode:
     def __init__(self, value, is_word=False, count=0, children=None, freeze=False):
         if children is None:
-            children = dict()
+            children = {}
         self._value = value
         self.children: Dict[str, TrieNode] = children
         self.is_word = is_word
@@ -106,7 +106,7 @@ class Trie(AbstractTrie):
         for element in container:
             self.push(element)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self._length
 
     def __contains__(self, element) -> bool:

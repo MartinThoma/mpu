@@ -29,7 +29,7 @@ def list_files(
     -------
     s3_paths : List[str]
     """
-    session = boto3.Session(profile_name=profile_name)
+    session = boto3.session.Session(profile_name=profile_name)
     conn = session.client("s3")
     keys = []
     ret = conn.list_objects_v2(Bucket=bucket, Prefix=prefix)
@@ -66,7 +66,7 @@ def s3_read(source: str, profile_name: Optional[str] = None) -> bytes:
         AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN.
         See https://boto3.readthedocs.io/en/latest/guide/configuration.html
     """
-    session = boto3.Session(profile_name=profile_name)
+    session = boto3.session.Session(profile_name=profile_name)
     s3 = session.client("s3")
     bucket_name, key = _s3_path_split(source)
     s3_object = s3.get_object(Bucket=bucket_name, Key=key)
@@ -122,7 +122,7 @@ def s3_download(
         raise ValueError(
             f"exists_strategy '{exists_strategy}' is not in {ExistsStrategy}"
         )
-    session = boto3.Session(profile_name=profile_name)
+    session = boto3.session.Session(profile_name=profile_name)
     s3 = session.resource("s3")
     bucket_name, key = _s3_path_split(source)
     if destination is None:
@@ -152,7 +152,7 @@ def s3_upload(
     profile_name : str, optional
         AWS profile
     """
-    session = boto3.Session(profile_name=profile_name)
+    session = boto3.session.Session(profile_name=profile_name)
     s3 = session.resource("s3")
     bucket_name, key = _s3_path_split(destination)
     with open(source, "rb") as data:
@@ -182,7 +182,7 @@ def _s3_path_split(s3_path: str) -> Tuple[str, str]:
     """
     if not s3_path.startswith("s3://"):
         raise ValueError(
-            "s3_path is expected to start with 's3://', " "but was {}".format(s3_path)
+            f"s3_path is expected to start with 's3://', but was {s3_path}"
         )
     bucket_key = s3_path[len("s3://") :]
     bucket_name, key = bucket_key.split("/", 1)

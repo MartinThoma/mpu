@@ -10,6 +10,8 @@ import random
 # Third party
 import pytz
 
+local_random = random.Random()
+
 
 def add_time(datetime_obj, days=0, hours=0, minutes=0, seconds=0):
     """
@@ -38,7 +40,7 @@ def add_time(datetime_obj, days=0, hours=0, minutes=0, seconds=0):
     return t14
 
 
-def generate(minimum, maximum, local_random=random.Random()):
+def generate(minimum, maximum, local_random=local_random):
     """
     Generate a random date.
 

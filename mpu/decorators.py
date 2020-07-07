@@ -18,9 +18,8 @@ def timing(func: Callable) -> Callable:
         result = func(*args, **kw)
         t1 = time()
         print(
-            "func:{!r} args:[{!r}, {!r}] took: {:2.4f} sec".format(
-                func.__name__, args, kw, t1 - t0
-            )
+            f"func:{func.__name__!r} args:[{args!r}, {kw!r}] took: "
+            f"{t1 - t0:2.4f} sec"
         )
         return result
 

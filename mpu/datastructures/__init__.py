@@ -196,9 +196,7 @@ def dict_merge(
                     new_dict[key] = dict_left[key] + dict_right[key]
         return new_dict
     else:
-        raise NotImplementedError(
-            f"merge_method='{merge_method}' is not known."
-        )
+        raise NotImplementedError(f"merge_method='{merge_method}' is not known.")
 
 
 def _dict_merge_right(dict_left: Dict, dict_right: Dict, merge_method: str) -> Dict:
@@ -310,7 +308,7 @@ class IntervalLike:
         is_inside : bool
         """
 
-    def union(self, other):
+    def union(self, other: "IntervalLike") -> "IntervalLike":
         """
         Combine two Intervals.
 
@@ -324,7 +322,7 @@ class IntervalLike:
         """
         raise NotImplementedError()
 
-    def intersection(self, other):
+    def intersection(self, other: "IntervalLike") -> "IntervalLike":
         """
         Intersect two IntervalLike objects.
 
@@ -348,11 +346,11 @@ class Interval(IntervalLike):
 
     Parameters
     ----------
-    left : object
-    right : object
+    left : Optional[Any]
+    right : Optional[Any]
     """
 
-    def __init__(self, left=None, right=None):
+    def __init__(self, left: Optional[Any] = None, right: Optional[Any] = None):
         if int(left is None) + int(right is None) not in [0, 2]:
             raise RuntimeError("Either left and right are None, or neither.")
         elif (left is not None) and (left > right):
@@ -383,9 +381,19 @@ class Interval(IntervalLike):
             return self
 
         if isinstance(other, Interval):
+            assert self.left is not None
+            assert self.right is not None
+            assert other.left is not None
+            assert other.right is not None
+
             # Standardize - after this step, the other.left is left of self.left
             if other.left > self.left:
                 other, self = self, other
+
+            assert self.left is not None
+            assert self.right is not None
+            assert other.left is not None
+            assert other.right is not None
 
             # Go through all cases
             if other.right < self.left:
@@ -411,7 +419,7 @@ class Interval(IntervalLike):
         else:
             raise NotImplementedError(f"Can't merge {self} and {other}")
 
-    @overload
+    @overload  # type: ignore[override]
     def intersection(self, other: "Interval") -> "Interval":
         ...
 
@@ -419,7 +427,7 @@ class Interval(IntervalLike):
     def intersection(self, other: "IntervalUnion") -> IntervalLike:
         ...
 
-    def intersection(self, other):
+    def intersection(self, other: IntervalLike) -> IntervalLike:
         """
         Intersect two IntervalLike objects.
 
@@ -438,9 +446,20 @@ class Interval(IntervalLike):
         if isinstance(other, IntervalUnion):
             return other.intersection(self)
 
+        assert isinstance(other, Interval)
+        assert self.left is not None
+        assert self.right is not None
+        assert other.left is not None
+        assert other.right is not None
+
         # Standardize - after this step, the other.left is left of self.left
         if other.left > self.left:
             other, self = self, other
+
+        assert self.left is not None
+        assert self.right is not None
+        assert other.left is not None
+        assert other.right is not None
 
         # Go through all cases
         if other.right < self.left:
@@ -501,6 +520,10 @@ class Interval(IntervalLike):
             # The order of those if / elif blocks matters here!
             return False
         elif isinstance(other, Interval):
+            assert self.left is not None
+            assert self.right is not None
+            assert other.left is not None
+            assert other.right is not None
             return other.left <= self.left <= self.right <= other.right
         elif isinstance(other, IntervalUnion):
             for interval in other.intervals:
@@ -511,7 +534,7 @@ class Interval(IntervalLike):
             raise RuntimeError(
                 "issubset is only defined on Interval and "
                 "IntervalUnion, "
-                "but {} was given".format(type(other))
+                f"but {type(other)} was given"
             )
 
 
@@ -520,7 +543,7 @@ class IntervalUnion(IntervalLike):
 
     def __init__(self, intervals):
         if not isinstance(intervals, list):
-            raise TypeError("'{}' is not a list".format(type(intervals)))
+            raise TypeError(f"'{type(intervals)}' is not a list")
         self.intervals = []
         for interval in intervals:
             if isinstance(interval, Interval):
@@ -565,18 +588,17 @@ class IntervalUnion(IntervalLike):
             return True
         else:
             raise RuntimeError(
-                "issubset is only defined on Interval and "
-                "IntervalUnion, "
-                "but {} was given".format(type(other))
+                "issubset is only defined on Interval and IntervalUnion, "
+                f"but {type(other)} was given"
             )
 
-    def _get_keypoints(self):
+    def _get_keypoints(self) -> List[Any]:
         """
         Get all points which are relevant for this IntervalUnion.
 
         Returns
         -------
-        keypoints : List[object]
+        keypoints : List[Any]
         """
         keypoints = []
         for interval in self.intervals:
@@ -628,7 +650,7 @@ class IntervalUnion(IntervalLike):
         elif isinstance(other, IntervalUnion):
             self.intervals += other.intervals
         else:
-            raise RuntimeError("Union with type={} not supported".format(type(other)))
+            raise RuntimeError(f"Union with type={type(other)} not supported")
         self._simplify()
         return self
 
@@ -664,18 +686,16 @@ class IntervalUnion(IntervalLike):
                     new_intervals.append(interval)
             return IntervalUnion(new_intervals)
         else:
-            raise RuntimeError(
-                "Intersection with type={} not supported".format(type(other))
-            )
+            raise RuntimeError(f"Intersection with type={type(other)} not supported")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Get an unambiguous representation."""
         return "IntervalUnion(" + str(self.intervals) + ")"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.intervals)
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         """Check if other is equal to this object."""
         if isinstance(other, (IntervalUnion, Interval)):
             return self.issubset(other) and other.issubset(self)

@@ -34,7 +34,7 @@ def test_angle(angle: float):
 
 def test_antisymmetry_of_cross_product():
     points = [Point(0, 0), Point(1, 1)]
-    for i in range(50):
+    for _ in range(50):
         points.append(Point(random.random(), random.random()))
 
     for p1 in points:
@@ -325,7 +325,7 @@ def test_lines_do_intesect_t5():
 
 
 def test_lines_do_intesect_t6():
-    for i in range(50):
+    for _ in range(50):
         ax = random.random()
         ay = random.random()
         bx = random.random()
@@ -399,7 +399,7 @@ def test_compare_to_brute_force():
     max_intersections = (n * n - n) / 2
 
     lines: List[LineSegment] = []
-    for i in range(n):
+    for _ in range(n):
         a = Point(random.random(), random.random())
         b = Point(random.random(), random.random())
         lines.append(LineSegment(a, b))

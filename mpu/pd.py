@@ -57,7 +57,7 @@ def describe(df: pd.DataFrame, dtype: Optional[Dict] = None) -> Dict:
     """
     if dtype is None:
         dtype = {}
-    print("Number of datapoints: {datapoints}".format(datapoints=len(df)))
+    print(f"Number of datapoints: {len(df)}")
     column_info, column_info_meta = _get_column_info(df, dtype)
 
     if len(column_info["int"]) > 0:
@@ -109,10 +109,9 @@ def _get_column_info(df: pd.DataFrame, dtype: Dict[str, str]) -> Tuple[Dict, Dic
         )
         if is_suspicious_cat:
             logger.warning(
-                "Column '{}' has only {} different values ({}). "
-                "You might want to make it a 'category'".format(
-                    column_name, value_count, value_list
-                )
+                f"Column '{column_name}' has only {value_count} different "
+                f"values ({value_list}). "
+                "You might want to make it a 'category'"
             )
         if len(value_list) > 0:
             top_count_val = counter_obj.tolist()[0]
@@ -154,7 +153,7 @@ def _get_column_info(df: pd.DataFrame, dtype: Dict[str, str]) -> Tuple[Dict, Dic
             column_info["time"].append(column_name)
         else:
             logger.warning(
-                "mpu.pd.describe does not know type '{}'".format(df[column_name].dtype)
+                f"mpu.pd.describe does not know type '{df[column_name].dtype}'"
             )
     return column_info, column_info_meta
 
@@ -188,13 +187,13 @@ def _describe_float(df: pd.DataFrame, column_info: Dict) -> None:
         row = []
         row.append(column_name)
         row.append(sum(df[column_name].notnull()))
-        row.append("{:0.2f}".format(df[column_name].mean()))
-        row.append("{:0.2f}".format(df[column_name].std()))
-        row.append("{:0.2f}".format(df[column_name].min()))
-        row.append("{:0.2f}".format(df[column_name].quantile(0.25)))
-        row.append("{:0.2f}".format(df[column_name].quantile(0.50)))
-        row.append("{:0.2f}".format(df[column_name].quantile(0.75)))
-        row.append("{:0.2f}".format(max(df[column_name])))
+        row.append(f"{df[column_name].mean():0.2f}")
+        row.append(f"{df[column_name].std():0.2f}")
+        row.append(f"{df[column_name].min():0.2f}")
+        row.append(f"{df[column_name].quantile(0.25):0.2f}")
+        row.append(f"{df[column_name].quantile(0.50):0.2f}")
+        row.append(f"{df[column_name].quantile(0.75):0.2f}")
+        row.append(f"{max(df[column_name]):0.2f}")
         table.append(row)
     mpu.shell.print_table(table)
 

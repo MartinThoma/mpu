@@ -28,18 +28,16 @@ class Currency:
     ):
         if not isinstance(name, str):
             raise ValueError(
-                "A currencies name has to be of type str, but "
-                "was: {}".format(type(name))
+                "A currencies name has to be of type str, but " f"was: {type(name)}"
             )
         if not isinstance(code, str):
             raise ValueError(
-                "A currencies code has to be of type str, but "
-                "was: {}".format(type(code))
+                "A currencies code has to be of type str, but " f"was: {type(code)}"
             )
         if not isinstance(exponent, (type(None), int)):
             raise ValueError(
                 "A currencies exponent has to be of type None "
-                "or int, but was: {}".format(type(code))
+                f"or int, but was: {type(code)}"
             )
 
         self.name = name
@@ -65,10 +63,8 @@ class Currency:
 
     def __repr__(self) -> str:
         return (
-            "Currency(name={name}, code={code}, "
-            "numeric_code={numeric_code})".format(
-                name=self.name, code=self.code, numeric_code=self.numeric_code
-            )
+            f"Currency(name={self.name}, code={self.code}, "
+            f"numeric_code={self.numeric_code})"
         )
 
     def __json__(self) -> Dict[str, Any]:
@@ -137,10 +133,8 @@ class Money:
         if isinstance(value, tuple):
             if len(value) != 2:
                 raise ValueError(
-                    (
-                        "value was {}, but only tuples of length 2 "
-                        "str, int and decimal are allowed."
-                    ).format(value)
+                    f"value was {value}, but only tuples of length 2 "
+                    "str, int and decimal are allowed."
                 )
             self.value = fractions.Fraction(value[0], value[1])
         elif isinstance(value, float):
@@ -170,8 +164,8 @@ class Money:
             )
         else:
             raise ValueError(
-                "currency is of type={}, but should be str or "
-                "Currency".format(type(currency))
+                f"currency is of type={type(currency)}, but should be str or "
+                "Currency"
             )
 
     def __str__(self) -> str:
@@ -179,13 +173,9 @@ class Money:
         if self.currency.exponent is not None:
             exponent = self.currency.exponent
         if self.currency.numeric_code is None:
-            return "{value:0.{exponent}f}".format(
-                exponent=exponent, value=float(self.value)
-            )
+            return f"{float(self.value):0.{exponent}f}"
         else:
-            return "{value:0.{exponent}f} {currency}".format(
-                exponent=exponent, value=float(self.value), currency=self.currency,
-            )
+            return f"{float(self.value):0.{exponent}f} {self.currency}"
 
     def __repr__(self) -> str:
         return str(self)
@@ -195,9 +185,7 @@ class Money:
             return Money(self.value * other, self.currency)
         else:
             raise ValueError(
-                ("Multiplication with type '{}' is not " "supported").format(
-                    type(other)
-                )
+                f"Multiplication with type '{type(other)}' is not " "supported"
             )
 
     def __format__(self, spec: str) -> str:
@@ -231,36 +219,30 @@ class Money:
             return value_str + sep + self.currency.code
         else:
             raise NotImplementedError(
-                "The formatter '{}' is not "
-                "implemented for the Money class.".format(symbol_formatter)
+                f"The formatter '{symbol_formatter}' is not "
+                "implemented for the Money class."
             )
 
     def __add__(self, other: "Money") -> "Money":
         if not isinstance(other, Money):
-            raise ValueError(
-                ("Addition with type '{}' is not " "supported").format(type(other))
-            )
+            raise ValueError(f"Addition with type '{type(other)}' is not " "supported")
         if not (self.currency == other.currency):
             raise ValueError(
-                (
-                    "Addition of currency '{}' and '{}' is "
-                    "not supported. You need an exchange rate."
-                ).format(self.currency, other.currency)
+                f"Addition of currency '{self.currency}' and '{other.currency}' "
+                "is not supported. You need an exchange rate."
             )
         return Money(self.value + other.value, self.currency)
 
     def __sub__(self, other: "Money") -> "Money":
         if not isinstance(other, Money):
             raise ValueError(
-                ("Subtraction with type '{}' is not " "supported").format(type(other))
+                f"Subtraction with type '{type(other)}' is not " "supported"
             )
         if not (self.currency == other.currency):
             raise ValueError(
-                (
-                    "Subtraction of currency '{}' and '{}' "
-                    "is not supported. You need an exchange "
-                    "rate."
-                ).format(self.currency, other.currency)
+                f"Subtraction of currency '{self.currency}' and "
+                f"'{other.currency}' is not supported. You need an exchange "
+                "rate."
             )
         return Money(self.value - other.value, self.currency)
 
@@ -270,18 +252,14 @@ class Money:
                 return self.value / other.value
             else:
                 raise ValueError(
-                    (
-                        "Division of currency '{}' and '{}' "
-                        "is not supported. You need an exchange "
-                        "rate."
-                    ).format(self.currency, other.currency)
+                    f"Division of currency '{self.currency}' and "
+                    f"'{other.currency}' is not supported. You need an "
+                    "exchange rate."
                 )
         elif isinstance(other, (int, fractions.Fraction)):
             return Money(self.value / other, self.currency)
         else:
-            raise ValueError(
-                ("Division with type '{}' is not " "supported").format(type(other))
-            )
+            raise ValueError(f"Division with type '{type(other)}' is not " "supported")
 
     __div__ = __truediv__
 

@@ -9,7 +9,7 @@ For more advanced use cases, see:
 
 # Core Library
 import math
-from typing import Any, FrozenSet, List, Set, Tuple, Union
+from typing import Any, FrozenSet, List, Set, Tuple, Union, cast
 
 # First party
 from mpu.datastructures import Interval
@@ -211,9 +211,12 @@ def _get_straight_line_intersection(
 
     intersection = self_y.intersection(other_y)
     if intersection.left == intersection.right:
-        return Point(x, intersection.left)
+        return Point(x, cast(float, intersection.left))
     else:
-        return LineSegment(Point(x, intersection.left), Point(x, intersection.right))
+        return LineSegment(
+            Point(x, cast(float, intersection.left)),
+            Point(x, cast(float, intersection.right)),
+        )
 
 
 def do_bounding_boxes_intersect(a: Tuple[Point, Point], b: Tuple[Point, Point]) -> bool:

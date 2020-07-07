@@ -283,8 +283,7 @@ def hash(filepath: str, method: str = "sha1", buffer_size: int = 65536) -> str:
         hash_function = hashlib.md5()
     else:
         raise NotImplementedError(
-            "Only md5 and sha1 hashes are known, but "
-            " '{}' was specified.".format(method)
+            f"Only md5 and sha1 hashes are known, but '{method}' was specified."
         )
 
     with open(filepath, "rb") as fp:

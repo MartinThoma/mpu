@@ -126,9 +126,7 @@ class Location:
     def latitude(self, latitude: float) -> None:
         """Setter for latiutde."""
         if not (-90 <= latitude <= 90):
-            raise ValueError(
-                f"latitude was {latitude}, but has to be in [-90, 90]"
-            )
+            raise ValueError(f"latitude was {latitude}, but has to be in [-90, 90]")
         self._latitude = latitude
 
     @property
@@ -140,16 +138,12 @@ class Location:
     def longitude(self, longitude: float) -> None:
         """Setter for longitude."""
         if not (-180 <= longitude <= 180):
-            raise ValueError(
-                f"longitude was {longitude}, but has to be in [-180, 180]"
-            )
+            raise ValueError(f"longitude was {longitude}, but has to be in [-180, 180]")
         self._longitude = longitude
 
     def get_google_maps_link(self) -> str:
         """Get a Google Maps link to this location."""
-        return "https://www.google.com/maps/place/{},{}".format(
-            self.latitude, self.longitude
-        )
+        return f"https://www.google.com/maps/place/{self.latitude},{self.longitude}"
 
     def distance(self, there: "Location") -> float:
         """
@@ -245,9 +239,7 @@ def is_in_intervall(
         Name of the variable to print in exception.
     """
     if not (min_value <= value <= max_value):
-        raise ValueError(
-            f"{name}={value} is not in [{min_value}, {max_value}]"
-        )
+        raise ValueError(f"{name}={value} is not in [{min_value}, {max_value}]")
 
 
 def exception_logging(exctype: Any, value: Any, tb: Optional[TracebackType]) -> None:
