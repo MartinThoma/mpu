@@ -329,7 +329,7 @@ def is_iban(potential_iban: str) -> bool:
     filepath = pkg_resources.resource_filename("mpu", path)
     data = mpu.io.read(filepath, delimiter=";", format="dicts")
     potential_iban = potential_iban.replace(" ", "")  # Remove spaces
-    if len(potential_iban) < min([int(el["length"]) for el in data]):
+    if len(potential_iban) < min(int(el["length"]) for el in data):
         return False
     country = None
     for element in data:
@@ -470,4 +470,4 @@ def human_readable_bytes(nb_bytes: Union[int, float], suffix: str = "B") -> str:
         if abs(nb_bytes) < 1024.0:
             return f"{nb_bytes:3.1f} {unit}{suffix}"
         nb_bytes /= 1024.0
-    return "{:.1f} {}{}".format(nb_bytes, "Yi", suffix)
+    return f"{nb_bytes:.1f} Yi{suffix}"

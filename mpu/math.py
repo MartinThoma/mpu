@@ -84,7 +84,7 @@ def factorize(number: int) -> List[int]:
     [1]
     """
     if not isinstance(number, int):
-        raise ValueError("integer expected, but type(number)={}".format(type(number)))
+        raise ValueError(f"integer expected, but type(number)={type(number)}")
     if number < 0:
         return [-1] + factorize(number * (-1))
     elif number == 0:

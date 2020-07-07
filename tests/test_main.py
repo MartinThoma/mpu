@@ -37,7 +37,7 @@ def test_parallel_for():
         time.sleep(1)
         return i + j
 
-    parameters = list((i, i + 1) for i in range(50))
+    parameters = [(i, i + 1) for i in range(50)]
     out = parallel_for(looping_function, parameters)
     assert out == [2 * i + 1 for i in range(50)]
 

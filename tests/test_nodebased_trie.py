@@ -46,7 +46,7 @@ def test_trie_autocomplete(Trie):
     trie = Trie(data)
     assert list(trie.autocomplete("d")) == ["d", "dog"]
     expected = ["tom", "tomatoe", "tomcat"]
-    assert sorted(list(trie.autocomplete("tom"))) == expected
+    assert sorted(trie.autocomplete("tom")) == expected
 
     data = ["tom", "d"]
     trie = Trie(data)
@@ -54,7 +54,7 @@ def test_trie_autocomplete(Trie):
 
     data = ["dog", "tomco", "cat", "cattle", "tom", "d", "tomcat", "tomatoe"]
     trie = Trie(data)
-    assert sorted(list(trie.autocomplete("tomc"))) == ["tomcat", "tomco"]
+    assert sorted(trie.autocomplete("tomc")) == ["tomcat", "tomco"]
     trie.print()
     print(trie.get_subtrie("tom"))
     assert list(trie.autocomplete("x")) == []
