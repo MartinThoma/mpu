@@ -3,7 +3,6 @@ hypothesis
 moto==1.3.3
 pandas
 pip-tools
-pydocstyle
 pytest
 pytest-cov
 pytest-mccabe

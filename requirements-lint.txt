@@ -16,7 +16,9 @@ flake8==3.8.3             # via -r requirements-lint.in, flake8-bugbear, flake8-
 mccabe==0.6.1             # via flake8
 pathspec==0.8.0           # via black
 pycodestyle==2.6.0        # via flake8
+pydocstyle==5.0.2         # via -r requirements-lint.in
 pyflakes==2.2.0           # via flake8
 regex==2020.7.14          # via black
+snowballstemmer==2.0.0    # via pydocstyle
 toml==0.10.1              # via black
 typed-ast==1.4.1          # via black

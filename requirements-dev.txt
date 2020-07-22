@@ -46,7 +46,6 @@ pluggy==0.13.1            # via pytest
 py==1.9.0                 # via pytest
 pyaml==20.4.0             # via moto
 pycparser==2.20           # via cffi
-pydocstyle==5.0.2         # via -r requirements-dev.in
 pygments==2.6.1           # via readme-renderer
 pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.0        # via -r requirements-dev.in
@@ -65,7 +64,6 @@ s3transfer==0.1.13        # via boto3
 secretstorage==3.1.2      # via keyring
 simplejson==3.17.2        # via -r requirements-dev.in
 six==1.15.0               # via bleach, cryptography, docker, moto, packaging, pip-tools, python-dateutil, readme-renderer, responses, websocket-client
-snowballstemmer==2.0.0    # via pydocstyle
 sortedcontainers==2.2.2   # via hypothesis
 tqdm==4.48.0              # via twine
 twine==3.2.0              # via -r requirements-dev.in
