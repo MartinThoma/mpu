@@ -12,9 +12,8 @@ functionality is not offered by any mayor package.
 
 Core design principles are:
 
-* **Lightweight**:
-    * No dependencies
-    * Small file size
+* **Lightweight**: mpu does not bring unexpected dependencies. You have
+  fine-grained control via extras.
 * **Documentation**: Every parameter is properly documented. For each opened
   issue or question I will think about adding the information to the docs
 * **Testing**: >90% test coverage. For each issue found I will think about
