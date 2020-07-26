@@ -12,7 +12,7 @@ from typing import Any, Callable, List, Optional, Tuple, Union
 # First party
 from mpu import io, shell, string, units  # noqa
 from mpu._version import __version__  # noqa
-from mpu.typing import Comparable
+from mpu.type import Comparable
 
 
 def parallel_for(
