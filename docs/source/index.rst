@@ -42,6 +42,7 @@ Contents:
    pd
    shell
    string
+   type
    units
 
 
