@@ -35,6 +35,7 @@ sphinxcontrib-htmlhelp==1.0.3  # via sphinx
 sphinxcontrib-jsmath==1.0.1  # via sphinx
 sphinxcontrib-qthelp==1.0.3  # via sphinx
 sphinxcontrib-serializinghtml==1.1.4  # via sphinx
+typing-extensions==3.7.4.2  # via -r requirements.in
 urllib3==1.25.10          # via botocore, requests
 
 # The following packages are considered to be unsafe in a requirements file:

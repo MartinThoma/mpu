@@ -1,3 +1,5 @@
+"""Implementation of a trie which has multi-character strings as node elements."""
+
 # Core Library
 import logging
 from typing import List, Set, Tuple
@@ -9,7 +11,14 @@ logger = logging.getLogger(__name__)
 
 
 class TrieNode:
-    def __init__(self, value, is_word=False, count=0, children=None, freeze=False):
+    def __init__(
+        self,
+        value,
+        is_word: bool = False,
+        count: int = 0,
+        children=None,
+        freeze: bool = False,
+    ):
         if children is None:
             children = set()
         self._value = value

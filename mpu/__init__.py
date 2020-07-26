@@ -4,8 +4,10 @@
 # Core Library
 import logging
 import math as math_stl
+import multiprocessing.pool
 import random
 import traceback
+from contextlib import closing
 from types import TracebackType
 from typing import Any, Callable, List, Optional, Tuple, Union
 
@@ -38,9 +40,6 @@ def parallel_for(
     -------
     return_values : list of return values
     """
-    import multiprocessing.pool
-    from contextlib import closing
-
     with closing(multiprocessing.pool.ThreadPool(nb_threads)) as pool:
         return pool.map(loop_function, parameters)
 

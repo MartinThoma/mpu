@@ -2,3 +2,4 @@ pandas
 sphinx_rtd_theme>=0.3.1
 boto3
 Sphinx
+typing_extensions

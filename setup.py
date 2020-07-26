@@ -17,7 +17,7 @@ requires_tests = [
     "simplejson",
 ]
 requires_all = (
-    ["pandas", "python-magic"]
+    ["pandas", "python-magic", "typing_extensions"]
     + requires_datetime
     + requires_image
     + requires_io

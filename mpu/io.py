@@ -84,7 +84,7 @@ def _read_csv(filepath: str, kwargs: Dict) -> Union[List, Dict]:
     if "skiprows" not in kwargs:
         kwargs["skiprows"] = []
     if isinstance(kwargs["skiprows"], int):
-        kwargs["skiprows"] = [i for i in range(kwargs["skiprows"])]
+        kwargs["skiprows"] = list(range(kwargs["skiprows"]))
     if "format" in kwargs:
         format_ = kwargs["format"]
         kwargs.pop("format", None)
@@ -96,11 +96,11 @@ def _read_csv(filepath: str, kwargs: Dict) -> Union[List, Dict]:
     with open(filepath) as fp:
         if format_ == "default":
             reader = csv.reader(fp, **kwargs)
-            data_tmp = EList([row for row in reader])
+            data_tmp = EList(list(reader))
             data: Union[List, Dict] = data_tmp.remove_indices(skiprows)
         elif format_ == "dicts":
             reader_list = csv.DictReader(fp, **kwargs)
-            data = [row for row in reader_list]
+            data = list(reader_list)
         else:
             raise NotImplementedError(f"Format '{format_}' unknown")
     return data
