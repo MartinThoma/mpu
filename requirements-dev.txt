@@ -11,17 +11,17 @@ boto3==1.7.84             # via -r requirements-dev.in, moto
 boto==2.49.0              # via moto
 botocore==1.10.84         # via boto3, moto, s3transfer
 certifi==2020.6.20        # via requests
-cffi==1.14.0              # via cryptography
+cffi==1.14.1              # via cryptography
 chardet==3.0.4            # via requests
 click==7.1.2              # via pip-tools
 colorama==0.4.3           # via twine
 cookies==2.2.1            # via moto
-coverage==5.2             # via pytest-cov
+coverage==5.2.1           # via pytest-cov
 cryptography==3.0         # via moto, secretstorage
 docker==4.2.2             # via moto
 docutils==0.16            # via botocore, readme-renderer
 filelock==3.0.12          # via pytest-mypy
-hypothesis==5.20.3        # via -r requirements-dev.in
+hypothesis==5.23.1        # via -r requirements-dev.in
 idna==2.10                # via requests
 importlib-metadata==1.7.0  # via jsonpickle
 jeepney==0.4.3            # via keyring, secretstorage
@@ -40,7 +40,7 @@ mypy==0.782               # via pytest-mypy
 numpy==1.19.1             # via pandas
 packaging==20.4           # via bleach, pytest
 pandas==1.0.5             # via -r requirements-dev.in
-pip-tools==5.2.1          # via -r requirements-dev.in
+pip-tools==5.3.0          # via -r requirements-dev.in
 pkginfo==1.5.0.1          # via twine
 pluggy==0.13.1            # via pytest
 py==1.9.0                 # via pytest
@@ -51,7 +51,8 @@ pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.0        # via -r requirements-dev.in
 pytest-mccabe==2.0        # via -r requirements-dev.in
 pytest-mypy==0.6.2        # via -r requirements-dev.in
-pytest==5.4.3             # via -r requirements-dev.in, pytest-cov, pytest-mccabe, pytest-mypy
+pytest-timeout==1.4.2     # via -r requirements-dev.in
+pytest==5.4.3             # via -r requirements-dev.in, pytest-cov, pytest-mccabe, pytest-mypy, pytest-timeout
 python-dateutil==2.6.1    # via botocore, moto, pandas
 pytz==2020.1              # via moto, pandas
 pyyaml==5.3.1             # via pyaml
