@@ -23,6 +23,7 @@ def get_meta(filepath: str) -> Dict:
     """
     meta = {}
     try:
+        # Third party
         from PIL import Image
 
         with Image.open(filepath) as img:

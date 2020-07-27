@@ -1,0 +1,3 @@
+*.py encoding=utf-8
+*.json encoding=utf-8
+*.csv encoding=utf-8

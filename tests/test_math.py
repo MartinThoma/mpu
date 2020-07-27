@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 
+# Core Library
+import itertools
+
 # Third party
 import hypothesis.strategies as s
 import pytest
@@ -66,7 +69,5 @@ def test_gcd_property(a, b):
 
 
 def test_generate_primes():
-    import itertools
-
     first_primes = list(itertools.islice(mpu.math.generate_primes(), 10))
     assert first_primes == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]

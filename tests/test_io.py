@@ -6,7 +6,6 @@
 import datetime
 import os
 import sys
-from tempfile import NamedTemporaryFile
 from unittest import mock
 
 # Third party
@@ -26,14 +25,13 @@ from mpu.io import (
 )
 
 
-def test_download_with_path():
+def test_download_with_path(jpg_tempfile):
     source = (
         "https://upload.wikimedia.org/wikipedia/commons/e/e9/"
         "Aurelia-aurita-3-1-style.jpg"
     )
-    with NamedTemporaryFile(suffix="image.jpg") as sink:
-        download(source, sink.name)
-        assert os.path.getsize(sink.name) == 116087
+    download(source, jpg_tempfile)
+    assert os.path.getsize(jpg_tempfile) == 116087
 
 
 def test_get_file_meta():
@@ -44,6 +42,10 @@ def test_get_file_meta():
     meta["filepath"] = None
     meta["last_access_datetime"] = None
     meta["modification_datetime"] = None
+
+    # Exists on Windows, but not on Linux
+    meta["creation_datetime"] = None
+
     expected = {
         "filepath": None,
         "creation_datetime": None,
@@ -115,7 +117,7 @@ def test_read_csv_dicts():
     assert data_real == data_exp
 
 
-def test_write_csv():
+def test_write_csv(csv_tempfile):
     data = [
         ["1", "A towel,", "1.0"],
         ["42", " it says, ", "2.0"],
@@ -123,13 +125,12 @@ def test_write_csv():
         ["0", "massively useful thing ", "123"],
         ["-2", "an interstellar hitchhiker can have.\n", "3"],
     ]
-    with NamedTemporaryFile(suffix=".csv", prefix="mpu_test") as filepath:
-        write(filepath.name, data)
-        data_read = read(filepath.name)
-        assert data == data_read
+    write(csv_tempfile, data)
+    data_read = read(csv_tempfile)
+    assert data == data_read
 
 
-def test_write_h5():
+def test_write_h5(hdf5_tempfile):
     data = [
         ["1", "A towel,", "1.0"],
         ["42", " it says, ", "2.0"],
@@ -137,12 +138,11 @@ def test_write_h5():
         ["0", "massively useful thing ", "123"],
         ["-2", "an interstellar hitchhiker can have.\n", "3"],
     ]
-    with NamedTemporaryFile(suffix=".hdf5", prefix="mpu_test") as filepath:
-        with pytest.raises(NotImplementedError):
-            write(filepath.name, data)
+    with pytest.raises(NotImplementedError):
+        write(hdf5_tempfile, data)
 
 
-def test_write_csv_params():
+def test_write_csv_params(csv_tempfile):
     data = [
         ["1", "A towel,", "1.0"],
         ["42", " it says, ", "2.0"],
@@ -150,10 +150,9 @@ def test_write_csv_params():
         ["0", "massively useful thing ", "123"],
         ["-2", "an interstellar hitchhiker can have.\n", "3"],
     ]
-    with NamedTemporaryFile(suffix=".csv", prefix="mpu_test") as filepath:
-        write(filepath.name, data, delimiter=",", quotechar='"')
-        data_read = read(filepath.name, delimiter=",", quotechar='"')
-        assert data == data_read
+    write(csv_tempfile, data, delimiter=",", quotechar='"')
+    data_read = read(csv_tempfile, delimiter=",", quotechar='"')
+    assert data == data_read
 
 
 def test_read_hdf5():
@@ -203,87 +202,81 @@ def test_read_pickle():
     assert data_real == data_exp
 
 
-def test_write_json():
+def test_write_json(json_tempfile):
     data = {
         "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
-    with NamedTemporaryFile(suffix=".json", prefix="mpu_test") as filepath:
-        write(filepath.name, data)
-        data_read = read(filepath.name)
-        assert data == data_read
+    write(json_tempfile, data)
+    data_read = read(json_tempfile)
+    assert data == data_read
 
 
-def test_write_jsonl():
+def test_write_jsonl(jsonl_tempfile):
     data = [
         {"some": "thing"},
         {"foo": 17, "bar": False, "quux": True},
         {"may": {"include": "nested", "objects": ["and", "arrays"]}},
     ]
-    with NamedTemporaryFile(suffix=".jsonl", prefix="mpu_test") as filepath:
-        write(filepath.name, data)
-        data_read = read(filepath.name)
-        assert data == data_read
+    write(jsonl_tempfile, data)
+    data_read = read(jsonl_tempfile)
+    assert data == data_read
 
 
-def test_write_jsonl_all_params():
+def test_write_jsonl_all_params(jsonl_tempfile):
     data = [
         {"some": "thing"},
         {"foo": 17, "bar": False, "quux": True},
         {"may": {"include": "nested", "objects": ["and", "arrays"]}},
     ]
-    with NamedTemporaryFile(suffix=".jsonl", prefix="mpu_test") as filepath:
-        _write_jsonl(
-            filepath.name,
-            data,
-            kwargs={"sort_keys": True, "separators": (",", ": "), "ensure_ascii": True},
-        )
-        data_read = read(filepath.name)
-        assert data == data_read
+    _write_jsonl(
+        jsonl_tempfile,
+        data,
+        kwargs={"sort_keys": True, "separators": (",", ": "), "ensure_ascii": True},
+    )
+    data_read = read(jsonl_tempfile)
+    assert data == data_read
 
 
-def test_write_json_params():
+def test_write_json_params(json_tempfile):
     data = {
         "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
-    with NamedTemporaryFile(suffix=".json", prefix="mpu_test") as filepath:
-        write(
-            filepath.name,
-            data,
-            indent=4,
-            sort_keys=True,
-            separators=(",", ":"),
-            ensure_ascii=False,
-        )
-        data_read = read(filepath.name)
-        assert data == data_read
+    write(
+        json_tempfile,
+        data,
+        indent=4,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+    )
+    data_read = read(json_tempfile)
+    assert data == data_read
 
 
-def test_write_pickle():
+def test_write_pickle(pickle_tempfile):
     data = {
         "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
-    with NamedTemporaryFile(suffix=".pickle", prefix="mpu_test") as filepath:
-        write(filepath.name, data)
-        data_read = read(filepath.name)
-        assert data == data_read
+    write(pickle_tempfile, data)
+    data_read = read(pickle_tempfile)
+    assert data == data_read
 
 
-def test_write_pickle_protocol():
+def test_write_pickle_protocol(pickle_tempfile):
     data = {
         "a list": [1, 42, 3.141, 1337, "help", "€"],
         "a string": "bla",
         "another dict": {"foo": "bar", "key": "value", "the answer": 42},
     }
-    with NamedTemporaryFile(suffix=".pickle", prefix="mpu_test") as filepath:
-        write(filepath.name, data, protocol=0)
-        data_read = read(filepath.name)
-        assert data == data_read
+    write(pickle_tempfile, data, protocol=0)
+    data_read = read(pickle_tempfile)
+    assert data == data_read
 
 
 def test_read_h5():
@@ -292,11 +285,10 @@ def test_read_h5():
         read(source)
 
 
-def test_gzip():
+def test_gzip(pickle_tempfile):
     path = "files/example.csv"
     source = pkg_resources.resource_filename(__name__, path)
-    with NamedTemporaryFile() as sink:
-        gzip_file(source, sink.name)
+    gzip_file(source, pickle_tempfile)
 
 
 def test_hash():

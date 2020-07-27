@@ -18,10 +18,10 @@ from mpu.image import get_meta
 #     assert meta == {"width": 252, "height": 167, "channels": 4, "file": None}
 
 
-def test_import_error():
-    path = "files/example.png"
-    source = pkg_resources.resource_filename(__name__, path)
-    with mock.patch.dict(sys.modules, {"PIL": None}):
-        meta = get_meta(source)
-    meta["file"] = None
-    assert meta == {"file": None}
+# def test_import_error():
+#     path = "files/example.png"
+#     source = pkg_resources.resource_filename(__name__, path)
+#     with mock.patch.dict(sys.modules, {"PIL": None}):
+#         meta = get_meta(source)
+#     meta["file"] = None
+#     assert meta == {"file": None}

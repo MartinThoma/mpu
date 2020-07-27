@@ -2,6 +2,7 @@
 
 # Core Library
 import sys
+import time
 import traceback
 
 # Third party
@@ -30,8 +31,6 @@ def test_clip():
 
 
 def test_parallel_for():
-    import time
-
     def looping_function(payload):
         i, j = payload
         time.sleep(1)

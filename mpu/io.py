@@ -44,7 +44,7 @@ def read(filepath: str, **kwargs: Any) -> Any:
     if filepath.lower().endswith(".csv"):
         return _read_csv(filepath, kwargs)
     elif filepath.lower().endswith(".json"):
-        with open(filepath) as data_file:
+        with open(filepath, encoding="utf8") as data_file:
             data: Any = json.load(data_file, **kwargs)
         return data
     elif filepath.lower().endswith(".jsonl"):
@@ -93,7 +93,7 @@ def _read_csv(filepath: str, kwargs: Dict) -> Union[List, Dict]:
     skiprows = kwargs["skiprows"]
     kwargs.pop("skiprows", None)
 
-    with open(filepath) as fp:
+    with open(filepath, encoding="utf8") as fp:
         if format_ == "default":
             reader = csv.reader(fp, **kwargs)
             data_tmp = EList(list(reader))
@@ -108,7 +108,7 @@ def _read_csv(filepath: str, kwargs: Dict) -> Union[List, Dict]:
 
 def _read_jsonl(filepath: str, kwargs: Dict) -> List:
     """See documentation of mpu.io.read."""
-    with open(filepath) as data_file:
+    with open(filepath, encoding="utf8") as data_file:
         data = [json.loads(line, **kwargs) for line in data_file if len(line) > 0]
     return data
 
@@ -170,14 +170,13 @@ def write(filepath: str, data: Union[Dict, List], **kwargs: Dict) -> Any:
 
 def _write_csv(filepath: str, data: Any, kwargs: Dict) -> Any:
     """See documentation of mpu.io.write."""
-    with open(filepath, "w") as fp:
+    with open(filepath, "w", encoding="utf8") as fp:
         if "delimiter" not in kwargs:
             kwargs["delimiter"] = ","
         if "quotechar" not in kwargs:
             kwargs["quotechar"] = '"'
-        with open(filepath, "w") as fp:
-            writer = csv.writer(fp, **kwargs)
-            writer.writerows(data)
+        writer = csv.writer(fp, **kwargs)
+        writer.writerows(data)
     return data
 
 
@@ -235,6 +234,7 @@ def urlread(url: str, encoding: str = "utf8") -> str:
     -------
     content : str
     """
+    # Core Library
     from urllib.request import urlopen
 
     response = urlopen(url)
@@ -254,6 +254,7 @@ def download(source: str, sink: Optional[str] = None) -> str:
     sink : str, optional (default: same filename in current directory)
         Where the file gets stored. Some filepath in the local file system.
     """
+    # Core Library
     from urllib.request import urlretrieve
 
     if sink is None:
@@ -332,6 +333,7 @@ def get_modification_datetime(filepath: str) -> datetime:
     modification_datetime : datetime
 
     """
+    # Third party
     import tzlocal
 
     timezone = tzlocal.get_localzone()
@@ -351,6 +353,7 @@ def get_access_datetime(filepath: str) -> datetime:
     -------
     access_datetime : datetime
     """
+    # Third party
     import tzlocal
 
     tz = tzlocal.get_localzone()
@@ -376,6 +379,7 @@ def get_file_meta(filepath: str) -> Dict[str, Any]:
     meta["last_access_datetime"] = get_access_datetime(filepath)
     meta["modification_datetime"] = get_modification_datetime(filepath)
     try:
+        # Third party
         import magic
 
         f_mime = magic.Magic(mime=True, uncompress=True)
@@ -398,6 +402,7 @@ def gzip_file(source: str, sink: str) -> None:
     sink : str
         Filepath
     """
+    # Core Library
     import gzip
 
     with open(source, "rb") as f_in, gzip.open(sink, "wb") as f_out:

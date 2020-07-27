@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+# Core Library
+import sys
+from io import StringIO
+
 # First party
 from mpu.shell import Codes, text_input
 
@@ -10,11 +14,5 @@ def test_codes():
 
 
 def test_text_input():
-    try:
-        from io import StringIO
-    except ImportError:
-        from StringIO import StringIO
-    import sys
-
     sys.stdin = StringIO("foo\nbar")
     text_input("foo")

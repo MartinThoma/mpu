@@ -6,7 +6,6 @@ pip-tools
 pytest
 pytest-cov
 pytest-mccabe
-pytest-mypy
 pytest-timeout
 simplejson
 twine

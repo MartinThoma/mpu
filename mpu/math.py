@@ -234,10 +234,8 @@ def round_down(x: float, decimal_places: int) -> float:
     >>> round_down(1.23456, 2)
     1.23
     """
-    from math import floor
-
     d = int("1" + ("0" * decimal_places))
-    return floor(x * d) / d
+    return math_stl.floor(x * d) / d
 
 
 def gcd(a: int, b: int) -> int:
