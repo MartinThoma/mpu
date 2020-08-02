@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 # Third party
+import hypothesis.strategies as st
 import pytest
+from hypothesis import given
 
 # First party
 import mpu.string
@@ -27,3 +29,13 @@ def test_is_iban():
 def test_is_none_not():
     with pytest.raises(ValueError):
         mpu.string.is_none("foobar")
+
+
+@given(st.emails())
+def test_is_email(email):
+    assert mpu.string.is_email(email), f"is_email({email}) returned False"
+
+
+@given(st.ip_addresses(v=4))
+def test_is_ipv4(ip):
+    assert mpu.string.is_ipv4(str(ip)), f"is_ipv4({ip}) returned False"

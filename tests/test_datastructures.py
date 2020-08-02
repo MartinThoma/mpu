@@ -7,6 +7,8 @@ from datetime import datetime
 
 # Third party
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 # First party
 from mpu.datastructures import (
@@ -170,10 +172,19 @@ def test_interval_intersection():
     assert Interval(1, 10).intersection(Interval(-1, 12)) == Interval(1, 10)
 
 
-def test_interval_issubset():
-    assert Interval(1, 2).issubset(Interval(0, 10))
-    assert Interval(0, 2).issubset(Interval(0, 10))
-    assert Interval(0, 10).issubset(Interval(0, 10))
+@given(st.lists(st.integers(), min_size=4, max_size=4).map(sorted))
+def test_interval_issubset(integer_list):
+    a, b, c, d = integer_list
+    assert Interval(b, c).issubset(Interval(a, d))
+
+
+@given(st.lists(st.integers(), min_size=4, max_size=4).map(sorted))
+def test_interval_issubset_not(integer_list):
+    a, b, c, d = integer_list
+    assert not Interval(a, b).issubset(Interval(c, d)) or c <= a <= b <= d
+    assert not Interval(a, c).issubset(Interval(b, d)) or b <= a <= c <= d
+    assert not Interval(c, d).issubset(Interval(a, b)) or a <= c <= d <= b
+    assert not Interval(b, d).issubset(Interval(a, c)) or a <= b <= d <= c
 
 
 def test_impossible_issubset():
@@ -211,13 +222,6 @@ def test_interval_issubset_interval_union():
     i1 = Interval(6, 7)
     i2 = IntervalUnion([[2, 3], [5, 7]])
     assert i1.issubset(i2)
-
-
-def test_interval_issubset_not():
-    assert not Interval(-1, 2).issubset(Interval(0, 10))
-    assert not Interval(0, 11).issubset(Interval(0, 10))
-    assert not Interval(-1, 11).issubset(Interval(0, 10))
-    assert not Interval(-2, -1).issubset(Interval(0, 10))
 
 
 def test_interval_issubset_error():
@@ -380,17 +384,21 @@ def test_interval_union_is_empty():
     assert iu.is_empty()
 
 
-def test_interval_and():
-    i1 = Interval(0, 10)
-    i2 = Interval(5, 20)
-    i3 = Interval(5, 10)
+@given(st.lists(st.integers(), min_size=4, max_size=4).map(sorted))
+def test_interval_and(integers):
+    a, b, c, d = integers
+    i1 = Interval(a, c)
+    i2 = Interval(b, d)
+    i3 = Interval(b, c)
     assert i1 & i2 == i3
 
 
-def test_interval_or():
-    i1 = Interval(0, 10)
-    i2 = Interval(5, 20)
-    i3 = Interval(0, 20)
+@given(st.lists(st.integers(), min_size=4, max_size=4).map(sorted))
+def test_interval_or(integers):
+    a, b, c, d = integers
+    i1 = Interval(a, c)
+    i2 = Interval(b, d)
+    i3 = Interval(a, d)
     assert i1 | i2 == i3
 
 

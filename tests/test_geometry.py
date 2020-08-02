@@ -4,7 +4,7 @@ import random
 from typing import List, Set
 
 # Third party
-import hypothesis.strategies as s
+import hypothesis.strategies as st
 import pytest
 from hypothesis import given
 
@@ -23,7 +23,7 @@ from mpu.geometry import (
 )
 
 
-@given(s.floats(min_value=0.0, max_value=360.0))
+@given(st.floats(min_value=0.0, max_value=360.0))
 def test_angle(angle: float):
     epsilon = 0.0001
     x = math.cos(math.radians(angle))

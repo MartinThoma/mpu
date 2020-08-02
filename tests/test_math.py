@@ -5,7 +5,7 @@
 import itertools
 
 # Third party
-import hypothesis.strategies as s
+import hypothesis.strategies as st
 import pytest
 from hypothesis import given
 
@@ -18,7 +18,7 @@ def test_factorize_zero():
         mpu.math.factorize(0)
 
 
-@given(s.floats())
+@given(st.floats())
 def test_factorize_float(a_float):
     with pytest.raises(ValueError):
         mpu.math.factorize(a_float)
@@ -28,7 +28,7 @@ def test_factorize_at_border():
     assert mpu.math.factorize(991 ** 2) == [991, 991]
 
 
-@given(s.integers(min_value=-(10 ** 6), max_value=10 ** 6))
+@given(st.integers(min_value=-(10 ** 6), max_value=10 ** 6))
 def test_factorize(an_integer):
     if an_integer == 0:
         # This is tested in `test_factorize_zero` and should throw an exception
@@ -44,7 +44,7 @@ def test_argmax():
     assert mpu.math.argmax([1, 2, 3]) == 2
 
 
-@given(s.lists(s.integers(), min_size=1))
+@given(st.lists(st.integers(), min_size=1))
 def test_argmax_property(integer_list):
     argmax = mpu.math.argmax(integer_list)
     max_value = integer_list[argmax]
@@ -57,7 +57,7 @@ def test_gcd_fail():
         mpu.math.gcd(0, 7)
 
 
-@given(s.integers(), s.integers())
+@given(st.integers(), st.integers())
 def test_gcd_property(a, b):
     if a == 0 or b == 0:
         with pytest.raises(ValueError):
