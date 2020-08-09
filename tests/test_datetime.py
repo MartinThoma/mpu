@@ -23,3 +23,10 @@ def test_add_hour():
 def test_generate_fail():
     with pytest.raises(ValueError):
         mpu.datetime.generate(datetime(2018, 1, 1), datetime(2018, 1, 1))
+
+
+def test_generate():
+    start = datetime(2018, 1, 1)
+    end = datetime(2018, 2, 1)
+    generated = mpu.datetime.generate(start, end)
+    assert start <= generated <= end

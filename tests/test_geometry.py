@@ -155,20 +155,46 @@ def test_line_segment_point_intersection_up_down():
     assert ls2.intersect(ls1).simplify() == expected
 
 
-def test_line_segment_length():
+def test_line_segment_length_x():
     line_segment = LineSegment(Point(0, 0), Point(42, 0))
     assert line_segment.length() == 42
 
+    line_segment = LineSegment(Point(2, 0), Point(42, 0))
+    assert line_segment.length() == 40
+
+
+def test_line_segment_length_y():
+    line_segment = LineSegment(Point(0, 0), Point(0, 42))
+    assert line_segment.length() == 42
+
+    line_segment = LineSegment(Point(0, 2), Point(0, 42))
+    assert line_segment.length() == 40
+
+
+def test_line_segment_length_xy():
     line_segment = LineSegment(Point(0, 0), Point(3, 4))
     assert line_segment.length() == 5
 
 
-def test_line_segment_angle():
+def test_line_segment_angle_zero():
     line_segment = LineSegment(Point(0, 0), Point(1, 0))
     assert line_segment.angle() == 0
 
+
+def test_line_segment_angle_180():
     line_segment = LineSegment(Point(0, 0), Point(-1, 0))
     assert line_segment.angle() == 180
+
+
+@given(
+    st.floats(min_value=-1, max_value=1),
+    st.floats(min_value=-1, max_value=1),
+    st.floats(min_value=-1, max_value=1),
+    st.floats(min_value=-1, max_value=1),
+)
+def test_line_segment_angle_boundaries(x1, y1, x2, y2):
+    line_segment = LineSegment(Point(x1, y1), Point(x2, y2))
+    assert 0 <= line_segment.angle() < 360
 
 
 def test_get_equation_parameters():

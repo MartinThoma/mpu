@@ -11,7 +11,8 @@ import mpu.pd
 
 
 def test_example_df():
-    mpu.pd.example_df()
+    df = mpu.pd.example_df()
+    assert list(df.columns) == ["country", "population", "population_time", "EUR"]
 
 
 def test_describe():
@@ -80,3 +81,7 @@ def test_get_column_info_column_unknown_dtype():
     }
     expected = (expected_column_info, expected_column_meta)
     assert info == expected
+
+
+def test_countries_global():
+    assert len(mpu.pd.countries) == 248

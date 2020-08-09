@@ -112,6 +112,11 @@ class Location:
         in [-180, 180] - from West to East
     """
 
+    MIN_LATITUDE = -90
+    MAX_LATITUDE = 90
+    MIN_LONGITUDE = -180
+    MAX_LONGITUDE = 180
+
     def __init__(self, latitude: float, longitude: float):
         self.latitude = latitude
         self.longitude = longitude
@@ -124,7 +129,7 @@ class Location:
     @latitude.setter
     def latitude(self, latitude: float) -> None:
         """Setter for latiutde."""
-        if not (-90 <= latitude <= 90):
+        if not (Location.MIN_LATITUDE <= latitude <= Location.MAX_LATITUDE):
             raise ValueError(f"latitude was {latitude}, but has to be in [-90, 90]")
         self._latitude = latitude
 
@@ -136,7 +141,7 @@ class Location:
     @longitude.setter
     def longitude(self, longitude: float) -> None:
         """Setter for longitude."""
-        if not (-180 <= longitude <= 180):
+        if not (Location.MIN_LONGITUDE <= longitude <= Location.MAX_LONGITUDE):
             raise ValueError(f"longitude was {longitude}, but has to be in [-180, 180]")
         self._longitude = longitude
 
@@ -197,13 +202,13 @@ def haversine_distance(
     """
     lat1, lon1 = origin
     lat2, lon2 = destination
-    if not (-90.0 <= lat1 <= 90):
+    if not (Location.MIN_LATITUDE <= lat1 <= Location.MAX_LATITUDE):
         raise ValueError(f"lat1={lat1:2.2f}, but must be in [-90,+90]")
-    if not (-90.0 <= lat2 <= 90):
+    if not (Location.MIN_LATITUDE <= lat2 <= Location.MAX_LATITUDE):
         raise ValueError(f"lat2={lat2:2.2f}, but must be in [-90,+90]")
-    if not (-180.0 <= lon1 <= 180):
+    if not (Location.MIN_LONGITUDE <= lon1 <= Location.MAX_LONGITUDE):
         raise ValueError(f"lon1={lat1:2.2f}, but must be in [-180,+180]")
-    if not (-180.0 <= lon2 <= 180):
+    if not (Location.MIN_LONGITUDE <= lon2 <= Location.MAX_LONGITUDE):
         raise ValueError(f"lon1={lat1:2.2f}, but must be in [-180,+180]")
     radius = 6371  # km
 

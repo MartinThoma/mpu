@@ -40,6 +40,10 @@ def test_factorize(an_integer):
     assert product == an_integer
 
 
+def test_factorize_power():
+    assert mpu.math.factorize(1024) == [2] * 10
+
+
 def test_argmax():
     assert mpu.math.argmax([1, 2, 3]) == 2
 
