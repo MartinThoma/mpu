@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Handle units - currently only currencies."""
 
 # Core Library
@@ -28,11 +26,11 @@ class Currency:
     ):
         if not isinstance(name, str):
             raise ValueError(
-                "A currencies name has to be of type str, but " f"was: {type(name)}"
+                f"A currencies name has to be of type str, but was: {type(name)}"
             )
         if not isinstance(code, str):
             raise ValueError(
-                "A currencies code has to be of type str, but " f"was: {type(code)}"
+                f"A currencies code has to be of type str, but was: {type(code)}"
             )
         if not isinstance(exponent, (type(None), int)):
             raise ValueError(
@@ -185,7 +183,7 @@ class Money:
             return Money(self.value * other, self.currency)
         else:
             raise ValueError(
-                f"Multiplication with type '{type(other)}' is not " "supported"
+                f"Multiplication with type '{type(other)}' is not supported"
             )
 
     def __format__(self, spec: str) -> str:
@@ -225,7 +223,7 @@ class Money:
 
     def __add__(self, other: "Money") -> "Money":
         if not isinstance(other, Money):
-            raise ValueError(f"Addition with type '{type(other)}' is not " "supported")
+            raise ValueError(f"Addition with type '{type(other)}' is not supported")
         if not (self.currency == other.currency):
             raise ValueError(
                 f"Addition of currency '{self.currency}' and '{other.currency}' "
@@ -235,9 +233,7 @@ class Money:
 
     def __sub__(self, other: "Money") -> "Money":
         if not isinstance(other, Money):
-            raise ValueError(
-                f"Subtraction with type '{type(other)}' is not " "supported"
-            )
+            raise ValueError(f"Subtraction with type '{type(other)}' is not supported")
         if not (self.currency == other.currency):
             raise ValueError(
                 f"Subtraction of currency '{self.currency}' and "
@@ -259,7 +255,7 @@ class Money:
         elif isinstance(other, (int, fractions.Fraction)):
             return Money(self.value / other, self.currency)
         else:
-            raise ValueError(f"Division with type '{type(other)}' is not " "supported")
+            raise ValueError(f"Division with type '{type(other)}' is not supported")
 
     __div__ = __truediv__
 

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """mpu: Martins Python Utilities."""
 
 # Third party

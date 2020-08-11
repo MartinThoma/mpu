@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-
 """Reading and writing common file formats."""
-
 
 # Core Library
 import csv

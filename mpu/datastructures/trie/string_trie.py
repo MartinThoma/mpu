@@ -140,9 +140,7 @@ class TrieNode:
         return string
 
     def __str__(self):
-        return (
-            f"TrieNode(value='{self._value}', " f"nb_children='{len(self.children)}')"
-        )
+        return f"TrieNode(value='{self._value}', nb_children='{len(self.children)}')"
 
     __repr__ = __str__
 

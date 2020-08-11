@@ -15,6 +15,7 @@ from typing import Any, FrozenSet, List, Set, Tuple, Union, cast
 from mpu.datastructures import Interval
 
 EPSILON = 0.000001
+FULL_ROTATION = 360
 
 
 class Point:
@@ -75,17 +76,22 @@ class LineSegment:
         theta = math.atan2(dy, dx)
         angle = math.degrees(theta)  # angle is in (-180, 180]
         if angle < 0:
-            angle = 360 + angle
+            angle = FULL_ROTATION + angle
         return angle
 
     def _get_equation_parameters(self) -> Tuple[float, float]:
+        """
+        Get the slope and the intercept of a line.
+
+        y1 = m*x1 + t
+        y2 = m*x2 + t
+        => y1 = m*x1 + (y2-m*x2)
+        <=> m = (y1 - y2) /(x1-x2)
+           t = y1 - m*x1
+        """
         if self.p1.x == self.p2.x:
             raise ValueError("is not a function")
-        # y1 = m*x1 + t
-        # y2 = m*x2 + t
-        # => y1 = m*x1 + (y2-m*x2)
-        # <=> m = (y1 - y2) /(x1-x2)
-        #    t = y1 - m*x1
+
         y1 = self.p1.y
         y2 = self.p2.y
         x1 = self.p1.x

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Decorators which are not in `functools`."""
 
 # Core Library

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Utility datastructures."""
 
 # Core Library
@@ -293,7 +291,7 @@ class IntervalLike:
 
     def is_empty(self) -> bool:
         """Return if the IntervalLike is empty."""
-        raise NotImplementedError()
+        raise NotImplementedError
 
     def issubset(self, other: "IntervalLike") -> bool:
         """
@@ -320,7 +318,7 @@ class IntervalLike:
         -------
         interval_union : IntervalLike
         """
-        raise NotImplementedError()
+        raise NotImplementedError
 
     def intersection(self, other: "IntervalLike") -> "IntervalLike":
         """
@@ -381,19 +379,15 @@ class Interval(IntervalLike):
             return self
 
         if isinstance(other, Interval):
-            assert self.left is not None
-            assert self.right is not None
-            assert other.left is not None
-            assert other.right is not None
+            other.left = cast(Any, other.left)  # Tell mypy it's not None
+            other.right = cast(Any, other.right)  # Tell mypy it's not None
 
             # Standardize - after this step, the other.left is left of self.left
             if other.left > self.left:
                 other, self = self, other
 
-            assert self.left is not None
-            assert self.right is not None
-            assert other.left is not None
-            assert other.right is not None
+            self.left = cast(Any, self.left)  # Tell mypy it's not None
+            self.right = cast(Any, self.right)  # Tell mypy it's not None
 
             # Go through all cases
             if other.right < self.left:
@@ -446,20 +440,16 @@ class Interval(IntervalLike):
         if isinstance(other, IntervalUnion):
             return other.intersection(self)
 
-        assert isinstance(other, Interval)
-        assert self.left is not None
-        assert self.right is not None
-        assert other.left is not None
-        assert other.right is not None
+        other = cast(Interval, other)
+        other.left = cast(Any, other.left)  # Tell mypy it's not None
+        other.right = cast(Any, other.right)  # Tell mypy it's not None
 
         # Standardize - after this step, the other.left is left of self.left
         if other.left > self.left:
             other, self = self, other
 
-        assert self.left is not None
-        assert self.right is not None
-        assert other.left is not None
-        assert other.right is not None
+        self.left = cast(Any, self.left)  # Tell mypy it's not None
+        self.right = cast(Any, self.right)  # Tell mypy it's not None
 
         # Go through all cases
         if other.right < self.left:
@@ -520,10 +510,8 @@ class Interval(IntervalLike):
             # The order of those if / elif blocks matters here!
             return False
         elif isinstance(other, Interval):
-            assert self.left is not None
-            assert self.right is not None
-            assert other.left is not None
-            assert other.right is not None
+            self.left = cast(Any, self.left)  # Tell mypy it's not None
+            self.right = cast(Any, self.right)  # Tell mypy it's not None
             return other.left <= self.left <= self.right <= other.right
         elif isinstance(other, IntervalUnion):
             for interval in other.intervals:

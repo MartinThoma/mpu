@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-
 """Machine Learning functions."""
-
 
 # Core Library
 from typing import Iterable, List

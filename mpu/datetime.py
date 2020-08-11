@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-
 """Datetime related utility functions."""
-
 
 # Core Library
 import datetime as dt

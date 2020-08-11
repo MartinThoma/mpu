@@ -6,6 +6,9 @@
 [![Build Status](https://dev.azure.com/martinthoma/mpu/_apis/build/status/MartinThoma.mpu?branchName=master)](https://dev.azure.com/martinthoma/mpu/_build/latest?definitionId=1&branchName=master)
 [![Coverage Status](https://coveralls.io/repos/github/MartinThoma/mpu/badge.svg?branch=master)](https://coveralls.io/github/MartinThoma/mpu?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![GitHub last commit](https://img.shields.io/github/last-commit/MartinThoma/mpu)
+![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/MartinThoma/mpu/0.23.1)
+[![CodeFactor](https://www.codefactor.io/repository/github/martinthoma/mpu/badge/master)](https://www.codefactor.io/repository/github/martinthoma/mpu/overview/master)
 
 # mpu
 Martins Python Utilities (mpu) is a collection of utility functions and classes

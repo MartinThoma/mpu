@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Mathematical functions which are not adequately covered by standard libraries.
 
@@ -10,7 +8,6 @@ Standard libraries are:
 * `sympy <http://docs.sympy.org/latest/index.html>`_
 
 """
-
 
 # Core Library
 import math as math_stl

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Convenience functions for AWS interactions."""
 
 # Core Library

@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-
 """Pandas utility functions."""
-
 
 # Core Library
 import datetime as dt

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 String manipulation, verification and formatting.
 

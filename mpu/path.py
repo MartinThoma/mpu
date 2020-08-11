@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Functions for path manipultion and retrival of files."""
 
 # Core Library
