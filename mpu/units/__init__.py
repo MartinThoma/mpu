@@ -260,11 +260,19 @@ class Money:
     __div__ = __truediv__
 
     def __eq__(self, other: Any) -> bool:
-        if isinstance(other, self.__class__):
-            same_currency = self.currency == other.currency
-            return (self.value == other.value) and same_currency
+        if not isinstance(other, self.__class__):
+            raise ValueError(
+                "Only instances of Money can be compared to each "
+                f"other. Other was of type {type(other)}"
+            )
+        elif self.currency != other.currency:
+            raise ValueError(
+                f"Left has currency={self.currency}, right has "
+                f"currency={other.currency}. You need to convert "
+                "to the same currency first."
+            )
         else:
-            return False
+            return self.value == other.value
 
     def __ne__(self, other: Any) -> bool:
         return not self.__eq__(other)
@@ -275,7 +283,11 @@ class Money:
         if not isinstance(other, self.__class__):
             return False
         elif self.currency != other.currency:
-            return False
+            raise ValueError(
+                f"Left has currency={self.currency}, right has "
+                f"currency={other.currency}. You need to convert "
+                "to the same currency first."
+            )
         else:
             return self.value > other.value
 
@@ -283,7 +295,11 @@ class Money:
         if not isinstance(other, self.__class__):
             return False
         elif self.currency != other.currency:
-            return False
+            raise ValueError(
+                f"Left has currency={self.currency}, right has "
+                f"currency={other.currency}. You need to convert "
+                "to the same currency first."
+            )
         else:
             return self.value < other.value
 

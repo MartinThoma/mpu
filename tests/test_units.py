@@ -87,12 +87,15 @@ def test_currency_operations():
     c = Money("0.1", "USD")
     d = Money("0.5", "EUR")
     assert (a == b) is False
-    assert (a == 0.5) is False
+    with pytest.raises(ValueError):
+        a == 0.5
     assert a == d
-    assert (a == c) is False
+    with pytest.raises(ValueError):
+        a == c
     assert a != b
     assert (a != d) is False
-    assert a != c
+    with pytest.raises(ValueError):
+        a != c
     assert str(a - b) == "0.40 Euro"
     assert -a == aneg
     assert +a == a
@@ -136,9 +139,12 @@ def test_currency_comperators():
     assert a >= c
     assert a <= c
 
-    assert (c > d) is False
-    assert (c < d) is False
-    assert (c == d) is False
+    with pytest.raises(ValueError):
+        is_smaller = c < d
+    with pytest.raises(ValueError):
+        is_smaller = c < d
+    with pytest.raises(ValueError):
+        is_equal = c == d
     assert (c < 1) is False
     assert (c > 1) is False
 
