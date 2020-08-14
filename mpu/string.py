@@ -148,6 +148,8 @@ def str2bool(string_: str, default: Union[str, bool] = "raise") -> bool:
     >>> str2bool('0')
     False
     """
+    if default not in ["raise", False]:
+        raise ValueError(f"default was '{default}', but should be 'raise' or False")
     true = ["true", "t", "1", "y", "yes", "enabled", "enable", "on"]
     false = ["false", "f", "0", "n", "no", "disabled", "disable", "off"]
     if string_.lower() in true:
@@ -212,6 +214,8 @@ def str2bool_or_none(
     False
     >>> str2bool_or_none('undefined')
     """
+    if default not in ["raise", False]:
+        raise ValueError(f"default was '{default}', but should be 'raise' or False")
     if is_none(string_, default=False):
         return None
     else:
@@ -289,6 +293,8 @@ def is_none(string_: str, default: Union[str, bool] = "raise") -> bool:
     >>> is_none('undefined', default=False)
     True
     """
+    if default not in ["raise", False]:
+        raise ValueError(f"default was '{default}', but should be 'raise' or False")
     none = ["none", "undefined", "unknown", "null", ""]
     if string_.lower() in none:
         return True

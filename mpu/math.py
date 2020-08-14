@@ -98,10 +98,7 @@ def factorize(number: int) -> List[int]:
                 return [1]
         for i in range(3, int(math_stl.ceil(number ** 0.5)) + 1, 2):
             if number % i == 0:
-                if i == number:
-                    return factors + [i]
-                else:
-                    return factors + [i] + factorize(number // i)
+                return factors + [i] + factorize(number // i)
         return factors + [number]
 
 

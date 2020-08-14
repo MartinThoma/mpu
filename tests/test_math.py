@@ -40,8 +40,16 @@ def test_factorize(an_integer):
     assert product == an_integer
 
 
-def test_factorize_power():
+def test_factorize_5():
+    assert mpu.math.factorize(5) == [5]
+
+
+def test_factorize_1024():
     assert mpu.math.factorize(1024) == [2] * 10
+
+
+def test_factorize_3072():
+    assert mpu.math.factorize(3072) == [2] * 10 + [3]
 
 
 def test_argmax():
@@ -62,7 +70,7 @@ def test_gcd_fail():
 
 
 @given(st.integers(), st.integers())
-def test_gcd_property(a, b):
+def test_gcd_is_divisor(a, b):
     if a == 0 or b == 0:
         with pytest.raises(ValueError):
             mpu.math.gcd(a, b)
@@ -70,6 +78,18 @@ def test_gcd_property(a, b):
         gcd = mpu.math.gcd(a, b)
         assert a % gcd == 0
         assert b % gcd == 0
+
+
+@given(st.integers(), st.integers(), st.integers())
+def test_gcd_is_divisor_min_size(a, b, c):
+    if a == 0 or b == 0 or c == 0:
+        with pytest.raises(ValueError):
+            mpu.math.gcd(a * c, b * c)
+    else:
+        gcd = mpu.math.gcd(a * c, b * c)
+        assert (a * c) % gcd == 0
+        assert (b * c) % gcd == 0
+        assert gcd % c == 0
 
 
 def test_generate_primes():

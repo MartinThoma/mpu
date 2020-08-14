@@ -13,6 +13,34 @@ import mpu.pd
 def test_example_df():
     df = mpu.pd.example_df()
     assert list(df.columns) == ["country", "population", "population_time", "EUR"]
+    assert list(df["country"]) == [
+        "Germany",
+        "France",
+        "Indonesia",
+        "Ireland",
+        "Spain",
+        "Vatican",
+    ]
+    assert list(df["population"])[:5] == [
+        82521653.0,
+        66991000.0,
+        255461700.0,
+        4761865.0,
+        46549045.0,
+    ]
+    assert df["population_time"].equals(
+        pd.Series(
+            [
+                datetime.datetime(2016, 12, 1),
+                datetime.datetime(2017, 1, 1),
+                datetime.datetime(2017, 1, 1),
+                None,  # Ireland
+                datetime.datetime(2017, 6, 1),  # Spain
+                None,
+            ]
+        )
+    )
+    assert list(df["EUR"]) == [True, True, False, True, True, True]
 
 
 def test_describe():

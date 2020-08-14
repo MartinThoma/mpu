@@ -20,6 +20,27 @@ def test_add_hour():
     assert out == "1918-04-15T03:00:00+02:00"
 
 
+def test_add_time_neutral():
+    """Call add_time without any specified time to add."""
+    tz = pytz.timezone("Europe/Berlin")
+    out = mpu.datetime.add_time(
+        datetime(1918, 4, 15, 0, 0, tzinfo=pytz.utc).astimezone(tz)
+    ).isoformat()
+    assert out == "1918-04-15T01:00:00+01:00"
+
+
+def test_add_time_all():
+    """Call add_time without any specified time to add."""
+    tz = pytz.timezone("Europe/Berlin")
+    out = mpu.datetime.add_time(
+        datetime(1918, 4, 15, 0, 0, tzinfo=pytz.utc).astimezone(tz),
+        seconds=1,
+        minutes=2,
+        hours=3,
+    ).isoformat()
+    assert out == "1918-04-15T05:02:01+02:00"
+
+
 def test_generate_fail():
     with pytest.raises(ValueError):
         mpu.datetime.generate(datetime(2018, 1, 1), datetime(2018, 1, 1))

@@ -79,6 +79,7 @@ def test_location_class():
     assert abs(munich.distance(berlin) - 506.7) < 10
     assert "google.com" in munich.get_google_maps_link()
     assert munich.get_google_maps_link().startswith("http")
+    assert str(munich) == "Location(48.137222222222, 11.575555555556)"
 
 
 def test_location_value_range():

@@ -9,9 +9,21 @@ from hypothesis import given
 import mpu.string
 
 
-def test_str2bool():
+def test_str2bool_no_mapping():
     with pytest.raises(ValueError):
         mpu.string.str2bool("foobar")
+
+
+@pytest.mark.parametrize("illegal_default", ["foobar", True])
+def test_str2bool_illegal_default(illegal_default):
+    with pytest.raises(ValueError):
+        mpu.string.str2bool("yes", default=illegal_default)
+
+
+@pytest.mark.parametrize("illegal_default", ["foobar", True])
+def test_str2bool_or_none_illegal_default(illegal_default):
+    with pytest.raises(ValueError):
+        mpu.string.str2bool_or_none("yes", default=illegal_default)
 
 
 def test_is_iban_not():
@@ -24,6 +36,12 @@ def test_is_iban_not():
 def test_is_iban():
     iban = "FR14 2004 1010 0505 0001 3M02 606"
     assert mpu.string.is_iban(iban)
+
+
+@pytest.mark.parametrize("illegal_default", ["foobar", True])
+def test_is_none_illegal_default(illegal_default):
+    with pytest.raises(ValueError):
+        mpu.string.is_none("none", default=illegal_default)
 
 
 def test_is_none_not():
