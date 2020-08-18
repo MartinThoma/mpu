@@ -111,5 +111,8 @@ report/
 
 # https://pypi.org/project/mutmut/
 .mutmut-cache
-.vscode/
 html/
+report.html
+assets/
+
+.vscode/

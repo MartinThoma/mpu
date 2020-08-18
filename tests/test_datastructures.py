@@ -74,6 +74,10 @@ def test_flatten_string():
 
 
 def test_interval_creation_successes():
+    empty = Interval()
+    assert str(empty) == "[]"
+    assert repr(empty) == "Interval()"
+
     a = Interval(0, 1)
     assert str(a) == "[0, 1]"
 
@@ -135,9 +139,10 @@ def test_interval_union():
 
 def test_interval_union_interval_unition():
     i01 = Interval(0, 1)
-    assert i01.union(IntervalUnion([[4, 5], [6, 7]])) == IntervalUnion(
-        [[0, 1], [4, 5], [6, 7]]
-    )
+    iu = IntervalUnion([[4, 5], [6, 7]])
+    iu_expected = IntervalUnion([[0, 1], [4, 5], [6, 7]])
+    assert i01.union(iu) == iu_expected
+    assert i01 | iu == iu_expected
 
 
 def test_impossible_union():
@@ -307,7 +312,9 @@ def test_interval_union_intersection_1():
     iu1 = IntervalUnion([[0, 100]])
     iu2 = IntervalUnion([[1, 2]])
     iu3 = iu1.intersection(iu2)
+    iu4 = iu1 & iu2
     assert iu3.intervals == [Interval(1, 2)]
+    assert iu3 == iu4
 
 
 def test_interval_union_intersection_2():

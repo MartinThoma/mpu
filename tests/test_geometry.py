@@ -44,6 +44,12 @@ def test_antisymmetry_of_cross_product():
             assert abs(r1 + r2) < EPSILON, f"[{p1}, {p2}]"
 
 
+def test_point_str():
+    p1 = Point(0, 0)
+    assert str(p1) == "(0|0)"
+    assert repr(p1) == "(0|0)"
+
+
 def test_point_equality():
     p1 = Point(0, 0)
     assert not (p1 == "(0|0)")
