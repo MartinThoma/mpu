@@ -5,7 +5,6 @@ pandas
 pip-tools
 pytest
 pytest-cov
-pytest-mccabe
 pytest-timeout
 simplejson
 twine
