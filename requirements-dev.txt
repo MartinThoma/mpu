@@ -39,14 +39,16 @@ pandas==1.0.5             # via -r requirements-dev.in
 pip-tools==5.3.0          # via -r requirements-dev.in
 pkginfo==1.5.0.1          # via twine
 pluggy==0.13.1            # via pytest
+py-cpuinfo==7.0.0         # via pytest-benchmark
 py==1.9.0                 # via pytest
 pyaml==20.4.0             # via moto
 pycparser==2.20           # via cffi
 pygments==2.6.1           # via readme-renderer
 pyparsing==2.4.7          # via packaging
+pytest-benchmark==3.2.3   # via -r requirements-dev.in
 pytest-cov==2.10.0        # via -r requirements-dev.in
 pytest-timeout==1.4.2     # via -r requirements-dev.in
-pytest==5.4.3             # via -r requirements-dev.in, pytest-cov, pytest-timeout
+pytest==5.4.3             # via -r requirements-dev.in, pytest-benchmark, pytest-cov, pytest-timeout
 python-dateutil==2.6.1    # via botocore, moto, pandas
 pytz==2020.1              # via moto, pandas
 pyyaml==5.3.1             # via pyaml

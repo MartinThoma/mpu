@@ -6,6 +6,7 @@ pip-tools
 pytest
 pytest-cov
 pytest-timeout
+pytest-benchmark
 simplejson
 twine
 wheel
