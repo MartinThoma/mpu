@@ -15,7 +15,7 @@ Martins Python Utilities (mpu) is a collection of utility functions and classes
 with no other dependencies.
 
 The total size of the package will never be bigger than 10 MB and currently it
-is 15.7 kB in zipped form. This makes it a candidate to include into AWS Lambda
+is 120 kB in zipped form. This makes it a candidate to include into AWS Lambda
 projects.
 
 

@@ -28,7 +28,7 @@ def test_factorize_at_border():
     assert mpu.math.factorize(991 ** 2) == [991, 991]
 
 
-@given(st.integers(min_value=-(10 ** 6), max_value=10 ** 6))
+@given(an_integer=st.integers(min_value=-(10 ** 6), max_value=10 ** 6))
 def test_factorize(an_integer):
     if an_integer == 0:
         # This is tested in `test_factorize_zero` and should throw an exception
@@ -44,16 +44,16 @@ def test_factorize_5():
     assert mpu.math.factorize(5) == [5]
 
 
-def test_factorize_1024():
-    assert mpu.math.factorize(1024) == [2] * 10
+def test_factorize_1024(benchmark):
+    assert benchmark(mpu.math.factorize, 1024) == [2] * 10
 
 
-def test_factorize_3072():
-    assert mpu.math.factorize(3072) == [2] * 10 + [3]
+def test_factorize_3072(benchmark):
+    assert benchmark(mpu.math.factorize, 3072) == [2] * 10 + [3]
 
 
-def test_argmax():
-    assert mpu.math.argmax([1, 2, 3]) == 2
+def test_argmax(benchmark):
+    assert benchmark(mpu.math.argmax, [1, 2, 3]) == 2
 
 
 @given(st.lists(st.integers(), min_size=1))
