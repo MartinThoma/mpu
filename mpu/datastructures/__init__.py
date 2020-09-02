@@ -211,7 +211,9 @@ def _dict_merge_right(dict_left: Dict, dict_right: Dict, merge_method: str) -> D
             )
             if recurse:
                 new_dict[key] = dict_merge(
-                    dict_left[key], dict_right[key], merge_method="take_right_deep",
+                    dict_left[key],
+                    dict_right[key],
+                    merge_method="take_right_deep",
                 )
             else:
                 new_dict[key] = value
