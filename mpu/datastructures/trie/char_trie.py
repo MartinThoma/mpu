@@ -68,7 +68,7 @@ class TrieNode:
             self.children[char].push(value[1:])
 
     def __iter__(self):
-        self._iteration_queue: List[TrieNode, str] = [(self, "")]
+        self._iteration_queue: List[Tuple[TrieNode, str]] = [(self, "")]
         while self._iteration_queue:
             trie_node, prefix = self._iteration_queue.pop()
             children = sorted(trie_node.children.items(), key=lambda n: n[0])

@@ -118,7 +118,7 @@ class TrieNode:
             self.children = {old_data, new_data}
 
     def __iter__(self):
-        self._iteration_queue: List[TrieNode, str] = [(self, "")]
+        self._iteration_queue: List[Tuple[TrieNode, str]] = [(self, "")]
         while self._iteration_queue:
             trie_node, prefix = self._iteration_queue.pop()
             for child in trie_node.children:
@@ -199,7 +199,8 @@ class Trie(AbstractTrie):
 
     def print(self, print_stdout=True) -> str:
         string = "Trie\n"
-        string += self._root.print()
+        if self._root is not None:
+            string += self._root.print()
         string = string.strip()
         if print_stdout:
             print(string)

@@ -301,13 +301,13 @@ def test_hash():
 
 def test_get_creation_datetime():
     ret_val = mpu.io.get_creation_datetime(__file__)
-    assert isinstance(ret_val, (type(None), datetime.datetime))
+    assert isinstance(ret_val, datetime.datetime) or ret_val is None
 
 
 def test_get_creation_datetime_windows():
     with mock.patch("platform.system", mock.MagicMock(return_value="Windows")):
         ret_val = mpu.io.get_creation_datetime(__file__)
-    assert isinstance(ret_val, (type(None), datetime.datetime))
+    assert isinstance(ret_val, datetime.datetime) or ret_val is None
 
 
 def test_get_modification_datetime():

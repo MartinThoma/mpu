@@ -110,7 +110,7 @@ def _read_jsonl(filepath: str, kwargs: Dict) -> List:
     return data
 
 
-def write(filepath: str, data: Union[Dict, List], **kwargs: Dict) -> Any:
+def write(filepath: str, data: Union[Dict, List], **kwargs: Any) -> Any:
     """
     Write a file.
 

@@ -1,7 +1,7 @@
 """Utility datastructures."""
 
 # Core Library
-import collections
+import collections.abc
 import logging
 from copy import deepcopy
 from typing import (

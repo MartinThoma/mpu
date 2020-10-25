@@ -16,6 +16,7 @@ from moto import mock_s3
 # First party
 # internal modules
 import mpu.aws
+from mpu.aws import ExistsStrategy
 
 
 @pytest.mark.xfail
@@ -57,7 +58,7 @@ def test_list_no_files():
         mpu.aws.s3_download(
             "s3://mybucket/example_test.csv",
             destination,
-            exists_strategy="raises",
+            exists_strategy=ExistsStrategy.RAISE,
         )
     mpu.aws.s3_download(
         "s3://mybucket/example_test.csv",

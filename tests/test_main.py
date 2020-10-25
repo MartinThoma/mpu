@@ -97,7 +97,7 @@ def test_location_value_range():
     Location(42, -180.0)
 
 
-def test_consistent_shuffle_singe():
-    input_list = [1, 2, 3]
-    result = consistent_shuffle(input_list)
-    assert set(input_list) == set(result[0])
+def test_consistent_shuffle_single():
+    input_list = [[1, 2], [3, 4]]
+    result = consistent_shuffle(*input_list)
+    assert result == ([1, 2], [3, 4]) or result == ([2, 1], [4, 3])

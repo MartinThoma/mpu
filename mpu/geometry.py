@@ -7,6 +7,8 @@ For more advanced use cases, see:
 * `Shapely <https://pypi.org/project/Shapely/>`_
 """
 
+from __future__ import annotations
+
 # Core Library
 import math
 from typing import Any, FrozenSet, List, Set, Tuple, Union, cast
@@ -44,6 +46,9 @@ class Point:
 
     def __hash__(self) -> int:
         return hash((self.x, self.y))
+
+    def simplify(self) -> Point:
+        return self
 
 
 class LineSegment:

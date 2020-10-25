@@ -237,32 +237,32 @@ def test_point_on_line():
 
 
 def test_bounding_boxes_intersect_t1():
-    a = [Point(0, 0), Point(5, 5)]
-    b = [Point(1, 1), Point(2, 2)]
+    a = (Point(0, 0), Point(5, 5))
+    b = (Point(1, 1), Point(2, 2))
     assert do_bounding_boxes_intersect(a, b)
 
 
 def test_bounding_boxes_intersect_t2():
-    a = [Point(0, 0), Point(3, 3)]
-    b = [Point(1, -1), Point(2, 7)]
+    a = (Point(0, 0), Point(3, 3))
+    b = (Point(1, -1), Point(2, 7))
     assert do_bounding_boxes_intersect(a, b)
 
 
 def test_bounding_boxes_intersect_t3():
-    a = [Point(0, 0), Point(3, 3)]
-    b = [Point(1, -1), Point(2, 2)]
+    a = (Point(0, 0), Point(3, 3))
+    b = (Point(1, -1), Point(2, 2))
     assert do_bounding_boxes_intersect(a, b)
 
 
 def test_bounding_boxes_intersect_t4():
-    a = [Point(0, 0), Point(3, 3)]
-    b = [Point(3, 3), Point(5, 5)]
+    a = (Point(0, 0), Point(3, 3))
+    b = (Point(3, 3), Point(5, 5))
     assert do_bounding_boxes_intersect(a, b)
 
 
 def test_bounding_boxes_intersect_f1():
-    a = [Point(0, 0), Point(3, 3)]
-    b = [Point(4, 4), Point(5, 5)]
+    a = (Point(0, 0), Point(3, 3))
+    b = (Point(4, 4), Point(5, 5))
     assert not do_bounding_boxes_intersect(a, b)
 
 

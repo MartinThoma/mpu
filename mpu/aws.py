@@ -5,10 +5,10 @@ import enum
 import os
 from collections import namedtuple
 from tempfile import mkstemp
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 # Third party
-import boto3
+import boto3.session
 
 
 def list_files(
@@ -161,7 +161,7 @@ def s3_upload(
 S3Path = namedtuple("S3Path", ["bucket_name", "key"])
 
 
-def _s3_path_split(s3_path: str) -> Tuple[str, str]:
+def _s3_path_split(s3_path: str) -> S3Path:
     """
     Split an S3 path into bucket and key.
 
@@ -171,8 +171,7 @@ def _s3_path_split(s3_path: str) -> Tuple[str, str]:
 
     Returns
     -------
-    splitted : (str, str)
-        (bucket, key)
+    splitted : S3Path
 
     Examples
     --------
