@@ -52,7 +52,7 @@ class EList(list, Generic[T]):
 
         Parameters
         ----------
-        key : int or List[int]
+        key : int or List[int] or List[List[int]] or ...
 
         Returns
         -------

@@ -9,19 +9,21 @@ import random
 import traceback
 from contextlib import closing
 from types import TracebackType
-from typing import Any, Callable, List, Optional, Tuple, Union
+from typing import Any, Callable, List, Optional, Tuple, TypeVar, Union
 
 # First party
 from mpu import io, shell, string, units  # noqa
 from mpu._version import __version__  # noqa
 from mpu.type import Comparable
 
+T = TypeVar("T")
+
 
 def parallel_for(
-    loop_function: Callable[[Any], Any],
+    loop_function: Callable[[Any], T],
     parameters: List[Tuple[Any, ...]],
     nb_threads: int = 100,
-) -> List[Any]:
+) -> List[T]:
     """
     Execute the loop body in parallel.
 

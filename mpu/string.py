@@ -391,9 +391,8 @@ def is_ipv4(
     >>> is_ipv4("4", allow_shortened_addresses=False)
     False
     """
-    if not allow_shortened_addresses:
-        if potential_ipv4.count(".") != 3:
-            return False
+    if not allow_shortened_addresses and potential_ipv4.count(".") != 3:
+        return False
     try:
         socket.inet_aton(potential_ipv4)
     except OSError:
