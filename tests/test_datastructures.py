@@ -245,7 +245,7 @@ def test_interval_union_simplification_empty():
     assert iu.intervals == []
 
 
-def test_interval_union_simplification_disjunct():
+def test_interval_union_simplification_disjoint():
     iu = IntervalUnion([[0, 1], [42, 1337]])
     iu._simplify()
     assert iu.intervals == [Interval(0, 1), Interval(42, 1337)]

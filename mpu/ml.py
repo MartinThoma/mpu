@@ -19,7 +19,6 @@ def indices2one_hot(indices: Iterable, nb_classes: int) -> List:
         iterable of indices
     nb_classes : int
         Number of classes
-    dtype : type
 
     Returns
     -------
@@ -48,7 +47,7 @@ def one_hot2indices(one_hots: List) -> List:
 
     Parameters
     ----------
-    one_hot : List
+    one_hots : List
 
     Returns
     -------

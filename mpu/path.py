@@ -1,4 +1,4 @@
-"""Functions for path manipultion and retrival of files."""
+"""Functions for path manipulation and retrieval of files."""
 
 # Core Library
 import os

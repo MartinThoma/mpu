@@ -100,7 +100,7 @@ class TrieNode:
             self.children.add(trie_node)
         else:
             logger.debug(f"No shared prefix for {self._value} and {value}")
-            # Current node willl become its child
+            # Current node will become its child
             old_data = TrieNode(
                 self._value[len(shared_prefix) :],
                 is_word=self.is_word,

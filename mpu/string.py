@@ -369,6 +369,8 @@ def is_ipv4(
     Parameters
     ----------
     potential_ipv4 : str
+    allow_leading_zeros : bool (default: False)
+    allow_shortened_addresses : bool (default: False)
 
     Returns
     -------

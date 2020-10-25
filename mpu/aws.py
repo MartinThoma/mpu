@@ -20,6 +20,7 @@ def list_files(
     Parameters
     ----------
     bucket : str
+    prefix : str
     profile_name : str, optional
         AWS profile
 

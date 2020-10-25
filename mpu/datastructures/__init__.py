@@ -272,8 +272,8 @@ def does_keychain_exist(dict_: Dict, list_: List) -> bool:
     >>> does_keychain_exist(d, l_exists)
     True
 
-    >>> l_no_existant = ['a', 'c']
-    >>> does_keychain_exist(d, l_no_existant)
+    >>> l_no_existent = ['a', 'c']
+    >>> does_keychain_exist(d, l_no_existent)
     False
     """
     for key in list_:
@@ -393,7 +393,7 @@ class Interval(IntervalLike):
 
             # Go through all cases
             if other.right < self.left:
-                # Completely disjunct
+                # Completely disjoint
                 return IntervalUnion([self, other])
             elif other.right == self.left:
                 # next to each other
@@ -455,7 +455,7 @@ class Interval(IntervalLike):
 
         # Go through all cases
         if other.right < self.left:
-            # Completely disjunct
+            # Completely disjoint
             return Interval(None, None)
         elif other.right == self.left:
             # next to each other

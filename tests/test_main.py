@@ -15,7 +15,7 @@ from mpu import (
     consistent_shuffle,
     exception_logging,
     haversine_distance,
-    is_in_intervall,
+    is_in_interval,
     parallel_for,
 )
 
@@ -52,13 +52,13 @@ def test_haversine():
         haversine_distance((0, 0), (0, -200))
 
 
-def test_is_in_intervall_raises():
+def test_is_in_interval_raises():
     with pytest.raises(ValueError):
-        is_in_intervall(10, 20, 100)
+        is_in_interval(10, 20, 100)
 
 
-def test_is_in_intervall_ok():
-    is_in_intervall(10, 10, 100)
+def test_is_in_interval_ok():
+    is_in_interval(10, 10, 100)
 
 
 def test_exception_logging():

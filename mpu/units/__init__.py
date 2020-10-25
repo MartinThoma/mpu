@@ -242,7 +242,7 @@ class Money:
             )
         return Money(self.value - other.value, self.currency)
 
-    def __truediv__(self, other: "Money") -> Union[float, "Money"]:
+    def __truediv__(self, other: "Money") -> Union[fractions.Fraction, "Money"]:
         if isinstance(other, Money):
             if self.currency == other.currency:
                 return self.value / other.value

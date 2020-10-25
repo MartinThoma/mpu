@@ -226,6 +226,7 @@ def urlread(url: str, encoding: str = "utf8") -> str:
     Parameters
     ----------
     url : str
+    encoding : str (default: "utf8")
 
     Returns
     -------
@@ -370,11 +371,12 @@ def get_file_meta(filepath: str) -> Dict[str, Any]:
     -------
     meta : dict
     """
-    meta: Dict[str, Any] = {}
-    meta["filepath"] = os.path.abspath(filepath)
-    meta["creation_datetime"] = get_creation_datetime(filepath)
-    meta["last_access_datetime"] = get_access_datetime(filepath)
-    meta["modification_datetime"] = get_modification_datetime(filepath)
+    meta: Dict[str, Any] = {
+        "filepath": os.path.abspath(filepath),
+        "creation_datetime": get_creation_datetime(filepath),
+        "last_access_datetime": get_access_datetime(filepath),
+        "modification_datetime": get_modification_datetime(filepath),
+    }
     try:
         # Third party
         import magic

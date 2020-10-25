@@ -37,6 +37,8 @@ def parallel_for(
         Python function which takes a tuple as input
     parameters : List[Tuple]
         Each element here should be executed in parallel.
+    nb_threads : int (default: 100)
+        The number of threads to use.
 
     Returns
     -------
@@ -125,12 +127,12 @@ class Location:
 
     @property
     def latitude(self) -> float:
-        """Getter for latiutde."""
+        """Getter for latitude."""
         return self._latitude
 
     @latitude.setter
     def latitude(self, latitude: float) -> None:
-        """Setter for latiutde."""
+        """Setter for latitude."""
         if not (Location.MIN_LATITUDE <= latitude <= Location.MAX_LATITUDE):
             raise ValueError(f"latitude was {latitude}, but has to be in [-90, 90]")
         self._latitude = latitude
@@ -227,7 +229,7 @@ def haversine_distance(
     return d
 
 
-def is_in_intervall(
+def is_in_interval(
     value: Comparable,
     min_value: Comparable,
     max_value: Comparable,

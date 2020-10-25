@@ -283,7 +283,7 @@ def get_all_intersecting_lines_by_brute_force(
     lines: List[LineSegment],
 ) -> Set[FrozenSet[LineSegment]]:
     """
-    Get all interectionLines by applying a brute force algorithm.
+    Get all intersecting lines by applying a brute force algorithm.
 
     Parameters
     ----------
@@ -291,7 +291,7 @@ def get_all_intersecting_lines_by_brute_force(
 
     Returns
     -------
-    a list that contains all pairs of intersecting lines
+    intersections : a list that contains all pairs of intersecting lines
     """
     intersections: Set[FrozenSet[LineSegment]] = set()
 

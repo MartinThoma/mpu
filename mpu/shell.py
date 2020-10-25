@@ -101,7 +101,7 @@ def text_input(text: str) -> str:
 
     Returns
     -------
-    inputed_text : str
+    entered_text : str
         What the user wrote.
     """
     return input(text)

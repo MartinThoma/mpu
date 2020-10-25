@@ -266,7 +266,7 @@ def test_bounding_boxes_intersect_f1():
     assert not do_bounding_boxes_intersect(a, b)
 
 
-def test_line_segment_corsses_line():
+def test_line_segment_crosses_line():
     """Tests for lineSegmentCrossesLine"""
     line_segment = LineSegment(Point(5, 5), Point(17, 17))
     line = LineSegment(Point(0, 0), Point(1, 1))
@@ -277,86 +277,86 @@ def test_line_segment_corsses_line():
     assert line_segment_touches_or_crosses_line(line_segment, line)
 
 
-def test_lines_dont_intesect_f1():
+def test_lines_dont_intersect_f1():
     """Tests for do_lines_intersect"""
     a = LineSegment(Point(0, 0), Point(7, 7))
     b = LineSegment(Point(3, 4), Point(4, 5))
     assert not do_lines_intersect(a, b)
 
 
-def test_lines_dont_intesect_f2():
+def test_lines_dont_intersect_f2():
     a = LineSegment(Point(-4, 4), Point(-2, 1))
     b = LineSegment(Point(-2, 3), Point(0, 0))
     assert not do_lines_intersect(a, b)
 
 
-def test_lines_dont_intesect_f3():
+def test_lines_dont_intersect_f3():
     a = LineSegment(Point(0, 0), Point(0, 1))
     b = LineSegment(Point(2, 2), Point(2, 3))
     assert not do_lines_intersect(a, b)
 
 
-def test_lines_dont_intesect_f4():
+def test_lines_dont_intersect_f4():
     a = LineSegment(Point(0, 0), Point(0, 1))
     b = LineSegment(Point(2, 2), Point(3, 2))
     assert not do_lines_intersect(a, b)
 
 
-def test_lines_dont_intesect_f5():
+def test_lines_dont_intersect_f5():
     a = LineSegment(Point(-1, -1), Point(2, 2))
     b = LineSegment(Point(3, 3), Point(5, 5))
     assert not do_lines_intersect(a, b)
 
 
-def test_lines_dont_intesect_f6():
+def test_lines_dont_intersect_f6():
     a = LineSegment(Point(0, 0), Point(1, 1))
     b = LineSegment(Point(2, 0), Point(0.5, 2))
     assert not do_lines_intersect(a, b)
 
 
-def test_lines_dont_intesect_f7():
+def test_lines_dont_intersect_f7():
     a = LineSegment(Point(1, 1), Point(4, 1))
     b = LineSegment(Point(2, 2), Point(3, 2))
     assert not do_lines_intersect(a, b)
 
 
-def test_lines_dont_intesect_f8():
+def test_lines_dont_intersect_f8():
     a = LineSegment(Point(0, 5), Point(6, 0))
     b = LineSegment(Point(2, 1), Point(2, 2))
     assert not do_lines_intersect(a, b)
 
 
-def test_lines_do_intesect_t1():
+def test_lines_do_intersect_t1():
     a = LineSegment(Point(0, -2), Point(0, 2))
     b = LineSegment(Point(-2, 0), Point(2, 0))
     assert do_lines_intersect(a, b)
 
 
-def test_lines_do_intesect_t2():
+def test_lines_do_intersect_t2():
     a = LineSegment(Point(5, 5), Point(0, 0))
     b = LineSegment(Point(1, 1), Point(8, 2))
     assert do_lines_intersect(a, b)
 
 
-def test_lines_do_intesect_t3():
+def test_lines_do_intersect_t3():
     a = LineSegment(Point(-1, 0), Point(0, 0))
     b = LineSegment(Point(-1, -1), Point(-1, 1))
     assert do_lines_intersect(a, b)
 
 
-def test_lines_do_intesect_t4():
+def test_lines_do_intersect_t4():
     a = LineSegment(Point(0, 2), Point(2, 2))
     b = LineSegment(Point(2, 0), Point(2, 4))
     assert do_lines_intersect(a, b)
 
 
-def test_lines_do_intesect_t5():
+def test_lines_do_intersect_t5():
     a = LineSegment(Point(0, 0), Point(5, 5))
     b = LineSegment(Point(1, 1), Point(3, 3))
     assert do_lines_intersect(a, b)
 
 
-def test_lines_do_intesect_t6():
+def test_lines_do_intersect_t6():
     for _ in range(50):
         ax = random.random()
         ay = random.random()
