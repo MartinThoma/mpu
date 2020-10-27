@@ -17,7 +17,7 @@ click==7.1.2              # via pip-tools
 colorama==0.4.3           # via twine
 cookies==2.2.1            # via moto
 coverage==5.2.1           # via pytest-cov
-cryptography==3.0         # via moto, secretstorage
+cryptography==3.2         # via moto, secretstorage
 docker==4.2.2             # via moto
 docutils==0.16            # via botocore, readme-renderer
 hypothesis==5.23.3        # via -r requirements-dev.in
