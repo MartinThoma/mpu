@@ -44,8 +44,9 @@ def test_create_trie_node_with_children():
 
 def test_trie_node_push():
     node = TrieNode(value="a")
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError) as exinfo:
         node.push("")
+    assert str(exinfo.value) == "The pushed value should not be empty"
 
 
 def test_get_subtrie_from_empty():

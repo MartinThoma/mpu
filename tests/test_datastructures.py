@@ -95,18 +95,21 @@ def test_interval_creation_successes():
 
 
 def test_interval_creation_fail_left_bigger():
-    with pytest.raises(RuntimeError):
+    with pytest.raises(RuntimeError) as exinfo:
         Interval(1, -1)
+    assert str(exinfo.value) == "left may not be bigger than right"
 
 
 def test_interval_creation_fail_left_none():
-    with pytest.raises(RuntimeError):
+    with pytest.raises(RuntimeError) as exinfo:
         Interval(None, -1)
+    assert str(exinfo.value) == "Either left and right are None, or neither."
 
 
 def test_interval_creation_fail_right_none():
-    with pytest.raises(RuntimeError):
+    with pytest.raises(RuntimeError) as exinfo:
         Interval(1, None)
+    assert str(exinfo.value) == "Either left and right are None, or neither."
 
 
 def test_interval_equality():
@@ -154,10 +157,11 @@ def test_impossible_union():
         def is_empty(self):
             return False
 
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(NotImplementedError) as exinfo:
         interval = Interval(0, 1)
         other = Impossible()
         interval.union(other)
+    assert str(exinfo.value).startswith("Can't merge [0, 1] and ")
 
 
 def test_interval_intersection():
@@ -203,8 +207,10 @@ def test_impossible_issubset():
 
     interval = Interval(0, 1)
     other = Impossible()
-    with pytest.raises(RuntimeError):
+    with pytest.raises(RuntimeError) as exinfo:
         interval.issubset(other)
+    msg = "issubset is only defined on Interval and IntervalUnion, but"
+    assert str(exinfo.value).startswith(msg)
 
 
 def test_interval_issubset_interval_union_not():
@@ -230,13 +236,15 @@ def test_interval_issubset_interval_union():
 
 
 def test_interval_issubset_error():
-    with pytest.raises(Exception):
+    with pytest.raises(Exception) as exinfo:
         Interval(0, 1).issubset([0, 1])
+    assert str(exinfo.value) == "'list' object has no attribute 'is_empty'"
 
 
 def test_interval_union_creation():
-    with pytest.raises(TypeError):
+    with pytest.raises(TypeError) as exinfo:
         IntervalUnion("Foobar")
+    assert str(exinfo.value) == "'<class 'str'>' is not a list"
 
 
 def test_interval_union_simplification_empty():
@@ -304,8 +312,9 @@ def test_interval_union_union_interval():
 def test_interval_union_union_error():
     iu1 = IntervalUnion([[0, 1], [2, 3], [4, 5]])
     iu2 = [[-2, -1], [3.5, 3.7]]
-    with pytest.raises(RuntimeError):
+    with pytest.raises(RuntimeError) as exinfo:
         iu1.union(iu2)
+    assert str(exinfo.value) == "Union with type=<class 'list'> not supported"
 
 
 def test_interval_union_intersection_1():
@@ -343,8 +352,9 @@ def test_interval_union_intersection():
 def test_interval_union_intersection_error():
     iu1 = IntervalUnion([[0, 10], [20, 30], [40, 50]])
     iu2 = [[-1, 60]]
-    with pytest.raises(RuntimeError):
+    with pytest.raises(RuntimeError) as exinfo:
         iu1.intersection(iu2)
+    assert str(exinfo.value) == "Intersection with type=<class 'list'> not supported"
 
 
 def test_interval_union_issubset_equal():
@@ -370,8 +380,13 @@ def test_interval_union_issubset_part():
 
 def test_interval_union_issubset_error():
     iu = IntervalUnion([[0, 10], [20, 30], [40, 50]])
-    with pytest.raises(Exception):
+    with pytest.raises(Exception) as exinfo:
         assert iu.issubset([[0, 100]])
+    msg = (
+        "issubset is only defined on Interval and IntervalUnion, "
+        "but <class 'list'> was given"
+    )
+    assert str(exinfo.value) == msg
 
 
 def test_interval_union_inequality():

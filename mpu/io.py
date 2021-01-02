@@ -90,7 +90,12 @@ def _read_csv(filepath: str, kwargs: Dict) -> Union[List, Dict]:
     skiprows = kwargs["skiprows"]
     kwargs.pop("skiprows", None)
 
-    with open(filepath, encoding="utf8") as fp:
+    newline = None
+    if "newline" in kwargs:
+        newline = kwargs["newline"]
+        del kwargs["newline"]
+
+    with open(filepath, encoding="utf8", newline=newline) as fp:
         if format_ == "default":
             reader = csv.reader(fp, **kwargs)
             data_tmp = EList(list(reader))
@@ -167,7 +172,11 @@ def write(filepath: str, data: Union[Dict, List], **kwargs: Any) -> Any:
 
 def _write_csv(filepath: str, data: Any, kwargs: Dict) -> Any:
     """See documentation of mpu.io.write."""
-    with open(filepath, "w", encoding="utf8") as fp:
+    newline = None
+    if "newline" in kwargs:
+        newline = kwargs["newline"]
+        del kwargs["newline"]
+    with open(filepath, "w", encoding="utf8", newline=newline) as fp:
         if "delimiter" not in kwargs:
             kwargs["delimiter"] = ","
         if "quotechar" not in kwargs:

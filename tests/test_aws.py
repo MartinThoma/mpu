@@ -76,5 +76,9 @@ def test_list_no_files():
 
 
 def test_s3_path_split():
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError) as exinfo:
         mpu.aws._s3_path_split("foo/bar")
+    assert (
+        str(exinfo.value)
+        == "s3_path is expected to start with 's3://', but was foo/bar"
+    )

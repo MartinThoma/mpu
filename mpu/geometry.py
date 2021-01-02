@@ -95,7 +95,7 @@ class LineSegment:
            t = y1 - m*x1
         """
         if self.p1.x == self.p2.x:
-            raise ValueError("is not a function")
+            raise ValueError("The given points have the same x-coordinate")
 
         y1 = self.p1.y
         y2 = self.p2.y
