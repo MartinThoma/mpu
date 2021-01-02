@@ -98,7 +98,10 @@ def consistent_shuffle(*lists: List[List[Any]]) -> Tuple[List[Any], ...]:
     >>> mpu.consistent_shuffle([1,2,3], ['a', 'b', 'c'], ['A', 'B', 'C'])
     ([3, 2, 1], ['c', 'b', 'a'], ['C', 'B', 'A'])
     """
-    perm = list(range(len(lists[0])))
+    LEN = len(lists[0])
+    if any(len(l) != LEN for l in lists):
+        raise ValueError("All lists need to have the same length")
+    perm = list(range(LEN))
     random.shuffle(perm)
     lists = tuple([sublist[index] for index in perm] for sublist in lists)
     return lists

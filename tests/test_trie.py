@@ -6,11 +6,23 @@
 import pytest
 
 # First party
+from mpu.datastructures.trie import Trie as DefaultTrie
+from mpu.datastructures.trie.base import AbstractTrie
 from mpu.datastructures.trie.char_trie import Trie as CharTrie
 from mpu.datastructures.trie.full_prefix_dict import FullPrefixDict
 from mpu.datastructures.trie.string_trie import Trie as StringTrie
 
-all_tries = [CharTrie, StringTrie, FullPrefixDict]
+all_tries = [CharTrie, StringTrie, FullPrefixDict, DefaultTrie]
+
+
+def test_abstract_trie():
+    with pytest.raises(TypeError) as exinfo:
+        trie = AbstractTrie()
+    msg = (
+        "Can't instantiate abstract class AbstractTrie with abstract "
+        "methods __contains__, __iter__, __len__, autocomplete"
+    )
+    assert str(exinfo.value) == msg
 
 
 @pytest.mark.parametrize("Trie", all_tries)

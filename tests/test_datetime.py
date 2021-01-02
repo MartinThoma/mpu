@@ -20,6 +20,15 @@ def test_add_hour():
     assert out == "1918-04-15T03:00:00+02:00"
 
 
+def test_add_day():
+    tz = pytz.timezone("Europe/Berlin")
+    out = mpu.datetime.add_time(
+        datetime(1918, 4, 15, 0, 0, tzinfo=pytz.utc).astimezone(tz),
+        days=1,
+    ).isoformat()
+    assert out == "1918-04-16T02:00:00+02:00"
+
+
 def test_add_time_neutral():
     """Call add_time without any specified time to add."""
     tz = pytz.timezone("Europe/Berlin")
