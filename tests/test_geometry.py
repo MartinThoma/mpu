@@ -211,8 +211,9 @@ def test_get_equation_parameters():
     assert line_segment._get_equation_parameters() == (1, 0)
 
     line_segment = LineSegment(Point(0, 0), Point(0, 1))
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError) as exinfo:
         line_segment._get_equation_parameters()
+    assert str(exinfo.value) == "The given points have the same x-coordinate"
 
 
 def test_point_right_of_line():

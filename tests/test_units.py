@@ -223,3 +223,15 @@ def test_formatting():
     assert f"{a:0.2f,postsymbol}" == "12.20$"
     assert f"{a:0.2f,shortcode}" == "USD 12.20"
     assert f"{a:0.2f,postshortcode}" == "12.20 USD"
+
+
+def test_gt_other_currency_fail():
+    a = Money("12.45", "USD")
+    b = Money("67.89", "EUR")
+    with pytest.raises(ValueError) as exinfo:
+        a > b
+    error_msg = (
+        "Left has currency=US Dollar, right has currency=Euro. "
+        "You need to convert to the same currency first."
+    )
+    assert str(exinfo.value) == error_msg

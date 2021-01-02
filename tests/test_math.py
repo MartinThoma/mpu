@@ -14,14 +14,16 @@ import mpu.math
 
 
 def test_factorize_zero():
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError) as exinfo:
         mpu.math.factorize(0)
+    assert str(exinfo.value) == "All primes are prime factors of 0."
 
 
 @given(st.floats())
 def test_factorize_float(a_float):
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError) as exinfo:
         mpu.math.factorize(a_float)
+    assert str(exinfo.value) == "integer expected, but type(number)=<class 'float'>"
 
 
 def test_factorize_at_border():
@@ -65,15 +67,17 @@ def test_argmax_property(integer_list):
 
 
 def test_gcd_fail():
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError) as exinfo:
         mpu.math.gcd(0, 7)
+    assert str(exinfo.value) == "gcd(a=0, b=7) is undefined"
 
 
 @given(st.integers(), st.integers())
 def test_gcd_is_divisor(a, b):
     if a == 0 or b == 0:
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError) as exinfo:
             mpu.math.gcd(a, b)
+        assert str(exinfo.value) == f"gcd(a={a}, b={b}) is undefined"
     else:
         gcd = mpu.math.gcd(a, b)
         assert a % gcd == 0
@@ -83,8 +87,9 @@ def test_gcd_is_divisor(a, b):
 @given(st.integers(), st.integers(), st.integers())
 def test_gcd_is_divisor_min_size(a, b, c):
     if a == 0 or b == 0 or c == 0:
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError) as exinfo:
             mpu.math.gcd(a * c, b * c)
+        assert str(exinfo.value) == f"gcd(a={a*c}, b={b*c}) is undefined"
     else:
         gcd = mpu.math.gcd(a * c, b * c)
         assert (a * c) % gcd == 0

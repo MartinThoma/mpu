@@ -118,6 +118,7 @@ def test_read_csv_dicts():
 
 
 def test_write_csv(csv_tempfile):
+    newline = "\n"
     data = [
         ["1", "A towel,", "1.0"],
         ["42", " it says, ", "2.0"],
@@ -125,8 +126,8 @@ def test_write_csv(csv_tempfile):
         ["0", "massively useful thing ", "123"],
         ["-2", "an interstellar hitchhiker can have.\n", "3"],
     ]
-    write(csv_tempfile, data)
-    data_read = read(csv_tempfile)
+    write(csv_tempfile, data, newline=newline)
+    data_read = read(csv_tempfile, newline=newline)
     assert data == data_read
 
 
@@ -150,8 +151,9 @@ def test_write_csv_params(csv_tempfile):
         ["0", "massively useful thing ", "123"],
         ["-2", "an interstellar hitchhiker can have.\n", "3"],
     ]
-    write(csv_tempfile, data, delimiter=",", quotechar='"')
-    data_read = read(csv_tempfile, delimiter=",", quotechar='"')
+    newline = "\n"
+    write(csv_tempfile, data, delimiter=",", quotechar='"', newline=newline)
+    data_read = read(csv_tempfile, delimiter=",", quotechar='"', newline=newline)
     assert data == data_read
 
 
