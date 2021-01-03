@@ -43,15 +43,51 @@ def test_example_df():
     assert list(df["EUR"]) == [True, True, False, True, True, True]
 
 
-def test_describe():
+def test_describe(capsys):
     mpu.pd.describe(mpu.pd.example_df())
+    captured = capsys.readouterr()
+    assert (
+        captured.out
+        == """Number of datapoints: 6
+
+## Float Columns
+Column name  Non-nan         mean          std         min          25%          50%          75%           max
+ population        5  91257052.60  96317882.77  4761865.00  46549045.00  66991000.00  82521653.00  255461700.00
+
+## Category Columns
+Column name  Non-nan  unique  top el  top (count)    rest
+        EUR        6       2   False            5  [True]
+
+## Time Columns
+    Column name  Non-nan  unique               top el  top (count)                  min                  max
+population_time        4       4  2016-12-01 00:00:00            2  2016-12-01 00:00:00  2017-06-01 00:00:00
+
+## Other Columns
+Column name  Non-nan  unique     top  (count)                                      rest
+    country        6       6  France        1  ['Germany', 'Indonesia', 'Ireland', 'Spa
+"""
+    )
 
 
-def test_describe_int():
+def test_describe_int(capsys):
     column_info = {"int": ["numbers"]}
     df = pd.DataFrame({"numbers": [1, 2, 3, 100, 500]})
     mpu.pd._describe_int(df, column_info)
     mpu.pd.describe(df, column_info)
+    captured = capsys.readouterr()
+    assert (
+        captured.out
+        == """
+## Integer Columns
+Column name  Non-nan   mean                 std  min  25%  50%    75%  max
+    numbers        5  121.2  215.96689561134133    1  2.0  3.0  100.0  500
+Number of datapoints: 5
+
+## Integer Columns
+Column name  Non-nan   mean                 std  min  25%  50%    75%  max
+    numbers        5  121.2  215.96689561134133    1  2.0  3.0  100.0  500
+"""
+    )
 
 
 def test_get_column_info_suspicious_categorical():

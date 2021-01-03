@@ -97,7 +97,12 @@ def _get_column_info(df: pd.DataFrame, dtype: Dict[str, str]) -> Tuple[Dict, Dic
     for column_name in df:
         column_info_meta[column_name] = {}
         counter_obj = df[column_name].value_counts()
-        value_list = counter_obj.keys().tolist()
+        value_list = [
+            key
+            for key, value in sorted(
+                counter_obj.items(), key=lambda n: (str(n[1]), str(n[0]))
+            )
+        ]
         value_count = len(value_list)
         is_suspicious_cat = (
             value_count <= 50
