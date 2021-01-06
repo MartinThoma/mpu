@@ -12,6 +12,7 @@ from typing import List, Optional, Union
 
 # Third party
 import pkg_resources
+from typing_extensions import Literal  # necessary until 3.8
 
 # First party
 import mpu.io
@@ -189,7 +190,7 @@ def str2str_or_none(string_: str) -> Optional[str]:
 
 
 def str2bool_or_none(
-    string_: str, default: Union[str, bool] = "raise"
+    string_: str, default: Literal["raise", False] = "raise"
 ) -> Optional[bool]:
     """
     Convert a string to a bool or to None.
@@ -272,7 +273,7 @@ def str2int_or_none(string_: str) -> Optional[int]:
         return int(string_)
 
 
-def is_none(string_: str, default: Union[str, bool] = "raise") -> bool:
+def is_none(string_: str, default: Literal["raise", False] = "raise") -> bool:
     """
     Check if a string is equivalent to None.
 

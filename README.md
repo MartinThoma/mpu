@@ -9,6 +9,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/MartinThoma/mpu)
 ![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/MartinThoma/mpu/0.23.1)
 [![CodeFactor](https://www.codefactor.io/repository/github/martinthoma/mpu/badge/master)](https://www.codefactor.io/repository/github/martinthoma/mpu/overview/master)
+[![mutmut](https://pypi.org/project/mutmut/)](https://img.shields.io/badge/mutmut-1417%2F1813-lightgrey)
 
 # mpu
 Martins Python Utilities (mpu) is a collection of utility functions and classes

@@ -10,6 +10,9 @@ import platform
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
 
+# Third party
+from typing_extensions import Literal
+
 # First party
 from mpu.datastructures import EList
 
@@ -270,7 +273,9 @@ def download(source: str, sink: Optional[str] = None) -> str:
     return sink
 
 
-def hash(filepath: str, method: str = "sha1", buffer_size: int = 65536) -> str:
+def hash(
+    filepath: str, method: Literal["sha1", "md5"] = "sha1", buffer_size: int = 65536
+) -> str:
     """
     Calculate a hash of a local file.
 
