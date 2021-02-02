@@ -13,7 +13,7 @@ aws-sam-translator==1.28.1
     # via cfn-lint
 aws-xray-sdk==2.6.0
     # via moto
-bleach==3.2.1
+bleach==3.3.0
     # via readme-renderer
 boto3==1.16.8
     # via
