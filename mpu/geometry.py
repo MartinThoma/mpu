@@ -11,7 +11,7 @@ from __future__ import annotations
 
 # Core Library
 import math
-from typing import Any, FrozenSet, List, Set, Tuple, Union, cast
+from typing import Any, cast
 
 # First party
 from mpu.datastructures import Interval
@@ -84,7 +84,7 @@ class LineSegment:
             angle = FULL_ROTATION + angle
         return angle
 
-    def _get_equation_parameters(self) -> Tuple[float, float]:
+    def _get_equation_parameters(self) -> tuple[float, float]:
         """
         Get the slope and the intercept of a line.
 
@@ -105,7 +105,7 @@ class LineSegment:
         t = y1 - m * x1
         return m, t
 
-    def simplify(self) -> Union[Point, "LineSegment"]:
+    def simplify(self) -> Point | "LineSegment":
         """Simplify this line segment to a point, if possible."""
         if self.is_point():
             return self.p1
@@ -114,7 +114,7 @@ class LineSegment:
         else:
             return self
 
-    def intersect(self, other: "LineSegment") -> Union[None, "LineSegment", Point]:
+    def intersect(self, other: "LineSegment") -> None | "LineSegment" | Point:
         """
         Get the intersection between this LineSegment and another LineSegment.
 
@@ -124,7 +124,7 @@ class LineSegment:
 
         Returns
         -------
-        intersection : Union[None, LineSegment, Point]
+        intersection : None | LineSegment | Point
         """
         if not do_lines_intersect(self, other):
             return None
@@ -180,7 +180,7 @@ class LineSegment:
                 y = m1 * x + t1
                 return Point(x, y)
 
-    def bounding_box(self) -> Tuple[Point, Point]:
+    def bounding_box(self) -> tuple[Point, Point]:
         """
         Get the bounding box of this line represented by two points.
 
@@ -215,7 +215,7 @@ class LineSegment:
 
 def _get_straight_line_intersection(
     x: float, other_y1: float, other_y2: float, self_y1: float, self_y2: float
-) -> Union[Point, LineSegment]:
+) -> Point | LineSegment:
     """Get the intersection point of two straight vertical lines."""
     self_y = Interval(left=min(self_y1, self_y2), right=max(self_y1, self_y2))
     other_y = Interval(left=min(other_y1, other_y2), right=max(other_y1, other_y2))
@@ -230,7 +230,7 @@ def _get_straight_line_intersection(
         )
 
 
-def do_bounding_boxes_intersect(a: Tuple[Point, Point], b: Tuple[Point, Point]) -> bool:
+def do_bounding_boxes_intersect(a: tuple[Point, Point], b: tuple[Point, Point]) -> bool:
     """
     Check if bounding boxes do intersect.
 
@@ -285,8 +285,8 @@ def do_lines_intersect(a: LineSegment, b: LineSegment) -> bool:
 
 
 def get_all_intersecting_lines_by_brute_force(
-    lines: List[LineSegment],
-) -> Set[FrozenSet[LineSegment]]:
+    lines: list[LineSegment],
+) -> set[frozenset[LineSegment]]:
     """
     Get all intersecting lines by applying a brute force algorithm.
 
@@ -298,7 +298,7 @@ def get_all_intersecting_lines_by_brute_force(
     -------
     intersections : a list that contains all pairs of intersecting lines
     """
-    intersections: Set[FrozenSet[LineSegment]] = set()
+    intersections: set[frozenset[LineSegment]] = set()
 
     for i in range(len(lines)):
         for j in range(i + 1, len(lines)):
