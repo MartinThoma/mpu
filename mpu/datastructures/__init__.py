@@ -516,10 +516,7 @@ class Interval(IntervalLike):
             self.right = cast(Any, self.right)  # Tell mypy it's not None
             return other.left <= self.left <= self.right <= other.right
         elif isinstance(other, IntervalUnion):
-            for interval in other.intervals:
-                if self.issubset(interval):
-                    return True
-            return False
+            return any(self.issubset(interval) for interval in other.intervals)
         else:
             raise RuntimeError(
                 "issubset is only defined on Interval and "
@@ -546,10 +543,7 @@ class IntervalUnion(IntervalLike):
 
     def is_empty(self) -> bool:
         """Return if the IntervalUnion is empty."""
-        for interval in self.intervals:
-            if not interval.is_empty():
-                return False
-        return True
+        return all(interval.is_empty() for interval in self.intervals)
 
     def issubset(self, other: IntervalLike) -> bool:
         """
@@ -564,18 +558,10 @@ class IntervalUnion(IntervalLike):
         is_inside : bool
         """
         self._simplify()
-        if isinstance(other, Interval):
+        if isinstance(other, (Interval, IntervalUnion)):
             # If every interval of this is inside the interval `other`,
             # then this IntervalUnion is completely in `other`.
-            for interval in self.intervals:
-                if not interval.issubset(other):
-                    return False
-            return True
-        elif isinstance(other, IntervalUnion):
-            for interval in self.intervals:
-                if not interval.issubset(other):
-                    return False
-            return True
+            return all(interval.issubset(other) for interval in self.intervals)
         else:
             raise RuntimeError(
                 "issubset is only defined on Interval and IntervalUnion, "
