@@ -1,0 +1,4 @@
+-r ci.txt
+pip-tools
+pre-commit
+wheel
