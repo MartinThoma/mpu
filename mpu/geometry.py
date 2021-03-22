@@ -105,7 +105,7 @@ class LineSegment:
         t = y1 - m * x1
         return m, t
 
-    def simplify(self) -> Point | "LineSegment":
+    def simplify(self) -> Point | LineSegment:
         """Simplify this line segment to a point, if possible."""
         if self.is_point():
             return self.p1
@@ -114,7 +114,7 @@ class LineSegment:
         else:
             return self
 
-    def intersect(self, other: "LineSegment") -> None | "LineSegment" | Point:
+    def intersect(self, other: LineSegment) -> None | LineSegment | Point:
         """
         Get the intersection between this LineSegment and another LineSegment.
 

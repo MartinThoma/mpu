@@ -1,3 +1,4 @@
+-r prod.txt
 boto3>=1.7.84
 hypothesis
 moto>=1.3.3
