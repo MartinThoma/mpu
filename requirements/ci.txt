@@ -12,7 +12,7 @@ bleach==3.3.0
     # via readme-renderer
 boto3==1.17.33
     # via
-    #   -r requirements/ci.in
+    #   -r ci.in
     #   moto
 botocore==1.20.33
     # via
@@ -38,7 +38,7 @@ cryptography==3.4.6
 docutils==0.16
     # via readme-renderer
 hypothesis==6.8.1
-    # via -r requirements/ci.in
+    # via -r ci.in
 idna==2.10
     # via requests
 importlib-metadata==3.7.3
@@ -68,7 +68,7 @@ mock==4.0.3
 more-itertools==8.7.0
     # via moto
 moto==2.0.2
-    # via -r requirements/ci.in
+    # via -r ci.in
 numpy==1.20.1
     # via pandas
 packaging==20.9
@@ -76,11 +76,11 @@ packaging==20.9
     #   bleach
     #   pytest
 pandas==1.2.3
-    # via -r requirements/ci.in
+    # via -r ci.in
 pep517==0.10.0
     # via pip-tools
 pip-tools==6.0.1
-    # via -r requirements/ci.in
+    # via -r ci.in
 pkginfo==1.7.0
     # via twine
 pluggy==0.13.1
@@ -96,14 +96,14 @@ pygments==2.8.1
 pyparsing==2.4.7
     # via packaging
 pytest-benchmark==3.2.3
-    # via -r requirements/ci.in
+    # via -r ci.in
 pytest-cov==2.11.1
-    # via -r requirements/ci.in
+    # via -r ci.in
 pytest-timeout==1.4.2
-    # via -r requirements/ci.in
+    # via -r ci.in
 pytest==6.2.2
     # via
-    #   -r requirements/ci.in
+    #   -r ci.in
     #   pytest-benchmark
     #   pytest-cov
     #   pytest-timeout
@@ -135,7 +135,7 @@ s3transfer==0.3.6
 secretstorage==3.3.1
     # via keyring
 simplejson==3.17.2
-    # via -r requirements/ci.in
+    # via -r ci.in
 six==1.15.0
     # via
     #   bleach
@@ -152,8 +152,8 @@ toml==0.10.2
 tqdm==4.59.0
     # via twine
 twine==3.4.1
-    # via -r requirements/ci.in
-urllib3==1.26.4
+    # via -r ci.in
+urllib3==1.26.5
     # via
     #   botocore
     #   requests
@@ -163,7 +163,7 @@ webencodings==0.5.1
 werkzeug==1.0.1
     # via moto
 wheel==0.36.2
-    # via -r requirements/ci.in
+    # via -r ci.in
 xmltodict==0.12.0
     # via moto
 zipp==3.4.1
