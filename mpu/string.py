@@ -17,7 +17,7 @@ from typing_extensions import Literal  # necessary until 3.8
 # First party
 import mpu.io
 
-email_regex = r"[^@]+@[^@]+\.[^@]+"
+email_regex = r"[^@]*[^@\.]+@[^@]+\.[^@]+"
 
 
 def is_email(potential_email_address: str) -> bool:
