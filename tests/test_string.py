@@ -76,6 +76,7 @@ def test_is_ipv4(ip):
     ],
 )
 def test_email_pattern_positive(valid_mail):
+    """Check if valid emails are recognized as being valid."""
     email_pattern = re.compile(mpu.string.email_regex)
     assert email_pattern.match(valid_mail)
 
@@ -88,5 +89,6 @@ def test_email_pattern_positive(valid_mail):
     ],
 )
 def test_email_pattern_negative(invalid_mail):
+    """Check if invalid emails are recognized as being invalid."""
     email_pattern = re.compile(mpu.string.email_regex)
     assert email_pattern.match(invalid_mail) is None
