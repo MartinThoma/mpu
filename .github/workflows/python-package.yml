@@ -34,4 +34,4 @@ jobs:
         pytest
     - name: Test with mypy
       run: |
-        mypy .
+        mypy . --exclude=build
