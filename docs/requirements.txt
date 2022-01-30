@@ -32,7 +32,7 @@ jmespath==0.10.0
     #   botocore
 markupsafe==1.1.1
     # via jinja2
-numpy==1.20.1
+numpy==1.21.0
     # via pandas
 packaging==20.9
     # via sphinx
@@ -58,12 +58,12 @@ six==1.15.0
     # via python-dateutil
 snowballstemmer==2.1.0
     # via sphinx
-sphinx-rtd-theme==0.5.1
-    # via -r requirements.in
 sphinx==3.5.3
     # via
     #   -r requirements.in
     #   sphinx-rtd-theme
+sphinx-rtd-theme==0.5.1
+    # via -r requirements.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
