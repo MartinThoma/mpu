@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# Core Library
+import re
+
 # Third party
 import hypothesis.strategies as st
 import pytest
@@ -57,3 +60,33 @@ def test_is_email(email):
 @given(st.ip_addresses(v=4))
 def test_is_ipv4(ip):
     assert mpu.string.is_ipv4(str(ip)), f"is_ipv4({ip}) returned False"
+
+
+@pytest.mark.parametrize(
+    "valid_mail",
+    [
+        "noreply@example.com",
+        "noreply@example.de",
+        "noreply+foo@gmail.com",
+        "jon.smith@notice.tuya.co",
+        "NoRePlY@ExAmPlE.cOm",
+        "noreply@example.de",
+        "noreply+foo@gmail.com",
+        "jon.smith@notice.tuya.co",
+    ],
+)
+def test_email_pattern_positive(valid_mail):
+    email_pattern = re.compile(mpu.string.email_regex)
+    assert email_pattern.match(valid_mail)
+
+
+@pytest.mark.parametrize(
+    "invalid_mail",
+    [
+        "noreply.@example.com",
+        "@example.de",
+    ],
+)
+def test_email_pattern_negative(invalid_mail):
+    email_pattern = re.compile(mpu.string.email_regex)
+    assert email_pattern.match(invalid_mail) is None
