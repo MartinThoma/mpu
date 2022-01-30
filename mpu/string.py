@@ -445,7 +445,7 @@ def _calculate_german_iban_checksum(
         translated = translate[val]
         for char in translated:
             numbers.append(char)
-    number = sum(int(value) * 10 ** i for i, value in enumerate(numbers[::-1]))
+    number = sum(int(value) * 10**i for i, value in enumerate(numbers[::-1]))
     checksum = 98 - (number % 97)
     return str(checksum)
 

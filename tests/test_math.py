@@ -27,10 +27,10 @@ def test_factorize_float(a_float):
 
 
 def test_factorize_at_border():
-    assert mpu.math.factorize(991 ** 2) == [991, 991]
+    assert mpu.math.factorize(991**2) == [991, 991]
 
 
-@given(an_integer=st.integers(min_value=-(10 ** 6), max_value=10 ** 6))
+@given(an_integer=st.integers(min_value=-(10**6), max_value=10**6))
 def test_factorize(an_integer):
     if an_integer == 0:
         # This is tested in `test_factorize_zero` and should throw an exception

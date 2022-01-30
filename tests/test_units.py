@@ -77,7 +77,7 @@ def test_money_floatingpoint_issue2():
     """The test is the reason why one should not use float for money."""
     a = Money("10.00", None)
     b = Money("1.2", None)
-    assert str((a + b - a) * 10 ** 14 - b * 10 ** 14) == "0.00"
+    assert str((a + b - a) * 10**14 - b * 10**14) == "0.00"
 
 
 def test_currency_operations():
